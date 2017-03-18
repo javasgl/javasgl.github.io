@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Mr.song</title>
+  <subtitle>step by step</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://yoursite.com/"/>
+  <updated>2017-03-18T15:01:02.000Z</updated>
+  <id>http://yoursite.com/</id>
+  
+  <author>
+    <name>songgl</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Linux zgrep使用笔记</title>
+    <link href="http://yoursite.com/Linux-zgrep/"/>
+    <id>http://yoursite.com/Linux-zgrep/</id>
+    <published>2017-03-17T09:20:05.000Z</published>
+    <updated>2017-03-18T15:01:02.000Z</updated>
+    
+    <content type="html"><![CDATA[<p><code>grep</code> 可以用来搜索文件内容,而基于<code>grep</code>的 <code>zgrep</code>这可以用来在压缩包中搜索内容而不需要事先解压文件.</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">[root@yourdream ~]# <span class="keyword">cat</span> <span class="keyword">test</span>.go</div><div class="line">package main</div><div class="line">import (</div><div class="line">   <span class="string">"fmt"</span></div><div class="line">)</div><div class="line">func main()&#123;</div><div class="line">  fmt.Println(<span class="string">"Hello Golang!"</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line">[root@yourdream ~]# tar zcf <span class="keyword">test</span>.tar.gz <span class="keyword">test</span>.go</div><div class="line"></div><div class="line">[root@yourdream ~]# <span class="keyword">file</span> <span class="keyword">test</span>.tar.gz</div><div class="line"><span class="keyword">test</span>.tar.gz: gzip compressed data, from Unix, last modified: Fri Mar 17 17:23:09 2017</div><div class="line"></div><div class="line">[root@yourdream ~]# zgrep <span class="string">"fmt"</span> <span class="keyword">test</span>.tar.gz</div><div class="line">Binary <span class="keyword">file</span> (standard <span class="keyword">input</span>) matches</div><div class="line"></div><div class="line">[root@yourdream ~]# zgrep -a <span class="string">"fmt"</span> <span class="keyword">test</span>.tar.gz</div><div class="line">   <span class="string">"fmt"</span></div><div class="line">  fmt.Println(<span class="string">"Hello Golang!"</span>);</div><div class="line"></div><div class="line">[root@yourdream ~]# tar -tvf <span class="keyword">test</span>.tar.gz</div><div class="line">-rw-r--r-- root/root        81 2017-03-17 17:18 <span class="keyword">test</span>.go</div><div class="line"></div><div class="line">[root@yourdream ~]# tar -rvf <span class="keyword">test</span>.tar.gz <span class="keyword">test</span>/</div><div class="line"><span class="keyword">test</span>/</div><div class="line"><span class="keyword">test</span>/a.php</div><div class="line"></div><div class="line">[root@yourdream ~]# tar -tvf <span class="keyword">test</span>.tar.gz</div><div class="line">-rw-r--r-- root/root        81 2017-03-17 17:18 <span class="keyword">test</span>.go</div><div class="line">drwxr-xr-x root/root         0 2017-03-17 17:50 <span class="keyword">test</span>/</div><div class="line">-rw-r--r-- root/root      1127 2017-03-17 17:50 <span class="keyword">test</span>/a.php</div><div class="line"></div><div class="line">[root@yourdream ~]# zgrep -aHn <span class="string">"Hello"</span> <span class="keyword">test</span>.tar.gz</div><div class="line"><span class="keyword">test</span>.tar.gz:6:  fmt.Println(<span class="string">"Hello Golang!"</span>);</div><div class="line"><span class="keyword">test</span>.tar.gz:16:echo 'Hello php';</div></pre></td></tr></table></figure>
+<ul>
+<li>注意需要加上 <code>-a</code> 参数,让其二进制文件当做文本处理</li>
+<li><code>tar -u -r</code> 先压缩包中添加文件</li>
+<li><code>tar -H</code> 显示文件名</li>
+<li><code>tar -n</code> 显示行号</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;code&gt;grep&lt;/code&gt; 可以用来搜索文件内容,而基于&lt;code&gt;grep&lt;/code&gt;的 &lt;code&gt;zgrep&lt;/code&gt;这可以用来在压缩包中搜索内容而不需要事先解压文件.&lt;/p&gt;
+&lt;figure class=&quot;highlight stata&quot;&gt;&lt;table
+    
+    </summary>
+    
+      <category term="notes" scheme="http://yoursite.com/categories/notes/"/>
+    
+    
+      <category term="Linux" scheme="http://yoursite.com/tags/Linux/"/>
+    
+      <category term="zgrep" scheme="http://yoursite.com/tags/zgrep/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>iptables使用笔记</title>
+    <link href="http://yoursite.com/Linux-iptables/"/>
+    <id>http://yoursite.com/Linux-iptables/</id>
+    <published>2017-03-17T07:07:10.000Z</published>
+    <updated>2017-03-18T15:01:02.000Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="Linux-下防火墙-iptables-命令使用笔记"><a href="#Linux-下防火墙-iptables-命令使用笔记" class="headerlink" title="Linux 下防火墙 iptables 命令使用笔记"></a>Linux 下防火墙 <code>iptables</code> 命令使用笔记</h4><ul>
+<li><p>查看目前iptables设置 <code>iptables -vnL --line-numbers</code></p>
+<ul>
+<li><code>-v</code> verbose 详细信息</li>
+<li><code>-n</code> 显示数字端口等</li>
+<li><code>-L</code> list ,默认会显示<code>filter</code>表的规则</li>
+<li><code>--line-numbers</code> 显示序号,删除、插入时有用</li>
+</ul>
+</li>
+<li><p>删除规则<code>iptables -t table -D INPUT ruleNumber</code></p>
+<ul>
+<li><code>-t</code> table name,默认filter表,filter|Nat|Mangle|Raw</li>
+<li><code>-D</code> delete</li>
+<li><code>INPUT</code> chain name,INPUT|OUTPUT|FORWARD|PREROUTING|POSTROUTING</li>
+<li><code>ruleNumber</code> rule number,可以使用<code>--line-numbers</code>参数查看</li>
+</ul>
+</li>
+<li><p>查看状态<code>/etc/init.d/iptables status</code></p>
+</li>
+<li>保存修改<code>/etc/init.d/iptables save</code>,规则保存在<code>/etc/sysconfg/iptables</code>文件中</li>
+<li>开启|重启|关闭<code>/etc/init.d/iptables start|restart|stop</code></li>
+</ul>
+<a id="more"></a>
+<h4 id="examples"><a href="#examples" class="headerlink" title="examples"></a>examples</h4><p><code>iptables -I INPUT -s 1.1.1.1 -p tcp -dport 6666 -m comment --comment &quot;some comment&quot; -j ACCEPT</code></p>
+<ul>
+<li>向<code>INPUT</code>链中<code>I</code>(插入)一条规则,没有指定ruleNumber则插入到最前面</li>
+<li><code>-s</code> source,来源ip或者hostname</li>
+<li><code>-p</code> protocol 协议 tcp,udp,icmp(ping包),all 等 <code>/etc/protocols</code>中protocol的均可以</li>
+<li><code>-dport</code> 目标端口 destination port,注意<code>--dport</code>和<code>-dport</code></li>
+<li><code>-m</code> match extension,启用扩展, <code>comment</code>是注释扩展</li>
+<li><code>-j</code> jump</li>
+<li><code>ACCEPT</code> ACCEPT|DROP|REJECT|LOG</li>
+</ul>
+<p>详细可参考 <a href="http://www.cnblogs.com/metoy/p/4320813.html" target="_blank" rel="external">iptables详解</a>,文章很详细!</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;Linux-下防火墙-iptables-命令使用笔记&quot;&gt;&lt;a href=&quot;#Linux-下防火墙-iptables-命令使用笔记&quot; class=&quot;headerlink&quot; title=&quot;Linux 下防火墙 iptables 命令使用笔记&quot;&gt;&lt;/a&gt;Linux 下防火墙 &lt;code&gt;iptables&lt;/code&gt; 命令使用笔记&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;查看目前iptables设置 &lt;code&gt;iptables -vnL --line-numbers&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;-v&lt;/code&gt; verbose 详细信息&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-n&lt;/code&gt; 显示数字端口等&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-L&lt;/code&gt; list ,默认会显示&lt;code&gt;filter&lt;/code&gt;表的规则&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--line-numbers&lt;/code&gt; 显示序号,删除、插入时有用&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;删除规则&lt;code&gt;iptables -t table -D INPUT ruleNumber&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;-t&lt;/code&gt; table name,默认filter表,filter|Nat|Mangle|Raw&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-D&lt;/code&gt; delete&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;INPUT&lt;/code&gt; chain name,INPUT|OUTPUT|FORWARD|PREROUTING|POSTROUTING&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ruleNumber&lt;/code&gt; rule number,可以使用&lt;code&gt;--line-numbers&lt;/code&gt;参数查看&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;查看状态&lt;code&gt;/etc/init.d/iptables status&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;保存修改&lt;code&gt;/etc/init.d/iptables save&lt;/code&gt;,规则保存在&lt;code&gt;/etc/sysconfg/iptables&lt;/code&gt;文件中&lt;/li&gt;
+&lt;li&gt;开启|重启|关闭&lt;code&gt;/etc/init.d/iptables start|restart|stop&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+      <category term="notes" scheme="http://yoursite.com/categories/notes/"/>
+    
+    
+      <category term="Linux" scheme="http://yoursite.com/tags/Linux/"/>
+    
+      <category term="iptables" scheme="http://yoursite.com/tags/iptables/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Go Get安装一些第三方库-网络问题</title>
+    <link href="http://yoursite.com/go-get-golang-x-packages/"/>
+    <id>http://yoursite.com/go-get-golang-x-packages/</id>
+    <published>2017-03-08T10:56:51.000Z</published>
+    <updated>2017-03-18T15:01:02.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>go在go get 一些 package时候的会由于<code>众所周知</code>的原因而无法下载。比如在安装 <code>bee</code>的时候有可能会遇到无法下载 <code>golang.org/x/sys/unix</code> 的问题。<br><figure class="highlight xl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">unrecognized <span class="keyword">import</span> <span class="built_in">path</span> <span class="string">"golang.org/x/sys/unix"</span></div></pre></td></tr></table></figure></p>
+<p>解决方案：手动从<code>github</code>下载相应的<code>package</code></p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git <span class="keyword">clone</span> <span class="title">--depth</span>=<span class="number">1</span> https://github.com/golang/xxx.git</div><div class="line">git <span class="keyword">clone</span> <span class="title">--depth</span>=<span class="number">1</span> https://github.com/golang/xxx.git</div></pre></td></tr></table></figure>
+<p>注：xxx 为对应的需要的库</p>
+<p>下载完成后，<code>软链</code>或者<code>复制</code> 到 <code>$GOPATH/src/golang.org/x/</code> 下即可。<br><figure class="highlight avrasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">golang<span class="meta">.org</span>/</div><div class="line">└── <span class="built_in">x</span></div><div class="line">    ├── net</div><div class="line">    ├── sys</div><div class="line">    └── tools</div><div class="line"></div><div class="line"><span class="number">4</span> directories</div></pre></td></tr></table></figure></p>
+<p>更为简便的方法：<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">mkdir -p <span class="variable">$GOPATH</span><span class="regexp">/src/g</span>olang.org<span class="regexp">/x/</span></div><div class="line">cd !$</div><div class="line">git clone https:<span class="regexp">//gi</span>thub.com<span class="regexp">/golang/</span>net.git</div><div class="line">git clone https:<span class="regexp">//gi</span>thub.com<span class="regexp">/golang/</span>sys.git</div><div class="line">git clone https:<span class="regexp">//gi</span>thub.com<span class="regexp">/golang/</span>tools.git</div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;go在go get 一些 package时候的会由于&lt;code&gt;众所周知&lt;/code&gt;的原因而无法下载。比如在安装 &lt;code&gt;bee&lt;/code&gt;的时候有可能会遇到无法下载 &lt;code&gt;golang.org/x/sys/unix&lt;/code&gt; 的问题。&lt;br&gt;&lt;figur
+    
+    </summary>
+    
+      <category term="go" scheme="http://yoursite.com/categories/go/"/>
+    
+    
+      <category term="go" scheme="http://yoursite.com/tags/go/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Atom 调整左侧目录字体大小</title>
+    <link href="http://yoursite.com/atom-set-font-size/"/>
+    <id>http://yoursite.com/atom-set-font-size/</id>
+    <published>2017-03-07T14:39:49.000Z</published>
+    <updated>2017-03-18T15:01:02.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>刚刚安装好 atom的时候， 左侧的 tree 目录字体特别小，可以通过一下方式来设置</p>
+<ul>
+<li><p>打开<code>Atom</code>-<code>Stylesheet</code></p>
+</li>
+<li><p>找到 <code>.tree-view</code></p>
+<figure class="highlight maxima"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">// <span class="built_in">style</span> the <span class="built_in">background</span> <span class="built_in">color</span> of the tree <span class="built_in">view</span></div><div class="line">.tree-<span class="built_in">view</span> &#123;</div><div class="line">  // <span class="built_in">background</span>-<span class="built_in">color</span>: whitesmoke;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>给 <code>.tree-view</code> 添加 <code>font-size</code> 即可：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.tree-view</span> &#123;</div><div class="line">    <span class="attribute">font-size</span>:<span class="number">16px</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>当然，添加其他属性也是可以的，可以自己定制样式，颜色，字体，字号等，<code>CSS</code>语法</p>
+</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;刚刚安装好 atom的时候， 左侧的 tree 目录字体特别小，可以通过一下方式来设置&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;打开&lt;code&gt;Atom&lt;/code&gt;-&lt;code&gt;Stylesheet&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;找到 &lt;code&gt;.tree-v
+    
+    </summary>
+    
+      <category term="tools" scheme="http://yoursite.com/categories/tools/"/>
+    
+    
+      <category term="atom" scheme="http://yoursite.com/tags/atom/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Atom设置代理</title>
+    <link href="http://yoursite.com/atom_set_proxy/"/>
+    <id>http://yoursite.com/atom_set_proxy/</id>
+    <published>2017-03-07T14:10:01.000Z</published>
+    <updated>2017-03-18T15:01:02.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>由于<code>众所周知</code>的原因，Atom有时候安装插件的时候很慢甚至无法安装。可以通过设置代理来解决。<br>前提是已经有一个可以使用的http代理。<a href="/transfer_socks5_to_http_proxy">参考之前的文章：将socks5转为http代理</a></p>
+<ul>
+<li><p>atom自带了一个工具 <code>apm</code>(atom package management) 这个工具可以用来设置一些系统配置</p>
+</li>
+<li><p>可以用<code>apm config list</code> 查看现有的系统配置信息</p>
+</li>
+</ul>
+<p>下面开始设置 http代理：<br><a id="more"></a></p>
+<ul>
+<li>执行一下命令</li>
+</ul>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">apm config <span class="built_in">set</span> <span class="keyword">http</span>-proxy <span class="keyword">http</span>://host:port</div><div class="line">apm config <span class="built_in">set</span> <span class="keyword">https</span>-proxy <span class="keyword">http</span>://host:port</div><div class="line">apm config <span class="built_in">set</span> strict-ssl <span class="literal">false</span></div></pre></td></tr></table></figure>
+<ul>
+<li>注意两点：<ul>
+<li>https 配置的也是 http 而不是 https!</li>
+<li>set strict-ssl false 可以避免ssl 证书错误问题</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>其实直接修改 ~/.atom/.apmrc 文件也是可行的</p>
+</blockquote>
+<p>具体说明可以查看 <a href="https://github.com/atom/apm#behind-a-firewall" target="_blank" rel="external">这里</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;由于&lt;code&gt;众所周知&lt;/code&gt;的原因，Atom有时候安装插件的时候很慢甚至无法安装。可以通过设置代理来解决。&lt;br&gt;前提是已经有一个可以使用的http代理。&lt;a href=&quot;/transfer_socks5_to_http_proxy&quot;&gt;参考之前的文章：将socks5转为http代理&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;atom自带了一个工具 &lt;code&gt;apm&lt;/code&gt;(atom package management) 这个工具可以用来设置一些系统配置&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;可以用&lt;code&gt;apm config list&lt;/code&gt; 查看现有的系统配置信息&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;下面开始设置 http代理：&lt;br&gt;
+    
+    </summary>
+    
+      <category term="tools" scheme="http://yoursite.com/categories/tools/"/>
+    
+    
+      <category term="atom" scheme="http://yoursite.com/tags/atom/"/>
+    
+      <category term="proxy" scheme="http://yoursite.com/tags/proxy/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Mac上使用Privoxy 将 socks5转换为 http 代理</title>
+    <link href="http://yoursite.com/transfer_socks5_to_http_proxy/"/>
+    <id>http://yoursite.com/transfer_socks5_to_http_proxy/</id>
+    <published>2017-03-06T15:07:20.000Z</published>
+    <updated>2017-03-18T15:01:02.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>shadowsocks 挺不错的，但是有些时候需要使用http代理来爬墙。这时候可以使用privoxy来将 socks5 代理转换为 http代理。</p>
+<p>步骤如下：</p>
+<ul>
+<li><p>首先，确保 shadowsocks 已经正常起来的，默认的本地socks5端口号为 1080,可以使用 netstat 和 lsof 命令查看端口情况。</p>
+</li>
+<li><p>安装privoxy, mac 使用 brew install privoxy 即可</p>
+</li>
+<li><p>安装完成后，修改privoxy配置文件</p>
+<a id="more"></a>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim <span class="regexp">/usr/</span>local<span class="regexp">/etc/</span>privoxy<span class="regexp">/config</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>修改内容如下：</p>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">forward-socks5t   /               <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">1080</span> .</div><div class="line">listen-address  <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">8118</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><code>listen-address</code> 默认是监听本地8118端口，如果端口没有被占用，可以不用修改</p>
+<ul>
+<li>启动privoxy<figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="regexp">/usr/</span>local<span class="regexp">/sbin/</span>privoxy <span class="regexp">/usr/</span>local<span class="regexp">/etc/</span>privoxy<span class="regexp">/config</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>可以使用 <code>ps aux|grep privoxy</code>和 <code>lsof -i:8118</code>来检查是否成功启动</p>
+<ul>
+<li>正常情况下,可以使用http代理了，代理地址<code>http://127.0.0.1:8118</code></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;shadowsocks 挺不错的，但是有些时候需要使用http代理来爬墙。这时候可以使用privoxy来将 socks5 代理转换为 http代理。&lt;/p&gt;
+&lt;p&gt;步骤如下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;首先，确保 shadowsocks 已经正常起来的，默认的本地socks5端口号为 1080,可以使用 netstat 和 lsof 命令查看端口情况。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;安装privoxy, mac 使用 brew install privoxy 即可&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;安装完成后，修改privoxy配置文件&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="tools" scheme="http://yoursite.com/categories/tools/"/>
+    
+    
+      <category term="proxy" scheme="http://yoursite.com/tags/proxy/"/>
+    
+      <category term="socks5" scheme="http://yoursite.com/tags/socks5/"/>
+    
+      <category term="http" scheme="http://yoursite.com/tags/http/"/>
+    
+      <category term="privoxy" scheme="http://yoursite.com/tags/privoxy/"/>
+    
+      <category term="shadowsocks" scheme="http://yoursite.com/tags/shadowsocks/"/>
+    
+  </entry>
+  
+</feed>
