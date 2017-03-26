@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-03-19T06:14:42.000Z</updated>
+  <updated>2017-03-26T15:46:25.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,49 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Alfred 编写 workflow</title>
+    <link href="http://yoursite.com/alfred-workflow/"/>
+    <id>http://yoursite.com/alfred-workflow/</id>
+    <published>2017-03-26T14:41:37.000Z</published>
+    <updated>2017-03-26T15:46:25.000Z</updated>
+    
+    <content type="html"><![CDATA[<p><code>Alfred</code> 的一个亮点功能就是<code>workflow</code>。通过<code>workflow</code>用户可以很容易的扩展<code>alfred</code>的功能,<br>而开源的优秀的<code>workflow</code>也有很多，不过如果找不到自己满意的<code>workflow</code>，可以自己动手编写<code>workflow</code>。自己动手，丰衣足食！<br>之所以重复造轮子的原因的是因为这个<a href="https://github.com/mwaterfall/alfred-datetime-format-converter" target="_blank" rel="external">datetie-format-converter</a> 转换的时间是按照UTC-GMT时间来算的，所以对于中国来说，属于东八区，所以就写了一个<code>php</code>版本的自己使用。<br>这里只是简单记录下自己开发的一个<code>Unix</code>时间戳转换的<code>workflow</code>的过程，详细教程请自行<code>google</code>或者参考 <a href="http://myg0u.com/python/2015/05/23/tutorial-alfred-workflow.html" target="_blank" rel="external">这篇教程</a>.<br><a id="more"></a></p>
+<h3 id="一些基本概念"><a href="#一些基本概念" class="headerlink" title="一些基本概念"></a>一些基本概念</h3><p><code>workflow</code>可以使用脚本语言来编写，包括但不限于<code>bash</code>、<code>php</code>、<code>python</code>、<code>ruby</code>等。<code>workflow</code>中的<code>triggers</code>、<code>inputs</code>、<code>actions</code>、<code>ouputs</code>等基本概念就不解释了，详细了解的可以自己一个个的试一试，反正总共加起来也不多。</p>
+<h3 id="Alfred-XML格式数据"><a href="#Alfred-XML格式数据" class="headerlink" title="Alfred XML格式数据"></a>Alfred XML格式数据</h3><p><code>Alfred</code>中要求<code>ouputs</code>最后输出特定<code>Schema</code>的 <code>XML</code>内容。其实这一点我不太理解为什么，个人一直不喜欢<code>XML</code>格式的数据，重复臃肿、层级难于管理，就数据交换格式而言，个人比较倾向简单清晰易读的<code>JSON</code>，<code>Alfred</code>不支持返回<code>JSON</code>数据结果，不知道是不是由于<code>MacOS</code>的原因，没有深究。<br><code>Alfred</code>要求输出的内容以下：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">items</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">autocomplete</span> = <span class="string">"autocompletex"</span> <span class="attr">uid</span> = <span class="string">"123321"</span> <span class="attr">arg</span> = <span class="string">"argsx"</span> &gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">title</span> &gt;</span>title<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">subtitle</span> &gt;</span>subtitle<span class="tag">&lt;/<span class="name">subtitle</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">icon</span> &gt;</span>icon<span class="tag">&lt;/<span class="name">icon</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">items</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>根节点为items 其中包括任意多个item节点，每一个item节点代表本次查询结果的一行。 每一个item节点包括若干parameter与childnode，其含义为： uid： 每一个item要有一个独立的uid，不可重复 valid：值为yes 或者 no, 若为no，该行结果不可被选择 autocomplete ： 自动补全的值， 使用tab可以令alfred自动补全为 autocompelete属性的值. arg：作为下一个模块的参数传递</p>
+<p><title> 该行item的标题，也是主要显示的位置。 <subtitle> 该行字标题位置，会被显示为灰色小字 <icon> 该行图标的文件名，其大小为64X64 pixels</icon></subtitle></title></p>
+<h3 id="接受参数"><a href="#接受参数" class="headerlink" title="接受参数"></a>接受参数</h3><p><code>Alfred</code>可以通过<code>query</code>字段来获取数据的内容。</p>
+<h3 id="逻辑处理-amp-格式输出"><a href="#逻辑处理-amp-格式输出" class="headerlink" title="逻辑处理&amp;格式输出"></a>逻辑处理&amp;格式输出</h3><p>获取<code>query</code>的内容后，使用熟悉的脚本语言进行一些处理后组成转符合上面<code>Schema</code>的<code>XML</code>数据格式直接输出即可。</p>
+<h3 id="调试"><a href="#调试" class="headerlink" title="调试"></a>调试</h3><p><code>Alfred</code>很人性化的为开发者提供了调试工具，在<code>workflow</code>开发界面的右上角<code>Toggle debuggind mode</code>即可在下方打开一个<code>debug</code>窗口输出一些调试信息，方便开发。</p>
+<h3 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h3><p>以下是开发的一个简单的时间戳转换<code>workflow</code>,代码没有做严格的输入检查，只是简单的将输入的内容通过<code>php</code>的<code>date</code>函数转换成人类可读的<code>Y-m-d H:i:s</code>格式.<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">date_default_timezone_set(<span class="string">'Asia/Shanghai'</span>);</div><div class="line"><span class="keyword">require_once</span> (<span class="string">'workflows.php'</span>);</div><div class="line">$query = <span class="string">"&#123;query&#125;"</span>;</div><div class="line">$wf = <span class="keyword">new</span> Workflows ();</div><div class="line">$wf-&gt;result ( time (), $query, date(<span class="string">'Y-m-d H:i:s'</span>,$query), <span class="string">''</span>, <span class="string">'icon.png'</span>, <span class="string">'yes'</span> );</div><div class="line"><span class="keyword">echo</span> $wf-&gt;toxml();</div></pre></td></tr></table></figure></p>
+<p>其中<code>worklows.php</code> 中就只用到了 输出 <code>XML</code> 的方法，这个方法就是将<code>resutl()</code>中传递的参数组装成特定<code>XML</code>数据。</p>
+<h3 id="后续"><a href="#后续" class="headerlink" title="后续"></a>后续</h3><p>后来研究了下<a href="https://github.com/mwaterfall/alfred-datetime-format-converter" target="_blank" rel="external">datetime-format-converter</a>的源码，做了简单的修改，已经支持北京时间的转换，其实就是在作者的<code>python</code>代码中时间转换的时候加上了时区的设置，手动将时区设置为<code>Asia/Shanghai</code>即可。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">parse_query_value</span><span class="params">(query_str)</span>:</span></div><div class="line">    <span class="string">""" Return value for the query string """</span></div><div class="line">    <span class="keyword">try</span>:</div><div class="line">        query_str = str(query_str).strip(<span class="string">'"\' '</span>)</div><div class="line">        <span class="keyword">if</span> query_str == <span class="string">'now'</span>:</div><div class="line">            d = utcnow().shift(<span class="string">'Asia/Shanghai'</span>)</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            <span class="comment"># Parse datetime string or timestamp</span></div><div class="line">            <span class="keyword">try</span>:</div><div class="line">                d = epoch(float(query_str)).shift(<span class="string">"Asia/Shanghai"</span>)</div><div class="line">            <span class="keyword">except</span> ValueError:</div><div class="line">                d = parse(str(query_str)).shift(<span class="string">'Asia/Shanghai'</span>)</div><div class="line">    <span class="keyword">except</span> (TypeError, ValueError):</div><div class="line">        d = <span class="keyword">None</span></div><div class="line">    <span class="keyword">return</span> d</div></pre></td></tr></table></figure></p>
+<p>将第<code>6</code>、<code>10</code>、<code>12</code>行中时间转换加上了<code>shift(&#39;Asia/Shanghai&#39;)</code><br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">d = epoch(float(query_str))</div></pre></td></tr></table></figure></p>
+<p>改为<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">d = epoch(float(query_str)).shift(<span class="string">"Asia/Shanghai"</span>)</div></pre></td></tr></table></figure></p>
+<p>即可。其实更好的做法是自动检测系统信息推断出用户所使用的时区并转换。</p>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ul>
+<li><a href="http://myg0u.com/python/2015/05/23/tutorial-alfred-workflow.html" target="_blank" rel="external">http://myg0u.com/python/2015/05/23/tutorial-alfred-workflow.html</a></li>
+<li><a href="http://www.deanishe.net/alfred-workflow/" target="_blank" rel="external">http://www.deanishe.net/alfred-workflow/</a></li>
+<li><a href="http://www.deanishe.net/alfred-workflow/tutorial.html" target="_blank" rel="external">http://www.deanishe.net/alfred-workflow/tutorial.html</a></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;code&gt;Alfred&lt;/code&gt; 的一个亮点功能就是&lt;code&gt;workflow&lt;/code&gt;。通过&lt;code&gt;workflow&lt;/code&gt;用户可以很容易的扩展&lt;code&gt;alfred&lt;/code&gt;的功能,&lt;br&gt;而开源的优秀的&lt;code&gt;workflow&lt;/code&gt;也有很多，不过如果找不到自己满意的&lt;code&gt;workflow&lt;/code&gt;，可以自己动手编写&lt;code&gt;workflow&lt;/code&gt;。自己动手，丰衣足食！&lt;br&gt;之所以重复造轮子的原因的是因为这个&lt;a href=&quot;https://github.com/mwaterfall/alfred-datetime-format-converter&quot;&gt;datetie-format-converter&lt;/a&gt; 转换的时间是按照UTC-GMT时间来算的，所以对于中国来说，属于东八区，所以就写了一个&lt;code&gt;php&lt;/code&gt;版本的自己使用。&lt;br&gt;这里只是简单记录下自己开发的一个&lt;code&gt;Unix&lt;/code&gt;时间戳转换的&lt;code&gt;workflow&lt;/code&gt;的过程，详细教程请自行&lt;code&gt;google&lt;/code&gt;或者参考 &lt;a href=&quot;http://myg0u.com/python/2015/05/23/tutorial-alfred-workflow.html&quot;&gt;这篇教程&lt;/a&gt;.&lt;br&gt;
+    
+    </summary>
+    
+      <category term="tools" scheme="http://yoursite.com/categories/tools/"/>
+    
+    
+      <category term="Alfred" scheme="http://yoursite.com/tags/Alfred/"/>
+    
+      <category term="workflow" scheme="http://yoursite.com/tags/workflow/"/>
+    
+  </entry>
   
   <entry>
     <title>解决MacOS Sierra 升级后原有的ssh private key无法通过验证</title>
