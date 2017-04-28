@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-03-26T15:46:25.000Z</updated>
+  <updated>2017-04-28T13:11:08.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -16,11 +16,40 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>shell脚本修改环境变量</title>
+    <link href="http://yoursite.com/shell-change-path/"/>
+    <id>http://yoursite.com/shell-change-path/</id>
+    <published>2017-04-28T04:04:50.000Z</published>
+    <updated>2017-04-28T13:11:08.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>有时候编写go程序的时候需要将当前目录加到系统<code>GOPATH</code>中，不然就得将代码放置在已有的<code>GOPATH</code>之下。所以一般习惯在项目根目录执行创建一个<code>shell</code>脚本来动态的修改<code>GOPTAH</code>。<br>脚本很简单，代码如下:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#/bin/sh</span></div><div class="line">CURRENT=`<span class="built_in">pwd</span>`</div><div class="line"><span class="built_in">export</span> GOPATH=<span class="string">"<span class="variable">$&#123;GOPATH&#125;</span>:<span class="variable">$&#123;CURRENT&#125;</span>"</span></div></pre></td></tr></table></figure></p>
+<p>因为是<code>shell</code>脚本，所以就习惯性的执行了如下命令:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sh env</div><div class="line"><span class="built_in">echo</span> <span class="variable">$GOPATH</span></div></pre></td></tr></table></figure></p>
+<p>期望<code>GOPATH</code>中已经追加上了当前目录，然而事与愿违，并没有什么效果，<code>GOPATH</code>仍然是之前的内容。</p>
+<p>原因:<br>使用 <code>sh</code> 命令来执行shell脚本的时候,脚本真正是在<code>sh</code>创建的子<code>shell</code>中执行,所以当<code>sh</code>进程完成的时候并没有修改系统变量,所以通过执行 <code>sh env</code> 来修改系统变量是无效的。子<code>shell</code>和父<code>shell</code>彼此无法使用对方的变量，子<code>shell</code>对环境变量的修改也不会影响父<code>shell</code>。<br>需要使用 <code>source env</code>来执行，<code>source</code>命令执行脚本的时候，是在<code>source</code>当前<code>shell</code>中执行的,并不会创建子<code>shell</code>。</p>
+<p>参考: <a href="http://bbs.chinaunix.net/thread-2211666-1-1.html" target="_blank" rel="external">用source 执行脚本和用sh 执行脚本有什么区别</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;有时候编写go程序的时候需要将当前目录加到系统&lt;code&gt;GOPATH&lt;/code&gt;中，不然就得将代码放置在已有的&lt;code&gt;GOPATH&lt;/code&gt;之下。所以一般习惯在项目根目录执行创建一个&lt;code&gt;shell&lt;/code&gt;脚本来动态的修改&lt;code&gt;GOPTAH&lt;/
+    
+    </summary>
+    
+      <category term="notes" scheme="http://yoursite.com/categories/notes/"/>
+    
+    
+      <category term="Linux" scheme="http://yoursite.com/tags/Linux/"/>
+    
+      <category term="Shell" scheme="http://yoursite.com/tags/Shell/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Alfred 编写 workflow</title>
     <link href="http://yoursite.com/alfred-workflow/"/>
     <id>http://yoursite.com/alfred-workflow/</id>
     <published>2017-03-26T14:41:37.000Z</published>
-    <updated>2017-03-26T15:46:25.000Z</updated>
+    <updated>2017-04-28T13:11:03.000Z</updated>
     
     <content type="html"><![CDATA[<p><code>Alfred</code> 的一个亮点功能就是<code>workflow</code>。通过<code>workflow</code>用户可以很容易的扩展<code>alfred</code>的功能,<br>而开源的优秀的<code>workflow</code>也有很多，不过如果找不到自己满意的<code>workflow</code>，可以自己动手编写<code>workflow</code>。自己动手，丰衣足食！<br>之所以重复造轮子的原因的是因为这个<a href="https://github.com/mwaterfall/alfred-datetime-format-converter" target="_blank" rel="external">datetie-format-converter</a> 转换的时间是按照UTC-GMT时间来算的，所以对于中国来说，属于东八区，所以就写了一个<code>php</code>版本的自己使用。<br>这里只是简单记录下自己开发的一个<code>Unix</code>时间戳转换的<code>workflow</code>的过程，详细教程请自行<code>google</code>或者参考 <a href="http://myg0u.com/python/2015/05/23/tutorial-alfred-workflow.html" target="_blank" rel="external">这篇教程</a>.<br><a id="more"></a></p>
 <h3 id="一些基本概念"><a href="#一些基本概念" class="headerlink" title="一些基本概念"></a>一些基本概念</h3><p><code>workflow</code>可以使用脚本语言来编写，包括但不限于<code>bash</code>、<code>php</code>、<code>python</code>、<code>ruby</code>等。<code>workflow</code>中的<code>triggers</code>、<code>inputs</code>、<code>actions</code>、<code>ouputs</code>等基本概念就不解释了，详细了解的可以自己一个个的试一试，反正总共加起来也不多。</p>

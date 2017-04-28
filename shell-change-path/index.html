@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hello, songgl" />
+  <meta name="keywords" content="Linux,Shell," />
 
 
 
@@ -89,15 +89,19 @@
 
 
 
-<meta name="description" content="A journey of a thousand miles begins with single step">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Mr.song">
-<meta property="og:url" content="http://yoursite.com/tags/Linux/index.html">
+<meta name="description" content="有时候编写go程序的时候需要将当前目录加到系统GOPATH中，不然就得将代码放置在已有的GOPATH之下。所以一般习惯在项目根目录执行创建一个shell脚本来动态的修改GOPTAH。脚本很简单，代码如下:123#/bin/shCURRENT=`pwd`export GOPATH=&quot;$&amp;#123;GOPATH&amp;#125;:$&amp;#123;CURRENT&amp;#125;&quot;
+因为是shell脚本，所以就习惯性">
+<meta property="og:type" content="article">
+<meta property="og:title" content="shell脚本修改环境变量">
+<meta property="og:url" content="http://yoursite.com/shell-change-path/index.html">
 <meta property="og:site_name" content="Mr.song">
-<meta property="og:description" content="A journey of a thousand miles begins with single step">
+<meta property="og:description" content="有时候编写go程序的时候需要将当前目录加到系统GOPATH中，不然就得将代码放置在已有的GOPATH之下。所以一般习惯在项目根目录执行创建一个shell脚本来动态的修改GOPTAH。脚本很简单，代码如下:123#/bin/shCURRENT=`pwd`export GOPATH=&quot;$&amp;#123;GOPATH&amp;#125;:$&amp;#123;CURRENT&amp;#125;&quot;
+因为是shell脚本，所以就习惯性">
+<meta property="og:updated_time" content="2017-04-28T13:11:08.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Mr.song">
-<meta name="twitter:description" content="A journey of a thousand miles begins with single step">
+<meta name="twitter:title" content="shell脚本修改环境变量">
+<meta name="twitter:description" content="有时候编写go程序的时候需要将当前目录加到系统GOPATH中，不然就得将代码放置在已有的GOPATH之下。所以一般习惯在项目根目录执行创建一个shell脚本来动态的修改GOPTAH。脚本很简单，代码如下:123#/bin/shCURRENT=`pwd`export GOPATH=&quot;$&amp;#123;GOPATH&amp;#125;:$&amp;#123;CURRENT&amp;#125;&quot;
+因为是shell脚本，所以就习惯性">
 
 
 
@@ -125,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/Linux/"/>
+  <link rel="canonical" href="http://yoursite.com/shell-change-path/"/>
 
 
 
 
 
-  <title> Tag: Linux | Mr.song </title>
+  <title> shell脚本修改环境变量 | Mr.song </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -156,7 +160,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-right  ">
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -260,102 +264,213 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h2 >
-        Linux
-        <small>Tag</small>
-      </h2>
-    </div>
-
+  <div id="posts" class="posts-expand">
     
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/shell-change-path/" itemprop="url">
-              
-                <span itemprop="name">shell脚本修改环境变量</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-04-28T12:04:50+08:00"
-              content="2017-04-28" >
-          04-28
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/Linux-zgrep/" itemprop="url">
-              
-                <span itemprop="name">Linux zgrep使用笔记</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-03-17T17:20:05+08:00"
-              content="2017-03-17" >
-          03-17
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/Linux-iptables/" itemprop="url">
-              
-                <span itemprop="name">iptables使用笔记</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-03-17T15:07:10+08:00"
-              content="2017-03-17" >
-          03-17
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-  </div>
 
   
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/shell-change-path/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="songgl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mr.song">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                shell脚本修改环境变量
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-28T12:04:50+08:00">
+                2017-04-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/notes/" itemprop="url" rel="index">
+                    <span itemprop="name">notes</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/shell-change-path/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="shell-change-path/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>有时候编写go程序的时候需要将当前目录加到系统<code>GOPATH</code>中，不然就得将代码放置在已有的<code>GOPATH</code>之下。所以一般习惯在项目根目录执行创建一个<code>shell</code>脚本来动态的修改<code>GOPTAH</code>。<br>脚本很简单，代码如下:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#/bin/sh</span></div><div class="line">CURRENT=`<span class="built_in">pwd</span>`</div><div class="line"><span class="built_in">export</span> GOPATH=<span class="string">"<span class="variable">$&#123;GOPATH&#125;</span>:<span class="variable">$&#123;CURRENT&#125;</span>"</span></div></pre></td></tr></table></figure></p>
+<p>因为是<code>shell</code>脚本，所以就习惯性的执行了如下命令:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sh env</div><div class="line"><span class="built_in">echo</span> <span class="variable">$GOPATH</span></div></pre></td></tr></table></figure></p>
+<p>期望<code>GOPATH</code>中已经追加上了当前目录，然而事与愿违，并没有什么效果，<code>GOPATH</code>仍然是之前的内容。</p>
+<p>原因:<br>使用 <code>sh</code> 命令来执行shell脚本的时候,脚本真正是在<code>sh</code>创建的子<code>shell</code>中执行,所以当<code>sh</code>进程完成的时候并没有修改系统变量,所以通过执行 <code>sh env</code> 来修改系统变量是无效的。子<code>shell</code>和父<code>shell</code>彼此无法使用对方的变量，子<code>shell</code>对环境变量的修改也不会影响父<code>shell</code>。<br>需要使用 <code>source env</code>来执行，<code>source</code>命令执行脚本的时候，是在<code>source</code>当前<code>shell</code>中执行的,并不会创建子<code>shell</code>。</p>
+<p>参考: <a href="http://bbs.chinaunix.net/thread-2211666-1-1.html" target="_blank" rel="external">用source 执行脚本和用sh 执行脚本有什么区别</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
+          
+            <a href="/tags/Shell/" rel="tag"># Shell</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/alfred-workflow/" rel="next" title="Alfred 编写 workflow">
+                <i class="fa fa-chevron-left"></i> Alfred 编写 workflow
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="shell-change-path/"
+     data-title="shell脚本修改环境变量"
+     data-content=""
+     data-url="http://yoursite.com/shell-change-path/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
 
           
           </div>
@@ -363,6 +478,14 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="shell-change-path/"
+           data-title="shell脚本修改环境变量" data-url="http://yoursite.com/shell-change-path/">
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -579,6 +702,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
 
   
 
