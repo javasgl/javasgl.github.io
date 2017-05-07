@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-05-07T14:38:56.000Z</updated>
+  <updated>2017-05-07T15:00:57.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,14 +20,14 @@
     <link href="http://yoursite.com/i-love-vim/"/>
     <id>http://yoursite.com/i-love-vim/</id>
     <published>2017-05-07T14:08:15.000Z</published>
-    <updated>2017-05-07T14:38:56.000Z</updated>
+    <updated>2017-05-07T15:00:57.000Z</updated>
     
     <content type="html"><![CDATA[<p>个人是一个<code>vi</code>重度使用者，所以尽可能的会希望所使用的工具中都能支持<code>vim</code>来方便操作。</p>
 <ul>
-<li>chrome浏览器支持 <code>vim</code>操作: <code>Vimium</code> 扩展</li>
+<li>chrome浏览器支持 <code>vim</code>操作: Vimium 扩展</li>
 <li>atom 编辑器: vim-mode、vim-mode-plus</li>
 <li>sublime text: 天然支持，配置中<code>ignored_packages</code> 置为空<code>[]</code>即可</li>
-<li>idea 编辑器：<code>vim</code> 插件用来编辑文件内容，还有一个和<code>Vimium</code>相似的插件(名称遗忘,自己未使用)，已和<code>Vimium</code>相同的方式操作<code>idea</code>的各种菜单</li>
+<li>idea 编辑器：<code>vim</code> 插件用来编辑文件内容，还有一个和<code>Vimium</code>相似的插件(名称遗忘,自己未使用)，以和<code>Vimium</code>相同的方式操作<code>idea</code>的各种菜单</li>
 <li>command line: 大部分天然支持<code>vim</code>编辑模式 (非 <code>windows</code> 系统),自行给<code>vim</code>安装了一些插件，打造成了一个命令行的<code>golang</code>的<code>IDE</code><ul>
 <li>目录：<code>scrooloose/nerdtree</code></li>
 <li>目录git状态：<code>Xuyuanp/nerdtree-git-plugin</code></li>
@@ -43,7 +43,8 @@
     
       &lt;p&gt;个人是一个&lt;code&gt;vi&lt;/code&gt;重度使用者，所以尽可能的会希望所使用的工具中都能支持&lt;code&gt;vim&lt;/code&gt;来方便操作。&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;chrome浏览器支持 &lt;code&gt;vim&lt;/code&gt;操作: &lt;code&gt;Vimium&lt;/code&gt; 扩展&lt;
+&lt;li&gt;chrome浏览器支持 &lt;code&gt;vim&lt;/code&gt;操作: Vimium 扩展&lt;/li&gt;
+&lt;li&gt;atom
     
     </summary>
     
