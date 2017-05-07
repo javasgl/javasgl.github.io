@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-04-28T13:11:08.000Z</updated>
+  <updated>2017-05-07T13:28:40.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,35 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>中文正则匹配</title>
+    <link href="http://yoursite.com/regex-match-chinese/"/>
+    <id>http://yoursite.com/regex-match-chinese/</id>
+    <published>2017-05-07T12:36:05.000Z</published>
+    <updated>2017-05-07T13:28:40.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>在某些场景下，需要使用正则对文本中的中文进行匹配。之前就在一个<code>python</code>的项目中需要对中文进行相应的匹配。<br>实际需求: 要求匹配非中文内容。<br>中文的<code>unicode</code>编码范围为 <code>u4e00</code> 到 <code>u9fa5</code>。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"><span class="comment"># -*- coding: utf-8 -*-</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> re</div><div class="line"></div><div class="line">group = re.search(<span class="string">ur'([^\u4e00-\u9fa5])'</span>,<span class="string">'1中文en汉字'</span>)</div><div class="line"></div><div class="line"><span class="keyword">if</span> group:</div><div class="line">	<span class="keyword">print</span> grou.groups()</div></pre></td></tr></table></figure></p>
+<p>Tips:</p>
+<blockquote>
+<p>1.正则非匹配: ^<br>2.正则范围匹配: [a-b]<br>3.正则捕获: ()<br>4.python2 中 u 表示 <code>unicode</code>的字符串, python3 已经全部使用<code>unicode</code>来表示字符串<br>5.python 中 r 表示 <code>row string</code>,使用原始字符串，不进行转义</p>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在某些场景下，需要使用正则对文本中的中文进行匹配。之前就在一个&lt;code&gt;python&lt;/code&gt;的项目中需要对中文进行相应的匹配。&lt;br&gt;实际需求: 要求匹配非中文内容。&lt;br&gt;中文的&lt;code&gt;unicode&lt;/code&gt;编码范围为 &lt;code&gt;u4e00&lt;/code
+    
+    </summary>
+    
+      <category term="notes" scheme="http://yoursite.com/categories/notes/"/>
+    
+    
+      <category term="regex" scheme="http://yoursite.com/tags/regex/"/>
+    
+      <category term="python" scheme="http://yoursite.com/tags/python/"/>
+    
+  </entry>
   
   <entry>
     <title>shell脚本修改环境变量</title>
