@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-05-07T13:28:40.000Z</updated>
+  <updated>2017-05-07T13:42:43.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,42 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>hexo 命令备忘录</title>
+    <link href="http://yoursite.com/hexo-command-notes/"/>
+    <id>http://yoursite.com/hexo-command-notes/</id>
+    <published>2017-05-07T13:35:26.000Z</published>
+    <updated>2017-05-07T13:42:43.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>这里记录个人一些 <code>hexo</code> 常用命令备查:</p>
+<ul>
+<li>创建新的文章: <code>hexo new post-title</code></li>
+<li>生成db和静态文件： <code>hexo generate</code>,缩写为 <code>hexo g</code></li>
+<li>删除cache和静态文件：<code>hexo clean</code></li>
+<li>本地开始预览server：<code>hexo server</code>,缩写为 <code>hexo s</code>,默认端口为 <code>4000</code></li>
+<li>部署到远程: <code>hexo deply</code>,缩写为 <code>hexo d</code></li>
+</ul>
+<p>有时候部署到远程后发现<code>blog</code>并没有更新，则可以先<code>clean</code>之后再 <code>deploy</code>:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">hexo clean</div><div class="line">hexo g <span class="_">-d</span></div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这里记录个人一些 &lt;code&gt;hexo&lt;/code&gt; 常用命令备查:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;创建新的文章: &lt;code&gt;hexo new post-title&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;生成db和静态文件： &lt;code&gt;hexo generate&lt;/code&gt;,缩
+    
+    </summary>
+    
+      <category term="notes" scheme="http://yoursite.com/categories/notes/"/>
+    
+    
+      <category term="hexo" scheme="http://yoursite.com/tags/hexo/"/>
+    
+      <category term="blog" scheme="http://yoursite.com/tags/blog/"/>
+    
+  </entry>
   
   <entry>
     <title>中文正则匹配</title>
