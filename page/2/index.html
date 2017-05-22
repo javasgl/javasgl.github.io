@@ -272,6 +272,342 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/Linux-iptables/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="songgl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mr.song">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/Linux-iptables/" itemprop="url">
+                  iptables使用笔记
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-17T15:07:10+08:00">
+                2017-03-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/notes/" itemprop="url" rel="index">
+                    <span itemprop="name">notes</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/Linux-iptables/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="Linux-iptables/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h4 id="Linux-下防火墙-iptables-命令使用笔记"><a href="#Linux-下防火墙-iptables-命令使用笔记" class="headerlink" title="Linux 下防火墙 iptables 命令使用笔记"></a>Linux 下防火墙 <code>iptables</code> 命令使用笔记</h4><ul>
+<li><p>查看目前iptables设置 <code>iptables -vnL --line-numbers</code></p>
+<ul>
+<li><code>-v</code> verbose 详细信息</li>
+<li><code>-n</code> 显示数字端口等</li>
+<li><code>-L</code> list ,默认会显示<code>filter</code>表的规则</li>
+<li><code>--line-numbers</code> 显示序号,删除、插入时有用</li>
+</ul>
+</li>
+<li><p>删除规则<code>iptables -t table -D INPUT ruleNumber</code></p>
+<ul>
+<li><code>-t</code> table name,默认filter表,filter|Nat|Mangle|Raw</li>
+<li><code>-D</code> delete</li>
+<li><code>INPUT</code> chain name,INPUT|OUTPUT|FORWARD|PREROUTING|POSTROUTING</li>
+<li><code>ruleNumber</code> rule number,可以使用<code>--line-numbers</code>参数查看</li>
+</ul>
+</li>
+<li><p>查看状态<code>/etc/init.d/iptables status</code></p>
+</li>
+<li>保存修改<code>/etc/init.d/iptables save</code>,规则保存在<code>/etc/sysconfg/iptables</code>文件中</li>
+<li>开启|重启|关闭<code>/etc/init.d/iptables start|restart|stop</code></li>
+</ul>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/Linux-iptables/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/go-get-golang-x-packages/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="songgl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mr.song">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/go-get-golang-x-packages/" itemprop="url">
+                  Go Get安装一些第三方库-网络问题
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-08T18:56:51+08:00">
+                2017-03-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/go/" itemprop="url" rel="index">
+                    <span itemprop="name">go</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/go-get-golang-x-packages/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="go-get-golang-x-packages/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>go在go get 一些 package时候的会由于<code>众所周知</code>的原因而无法下载。比如在安装 <code>bee</code>的时候有可能会遇到无法下载 <code>golang.org/x/sys/unix</code> 的问题。<br><figure class="highlight xl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">unrecognized <span class="keyword">import</span> <span class="built_in">path</span> <span class="string">"golang.org/x/sys/unix"</span></div></pre></td></tr></table></figure></p>
+<p>解决方案：手动从<code>github</code>下载相应的<code>package</code></p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git <span class="keyword">clone</span> <span class="title">--depth</span>=<span class="number">1</span> https://github.com/golang/xxx.git</div><div class="line">git <span class="keyword">clone</span> <span class="title">--depth</span>=<span class="number">1</span> https://github.com/golang/xxx.git</div></pre></td></tr></table></figure>
+<p>注：xxx 为对应的需要的库</p>
+<p>下载完成后，<code>软链</code>或者<code>复制</code> 到 <code>$GOPATH/src/golang.org/x/</code> 下即可。<br><figure class="highlight avrasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">golang<span class="meta">.org</span>/</div><div class="line">└── <span class="built_in">x</span></div><div class="line">    ├── net</div><div class="line">    ├── sys</div><div class="line">    └── tools</div><div class="line"></div><div class="line"><span class="number">4</span> directories</div></pre></td></tr></table></figure></p>
+<p>更为简便的方法：<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">mkdir -p <span class="variable">$GOPATH</span><span class="regexp">/src/g</span>olang.org<span class="regexp">/x/</span></div><div class="line">cd !$</div><div class="line">git clone https:<span class="regexp">//gi</span>thub.com<span class="regexp">/golang/</span>net.git</div><div class="line">git clone https:<span class="regexp">//gi</span>thub.com<span class="regexp">/golang/</span>sys.git</div><div class="line">git clone https:<span class="regexp">//gi</span>thub.com<span class="regexp">/golang/</span>tools.git</div></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/atom-set-font-size/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -805,7 +1141,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-count">15</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -816,7 +1152,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -827,7 +1163,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-count">23</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>

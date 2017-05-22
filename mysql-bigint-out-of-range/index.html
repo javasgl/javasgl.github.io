@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="proxy,socks5,http,privoxy,shadowsocks," />
+  <meta name="keywords" content="database,mysql," />
 
 
 
@@ -89,31 +89,19 @@
 
 
 
-<meta name="description" content="shadowsocks 挺不错的，但是有些时候需要使用http代理来爬墙。这时候可以使用privoxy来将 socks5 代理转换为 http代理。
-步骤如下：
-
-首先，确保 shadowsocks 已经正常起来的，默认的本地socks5端口号为 1080,可以使用 netstat 和 lsof 命令查看端口情况。
-
-安装privoxy, mac 使用 brew install privoxy 即">
+<meta name="description" content="线上的MySQL错误日志中遇到了以下问题1Data truncation: BIGINT UNSIGNED value is out of range in `(database.tablename.fieldname)`
+MySQL版本为:1234567mysql&amp;gt; select version();+------------+| version()  |+------------+| 5">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Mac上使用Privoxy 将 socks5转换为 http 代理">
-<meta property="og:url" content="http://yoursite.com/transfer_socks5_to_http_proxy/index.html">
+<meta property="og:title" content="mysql unsigned/int字段越界">
+<meta property="og:url" content="http://yoursite.com/mysql-bigint-out-of-range/index.html">
 <meta property="og:site_name" content="Mr.song">
-<meta property="og:description" content="shadowsocks 挺不错的，但是有些时候需要使用http代理来爬墙。这时候可以使用privoxy来将 socks5 代理转换为 http代理。
-步骤如下：
-
-首先，确保 shadowsocks 已经正常起来的，默认的本地socks5端口号为 1080,可以使用 netstat 和 lsof 命令查看端口情况。
-
-安装privoxy, mac 使用 brew install privoxy 即">
-<meta property="og:updated_time" content="2017-03-18T15:01:02.000Z">
+<meta property="og:description" content="线上的MySQL错误日志中遇到了以下问题1Data truncation: BIGINT UNSIGNED value is out of range in `(database.tablename.fieldname)`
+MySQL版本为:1234567mysql&amp;gt; select version();+------------+| version()  |+------------+| 5">
+<meta property="og:updated_time" content="2017-05-22T12:39:37.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Mac上使用Privoxy 将 socks5转换为 http 代理">
-<meta name="twitter:description" content="shadowsocks 挺不错的，但是有些时候需要使用http代理来爬墙。这时候可以使用privoxy来将 socks5 代理转换为 http代理。
-步骤如下：
-
-首先，确保 shadowsocks 已经正常起来的，默认的本地socks5端口号为 1080,可以使用 netstat 和 lsof 命令查看端口情况。
-
-安装privoxy, mac 使用 brew install privoxy 即">
+<meta name="twitter:title" content="mysql unsigned/int字段越界">
+<meta name="twitter:description" content="线上的MySQL错误日志中遇到了以下问题1Data truncation: BIGINT UNSIGNED value is out of range in `(database.tablename.fieldname)`
+MySQL版本为:1234567mysql&amp;gt; select version();+------------+| version()  |+------------+| 5">
 
 
 
@@ -141,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/transfer_socks5_to_http_proxy/"/>
+  <link rel="canonical" href="http://yoursite.com/mysql-bigint-out-of-range/"/>
 
 
 
 
 
-  <title> Mac上使用Privoxy 将 socks5转换为 http 代理 | Mr.song </title>
+  <title> mysql unsigned/int字段越界 | Mr.song </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -286,7 +274,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/transfer_socks5_to_http_proxy/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/mysql-bigint-out-of-range/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="songgl">
@@ -307,7 +295,7 @@
             
             
               
-                Mac上使用Privoxy 将 socks5转换为 http 代理
+                mysql unsigned/int字段越界
               
             
           </h1>
@@ -322,8 +310,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-06T23:07:20+08:00">
-                2017-03-06
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-22T10:41:39+08:00">
+                2017-05-22
               </time>
             
 
@@ -345,8 +333,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/tools/" itemprop="url" rel="index">
-                    <span itemprop="name">tools</span>
+                  <a href="/categories/mysql/" itemprop="url" rel="index">
+                    <span itemprop="name">mysql</span>
                   </a>
                 </span>
 
@@ -363,8 +351,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/transfer_socks5_to_http_proxy/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="transfer_socks5_to_http_proxy/" itemprop="commentCount"></span>
+                <a href="/mysql-bigint-out-of-range/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="mysql-bigint-out-of-range/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -390,29 +378,21 @@
       
 
       
-        <p>shadowsocks 挺不错的，但是有些时候需要使用http代理来爬墙。这时候可以使用privoxy来将 socks5 代理转换为 http代理。</p>
-<p>步骤如下：</p>
+        <p>线上的<code>MySQL</code>错误日志中遇到了以下问题<br><figure class="highlight vhdl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Data truncation: BIGINT <span class="built_in">UNSIGNED</span> value <span class="keyword">is</span> <span class="keyword">out</span> <span class="keyword">of</span> <span class="keyword">range</span> <span class="keyword">in</span> `(database.tablename.fieldname)`</div></pre></td></tr></table></figure></p>
+<p><code>MySQL</code>版本为:<br><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="section">mysql&gt; select version();</span></div><div class="line">+------------+</div><div class="line"><span class="section">| version()  |</span></div><div class="line">+------------+</div><div class="line"><span class="section">| 5.6.21-log |</span></div><div class="line">+------------+</div><div class="line">1 row in set (0.00 sec)</div></pre></td></tr></table></figure></p>
+<p>引起这个错误的原因是<code>sql</code>语句中对<code>unsigned</code>字段进行了递减操作的结果为负数导致的,<br><figure class="highlight n1ql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">update</span> <span class="keyword">database</span>.tablename <span class="keyword">set</span> fieldname=fieldname-num</div></pre></td></tr></table></figure></p>
+<p>而<code>MySQL</code>的模式是默认的<code>mode</code>:<br><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="section">mysql&gt; show variables like 'sql_mode';</span></div><div class="line">+---------------+------------------------+</div><div class="line"><span class="section">| Variable_name | Value                  |</span></div><div class="line">+---------------+------------------------+</div><div class="line"><span class="section">| sql_mode      | NO_ENGINE_SUBSTITUTION |</span></div><div class="line">+---------------+------------------------+</div><div class="line">1 row in set (0.00 sec)</div></pre></td></tr></table></figure></p>
+<p>解决方案有3种:</p>
+<p>1.程序中做数据合法性检查，先查询出来，递减之后判断结果，结果正常再去插入，不过这样需要2次<code>sql</code>操作，需要保证操作的原子性，不然容易引起数据一致性问题.</p>
+<p>2.在同一个<code>session</code>中临时修改<code>MySQL</code>的<code>sql_mode</code>:<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SET</span> sql_mode=<span class="string">'NO_UNSIGNED_SUBTRACTION'</span>;</div><div class="line"><span class="keyword">UPDATE</span> database.tablename <span class="keyword">SET</span> fieldname=fieldname-<span class="keyword">num</span></div></pre></td></tr></table></figure></p>
+<p><code>NO_UNSIGNED_SUBTRACTION</code> 模式下，对于<code>unsigned</code>字段，如果插入负值，则会讲该字段的值自动设置为 0 .</p>
+<p>3.如果<code>unsigned</code>字段能接受负值,则可以使用<code>CAST</code>函数处理:<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SET</span> sql_mode=<span class="string">'NO_UNSIGNED_SUBTRACTION'</span>;</div><div class="line"><span class="keyword">UPDATE</span> database.tablename <span class="keyword">SET</span> fieldname=<span class="keyword">CAST</span>(fieldname-<span class="keyword">num</span> <span class="keyword">AS</span> <span class="keyword">UNSIGNED</span>);</div></pre></td></tr></table></figure></p>
+<p>需要注意的是<code>CAST</code>的表现会因不同的<code>sql_mode</code>而不同，需要合适的<code>sql_mode</code>和<code>CAST</code>配合使用.</p>
+<p>参考:</p>
 <ul>
-<li><p>首先，确保 shadowsocks 已经正常起来的，默认的本地socks5端口号为 1080,可以使用 netstat 和 lsof 命令查看端口情况。</p>
-</li>
-<li><p>安装privoxy, mac 使用 brew install privoxy 即可</p>
-</li>
-<li><p>安装完成后，修改privoxy配置文件</p>
-<a id="more"></a>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim <span class="regexp">/usr/</span>local<span class="regexp">/etc/</span>privoxy<span class="regexp">/config</span></div></pre></td></tr></table></figure>
-</li>
-<li><p>修改内容如下：</p>
-<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">forward-socks5t   /               <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">1080</span> .</div><div class="line">listen-address  <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">8118</span></div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p><code>listen-address</code> 默认是监听本地8118端口，如果端口没有被占用，可以不用修改</p>
-<ul>
-<li>启动privoxy<figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="regexp">/usr/</span>local<span class="regexp">/sbin/</span>privoxy <span class="regexp">/usr/</span>local<span class="regexp">/etc/</span>privoxy<span class="regexp">/config</span></div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>可以使用 <code>ps aux|grep privoxy</code>和 <code>lsof -i:8118</code>来检查是否成功启动</p>
-<ul>
-<li>正常情况下,可以使用http代理了，代理地址<code>http://127.0.0.1:8118</code></li>
+<li><a href="https://dev.mysql.com/doc/refman/5.6/en/out-of-range-and-overflow.html" target="_blank" rel="external">mysql out-of-range-and-overflow</a></li>
+<li><a href="https://dev.mysql.com/doc/refman/5.6/en/sql-mode.html" target="_blank" rel="external">mysql sql mode</a></li>
+<li><a href="https://dev.mysql.com/doc/refman/5.6/en/sql-mode.html#sqlmode_no_unsigned_subtraction" target="_blank" rel="external">mysql no_unsigned_subtraction mode</a></li>
 </ul>
 
       
@@ -443,15 +423,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/proxy/" rel="tag"># proxy</a>
+            <a href="/tags/database/" rel="tag"># database</a>
           
-            <a href="/tags/socks5/" rel="tag"># socks5</a>
-          
-            <a href="/tags/http/" rel="tag"># http</a>
-          
-            <a href="/tags/privoxy/" rel="tag"># privoxy</a>
-          
-            <a href="/tags/shadowsocks/" rel="tag"># shadowsocks</a>
+            <a href="/tags/mysql/" rel="tag"># mysql</a>
           
         </div>
       
@@ -464,15 +438,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/umount-device-when-its-buzy/" rel="next" title="Linux强制卸载设备">
+                <i class="fa fa-chevron-left"></i> Linux强制卸载设备
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/atom_set_proxy/" rel="prev" title="Atom设置代理">
-                Atom设置代理 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -487,10 +461,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="transfer_socks5_to_http_proxy/"
-     data-title="Mac上使用Privoxy 将 socks5转换为 http 代理"
+        <div class="ds-share flat" data-thread-key="mysql-bigint-out-of-range/"
+     data-title="mysql unsigned/int字段越界"
      data-content=""
-     data-url="http://yoursite.com/transfer_socks5_to_http_proxy/">
+     data-url="http://yoursite.com/mysql-bigint-out-of-range/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -517,8 +491,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="transfer_socks5_to_http_proxy/"
-           data-title="Mac上使用Privoxy 将 socks5转换为 http 代理" data-url="http://yoursite.com/transfer_socks5_to_http_proxy/">
+      <div class="ds-thread" data-thread-key="mysql-bigint-out-of-range/"
+           data-title="mysql unsigned/int字段越界" data-url="http://yoursite.com/mysql-bigint-out-of-range/">
       </div>
     
   </div>
