@@ -1,0 +1,908 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="go,gdb,debug," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Mr.song" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.png?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="单步调试最近在写golang程序的时候，想要想单步调试一下程序，减少手动print log调试代码的痛苦。
+找了一些golang单步调试的方案，主要有几下集中方案:
+
+使用 SublimeGDB 插件在Sublime 中调试
+使用 Goland IDE 调试,不过可惜Goland还未发布正式版本
+使用 gdb 工具调试
+
+每个都尝试了一遍:
+
+SublimeGDB 界面不错，但是调试速度太慢，设置">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mac上使用gdb单步调试golang程序">
+<meta property="og:url" content="http://yoursite.com/debug-golang-with-gdb-on-mac/index.html">
+<meta property="og:site_name" content="Mr.song">
+<meta property="og:description" content="单步调试最近在写golang程序的时候，想要想单步调试一下程序，减少手动print log调试代码的痛苦。
+找了一些golang单步调试的方案，主要有几下集中方案:
+
+使用 SublimeGDB 插件在Sublime 中调试
+使用 Goland IDE 调试,不过可惜Goland还未发布正式版本
+使用 gdb 工具调试
+
+每个都尝试了一遍:
+
+SublimeGDB 界面不错，但是调试速度太慢，设置">
+<meta property="og:updated_time" content="2017-06-07T15:26:44.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Mac上使用gdb单步调试golang程序">
+<meta name="twitter:description" content="单步调试最近在写golang程序的时候，想要想单步调试一下程序，减少手动print log调试代码的痛苦。
+找了一些golang单步调试的方案，主要有几下集中方案:
+
+使用 SublimeGDB 插件在Sublime 中调试
+使用 Goland IDE 调试,不过可惜Goland还未发布正式版本
+使用 gdb 工具调试
+
+每个都尝试了一遍:
+
+SublimeGDB 界面不错，但是调试速度太慢，设置">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":true},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/debug-golang-with-gdb-on-mac/"/>
+
+
+
+
+
+  <title> Mac上使用gdb单步调试golang程序 | Mr.song </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Mr.song</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">step by step</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/debug-golang-with-gdb-on-mac/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="songgl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mr.song">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Mac上使用gdb单步调试golang程序
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-07T22:29:40+08:00">
+                2017-06-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/debug-golang-with-gdb-on-mac/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="debug-golang-with-gdb-on-mac/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="单步调试"><a href="#单步调试" class="headerlink" title="单步调试"></a>单步调试</h2><p>最近在写<code>golang</code>程序的时候，想要想单步调试一下程序，减少手动<code>print log</code>调试代码的痛苦。</p>
+<p>找了一些golang单步调试的方案，主要有几下集中方案:</p>
+<ul>
+<li>使用 <code>SublimeGDB</code> 插件在<code>Sublime</code> 中调试</li>
+<li>使用 <code>Goland IDE</code> 调试,不过可惜<code>Goland</code>还未发布正式版本</li>
+<li>使用 <code>gdb</code> 工具调试</li>
+</ul>
+<p>每个都尝试了一遍:</p>
+<ul>
+<li><code>SublimeGDB</code> 界面不错，但是调试速度太慢，设置一个断点需要很长时间，故 pass 此方案。</li>
+<li><code>Goland IDE</code> 只是预览版，有使用时间限制,还是等等吧，等 <code>Jetbrains</code> 出正式版后再去试试.(<code>Jetbrains</code>出品必属精品)</li>
+<li><code>gdb</code>调试，使用下来发现，目前而言，<code>gdb</code>的方式还是用的比较顺手的。</li>
+</ul>
+<p>不过在<code>mac</code>电脑上使用<code>gdb</code>还是遇到了一些问题,不过还好都顺利解决了。<br><a id="more"></a></p>
+<p>遇到的主要问题有权限问题和 mac系统版本问题</p>
+<h2 id="权限问题"><a href="#权限问题" class="headerlink" title="权限问题"></a>权限问题</h2><p>mac 系统为了安全起见，不允许普通用户直接运行gdb,运行时会出现以下问题：<br><figure class="highlight smali"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Unable to find Mach task port for process-id 4263: (os/kern) failure (0x5).</div><div class="line"> (please<span class="built_in"> check </span>gdb is codesigned - see taskgated(8))</div></pre></td></tr></table></figure></p>
+<p>这个问题，网络上已有解决方案，比如对gdb进行签名啥的，嫌麻烦，没有尝试。直接使用 <code>sudo gdb ..</code>来运行。可以自行设置命令alias。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">alias</span> gdb=<span class="string">'sudo gdb'</span></div></pre></td></tr></table></figure>
+<p>不过这样就得每次输入系统密码了。不过可以使用<code>expect</code> 来让命令行自动输入密码。</p>
+<h2 id="版本问题"><a href="#版本问题" class="headerlink" title="版本问题"></a>版本问题</h2><p>开始调试的时候遇到了一下问题：<br><figure class="highlight qml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">During startup program terminated <span class="keyword">with</span> <span class="keyword">signal</span><span class="string"> ?</span>, Unknown <span class="keyword">signal</span><span class="string">.</span></div></pre></td></tr></table></figure></p>
+<p>查询了一下，Mac Sierra 这个版本的系统不支持 gdb 调试。解决方案五花八门。<br>主要进行了一下操作：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">brew upgrade gdb </div><div class="line">touch ~/.gdbinit</div><div class="line">cat '<span class="keyword">set</span> <span class="keyword">startup</span>-<span class="keyword">with</span>-shell <span class="keyword">off</span><span class="string">' &gt; ~/.gdbinit</span></div></pre></td></tr></table></figure></p>
+<p>这些操作主要是:</p>
+<ul>
+<li>将 gdb 从 7.1.2升级到最新的 8.0</li>
+<li>给 gdb 写入配置文件</li>
+</ul>
+<p>幸运的是，经过这两步的处理，gdb 已经能够在本人机器上正常运行了。</p>
+<p>下面记录下一些 常用的gdb操作:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">command</th>
+<th style="text-align:left">alias</th>
+<th style="text-align:center">description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">l main.main</td>
+<td style="text-align:left">list main.main</td>
+<td style="text-align:center">查看 golang main函数入口源码</td>
+</tr>
+<tr>
+<td style="text-align:left">b 12</td>
+<td style="text-align:left">breakpoints 12</td>
+<td style="text-align:center">在12行设置一个断点</td>
+</tr>
+<tr>
+<td style="text-align:left">d</td>
+<td style="text-align:left">delete</td>
+<td style="text-align:center">删除所有断点</td>
+</tr>
+<tr>
+<td style="text-align:left">i b</td>
+<td style="text-align:left">info breakpoints</td>
+<td style="text-align:center">查看已经设置的断点</td>
+</tr>
+<tr>
+<td style="text-align:left">r</td>
+<td style="text-align:left">run</td>
+<td style="text-align:center">开始运行程序</td>
+</tr>
+<tr>
+<td style="text-align:left">n</td>
+<td style="text-align:left">next</td>
+<td style="text-align:center">执行下一行，相当于step over</td>
+</tr>
+<tr>
+<td style="text-align:left">s</td>
+<td style="text-align:left">-</td>
+<td style="text-align:center">进入函数内部，相当于step into</td>
+</tr>
+<tr>
+<td style="text-align:left">i locals</td>
+<td style="text-align:left">info locals</td>
+<td style="text-align:center">查看局部变量</td>
+</tr>
+<tr>
+<td style="text-align:left">i args</td>
+<td style="text-align:left">info args</td>
+<td style="text-align:center">查看参数</td>
+</tr>
+<tr>
+<td style="text-align:left">p paramName</td>
+<td style="text-align:left">print paramName</td>
+<td style="text-align:center">打印变量</td>
+</tr>
+<tr>
+<td style="text-align:left">c</td>
+<td style="text-align:left">-</td>
+<td style="text-align:center">继续执行，直到下一个断点</td>
+</tr>
+<tr>
+<td style="text-align:left">whatis paramName</td>
+<td style="text-align:left">-</td>
+<td style="text-align:center">查看变量类型</td>
+</tr>
+<tr>
+<td style="text-align:left">up</td>
+<td style="text-align:left">-</td>
+<td style="text-align:center">返回上一次函数</td>
+</tr>
+<tr>
+<td style="text-align:left">down</td>
+<td style="text-align:left">-</td>
+<td style="text-align:center">进入下一层函数</td>
+</tr>
+<tr>
+<td style="text-align:left">h</td>
+<td style="text-align:left">help</td>
+<td style="text-align:center">help</td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/go/" rel="tag"># go</a>
+          
+            <a href="/tags/gdb/" rel="tag"># gdb</a>
+          
+            <a href="/tags/debug/" rel="tag"># debug</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/pressure-test-tools/" rel="next" title="压力测试工具ab、webbench、http_load、siege简单使用">
+                <i class="fa fa-chevron-left"></i> 压力测试工具ab、webbench、http_load、siege简单使用
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="debug-golang-with-gdb-on-mac/"
+     data-title="Mac上使用gdb单步调试golang程序"
+     data-content=""
+     data-url="http://yoursite.com/debug-golang-with-gdb-on-mac/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="debug-golang-with-gdb-on-mac/"
+           data-title="Mac上使用gdb单步调试golang程序" data-url="http://yoursite.com/debug-golang-with-gdb-on-mac/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="songgl" />
+          <p class="site-author-name" itemprop="name">songgl</p>
+           
+              <p class="site-description motion-element" itemprop="description">A journey of a thousand miles begins with single step</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/javasgl" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="/images/wechat.jpg" target="_blank" title="Wechat">
+                  
+                    <i class="fa fa-fw fa-wechat"></i>
+                  
+                  Wechat
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#单步调试"><span class="nav-number">1.</span> <span class="nav-text">单步调试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#权限问题"><span class="nav-number">2.</span> <span class="nav-text">权限问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#版本问题"><span class="nav-number">3.</span> <span class="nav-text">版本问题</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">songgl</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"javasgl"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>

@@ -97,7 +97,7 @@ MySQL版本为:1234567mysql&amp;gt; select version();+------------+| version()  
 <meta property="og:site_name" content="Mr.song">
 <meta property="og:description" content="线上的MySQL错误日志中遇到了以下问题1Data truncation: BIGINT UNSIGNED value is out of range in `(database.tablename.fieldname)`
 MySQL版本为:1234567mysql&amp;gt; select version();+------------+| version()  |+------------+| 5">
-<meta property="og:updated_time" content="2017-05-22T12:39:37.000Z">
+<meta property="og:updated_time" content="2017-06-05T14:39:48.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mysql unsigned/int字段越界">
 <meta name="twitter:description" content="线上的MySQL错误日志中遇到了以下问题1Data truncation: BIGINT UNSIGNED value is out of range in `(database.tablename.fieldname)`
@@ -382,7 +382,7 @@ MySQL版本为:1234567mysql&amp;gt; select version();+------------+| version()  
 <p><code>MySQL</code>版本为:<br><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="section">mysql&gt; select version();</span></div><div class="line">+------------+</div><div class="line"><span class="section">| version()  |</span></div><div class="line">+------------+</div><div class="line"><span class="section">| 5.6.21-log |</span></div><div class="line">+------------+</div><div class="line">1 row in set (0.00 sec)</div></pre></td></tr></table></figure></p>
 <p>引起这个错误的原因是<code>sql</code>语句中对<code>unsigned</code>字段进行了递减操作的结果为负数导致的,<br><figure class="highlight n1ql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">update</span> <span class="keyword">database</span>.tablename <span class="keyword">set</span> fieldname=fieldname-num</div></pre></td></tr></table></figure></p>
 <p>而<code>MySQL</code>的模式是默认的<code>mode</code>:<br><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="section">mysql&gt; show variables like 'sql_mode';</span></div><div class="line">+---------------+------------------------+</div><div class="line"><span class="section">| Variable_name | Value                  |</span></div><div class="line">+---------------+------------------------+</div><div class="line"><span class="section">| sql_mode      | NO_ENGINE_SUBSTITUTION |</span></div><div class="line">+---------------+------------------------+</div><div class="line">1 row in set (0.00 sec)</div></pre></td></tr></table></figure></p>
-<p>解决方案有3种:</p>
+<p>解决方案有3种:<br><a id="more"></a></p>
 <p>1.程序中做数据合法性检查，先查询出来，递减之后判断结果，结果正常再去插入，不过这样需要2次<code>sql</code>操作，需要保证操作的原子性，不然容易引起数据一致性问题.</p>
 <p>2.在同一个<code>session</code>中临时修改<code>MySQL</code>的<code>sql_mode</code>:<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SET</span> sql_mode=<span class="string">'NO_UNSIGNED_SUBTRACTION'</span>;</div><div class="line"><span class="keyword">UPDATE</span> database.tablename <span class="keyword">SET</span> fieldname=fieldname-<span class="keyword">num</span></div></pre></td></tr></table></figure></p>
 <p><code>NO_UNSIGNED_SUBTRACTION</code> 模式下，对于<code>unsigned</code>字段，如果插入负值，则会讲该字段的值自动设置为 0 .</p>
@@ -447,6 +447,10 @@ MySQL版本为:1234567mysql&amp;gt; select version();+------------+| version()  
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/js-pass-this-into-callback-function/" rel="prev" title="js 回调函数访问上下文 this 对象">
+                js 回调函数访问上下文 this 对象 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -532,7 +536,7 @@ MySQL版本为:1234567mysql&amp;gt; select version();+------------+| version()  
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-count">18</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -554,7 +558,7 @@ MySQL版本为:1234567mysql&amp;gt; select version();+------------+| version()  
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-count">31</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>

@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-05-22T12:39:37.000Z</updated>
+  <updated>2017-06-07T15:26:44.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -16,17 +16,246 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Mac上使用gdb单步调试golang程序</title>
+    <link href="http://yoursite.com/debug-golang-with-gdb-on-mac/"/>
+    <id>http://yoursite.com/debug-golang-with-gdb-on-mac/</id>
+    <published>2017-06-07T14:29:40.000Z</published>
+    <updated>2017-06-07T15:26:44.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="单步调试"><a href="#单步调试" class="headerlink" title="单步调试"></a>单步调试</h2><p>最近在写<code>golang</code>程序的时候，想要想单步调试一下程序，减少手动<code>print log</code>调试代码的痛苦。</p>
+<p>找了一些golang单步调试的方案，主要有几下集中方案:</p>
+<ul>
+<li>使用 <code>SublimeGDB</code> 插件在<code>Sublime</code> 中调试</li>
+<li>使用 <code>Goland IDE</code> 调试,不过可惜<code>Goland</code>还未发布正式版本</li>
+<li>使用 <code>gdb</code> 工具调试</li>
+</ul>
+<p>每个都尝试了一遍:</p>
+<ul>
+<li><code>SublimeGDB</code> 界面不错，但是调试速度太慢，设置一个断点需要很长时间，故 pass 此方案。</li>
+<li><code>Goland IDE</code> 只是预览版，有使用时间限制,还是等等吧，等 <code>Jetbrains</code> 出正式版后再去试试.(<code>Jetbrains</code>出品必属精品)</li>
+<li><code>gdb</code>调试，使用下来发现，目前而言，<code>gdb</code>的方式还是用的比较顺手的。</li>
+</ul>
+<p>不过在<code>mac</code>电脑上使用<code>gdb</code>还是遇到了一些问题,不过还好都顺利解决了。<br><a id="more"></a></p>
+<p>遇到的主要问题有权限问题和 mac系统版本问题</p>
+<h2 id="权限问题"><a href="#权限问题" class="headerlink" title="权限问题"></a>权限问题</h2><p>mac 系统为了安全起见，不允许普通用户直接运行gdb,运行时会出现以下问题：<br><figure class="highlight smali"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Unable to find Mach task port for process-id 4263: (os/kern) failure (0x5).</div><div class="line"> (please<span class="built_in"> check </span>gdb is codesigned - see taskgated(8))</div></pre></td></tr></table></figure></p>
+<p>这个问题，网络上已有解决方案，比如对gdb进行签名啥的，嫌麻烦，没有尝试。直接使用 <code>sudo gdb ..</code>来运行。可以自行设置命令alias。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">alias</span> gdb=<span class="string">'sudo gdb'</span></div></pre></td></tr></table></figure>
+<p>不过这样就得每次输入系统密码了。不过可以使用<code>expect</code> 来让命令行自动输入密码。</p>
+<h2 id="版本问题"><a href="#版本问题" class="headerlink" title="版本问题"></a>版本问题</h2><p>开始调试的时候遇到了一下问题：<br><figure class="highlight qml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">During startup program terminated <span class="keyword">with</span> <span class="keyword">signal</span><span class="string"> ?</span>, Unknown <span class="keyword">signal</span><span class="string">.</span></div></pre></td></tr></table></figure></p>
+<p>查询了一下，Mac Sierra 这个版本的系统不支持 gdb 调试。解决方案五花八门。<br>主要进行了一下操作：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">brew upgrade gdb </div><div class="line">touch ~/.gdbinit</div><div class="line">cat '<span class="keyword">set</span> <span class="keyword">startup</span>-<span class="keyword">with</span>-shell <span class="keyword">off</span><span class="string">' &gt; ~/.gdbinit</span></div></pre></td></tr></table></figure></p>
+<p>这些操作主要是:</p>
+<ul>
+<li>将 gdb 从 7.1.2升级到最新的 8.0</li>
+<li>给 gdb 写入配置文件</li>
+</ul>
+<p>幸运的是，经过这两步的处理，gdb 已经能够在本人机器上正常运行了。</p>
+<p>下面记录下一些 常用的gdb操作:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">command</th>
+<th style="text-align:left">alias</th>
+<th style="text-align:center">description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">l main.main</td>
+<td style="text-align:left">list main.main</td>
+<td style="text-align:center">查看 golang main函数入口源码</td>
+</tr>
+<tr>
+<td style="text-align:left">b 12</td>
+<td style="text-align:left">breakpoints 12</td>
+<td style="text-align:center">在12行设置一个断点</td>
+</tr>
+<tr>
+<td style="text-align:left">d</td>
+<td style="text-align:left">delete</td>
+<td style="text-align:center">删除所有断点</td>
+</tr>
+<tr>
+<td style="text-align:left">i b</td>
+<td style="text-align:left">info breakpoints</td>
+<td style="text-align:center">查看已经设置的断点</td>
+</tr>
+<tr>
+<td style="text-align:left">r</td>
+<td style="text-align:left">run</td>
+<td style="text-align:center">开始运行程序</td>
+</tr>
+<tr>
+<td style="text-align:left">n</td>
+<td style="text-align:left">next</td>
+<td style="text-align:center">执行下一行，相当于step over</td>
+</tr>
+<tr>
+<td style="text-align:left">s</td>
+<td style="text-align:left">-</td>
+<td style="text-align:center">进入函数内部，相当于step into</td>
+</tr>
+<tr>
+<td style="text-align:left">i locals</td>
+<td style="text-align:left">info locals</td>
+<td style="text-align:center">查看局部变量</td>
+</tr>
+<tr>
+<td style="text-align:left">i args</td>
+<td style="text-align:left">info args</td>
+<td style="text-align:center">查看参数</td>
+</tr>
+<tr>
+<td style="text-align:left">p paramName</td>
+<td style="text-align:left">print paramName</td>
+<td style="text-align:center">打印变量</td>
+</tr>
+<tr>
+<td style="text-align:left">c</td>
+<td style="text-align:left">-</td>
+<td style="text-align:center">继续执行，直到下一个断点</td>
+</tr>
+<tr>
+<td style="text-align:left">whatis paramName</td>
+<td style="text-align:left">-</td>
+<td style="text-align:center">查看变量类型</td>
+</tr>
+<tr>
+<td style="text-align:left">up</td>
+<td style="text-align:left">-</td>
+<td style="text-align:center">返回上一次函数</td>
+</tr>
+<tr>
+<td style="text-align:left">down</td>
+<td style="text-align:left">-</td>
+<td style="text-align:center">进入下一层函数</td>
+</tr>
+<tr>
+<td style="text-align:left">h</td>
+<td style="text-align:left">help</td>
+<td style="text-align:center">help</td>
+</tr>
+</tbody>
+</table>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;单步调试&quot;&gt;&lt;a href=&quot;#单步调试&quot; class=&quot;headerlink&quot; title=&quot;单步调试&quot;&gt;&lt;/a&gt;单步调试&lt;/h2&gt;&lt;p&gt;最近在写&lt;code&gt;golang&lt;/code&gt;程序的时候，想要想单步调试一下程序，减少手动&lt;code&gt;print log&lt;/code&gt;调试代码的痛苦。&lt;/p&gt;
+&lt;p&gt;找了一些golang单步调试的方案，主要有几下集中方案:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;使用 &lt;code&gt;SublimeGDB&lt;/code&gt; 插件在&lt;code&gt;Sublime&lt;/code&gt; 中调试&lt;/li&gt;
+&lt;li&gt;使用 &lt;code&gt;Goland IDE&lt;/code&gt; 调试,不过可惜&lt;code&gt;Goland&lt;/code&gt;还未发布正式版本&lt;/li&gt;
+&lt;li&gt;使用 &lt;code&gt;gdb&lt;/code&gt; 工具调试&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;每个都尝试了一遍:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;SublimeGDB&lt;/code&gt; 界面不错，但是调试速度太慢，设置一个断点需要很长时间，故 pass 此方案。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Goland IDE&lt;/code&gt; 只是预览版，有使用时间限制,还是等等吧，等 &lt;code&gt;Jetbrains&lt;/code&gt; 出正式版后再去试试.(&lt;code&gt;Jetbrains&lt;/code&gt;出品必属精品)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;gdb&lt;/code&gt;调试，使用下来发现，目前而言，&lt;code&gt;gdb&lt;/code&gt;的方式还是用的比较顺手的。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;不过在&lt;code&gt;mac&lt;/code&gt;电脑上使用&lt;code&gt;gdb&lt;/code&gt;还是遇到了一些问题,不过还好都顺利解决了。&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="go" scheme="http://yoursite.com/tags/go/"/>
+    
+      <category term="gdb" scheme="http://yoursite.com/tags/gdb/"/>
+    
+      <category term="debug" scheme="http://yoursite.com/tags/debug/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>压力测试工具ab、webbench、http_load、siege简单使用</title>
+    <link href="http://yoursite.com/pressure-test-tools/"/>
+    <id>http://yoursite.com/pressure-test-tools/</id>
+    <published>2017-06-05T02:05:14.000Z</published>
+    <updated>2017-06-05T14:39:48.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>本文简单介绍ab、http_load、webbench、siege四种压力测试工具的使用。</p>
+<h1 id="ab"><a href="#ab" class="headerlink" title="ab"></a>ab</h1><p><code>ab</code> 是 <code>apache</code> 服务器自带的一个压力测试工具。安装<code>apache</code> web服务器时就自动安装了。当然，<code>ab</code>也是可以单独安装的，如果你不想安装<code>apache</code>而只是想安装<code>ab</code>，那么可以使用以下方式安装:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[root@yourdream ~]# yum install httpd-tools</div></pre></td></tr></table></figure></p>
+<p>安装完成之后即可使用<code>ab</code>进行测试了。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">[root@yourdream ~]# ab -h</div><div class="line">Usage: ab [options] [http[s]://]hostname[:port]/path</div><div class="line">Options are:</div><div class="line">    -n requests     Number of requests to perform</div><div class="line">    -c concurrency  Number of multiple requests to make</div><div class="line">    ....</div><div class="line">    -h              Display usage information (this message)</div></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<p>压力测试的时候一般使用到 <code>-n</code>和<code>-c</code>参数来分别指定运行次数和并发数:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">[root@yourdream ~]# ab -n 1000 -c 100 https://baidu.com/</div><div class="line">This is ApacheBench, Version 2.3 &lt;$Revision: 655654 $&gt;</div><div class="line">Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/</div><div class="line">Licensed to The Apache Software Foundation, http://www.apache.org/</div><div class="line"></div><div class="line">Benchmarking baidu.com (be patient)</div><div class="line">Completed 100 requests</div><div class="line">...</div><div class="line">Completed 1000 requests</div><div class="line">Finished 1000 requests</div><div class="line"></div><div class="line">....</div><div class="line"></div><div class="line">Concurrency Level:      100</div><div class="line">Time taken for tests:   3.742 seconds</div><div class="line">Complete requests:      1000</div><div class="line">Failed requests:        0</div><div class="line">Write errors:           0</div><div class="line">...</div><div class="line">Requests per second:    267.23 [#/sec] (mean)</div><div class="line">Time per request:       374.213 [ms] (mean)</div><div class="line">Time per request:       3.742 [ms] (mean, across all concurrent requests)</div><div class="line">Transfer rate:          92.50 [Kbytes/sec] received</div><div class="line"></div><div class="line">Connection Times (ms)</div><div class="line">              min  mean[+/-sd] median   max</div><div class="line">Connect:       93  260  50.7    269     498</div><div class="line">Processing:    26   88  45.6     77     362</div><div class="line">Waiting:       25   62  31.8     50     356</div><div class="line">Total:        125  348  47.5    342     635</div><div class="line"></div><div class="line">Percentage of the requests served within a certain time (ms)</div><div class="line">  50%    342</div><div class="line">  ....</div><div class="line">  99%    534</div><div class="line"> 100%    635 (longest request)</div></pre></td></tr></table></figure></p>
+<p>测试结果中，重点关注<code>Requests per second</code>和<code>Time per request</code> 指标,分别是每秒请求数和单个请求耗时。注意这些指标只能作为性能参考，因为会受到各种因素的影响，比如网络环境的影响…</p>
+<h1 id="http-load"><a href="#http-load" class="headerlink" title="http_load"></a>http_load</h1><p><code>http_load</code>非常轻量，程序解压后<code>100kb</code>左右的大小。不过不支持直接测试<code>url</code>，需要先将要测试的<code>url</code>写入文件，把文件作为参数传递给<code>http_load</code>。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">[root@yourdream ~]# http_load</div><div class="line">usage:  http_load [-checksum] [-throttle] [-proxy host:port] [-verbose] [-timeout secs] [-sip sip_file]</div><div class="line">            -parallel N | -rate N [-jitter]</div><div class="line">            -fetches N | -seconds N</div><div class="line">            url_file</div><div class="line">One start specifier, either -parallel or -rate, is required.</div><div class="line">One end specifier, either -fetches or -seconds, is required.</div></pre></td></tr></table></figure></p>
+<p>经常需要使用到的参数是<code>-parallel</code>和<code>-fetches</code>，分别表示并发数和总共请求数。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">[root@yourdream ~]# http_load -parallel 100 -fetches 1000 a.txt</div><div class="line">....</div><div class="line">1000 fetches, 100 max parallel, 55088 bytes, in 1.8685 seconds</div><div class="line">55.088 mean bytes/connection</div><div class="line">535.189 fetches/sec, 29482.5 bytes/sec</div><div class="line">msecs/connect: 31.5979 mean, 48.524 max, 26.395 min</div><div class="line">msecs/first-response: 36.9429 mean, 1312.77 max, 5.107 min</div><div class="line">999 bad byte counts</div><div class="line">HTTP response codes:</div><div class="line">  code 200 -- 514</div></pre></td></tr></table></figure></p>
+<p>测试结果中，重点关注<code>fetches/sec</code>和<code>msecs/connect</code>,分别表示每秒处理请求数和每个连接平均响应时间。</p>
+<h1 id="webbench"><a href="#webbench" class="headerlink" title="webbench"></a>webbench</h1><p><code>webbench</code> 也非常轻量级，和<code>http_load</code>大小差不多。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">[root@yourdream ~]# webbench</div><div class="line">webbench [option]... URL</div><div class="line">  -f|--force               Don&apos;t wait for reply from server.</div><div class="line">  -r|--reload              Send reload request - Pragma: no-cache.</div><div class="line">  -t|--time &lt;sec&gt;          Run benchmark for &lt;sec&gt; seconds. Default 30.</div><div class="line">  -p|--proxy &lt;server:port&gt; Use proxy server for request.</div><div class="line">  -c|--clients &lt;n&gt;         Run &lt;n&gt; HTTP clients at once. Default one.</div><div class="line">  -9|--http09              Use HTTP/0.9 style requests.</div><div class="line">  -1|--http10              Use HTTP/1.0 protocol.</div><div class="line">  -2|--http11              Use HTTP/1.1 protocol.</div><div class="line">  --get                    Use GET request method.</div><div class="line">  --head                   Use HEAD request method.</div><div class="line">  --options                Use OPTIONS request method.</div><div class="line">  --trace                  Use TRACE request method.</div><div class="line">  -?|-h|--help             This information.</div><div class="line">  -V|--version             Display program version.</div></pre></td></tr></table></figure></p>
+<p><code>webbench</code>不支持指定总访问数，支持并发数(<code>-c</code>)和测试时长(<code>-t</code>)，不直接支持<code>https</code>测试。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">[root@yourdream ~]# webbench -c 100 -t 10 http://baidu.com/</div><div class="line">Webbench - Simple Web Benchmark 1.5</div><div class="line">Copyright (c) Radim Kolar 1997-2004, GPL Open Source Software.</div><div class="line"></div><div class="line">Benchmarking: GET http://baidu.com/</div><div class="line">100 clients, running 10 sec.</div><div class="line"></div><div class="line">Speed=14628 pages/min, 2448 bytes/sec.</div><div class="line">Requests: 86 susceed, 2352 failed.</div></pre></td></tr></table></figure></p>
+<p>每秒钟响应请求数：146285 pages/min，每秒钟传输数据量:2448 bytes/sec</p>
+<h1 id="siege"><a href="#siege" class="headerlink" title="siege"></a>siege</h1><p>安装可以直接使用<code>yum</code>、<code>apt</code>安装，也自己去下载手动安装。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">[root@yourdream ~]# siege</div><div class="line">SIEGE 3.0.8</div><div class="line">Usage: siege [options]</div><div class="line">       siege [options] URL</div><div class="line">       siege -g URL</div><div class="line">Options:</div><div class="line">  ...</div><div class="line">  -h, --help                HELP, prints this section.</div><div class="line">  ...</div><div class="line">  -c, --concurrent=NUM      CONCURRENT users, default is 10</div><div class="line">  -i, --internet            INTERNET user simulation, hits URLs randomly.</div><div class="line">  ...</div><div class="line">  -t, --time=NUMm           TIMED testing where &quot;m&quot; is modifier S, M, or H</div><div class="line">                            ex: --time=1H, one hour test.</div><div class="line">  ...</div></pre></td></tr></table></figure></p>
+<p>经常使用的参数是<code>-c</code>和<code>-t</code>，分别是并发数和测试时长。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">[root@yourdream ~]# siege -c 100 -t 10S https://baidu.com</div><div class="line">** SIEGE 3.0.8</div><div class="line">** Preparing 100 concurrent users for battle.</div><div class="line">The server is now under siege...</div><div class="line">HTTP/1.1 200   0.03 secs:   28207 bytes ==&gt; GET  /</div><div class="line">HTTP/1.1 302   0.15 secs:     161 bytes ==&gt; GET  /</div><div class="line">....</div><div class="line">Lifting the server siege..      done.</div><div class="line"></div><div class="line">Transactions:		        1512 hits</div><div class="line">Availability:		      100.00 %</div><div class="line">Elapsed time:		        9.63 secs</div><div class="line">Data transferred:	       20.38 MB</div><div class="line">Response time:		        0.12 secs</div><div class="line">Transaction rate:	      157.01 trans/sec</div><div class="line">Throughput:		        2.12 MB/sec</div><div class="line">Concurrency:		       18.14</div><div class="line">Successful transactions:        1555</div><div class="line">Failed transactions:	           0</div><div class="line">Longest transaction:	        1.34</div><div class="line">Shortest transaction:	        0.02</div><div class="line">...</div></pre></td></tr></table></figure></p>
+<p>测试结果中，重点关注<code>Transaction rate</code>和<code>Concurrency</code>，分别表示每秒处理数和实际并发数。<br><code>siege</code>可以将测试结果写入日志文件中，方便进行后续图形化工具或者分析工具使用。<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">        <span class="selector-tag">Date</span> &amp; <span class="selector-tag">Time</span>,  <span class="selector-tag">Trans</span>,  <span class="selector-tag">Elap</span> <span class="selector-tag">Time</span>,  <span class="selector-tag">Data</span> <span class="selector-tag">Trans</span>,  <span class="selector-tag">Resp</span> <span class="selector-tag">Time</span>,  <span class="selector-tag">Trans</span> <span class="selector-tag">Rate</span>,  <span class="selector-tag">Throughput</span>,  <span class="selector-tag">Concurrent</span>,    <span class="selector-tag">OKAY</span>,   <span class="selector-tag">Failed</span></div><div class="line">2017<span class="selector-tag">-06-05</span> 11<span class="selector-pseudo">:38</span><span class="selector-pseudo">:02</span>,   1512,       9<span class="selector-class">.63</span>,          20,       0<span class="selector-class">.12</span>,      157<span class="selector-class">.01</span>,        2<span class="selector-class">.08</span>,       18<span class="selector-class">.14</span>,    1555,       0</div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;本文简单介绍ab、http_load、webbench、siege四种压力测试工具的使用。&lt;/p&gt;
+&lt;h1 id=&quot;ab&quot;&gt;&lt;a href=&quot;#ab&quot; class=&quot;headerlink&quot; title=&quot;ab&quot;&gt;&lt;/a&gt;ab&lt;/h1&gt;&lt;p&gt;&lt;code&gt;ab&lt;/code&gt; 是 &lt;code&gt;apache&lt;/code&gt; 服务器自带的一个压力测试工具。安装&lt;code&gt;apache&lt;/code&gt; web服务器时就自动安装了。当然，&lt;code&gt;ab&lt;/code&gt;也是可以单独安装的，如果你不想安装&lt;code&gt;apache&lt;/code&gt;而只是想安装&lt;code&gt;ab&lt;/code&gt;，那么可以使用以下方式安装:&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;[root@yourdream ~]# yum install httpd-tools&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;安装完成之后即可使用&lt;code&gt;ab&lt;/code&gt;进行测试了。&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;[root@yourdream ~]# ab -h&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;Usage: ab [options] [http[s]://]hostname[:port]/path&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;Options are:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    -n requests     Number of requests to perform&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    -c concurrency  Number of multiple requests to make&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    ....&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    -h              Display usage information (this message)&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="tools" scheme="http://yoursite.com/categories/tools/"/>
+    
+    
+      <category term="ab" scheme="http://yoursite.com/tags/ab/"/>
+    
+      <category term="webbench" scheme="http://yoursite.com/tags/webbench/"/>
+    
+      <category term="http_load" scheme="http://yoursite.com/tags/http-load/"/>
+    
+      <category term="siege" scheme="http://yoursite.com/tags/siege/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>js 回调函数访问上下文 this 对象</title>
+    <link href="http://yoursite.com/js-pass-this-into-callback-function/"/>
+    <id>http://yoursite.com/js-pass-this-into-callback-function/</id>
+    <published>2017-05-27T10:10:14.000Z</published>
+    <updated>2017-06-05T14:39:48.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>在开发项目之中，使用到js ajax 同服务端进行数据交互。一般图方便直接使用<code>jquery</code>或者<code>axios</code>等已有的库。<br>一般代码如下:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//axios</span></div><div class="line">axios.get(<span class="string">'/url'</span>).then(<span class="function"><span class="keyword">function</span>(<span class="params">res</span>)</span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(res)</div><div class="line">&#125;)</div><div class="line"><span class="comment">//juqery</span></div><div class="line">$.get(<span class="string">'/url'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">res</span>)</span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(res)</div><div class="line">&#125;,<span class="string">'json'</span>)</div></pre></td></tr></table></figure></p>
+<p>那么经常这么使用的肯定会遇到一个场景，就是:在回调函数中如何访问上下文中的<code>this</code>对象?<br><a id="more"></a><br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">request</span>(<span class="params"></span>)</span>&#123;</div><div class="line">  <span class="comment">//this</span></div><div class="line">  axios.get(<span class="string">'/url'</span>).then(<span class="function"><span class="keyword">function</span>(<span class="params">res</span>)</span>&#123;   </div><div class="line">    <span class="comment">//in callbacl ,how to access this</span></div><div class="line">  &#125;)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>之前的做法是这样的:将<code>this</code>赋值给一个局部变量,然后在回调函数中访问这个变量<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">request</span>(<span class="params"></span>)</span>&#123;</div><div class="line">  <span class="comment">//this</span></div><div class="line">  <span class="keyword">var</span> that = <span class="keyword">this</span>;</div><div class="line">  axios.get(<span class="string">'/url'</span>).then(<span class="function"><span class="keyword">function</span>(<span class="params">res</span>)</span>&#123;   </div><div class="line">    <span class="comment">//in callbacl ,how to access this</span></div><div class="line">    <span class="built_in">console</span>.log(that)</div><div class="line">  &#125;)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>后来知道了更为优雅的两种方式:</p>
+<p>使用 <code>bind</code>函数:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">request</span>(<span class="params"></span>)</span>&#123;</div><div class="line">  axios.get(<span class="string">'/url'</span>).then(<span class="function"><span class="keyword">function</span>(<span class="params">res</span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>);</div><div class="line">  &#125;.bind(<span class="keyword">this</span>));</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>使用<code>ES6</code>的箭头函数:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">request</span>(<span class="params"></span>)</span>&#123;</div><div class="line">  axios.get(<span class="string">'/url'</span>).then(<span class="function">(<span class="params">res</span>)=&gt;</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>);</div><div class="line">  ));</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>参考:</p>
+<p><a href="!http://www.infoq.com/cn/articles/es6-in-depth-arrow-functions">深入浅出ES6（七）：箭头函数 Arrow Functions</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在开发项目之中，使用到js ajax 同服务端进行数据交互。一般图方便直接使用&lt;code&gt;jquery&lt;/code&gt;或者&lt;code&gt;axios&lt;/code&gt;等已有的库。&lt;br&gt;一般代码如下:&lt;br&gt;&lt;figure class=&quot;highlight js&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//axios&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;axios.get(&lt;span class=&quot;string&quot;&gt;&#39;/url&#39;&lt;/span&gt;).then(&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;res&lt;/span&gt;)&lt;/span&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &lt;span class=&quot;built_in&quot;&gt;console&lt;/span&gt;.log(res)&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;)&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//juqery&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;$.get(&lt;span class=&quot;string&quot;&gt;&#39;/url&#39;&lt;/span&gt;,&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;res&lt;/span&gt;)&lt;/span&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  &lt;span class=&quot;built_in&quot;&gt;console&lt;/span&gt;.log(res)&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;,&lt;span class=&quot;string&quot;&gt;&#39;json&#39;&lt;/span&gt;)&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;那么经常这么使用的肯定会遇到一个场景，就是:在回调函数中如何访问上下文中的&lt;code&gt;this&lt;/code&gt;对象?&lt;br&gt;
+    
+    </summary>
+    
+      <category term="notes" scheme="http://yoursite.com/categories/notes/"/>
+    
+    
+      <category term="js" scheme="http://yoursite.com/tags/js/"/>
+    
+      <category term="es6" scheme="http://yoursite.com/tags/es6/"/>
+    
+  </entry>
+  
+  <entry>
     <title>mysql unsigned/int字段越界</title>
     <link href="http://yoursite.com/mysql-bigint-out-of-range/"/>
     <id>http://yoursite.com/mysql-bigint-out-of-range/</id>
     <published>2017-05-22T02:41:39.000Z</published>
-    <updated>2017-05-22T12:39:37.000Z</updated>
+    <updated>2017-06-05T14:39:48.000Z</updated>
     
     <content type="html"><![CDATA[<p>线上的<code>MySQL</code>错误日志中遇到了以下问题<br><figure class="highlight vhdl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Data truncation: BIGINT <span class="built_in">UNSIGNED</span> value <span class="keyword">is</span> <span class="keyword">out</span> <span class="keyword">of</span> <span class="keyword">range</span> <span class="keyword">in</span> `(database.tablename.fieldname)`</div></pre></td></tr></table></figure></p>
 <p><code>MySQL</code>版本为:<br><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="section">mysql&gt; select version();</span></div><div class="line">+------------+</div><div class="line"><span class="section">| version()  |</span></div><div class="line">+------------+</div><div class="line"><span class="section">| 5.6.21-log |</span></div><div class="line">+------------+</div><div class="line">1 row in set (0.00 sec)</div></pre></td></tr></table></figure></p>
 <p>引起这个错误的原因是<code>sql</code>语句中对<code>unsigned</code>字段进行了递减操作的结果为负数导致的,<br><figure class="highlight n1ql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">update</span> <span class="keyword">database</span>.tablename <span class="keyword">set</span> fieldname=fieldname-num</div></pre></td></tr></table></figure></p>
 <p>而<code>MySQL</code>的模式是默认的<code>mode</code>:<br><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="section">mysql&gt; show variables like 'sql_mode';</span></div><div class="line">+---------------+------------------------+</div><div class="line"><span class="section">| Variable_name | Value                  |</span></div><div class="line">+---------------+------------------------+</div><div class="line"><span class="section">| sql_mode      | NO_ENGINE_SUBSTITUTION |</span></div><div class="line">+---------------+------------------------+</div><div class="line">1 row in set (0.00 sec)</div></pre></td></tr></table></figure></p>
-<p>解决方案有3种:</p>
+<p>解决方案有3种:<br><a id="more"></a></p>
 <p>1.程序中做数据合法性检查，先查询出来，递减之后判断结果，结果正常再去插入，不过这样需要2次<code>sql</code>操作，需要保证操作的原子性，不然容易引起数据一致性问题.</p>
 <p>2.在同一个<code>session</code>中临时修改<code>MySQL</code>的<code>sql_mode</code>:<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SET</span> sql_mode=<span class="string">'NO_UNSIGNED_SUBTRACTION'</span>;</div><div class="line"><span class="keyword">UPDATE</span> database.tablename <span class="keyword">SET</span> fieldname=fieldname-<span class="keyword">num</span></div></pre></td></tr></table></figure></p>
 <p><code>NO_UNSIGNED_SUBTRACTION</code> 模式下，对于<code>unsigned</code>字段，如果插入负值，则会讲该字段的值自动设置为 0 .</p>
@@ -42,7 +271,11 @@
     
     <summary type="html">
     
-      &lt;p&gt;线上的&lt;code&gt;MySQL&lt;/code&gt;错误日志中遇到了以下问题&lt;br&gt;&lt;figure class=&quot;highlight vhdl&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/t
+      &lt;p&gt;线上的&lt;code&gt;MySQL&lt;/code&gt;错误日志中遇到了以下问题&lt;br&gt;&lt;figure class=&quot;highlight vhdl&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;Data truncation: BIGINT &lt;span class=&quot;built_in&quot;&gt;UNSIGNED&lt;/span&gt; value &lt;span class=&quot;keyword&quot;&gt;is&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;out&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;range&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;in&lt;/span&gt; `(database.tablename.fieldname)`&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;MySQL&lt;/code&gt;版本为:&lt;br&gt;&lt;figure class=&quot;highlight asciidoc&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;section&quot;&gt;mysql&amp;gt; select version();&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;+------------+&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;section&quot;&gt;| version()  |&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;+------------+&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;section&quot;&gt;| 5.6.21-log |&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;+------------+&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;1 row in set (0.00 sec)&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;引起这个错误的原因是&lt;code&gt;sql&lt;/code&gt;语句中对&lt;code&gt;unsigned&lt;/code&gt;字段进行了递减操作的结果为负数导致的,&lt;br&gt;&lt;figure class=&quot;highlight n1ql&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;update&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;database&lt;/span&gt;.tablename &lt;span class=&quot;keyword&quot;&gt;set&lt;/span&gt; fieldname=fieldname-num&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;而&lt;code&gt;MySQL&lt;/code&gt;的模式是默认的&lt;code&gt;mode&lt;/code&gt;:&lt;br&gt;&lt;figure class=&quot;highlight asciidoc&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;section&quot;&gt;mysql&amp;gt; show variables like &#39;sql_mode&#39;;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;+---------------+------------------------+&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;section&quot;&gt;| Variable_name | Value                  |&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;+---------------+------------------------+&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;section&quot;&gt;| sql_mode      | NO_ENGINE_SUBSTITUTION |&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;+---------------+------------------------+&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;1 row in set (0.00 sec)&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;解决方案有3种:&lt;br&gt;
     
     </summary>
     
@@ -147,11 +380,11 @@
       <category term="python" scheme="http://yoursite.com/categories/python/"/>
     
     
+      <category term="database" scheme="http://yoursite.com/tags/database/"/>
+    
       <category term="python" scheme="http://yoursite.com/tags/python/"/>
     
       <category term="dbm" scheme="http://yoursite.com/tags/dbm/"/>
-    
-      <category term="database" scheme="http://yoursite.com/tags/database/"/>
     
   </entry>
   
