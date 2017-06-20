@@ -43,9 +43,6 @@
   
 
   
-    
-    
-  
 
   
 
@@ -55,10 +52,6 @@
 
   
 
-  
-    
-    
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
   
 
 
@@ -113,7 +106,7 @@ SublimeGDB 界面不错，但是调试速度太慢，设置">
 每个都尝试了一遍:
 
 SublimeGDB 界面不错，但是调试速度太慢，设置">
-<meta property="og:updated_time" content="2017-06-07T15:29:32.000Z">
+<meta property="og:updated_time" content="2017-06-08T15:33:49.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mac上使用gdb单步调试golang程序">
 <meta name="twitter:description" content="单步调试最近在写golang程序的时候，想要想单步调试一下程序，减少手动print log调试代码的痛苦。
@@ -408,7 +401,7 @@ SublimeGDB 界面不错，但是调试速度太慢，设置">
 <p>不过在<code>mac</code>电脑上使用<code>gdb</code>还是遇到了一些问题,不过还好都顺利解决了。<br><a id="more"></a></p>
 <p>遇到的主要问题有权限问题和 mac系统版本问题</p>
 <h2 id="权限问题"><a href="#权限问题" class="headerlink" title="权限问题"></a>权限问题</h2><p>mac 系统为了安全起见，不允许普通用户直接运行gdb,运行时会出现以下问题：<br><figure class="highlight smali"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Unable to find Mach task port for process-id 4263: (os/kern) failure (0x5).</div><div class="line"> (please<span class="built_in"> check </span>gdb is codesigned - see taskgated(8))</div></pre></td></tr></table></figure></p>
-<p>这个问题，网络上已有解决方案，比如对gdb进行签名啥的，嫌麻烦，没有尝试。直接使用 <code>sudo gdb ..</code>来运行。可以自行设置命令alias。</p>
+<p>这个问题，网络上已有解决方案，比如对gdb进行签名啥的，嫌麻烦，没有尝试。详细步骤见<a href="https://sourceware.org/gdb/wiki/BuildingOnDarwin" target="_blank" rel="external">这里</a><br>这里直接使用 <code>sudo gdb ..</code>来运行。可以自行设置命令alias。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">alias</span> gdb=<span class="string">'sudo gdb'</span></div></pre></td></tr></table></figure>
 <p>不过这样就得每次输入系统密码了。不过可以使用<code>expect</code> 来让命令行自动输入密码。</p>
 <h2 id="版本问题"><a href="#版本问题" class="headerlink" title="版本问题"></a>版本问题</h2><p>开始调试的时候遇到了一下问题：<br><figure class="highlight qml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">During startup program terminated <span class="keyword">with</span> <span class="keyword">signal</span><span class="string"> ?</span>, Unknown <span class="keyword">signal</span><span class="string">.</span></div></pre></td></tr></table></figure></p>
