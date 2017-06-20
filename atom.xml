@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-06-08T15:33:49.000Z</updated>
+  <updated>2017-06-20T16:27:59.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,39 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>golang中slice越界问题</title>
+    <link href="http://yoursite.com/go-slice-append/"/>
+    <id>http://yoursite.com/go-slice-append/</id>
+    <published>2017-06-20T16:02:26.000Z</published>
+    <updated>2017-06-20T16:27:59.000Z</updated>
+    
+    <content type="html"><![CDATA[<p><code>go</code>中<code>slice</code>由于其类似于一个长度可动态变化的数组而非常方便使用。<br><code>slice</code>有两个基本属性：<code>cap</code>,<code>len</code>，分别代表容量和已有数据长度。<br>一般声明<code>slice</code>的两种方式如下：<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//定义了一个初始长度为0,容量为2的int 类型的 `slice`</span></div><div class="line">slice:=<span class="built_in">make</span>([]<span class="keyword">int</span>,<span class="number">0</span>,<span class="number">2</span>)</div><div class="line"></div><div class="line"><span class="keyword">var</span> slice=[]<span class="keyword">int</span>&#123;<span class="number">0</span>,<span class="number">1</span>&#125;</div></pre></td></tr></table></figure></p>
+<p>往<code>slice</code>中添加元素使用<code>append</code>方法：<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">slice=<span class="built_in">append</span>(slice,<span class="number">1</span>)</div></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<p>当然有时也可以使用索引值来直接赋值：<br><figure class="highlight ini"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attr">slice[0]</span>=<span class="number">1</span></div></pre></td></tr></table></figure></p>
+<p>不过这种方式需要注意的是，索引的值不能大于<code>slice</code>的容量(cap)，否则会报出<code>panic: runtime error: index out of range</code>错误。所以一般情况下应该优先使用<code>append</code>的方法给<code>slice</code>添加元素。</p>
+<p>同样，对<code>slice</code>或者<code>array</code>进行切片(slice)操作的时候，索引也不能超过当前<code>slice</code>的容量或者<code>array</code>的长度<br><figure class="highlight fortran"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var slice = []<span class="built_in">int</span>&#123;<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>&#125;</div><div class="line"><span class="keyword">fmt</span>.Println(slice[:<span class="number">5</span>]) //[<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]</div><div class="line"><span class="keyword">fmt</span>.Println(slice[<span class="number">1</span>:<span class="number">10</span>]) //slice bounds <span class="keyword">out</span> of <span class="built_in">range</span></div></pre></td></tr></table></figure></p>
+<p><code>slice</code>的容量扩容规则： 当容量不够时，容量扩充为之前容量的2倍</p>
+<p>在调用<code>append</code>方法给<code>slice</code>添加元素的时候，可以一次添加多个或者全部：<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> slice = []<span class="keyword">int</span>&#123;<span class="number">0</span>,<span class="number">1</span>&#125;</div><div class="line"><span class="keyword">var</span> slice2 = []<span class="keyword">int</span>&#123;<span class="number">2</span>,<span class="number">3</span>&#125;</div><div class="line"></div><div class="line">fmt.Println(<span class="built_in">append</span>(slice,slice2...)) <span class="comment">//[0,1,2,3]</span></div><div class="line"></div><div class="line">fmt.Println(<span class="built_in">append</span>(slice,<span class="number">4</span>,<span class="number">5</span>)) <span class="comment">//[0,1,4,5]</span></div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;code&gt;go&lt;/code&gt;中&lt;code&gt;slice&lt;/code&gt;由于其类似于一个长度可动态变化的数组而非常方便使用。&lt;br&gt;&lt;code&gt;slice&lt;/code&gt;有两个基本属性：&lt;code&gt;cap&lt;/code&gt;,&lt;code&gt;len&lt;/code&gt;，分别代表容量和已有数据长度。&lt;br&gt;一般声明&lt;code&gt;slice&lt;/code&gt;的两种方式如下：&lt;br&gt;&lt;figure class=&quot;highlight go&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//定义了一个初始长度为0,容量为2的int 类型的 `slice`&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;slice:=&lt;span class=&quot;built_in&quot;&gt;make&lt;/span&gt;([]&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt;,&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;,&lt;span class=&quot;number&quot;&gt;2&lt;/span&gt;)&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; slice=[]&lt;span class=&quot;keyword&quot;&gt;int&lt;/span&gt;&amp;#123;&lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;,&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;往&lt;code&gt;slice&lt;/code&gt;中添加元素使用&lt;code&gt;append&lt;/code&gt;方法：&lt;br&gt;&lt;figure class=&quot;highlight go&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;slice=&lt;span class=&quot;built_in&quot;&gt;append&lt;/span&gt;(slice,&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;)&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="go" scheme="http://yoursite.com/categories/go/"/>
+    
+    
+      <category term="go" scheme="http://yoursite.com/tags/go/"/>
+    
+      <category term="slice" scheme="http://yoursite.com/tags/slice/"/>
+    
+  </entry>
   
   <entry>
     <title>Mac上使用gdb单步调试golang程序</title>

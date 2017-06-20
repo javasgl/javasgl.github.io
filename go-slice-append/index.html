@@ -64,7 +64,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="proxy,socks5,http,privoxy,shadowsocks," />
+  <meta name="keywords" content="go,slice," />
 
 
 
@@ -82,31 +82,19 @@
 
 
 
-<meta name="description" content="shadowsocks 挺不错的，但是有些时候需要使用http代理来爬墙。这时候可以使用privoxy来将 socks5 代理转换为 http代理。
-步骤如下：
-
-首先，确保 shadowsocks 已经正常起来的，默认的本地socks5端口号为 1080,可以使用 netstat 和 lsof 命令查看端口情况。
-
-安装privoxy, mac 使用 brew install privoxy 即">
+<meta name="description" content="go中slice由于其类似于一个长度可动态变化的数组而非常方便使用。slice有两个基本属性：cap,len，分别代表容量和已有数据长度。一般声明slice的两种方式如下：1234//定义了一个初始长度为0,容量为2的int 类型的 `slice`slice:=make([]int,0,2)var slice=[]int&amp;#123;0,1&amp;#125;
+往slice中添加元素使用append方法：1">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Mac上使用Privoxy 将 socks5转换为 http 代理">
-<meta property="og:url" content="http://yoursite.com/transfer_socks5_to_http_proxy/index.html">
+<meta property="og:title" content="golang中slice越界问题">
+<meta property="og:url" content="http://yoursite.com/go-slice-append/index.html">
 <meta property="og:site_name" content="Mr.song">
-<meta property="og:description" content="shadowsocks 挺不错的，但是有些时候需要使用http代理来爬墙。这时候可以使用privoxy来将 socks5 代理转换为 http代理。
-步骤如下：
-
-首先，确保 shadowsocks 已经正常起来的，默认的本地socks5端口号为 1080,可以使用 netstat 和 lsof 命令查看端口情况。
-
-安装privoxy, mac 使用 brew install privoxy 即">
-<meta property="og:updated_time" content="2017-03-18T15:01:02.000Z">
+<meta property="og:description" content="go中slice由于其类似于一个长度可动态变化的数组而非常方便使用。slice有两个基本属性：cap,len，分别代表容量和已有数据长度。一般声明slice的两种方式如下：1234//定义了一个初始长度为0,容量为2的int 类型的 `slice`slice:=make([]int,0,2)var slice=[]int&amp;#123;0,1&amp;#125;
+往slice中添加元素使用append方法：1">
+<meta property="og:updated_time" content="2017-06-20T16:27:59.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Mac上使用Privoxy 将 socks5转换为 http 代理">
-<meta name="twitter:description" content="shadowsocks 挺不错的，但是有些时候需要使用http代理来爬墙。这时候可以使用privoxy来将 socks5 代理转换为 http代理。
-步骤如下：
-
-首先，确保 shadowsocks 已经正常起来的，默认的本地socks5端口号为 1080,可以使用 netstat 和 lsof 命令查看端口情况。
-
-安装privoxy, mac 使用 brew install privoxy 即">
+<meta name="twitter:title" content="golang中slice越界问题">
+<meta name="twitter:description" content="go中slice由于其类似于一个长度可动态变化的数组而非常方便使用。slice有两个基本属性：cap,len，分别代表容量和已有数据长度。一般声明slice的两种方式如下：1234//定义了一个初始长度为0,容量为2的int 类型的 `slice`slice:=make([]int,0,2)var slice=[]int&amp;#123;0,1&amp;#125;
+往slice中添加元素使用append方法：1">
 
 
 
@@ -134,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/transfer_socks5_to_http_proxy/"/>
+  <link rel="canonical" href="http://yoursite.com/go-slice-append/"/>
 
 
 
 
 
-  <title> Mac上使用Privoxy 将 socks5转换为 http 代理 | Mr.song </title>
+  <title> golang中slice越界问题 | Mr.song </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -279,7 +267,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/transfer_socks5_to_http_proxy/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/go-slice-append/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="songgl">
@@ -300,7 +288,7 @@
             
             
               
-                Mac上使用Privoxy 将 socks5转换为 http 代理
+                golang中slice越界问题
               
             
           </h1>
@@ -315,8 +303,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-06T23:07:20+08:00">
-                2017-03-06
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-21T00:02:26+08:00">
+                2017-06-21
               </time>
             
 
@@ -338,8 +326,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/tools/" itemprop="url" rel="index">
-                    <span itemprop="name">tools</span>
+                  <a href="/categories/go/" itemprop="url" rel="index">
+                    <span itemprop="name">go</span>
                   </a>
                 </span>
 
@@ -373,30 +361,14 @@
       
 
       
-        <p>shadowsocks 挺不错的，但是有些时候需要使用http代理来爬墙。这时候可以使用privoxy来将 socks5 代理转换为 http代理。</p>
-<p>步骤如下：</p>
-<ul>
-<li><p>首先，确保 shadowsocks 已经正常起来的，默认的本地socks5端口号为 1080,可以使用 netstat 和 lsof 命令查看端口情况。</p>
-</li>
-<li><p>安装privoxy, mac 使用 brew install privoxy 即可</p>
-</li>
-<li><p>安装完成后，修改privoxy配置文件</p>
+        <p><code>go</code>中<code>slice</code>由于其类似于一个长度可动态变化的数组而非常方便使用。<br><code>slice</code>有两个基本属性：<code>cap</code>,<code>len</code>，分别代表容量和已有数据长度。<br>一般声明<code>slice</code>的两种方式如下：<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//定义了一个初始长度为0,容量为2的int 类型的 `slice`</span></div><div class="line">slice:=<span class="built_in">make</span>([]<span class="keyword">int</span>,<span class="number">0</span>,<span class="number">2</span>)</div><div class="line"></div><div class="line"><span class="keyword">var</span> slice=[]<span class="keyword">int</span>&#123;<span class="number">0</span>,<span class="number">1</span>&#125;</div></pre></td></tr></table></figure></p>
+<p>往<code>slice</code>中添加元素使用<code>append</code>方法：<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">slice=<span class="built_in">append</span>(slice,<span class="number">1</span>)</div></pre></td></tr></table></figure></p>
 <a id="more"></a>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim <span class="regexp">/usr/</span>local<span class="regexp">/etc/</span>privoxy<span class="regexp">/config</span></div></pre></td></tr></table></figure>
-</li>
-<li><p>修改内容如下：</p>
-<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">forward-socks5t   /               <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">1080</span> .</div><div class="line">listen-address  <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">8118</span></div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p><code>listen-address</code> 默认是监听本地8118端口，如果端口没有被占用，可以不用修改</p>
-<ul>
-<li>启动privoxy<figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="regexp">/usr/</span>local<span class="regexp">/sbin/</span>privoxy <span class="regexp">/usr/</span>local<span class="regexp">/etc/</span>privoxy<span class="regexp">/config</span></div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>可以使用 <code>ps aux|grep privoxy</code>和 <code>lsof -i:8118</code>来检查是否成功启动</p>
-<ul>
-<li>正常情况下,可以使用http代理了，代理地址<code>http://127.0.0.1:8118</code></li>
-</ul>
+<p>当然有时也可以使用索引值来直接赋值：<br><figure class="highlight ini"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attr">slice[0]</span>=<span class="number">1</span></div></pre></td></tr></table></figure></p>
+<p>不过这种方式需要注意的是，索引的值不能大于<code>slice</code>的容量(cap)，否则会报出<code>panic: runtime error: index out of range</code>错误。所以一般情况下应该优先使用<code>append</code>的方法给<code>slice</code>添加元素。</p>
+<p>同样，对<code>slice</code>或者<code>array</code>进行切片(slice)操作的时候，索引也不能超过当前<code>slice</code>的容量或者<code>array</code>的长度<br><figure class="highlight fortran"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var slice = []<span class="built_in">int</span>&#123;<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>&#125;</div><div class="line"><span class="keyword">fmt</span>.Println(slice[:<span class="number">5</span>]) //[<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]</div><div class="line"><span class="keyword">fmt</span>.Println(slice[<span class="number">1</span>:<span class="number">10</span>]) //slice bounds <span class="keyword">out</span> of <span class="built_in">range</span></div></pre></td></tr></table></figure></p>
+<p><code>slice</code>的容量扩容规则： 当容量不够时，容量扩充为之前容量的2倍</p>
+<p>在调用<code>append</code>方法给<code>slice</code>添加元素的时候，可以一次添加多个或者全部：<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> slice = []<span class="keyword">int</span>&#123;<span class="number">0</span>,<span class="number">1</span>&#125;</div><div class="line"><span class="keyword">var</span> slice2 = []<span class="keyword">int</span>&#123;<span class="number">2</span>,<span class="number">3</span>&#125;</div><div class="line"></div><div class="line">fmt.Println(<span class="built_in">append</span>(slice,slice2...)) <span class="comment">//[0,1,2,3]</span></div><div class="line"></div><div class="line">fmt.Println(<span class="built_in">append</span>(slice,<span class="number">4</span>,<span class="number">5</span>)) <span class="comment">//[0,1,4,5]</span></div></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -426,15 +398,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/proxy/" rel="tag"># proxy</a>
+            <a href="/tags/go/" rel="tag"># go</a>
           
-            <a href="/tags/socks5/" rel="tag"># socks5</a>
-          
-            <a href="/tags/http/" rel="tag"># http</a>
-          
-            <a href="/tags/privoxy/" rel="tag"># privoxy</a>
-          
-            <a href="/tags/shadowsocks/" rel="tag"># shadowsocks</a>
+            <a href="/tags/slice/" rel="tag"># slice</a>
           
         </div>
       
@@ -447,15 +413,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/debug-golang-with-gdb-on-mac/" rel="next" title="Mac上使用gdb单步调试golang程序">
+                <i class="fa fa-chevron-left"></i> Mac上使用gdb单步调试golang程序
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/atom_set_proxy/" rel="prev" title="Atom设置代理">
-                Atom设置代理 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
