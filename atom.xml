@@ -53,10 +53,10 @@
     <link href="http://yoursite.com/debug-golang-with-gdb-on-mac/"/>
     <id>http://yoursite.com/debug-golang-with-gdb-on-mac/</id>
     <published>2017-06-07T14:29:40.000Z</published>
-    <updated>2017-06-08T15:33:49.000Z</updated>
+    <updated>2017-06-21T11:53:26.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="单步调试"><a href="#单步调试" class="headerlink" title="单步调试"></a>单步调试</h2><p>最近在写<code>golang</code>程序的时候，想要想单步调试一下程序，减少手动<code>print log</code>调试代码的痛苦。</p>
-<p>找了一些golang单步调试的方案，主要有几下集中方案:</p>
+<p>找了一些golang单步调试的方案，主要有几下几种方案:</p>
 <ul>
 <li>使用 <code>SublimeGDB</code> 插件在<code>Sublime</code> 中调试</li>
 <li>使用 <code>Goland IDE</code> 调试,不过可惜<code>Goland</code>还未发布正式版本</li>
@@ -64,7 +64,7 @@
 </ul>
 <p>每个都尝试了一遍:</p>
 <ul>
-<li><code>SublimeGDB</code> 界面不错，但是调试速度太慢，设置一个断点需要很长时间，故 pass 此方案。</li>
+<li><code>SublimeGDB</code> 界面不错，但是调试速度太慢，设置一个断点都需要很长时间，故 pass 此方案。</li>
 <li><code>Goland IDE</code> 只是预览版，有使用时间限制,还是等等吧，等 <code>Jetbrains</code> 出正式版后再去试试.(<code>Jetbrains</code>出品必属精品)</li>
 <li><code>gdb</code>调试，使用下来发现，目前而言，<code>gdb</code>的方式还是用的比较顺手的。</li>
 </ul>
@@ -73,7 +73,7 @@
 <h2 id="权限问题"><a href="#权限问题" class="headerlink" title="权限问题"></a>权限问题</h2><p>mac 系统为了安全起见，不允许普通用户直接运行gdb,运行时会出现以下问题：<br><figure class="highlight smali"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Unable to find Mach task port for process-id 4263: (os/kern) failure (0x5).</div><div class="line"> (please<span class="built_in"> check </span>gdb is codesigned - see taskgated(8))</div></pre></td></tr></table></figure></p>
 <p>这个问题，网络上已有解决方案，比如对gdb进行签名啥的，嫌麻烦，没有尝试。详细步骤见<a href="https://sourceware.org/gdb/wiki/BuildingOnDarwin" target="_blank" rel="external">这里</a><br>这里直接使用 <code>sudo gdb ..</code>来运行。可以自行设置命令alias。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">alias</span> gdb=<span class="string">'sudo gdb'</span></div></pre></td></tr></table></figure>
-<p>不过这样就得每次输入系统密码了。不过可以使用<code>expect</code> 来让命令行自动输入密码。</p>
+<p>不过这样就得每次输入系统密码了。不过可以使用 <code>expect</code> 来让命令行自动输入密码(这是后话)。</p>
 <h2 id="版本问题"><a href="#版本问题" class="headerlink" title="版本问题"></a>版本问题</h2><p>开始调试的时候遇到了一下问题：<br><figure class="highlight qml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">During startup program terminated <span class="keyword">with</span> <span class="keyword">signal</span><span class="string"> ?</span>, Unknown <span class="keyword">signal</span><span class="string">.</span></div></pre></td></tr></table></figure></p>
 <p>查询了一下，Mac Sierra 这个版本的系统不支持 gdb 调试。解决方案五花八门。<br>主要进行了一下操作：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">brew upgrade gdb </div><div class="line">touch ~/.gdbinit</div><div class="line">cat '<span class="keyword">set</span> <span class="keyword">startup</span>-<span class="keyword">with</span>-shell <span class="keyword">off</span><span class="string">' &gt; ~/.gdbinit</span></div></pre></td></tr></table></figure></p>
 <p>这些操作主要是:</p>
@@ -174,7 +174,7 @@
     <summary type="html">
     
       &lt;h2 id=&quot;单步调试&quot;&gt;&lt;a href=&quot;#单步调试&quot; class=&quot;headerlink&quot; title=&quot;单步调试&quot;&gt;&lt;/a&gt;单步调试&lt;/h2&gt;&lt;p&gt;最近在写&lt;code&gt;golang&lt;/code&gt;程序的时候，想要想单步调试一下程序，减少手动&lt;code&gt;print log&lt;/code&gt;调试代码的痛苦。&lt;/p&gt;
-&lt;p&gt;找了一些golang单步调试的方案，主要有几下集中方案:&lt;/p&gt;
+&lt;p&gt;找了一些golang单步调试的方案，主要有几下几种方案:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;使用 &lt;code&gt;SublimeGDB&lt;/code&gt; 插件在&lt;code&gt;Sublime&lt;/code&gt; 中调试&lt;/li&gt;
 &lt;li&gt;使用 &lt;code&gt;Goland IDE&lt;/code&gt; 调试,不过可惜&lt;code&gt;Goland&lt;/code&gt;还未发布正式版本&lt;/li&gt;
@@ -182,7 +182,7 @@
 &lt;/ul&gt;
 &lt;p&gt;每个都尝试了一遍:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;code&gt;SublimeGDB&lt;/code&gt; 界面不错，但是调试速度太慢，设置一个断点需要很长时间，故 pass 此方案。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;SublimeGDB&lt;/code&gt; 界面不错，但是调试速度太慢，设置一个断点都需要很长时间，故 pass 此方案。&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;Goland IDE&lt;/code&gt; 只是预览版，有使用时间限制,还是等等吧，等 &lt;code&gt;Jetbrains&lt;/code&gt; 出正式版后再去试试.(&lt;code&gt;Jetbrains&lt;/code&gt;出品必属精品)&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;gdb&lt;/code&gt;调试，使用下来发现，目前而言，&lt;code&gt;gdb&lt;/code&gt;的方式还是用的比较顺手的。&lt;/li&gt;
 &lt;/ul&gt;
@@ -251,14 +251,14 @@
     <link href="http://yoursite.com/js-pass-this-into-callback-function/"/>
     <id>http://yoursite.com/js-pass-this-into-callback-function/</id>
     <published>2017-05-27T10:10:14.000Z</published>
-    <updated>2017-06-05T14:39:48.000Z</updated>
+    <updated>2017-06-21T11:53:26.000Z</updated>
     
     <content type="html"><![CDATA[<p>在开发项目之中，使用到js ajax 同服务端进行数据交互。一般图方便直接使用<code>jquery</code>或者<code>axios</code>等已有的库。<br>一般代码如下:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//axios</span></div><div class="line">axios.get(<span class="string">'/url'</span>).then(<span class="function"><span class="keyword">function</span>(<span class="params">res</span>)</span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(res)</div><div class="line">&#125;)</div><div class="line"><span class="comment">//juqery</span></div><div class="line">$.get(<span class="string">'/url'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">res</span>)</span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(res)</div><div class="line">&#125;,<span class="string">'json'</span>)</div></pre></td></tr></table></figure></p>
 <p>那么经常这么使用的肯定会遇到一个场景，就是:在回调函数中如何访问上下文中的<code>this</code>对象?<br><a id="more"></a><br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">request</span>(<span class="params"></span>)</span>&#123;</div><div class="line">  <span class="comment">//this</span></div><div class="line">  axios.get(<span class="string">'/url'</span>).then(<span class="function"><span class="keyword">function</span>(<span class="params">res</span>)</span>&#123;   </div><div class="line">    <span class="comment">//in callbacl ,how to access this</span></div><div class="line">  &#125;)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>之前的做法是这样的:将<code>this</code>赋值给一个局部变量,然后在回调函数中访问这个变量<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">request</span>(<span class="params"></span>)</span>&#123;</div><div class="line">  <span class="comment">//this</span></div><div class="line">  <span class="keyword">var</span> that = <span class="keyword">this</span>;</div><div class="line">  axios.get(<span class="string">'/url'</span>).then(<span class="function"><span class="keyword">function</span>(<span class="params">res</span>)</span>&#123;   </div><div class="line">    <span class="comment">//in callbacl ,how to access this</span></div><div class="line">    <span class="built_in">console</span>.log(that)</div><div class="line">  &#125;)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>后来知道了更为优雅的两种方式:</p>
-<p>使用 <code>bind</code>函数:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">request</span>(<span class="params"></span>)</span>&#123;</div><div class="line">  axios.get(<span class="string">'/url'</span>).then(<span class="function"><span class="keyword">function</span>(<span class="params">res</span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>);</div><div class="line">  &#125;.bind(<span class="keyword">this</span>));</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>使用<code>ES6</code>的箭头函数:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">request</span>(<span class="params"></span>)</span>&#123;</div><div class="line">  axios.get(<span class="string">'/url'</span>).then(<span class="function">(<span class="params">res</span>)=&gt;</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>);</div><div class="line">  ));</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>使用 <code>bind</code>函数:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//axios</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">request</span>(<span class="params"></span>)</span>&#123;</div><div class="line">  axios.get(<span class="string">'/url'</span>).then(<span class="function"><span class="keyword">function</span>(<span class="params">res</span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>);</div><div class="line">  &#125;.bind(<span class="keyword">this</span>));</div><div class="line">&#125;</div><div class="line"><span class="comment">//jquery</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">request</span>(<span class="params"></span>)</span>&#123;</div><div class="line">  $.get(<span class="string">'/url'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">res</span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>);</div><div class="line">  &#125;.bind(<span class="keyword">this</span>),<span class="string">'json'</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>使用<code>ES6</code>的箭头函数:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//axios</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">request</span>(<span class="params"></span>)</span>&#123;</div><div class="line">  axios.get(<span class="string">'/url'</span>).then(<span class="function">(<span class="params">res</span>)=&gt;</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>);</div><div class="line">  ));</div><div class="line">&#125;</div><div class="line"><span class="comment">//juqery</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">request</span>(<span class="params"></span>)</span>&#123;</div><div class="line">  $.get(<span class="string">'/url'</span>,(res)=&gt;&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>);</div><div class="line">  &#125;,<span class="string">'json'</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>参考:</p>
 <p><a href="!http://www.infoq.com/cn/articles/es6-in-depth-arrow-functions">深入浅出ES6（七）：箭头函数 Arrow Functions</a></p>
 ]]></content>
@@ -357,7 +357,7 @@
     <link href="http://yoursite.com/i-love-vim/"/>
     <id>http://yoursite.com/i-love-vim/</id>
     <published>2017-05-07T14:08:15.000Z</published>
-    <updated>2017-05-07T15:00:57.000Z</updated>
+    <updated>2017-06-22T14:54:38.000Z</updated>
     
     <content type="html"><![CDATA[<p>个人是一个<code>vi</code>重度使用者，所以尽可能的会希望所使用的工具中都能支持<code>vim</code>来方便操作。</p>
 <ul>
@@ -373,7 +373,7 @@
 </ul>
 </li>
 </ul>
-<p>最后，附上一张命令行<code>IDE</code>效果图:<br><img src="images/vim.png" alt="vim-ide"></p>
+<p>最后，附上一张命令行<code>IDE</code>效果图:<br><img src="/images/vim.png" alt="vim-ide"></p>
 ]]></content>
     
     <summary type="html">

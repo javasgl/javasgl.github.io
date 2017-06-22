@@ -83,7 +83,7 @@
 
 
 <meta name="description" content="单步调试最近在写golang程序的时候，想要想单步调试一下程序，减少手动print log调试代码的痛苦。
-找了一些golang单步调试的方案，主要有几下集中方案:
+找了一些golang单步调试的方案，主要有几下几种方案:
 
 使用 SublimeGDB 插件在Sublime 中调试
 使用 Goland IDE 调试,不过可惜Goland还未发布正式版本
@@ -97,7 +97,7 @@ SublimeGDB 界面不错，但是调试速度太慢，设置">
 <meta property="og:url" content="http://yoursite.com/debug-golang-with-gdb-on-mac/index.html">
 <meta property="og:site_name" content="Mr.song">
 <meta property="og:description" content="单步调试最近在写golang程序的时候，想要想单步调试一下程序，减少手动print log调试代码的痛苦。
-找了一些golang单步调试的方案，主要有几下集中方案:
+找了一些golang单步调试的方案，主要有几下几种方案:
 
 使用 SublimeGDB 插件在Sublime 中调试
 使用 Goland IDE 调试,不过可惜Goland还未发布正式版本
@@ -106,11 +106,11 @@ SublimeGDB 界面不错，但是调试速度太慢，设置">
 每个都尝试了一遍:
 
 SublimeGDB 界面不错，但是调试速度太慢，设置">
-<meta property="og:updated_time" content="2017-06-08T15:33:49.000Z">
+<meta property="og:updated_time" content="2017-06-21T11:53:26.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mac上使用gdb单步调试golang程序">
 <meta name="twitter:description" content="单步调试最近在写golang程序的时候，想要想单步调试一下程序，减少手动print log调试代码的痛苦。
-找了一些golang单步调试的方案，主要有几下集中方案:
+找了一些golang单步调试的方案，主要有几下几种方案:
 
 使用 SublimeGDB 插件在Sublime 中调试
 使用 Goland IDE 调试,不过可惜Goland还未发布正式版本
@@ -386,7 +386,7 @@ SublimeGDB 界面不错，但是调试速度太慢，设置">
 
       
         <h2 id="单步调试"><a href="#单步调试" class="headerlink" title="单步调试"></a>单步调试</h2><p>最近在写<code>golang</code>程序的时候，想要想单步调试一下程序，减少手动<code>print log</code>调试代码的痛苦。</p>
-<p>找了一些golang单步调试的方案，主要有几下集中方案:</p>
+<p>找了一些golang单步调试的方案，主要有几下几种方案:</p>
 <ul>
 <li>使用 <code>SublimeGDB</code> 插件在<code>Sublime</code> 中调试</li>
 <li>使用 <code>Goland IDE</code> 调试,不过可惜<code>Goland</code>还未发布正式版本</li>
@@ -394,7 +394,7 @@ SublimeGDB 界面不错，但是调试速度太慢，设置">
 </ul>
 <p>每个都尝试了一遍:</p>
 <ul>
-<li><code>SublimeGDB</code> 界面不错，但是调试速度太慢，设置一个断点需要很长时间，故 pass 此方案。</li>
+<li><code>SublimeGDB</code> 界面不错，但是调试速度太慢，设置一个断点都需要很长时间，故 pass 此方案。</li>
 <li><code>Goland IDE</code> 只是预览版，有使用时间限制,还是等等吧，等 <code>Jetbrains</code> 出正式版后再去试试.(<code>Jetbrains</code>出品必属精品)</li>
 <li><code>gdb</code>调试，使用下来发现，目前而言，<code>gdb</code>的方式还是用的比较顺手的。</li>
 </ul>
@@ -403,7 +403,7 @@ SublimeGDB 界面不错，但是调试速度太慢，设置">
 <h2 id="权限问题"><a href="#权限问题" class="headerlink" title="权限问题"></a>权限问题</h2><p>mac 系统为了安全起见，不允许普通用户直接运行gdb,运行时会出现以下问题：<br><figure class="highlight smali"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Unable to find Mach task port for process-id 4263: (os/kern) failure (0x5).</div><div class="line"> (please<span class="built_in"> check </span>gdb is codesigned - see taskgated(8))</div></pre></td></tr></table></figure></p>
 <p>这个问题，网络上已有解决方案，比如对gdb进行签名啥的，嫌麻烦，没有尝试。详细步骤见<a href="https://sourceware.org/gdb/wiki/BuildingOnDarwin" target="_blank" rel="external">这里</a><br>这里直接使用 <code>sudo gdb ..</code>来运行。可以自行设置命令alias。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">alias</span> gdb=<span class="string">'sudo gdb'</span></div></pre></td></tr></table></figure>
-<p>不过这样就得每次输入系统密码了。不过可以使用<code>expect</code> 来让命令行自动输入密码。</p>
+<p>不过这样就得每次输入系统密码了。不过可以使用 <code>expect</code> 来让命令行自动输入密码(这是后话)。</p>
 <h2 id="版本问题"><a href="#版本问题" class="headerlink" title="版本问题"></a>版本问题</h2><p>开始调试的时候遇到了一下问题：<br><figure class="highlight qml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">During startup program terminated <span class="keyword">with</span> <span class="keyword">signal</span><span class="string"> ?</span>, Unknown <span class="keyword">signal</span><span class="string">.</span></div></pre></td></tr></table></figure></p>
 <p>查询了一下，Mac Sierra 这个版本的系统不支持 gdb 调试。解决方案五花八门。<br>主要进行了一下操作：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">brew upgrade gdb </div><div class="line">touch ~/.gdbinit</div><div class="line">cat '<span class="keyword">set</span> <span class="keyword">startup</span>-<span class="keyword">with</span>-shell <span class="keyword">off</span><span class="string">' &gt; ~/.gdbinit</span></div></pre></td></tr></table></figure></p>
 <p>这些操作主要是:</p>
