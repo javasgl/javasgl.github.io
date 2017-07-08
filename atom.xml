@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-06-20T16:27:59.000Z</updated>
+  <updated>2017-07-08T15:09:47.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,47 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Glide--golang 包管理工具简单教程</title>
+    <link href="http://yoursite.com/glide/"/>
+    <id>http://yoursite.com/glide/</id>
+    <published>2017-07-08T15:06:00.000Z</published>
+    <updated>2017-07-08T15:09:47.000Z</updated>
+    
+    <content type="html"><![CDATA[<p> Golang挺好用的，但是目前比较受到诟病的是其没有自带包管理工具(golang社区已经发起了一个<a href="https://github.com/golang/dep" target="_blank" rel="external">dep</a>的项目，不过要正式被golang接受还需要一段时间)。官方没有咋办，那就自己造轮子呗。所以 go的包管理工具就五花八门、层出不穷了。目前有Glide, gopm, godep,gpm，gom等等。。。</p>
+<p>这里介绍一个工具，使用比较简单: glide</p>
+<p>我已经将其的文档翻译成了中文:  <a href="http://glidedocs.readthedocs.io/" target="_blank" rel="external">glide 中文文档</a>.</p>
+<p>翻译的内容放在github上: <a href="https://github.com/javasgl/GlideDocs" target="_blank" rel="external">https://github.com/javasgl/GlideDocs</a></p>
+<p>不想看文章的可以直接去看中文文档，文档写的很清晰，文档中关于<code>glide</code>的用法和原理都有说明。<br><a id="more"></a></p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>安装就没啥可以说的了，去下载安装即可了(<a href="http://glidedocs.readthedocs.io/zh/latest/#glide" target="_blank" rel="external">http://glidedocs.readthedocs.io/zh/latest/#glide</a>)</p>
+<h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2><p>在你已有的go项目的根目录下直接运行:<code>glide init</code>，就会生成一个<code>glide.yaml</code>配置文件，配置信息的详细说明见<a href="http://glidedocs.readthedocs.io/zh/latest/glide.yaml/" target="_blank" rel="external">文档</a>。<br>运行<code>glide init</code>之后，<code>glide</code>自动分析当前项目里已有的依赖包的关系并自动生成了<code>glide.yaml</code>文件来管理这些依赖关系。<br>这个过程需要一段时间来运行，因为它在扫描你的代码在推算依赖关系，请耐心等待。<br><figure class="highlight livescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">~<span class="regexp">/codes/xxxxx/xxxx/</span>: glide init</div><div class="line">[INFO]	Generating a YAML configuration file <span class="keyword">and</span> guessing the dependencies</div><div class="line">[INFO]	Attempting <span class="keyword">to</span> <span class="keyword">import</span> <span class="keyword">from</span> other package managers (use --skip-<span class="keyword">import</span> <span class="keyword">to</span> skip)</div><div class="line">[INFO]	Scanning code <span class="keyword">to</span> look <span class="keyword">for</span> dependencies</div><div class="line">[INFO]<span class="function">	--&gt;</span> Found reference <span class="keyword">to</span> github.com/astaxie/beego</div><div class="line">[INFO]<span class="function">	--&gt;</span> Found reference <span class="keyword">to</span> github.com/stretchr/testify/assert</div><div class="line">[INFO]<span class="function">	--&gt;</span> Found reference <span class="keyword">to</span> gopkg.<span class="keyword">in</span>/olivere/elastic.v3</div><div class="line">....</div></pre></td></tr></table></figure></p>
+<p>运行完成之后,<code>glide.yaml</code>中的内容如下：<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="string">package:</span> .</div><div class="line"><span class="string">import:</span></div><div class="line">- <span class="string">package:</span> github.com<span class="regexp">/astaxie/</span>beego</div><div class="line">- <span class="string">package:</span> github.com<span class="regexp">/stretchr/</span>testify</div><div class="line"><span class="symbol">  subpackages:</span></div><div class="line">  - <span class="keyword">assert</span></div><div class="line">- <span class="string">package:</span> gopkg.<span class="keyword">in</span><span class="regexp">/olivere/</span>elastic.v3</div></pre></td></tr></table></figure></p>
+<h2 id="添加依赖"><a href="#添加依赖" class="headerlink" title="添加依赖"></a>添加依赖</h2><p>运行<code>glide get</code>,类似于<code>go get</code>,不过不同的是，<code>glide get</code>会下载你指定包到<code>vendor/</code>目录中而不是之前的<code>GOPATH</code>之中。关于go的 <code>vendor/</code>目录请执行google，这是go 1.5版本之后的功能。<br>这个<code>glide get</code>下载包的同时，也会更新<code>glide.yaml</code>中的配置:<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">~<span class="regexp">/cods/</span>xxxx<span class="regexp">/xxxx/</span>:glide get https:<span class="regexp">//gi</span>thub.com<span class="regexp">/garyburd/</span>redigo</div><div class="line">....</div></pre></td></tr></table></figure></p>
+<p>完成之后,<code>glide.yaml</code>也更新了：<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="string">package:</span> .</div><div class="line"><span class="string">import:</span></div><div class="line">- <span class="string">package:</span> github.com<span class="regexp">/astaxie/</span>beego</div><div class="line">- <span class="string">package:</span> github.com<span class="regexp">/stretchr/</span>testify</div><div class="line"><span class="symbol">  subpackages:</span></div><div class="line">  - <span class="keyword">assert</span></div><div class="line">- <span class="string">package:</span> gopkg.<span class="keyword">in</span><span class="regexp">/olivere/</span>elastic.v3</div><div class="line">- <span class="string">package:</span> github.com<span class="regexp">/grayburd/</span>redigo</div></pre></td></tr></table></figure></p>
+<h2 id="更新依赖"><a href="#更新依赖" class="headerlink" title="更新依赖"></a>更新依赖</h2><p>运行<code>glide up</code>来更新<code>glide.yaml</code>中配置的依赖包。<br>首次运行的时候，会生成一个<code>glide.lock</code>文件，对php的<code>composer</code>熟悉的一样就知道这个锁文件是干嘛的了。这个锁文件是保证再次运行<code>glide up</code>的时候不会去远程获取更新，而是直接使用这个锁文件中定义的依赖包及其版本。在协作开发时，一般这个锁文件可以进行版本控制，这样其他人拿到这个锁文件之后，执行<code>glide up</code>则会获取锁文件中指定的包版本，起到多人协作开发时统一开发环境的问题。<br><figure class="highlight prolog"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">~/cods/xxxx/xxxx/:glide up</div><div class="line">[<span class="symbol">INFO</span>]	<span class="symbol">Downloading</span> dependencies. <span class="symbol">Please</span> wait...</div><div class="line">[<span class="symbol">INFO</span>]	--&gt; <span class="symbol">Fetching</span> github.com/stretchr/testify.</div><div class="line">[<span class="symbol">INFO</span>]	--&gt; <span class="symbol">Fetching</span> gopkg.in/olivere/elastic.v3.</div><div class="line">[<span class="symbol">INFO</span>]	--&gt; <span class="symbol">Fetching</span> github.com/astaxie/beego.</div><div class="line">....</div></pre></td></tr></table></figure></p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>其他的一些命令主要是帮助管理这些依赖的。详细见 <a href="http://glidedocs.readthedocs.io/zh/latest/commands/" target="_blank" rel="external">http://glidedocs.readthedocs.io/zh/latest/commands/</a></p>
+<h2 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h2><p>欢迎大家 star ,提交 issue 或者 fork 提交 pull request 来帮助我改进翻译质量。翻译项目地址: <a href="https://github.com/javasgl/GlideDocs" target="_blank" rel="external">https://github.com/javasgl/GlideDocs</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt; Golang挺好用的，但是目前比较受到诟病的是其没有自带包管理工具(golang社区已经发起了一个&lt;a href=&quot;https://github.com/golang/dep&quot;&gt;dep&lt;/a&gt;的项目，不过要正式被golang接受还需要一段时间)。官方没有咋办，那就自己造轮子呗。所以 go的包管理工具就五花八门、层出不穷了。目前有Glide, gopm, godep,gpm，gom等等。。。&lt;/p&gt;
+&lt;p&gt;这里介绍一个工具，使用比较简单: glide&lt;/p&gt;
+&lt;p&gt;我已经将其的文档翻译成了中文:  &lt;a href=&quot;http://glidedocs.readthedocs.io/&quot;&gt;glide 中文文档&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;翻译的内容放在github上: &lt;a href=&quot;https://github.com/javasgl/GlideDocs&quot;&gt;https://github.com/javasgl/GlideDocs&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;不想看文章的可以直接去看中文文档，文档写的很清晰，文档中关于&lt;code&gt;glide&lt;/code&gt;的用法和原理都有说明。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="go" scheme="http://yoursite.com/categories/go/"/>
+    
+    
+      <category term="go" scheme="http://yoursite.com/tags/go/"/>
+    
+      <category term="glide" scheme="http://yoursite.com/tags/glide/"/>
+    
+  </entry>
   
   <entry>
     <title>golang中slice越界问题</title>
@@ -357,7 +398,7 @@
     <link href="http://yoursite.com/i-love-vim/"/>
     <id>http://yoursite.com/i-love-vim/</id>
     <published>2017-05-07T14:08:15.000Z</published>
-    <updated>2017-06-22T14:54:38.000Z</updated>
+    <updated>2017-06-22T14:57:00.000Z</updated>
     
     <content type="html"><![CDATA[<p>个人是一个<code>vi</code>重度使用者，所以尽可能的会希望所使用的工具中都能支持<code>vim</code>来方便操作。</p>
 <ul>
