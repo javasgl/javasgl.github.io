@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-07-08T15:31:31.000Z</updated>
+  <updated>2017-08-19T15:23:24.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -16,13 +16,203 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>使用upx压缩可执行文件</title>
+    <link href="http://yoursite.com/compress-executables-with-upx/"/>
+    <id>http://yoursite.com/compress-executables-with-upx/</id>
+    <published>2017-08-19T14:39:28.000Z</published>
+    <updated>2017-08-19T15:23:24.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>记得当初刚接触学习 golang 的时候,当时使用还是 go 1.4版本,和其他语言的入门一样，写了一个简单的 hello world 程序。<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> main</div><div class="line"></div><div class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</div><div class="line">	fmt.Println(<span class="string">"Hello World!"</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>程序非常简单，整个源文件大小才 4KB。然后执行 go build 编译成可执行文件，结果让我非常惊讶的是这段简单的代码生成的可执行文件竟然有4M之多。<br><a id="more"></a><br>当然，只有升级到了1.8版本之后，情况稍微好了一些，但是生成的可执行程序依然有1.6M之多。<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">du</span> <span class="selector-tag">-sh</span> <span class="selector-tag">hello</span>*</div><div class="line">1<span class="selector-class">.6M</span>	<span class="selector-tag">hello</span></div><div class="line">4<span class="selector-class">.0K</span>	<span class="selector-tag">hello</span><span class="selector-class">.go</span></div></pre></td></tr></table></figure></p>
+<p>虽然现在服务器的硬盘不再是限制，价格也比较低廉，但是网络带宽依然是瓶颈，当可执行文件需要通过网络进行分发的时候，文件的大小的影响就比较明显了。</p>
+<p>这个问题可以通过 upx(the Ultimate Packer for eXecutables) 来解决。</p>
+<p>地址：<a href="https://github.com/upx/upx" target="_blank" rel="external">https://github.com/upx/upx</a></p>
+<p>压缩效果非常明显，以下 helllo_1 和 hello_2 分别是默认压缩和使用 –brute 参数压缩之后的二进制文件：<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">upx -o hello_1 hello</div><div class="line"></div><div class="line">upx --brute hello_2 hello</div><div class="line"></div><div class="line">du -sh hello*</div><div class="line"></div><div class="line"><span class="number">1.6</span>M	hello</div><div class="line"><span class="number">4.0</span>K	hello.go</div><div class="line"><span class="number">576</span>K	hello_1</div><div class="line"><span class="number">456</span>K	hello_2</div></pre></td></tr></table></figure></p>
+<p>可见，压缩比相当可观，大概压缩了 70% 的大小。</p>
+<p>下面是一个正式项目的压缩效果：<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"> <span class="number">14</span>M	gomessage_v2</div><div class="line"><span class="number">4.2</span>M	gomessage_v2<span class="selector-class">.compressed</span>			<span class="comment">//upx -o gomessage_v2.compressed gomessage_v2</span></div><div class="line"><span class="number">4.1</span>M	gomessage_v2<span class="selector-class">.compressed</span><span class="selector-class">.best</span>		<span class="comment">//upx --best -o gomessage_v2.compressed.best gomessage_v2</span></div><div class="line"><span class="number">3.1</span>M	gomessage_v2<span class="selector-class">.compressed</span><span class="selector-class">.brute</span>		<span class="comment">//upx --brute -o gomessage_v2.compressed.brute gomessage_v2</span></div></pre></td></tr></table></figure></p>
+<p>可见压缩之后可执行文件还是小了很多，从 14M 降低到了 3~4M 左右。<br>不同的参数代表着压缩程度，压缩的越多，压缩过程所需的时间也相对比较长。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;记得当初刚接触学习 golang 的时候,当时使用还是 go 1.4版本,和其他语言的入门一样，写了一个简单的 hello world 程序。&lt;br&gt;&lt;figure class=&quot;highlight go&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;package&lt;/span&gt; main&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&quot;fmt&quot;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;()&lt;/span&gt;&lt;/span&gt; &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;	fmt.Println(&lt;span class=&quot;string&quot;&gt;&quot;Hello World!&quot;&lt;/span&gt;)&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;程序非常简单，整个源文件大小才 4KB。然后执行 go build 编译成可执行文件，结果让我非常惊讶的是这段简单的代码生成的可执行文件竟然有4M之多。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="tools" scheme="http://yoursite.com/categories/tools/"/>
+    
+    
+      <category term="upx" scheme="http://yoursite.com/tags/upx/"/>
+    
+      <category term="compress" scheme="http://yoursite.com/tags/compress/"/>
+    
+      <category term="golang" scheme="http://yoursite.com/tags/golang/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>读书清单(备忘)</title>
+    <link href="http://yoursite.com/reading-list/"/>
+    <id>http://yoursite.com/reading-list/</id>
+    <published>2017-08-19T14:08:27.000Z</published>
+    <updated>2017-08-19T14:30:31.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="2017读书清单"><a href="#2017读书清单" class="headerlink" title="2017读书清单"></a>2017读书清单</h2><h3 id="进行中-amp-计划中"><a href="#进行中-amp-计划中" class="headerlink" title="进行中&amp;计划中"></a>进行中&amp;计划中</h3><ul>
+<li>《Go并发编程实战》 –郝林</li>
+<li>《App 后台开发运维和架构实践》–曾健生</li>
+<li>《重构–改善既有代码的设计》 – 中文版</li>
+<li>《高性能网站架构实战》 – 刘鑫</li>
+<li>《构建高性能Web站点》 – 郭欣</li>
+<li>《设计模式之禅》 – 秦小波</li>
+<li>《go In Action》（Go语言实战）–中文版</li>
+<li>《the way to go》（go语言程序设计）–中文版</li>
+<li>《build-web-application-with-golang》–github<br>….</li>
+</ul>
+<h3 id="已读"><a href="#已读" class="headerlink" title="已读"></a>已读</h3><ul>
+<li>《Go语言编程》 – 许式伟</li>
+<li>《Go语言最佳实践》– pdf</li>
+<li>《深入理解PHP内核》– php-internal.com</li>
+</ul>
+<p>^_^ 任务艰巨~~~~</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;2017读书清单&quot;&gt;&lt;a href=&quot;#2017读书清单&quot; class=&quot;headerlink&quot; title=&quot;2017读书清单&quot;&gt;&lt;/a&gt;2017读书清单&lt;/h2&gt;&lt;h3 id=&quot;进行中-amp-计划中&quot;&gt;&lt;a href=&quot;#进行中-amp-计划中&quot; class
+    
+    </summary>
+    
+      <category term="notes" scheme="http://yoursite.com/categories/notes/"/>
+    
+    
+      <category term="book" scheme="http://yoursite.com/tags/book/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>使用 &amp; 代替 % 来判断整数奇偶性</title>
+    <link href="http://yoursite.com/use-bitwise-and-judge-even-odd/"/>
+    <id>http://yoursite.com/use-bitwise-and-judge-even-odd/</id>
+    <published>2017-08-08T02:29:06.000Z</published>
+    <updated>2017-08-19T14:04:23.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>一般情况下，判断整数的奇偶性都会使用取模预算， 性能方面没有测试，但是由于机器可以直接操作二进制，应该会比较快，不过这点性能提升一般情况下对整体性能的影响不大，可以忽略不计。<br><figure class="highlight xquery"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> num<span class="meta">%2</span>==<span class="number">0</span> &#123;</div><div class="line">	fmt.Println(<span class="string">"even"</span>)</div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">	fmt.Println(<span class="string">"odd"</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>不过，还有一种方式也是类似，使用 按位与 来判断整数奇偶性：<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> num&amp;<span class="number">1</span>==<span class="number">0</span> &#123;</div><div class="line">	fmt.<span class="keyword">Println</span>(<span class="string">"even"</span>)</div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">	fmt.<span class="keyword">Println</span>(<span class="string">"odd"</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>也能达到相同的效果。</p>
+<p>类似的，使用二进制运算也可以进行乘除法的运算:<br>乘法左移：<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//a = a * 4</span></div><div class="line"><span class="selector-tag">a</span> = <span class="selector-tag">a</span> &lt;&lt; <span class="number">2</span></div><div class="line"></div><div class="line"><span class="comment">//b = b * 8</span></div><div class="line"><span class="selector-tag">b</span> = <span class="selector-tag">b</span> &lt;&lt; <span class="number">3</span></div></pre></td></tr></table></figure></p>
+<p>除法右移：<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//a = a / 4</span></div><div class="line"><span class="selector-tag">a</span> = <span class="selector-tag">a</span> &gt;&gt; <span class="number">2</span></div><div class="line"></div><div class="line"><span class="comment">//b = b / 8</span></div><div class="line"><span class="selector-tag">b</span> = <span class="selector-tag">b</span> &gt;&gt; <span class="number">3</span></div></pre></td></tr></table></figure></p>
+<p>这些都是一些二进制运算的技巧，记下备忘。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;一般情况下，判断整数的奇偶性都会使用取模预算， 性能方面没有测试，但是由于机器可以直接操作二进制，应该会比较快，不过这点性能提升一般情况下对整体性能的影响不大，可以忽略不计。&lt;br&gt;&lt;figure class=&quot;highlight xquery&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;t
+    
+    </summary>
+    
+      <category term="notes" scheme="http://yoursite.com/categories/notes/"/>
+    
+    
+      <category term="go" scheme="http://yoursite.com/tags/go/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>阅读 php 源码，使用 vld 扩展查看 opcode</title>
+    <link href="http://yoursite.com/php-vld/"/>
+    <id>http://yoursite.com/php-vld/</id>
+    <published>2017-08-03T02:12:44.000Z</published>
+    <updated>2017-08-19T14:04:23.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>php 虽然是一门动态语言，但是它也有一个编译的过程，这个过程经过词法分析、语法分析,最终生成 Zend 引擎可以执行的 opcode 指令，类似于 java 的字节码。</p>
+<p>要查看一段代码对应的 opcode ，可以使用 <a href="http://pecl.php.net/package/vld/" target="_blank" rel="external">vld 扩展</a> 来查看。</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>安装 vld 和安装 php 其他的扩展没有任何区别，下载源码、编译、安装等…<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">tar zxf vld<span class="number">-0.14</span><span class="number">.0</span>.tar.gz</div><div class="line">cd vld<span class="number">-0.14</span><span class="number">.0</span></div><div class="line">phpize</div><div class="line">./configure</div><div class="line">make</div><div class="line">make install</div></pre></td></tr></table></figure></p>
+<p>记得要修改 php.ini 启用 vld 扩展:<br><figure class="highlight ini"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="section">[vld]</span></div><div class="line"><span class="attr">extensions</span>=vld.so</div></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>使用 vld 查看 opcode 也非常简单，主要传递参数<code>-dvld.active=1</code>来激活 vld 扩展即可：<br><figure class="highlight fortran"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">[root@host ~]# php -dvld.active=<span class="number">1</span> source.php</div><div class="line">Finding <span class="built_in">entry</span> points</div><div class="line">Branch analysis from <span class="keyword">position</span>: <span class="number">0</span></div><div class="line">Jump found. (Code = <span class="number">62</span>) <span class="keyword">Position</span> <span class="number">1</span> = -<span class="number">2</span></div><div class="line">filename:       /root/source.php</div><div class="line"><span class="function"><span class="keyword">function</span></span> <span class="keyword">name</span>:  (null)</div><div class="line"><span class="keyword">number</span> of ops:  <span class="number">3</span></div><div class="line">compiled vars:  <span class="comment">!0 = $a</span></div><div class="line">line     #* E I O op                           fetch          ext  <span class="keyword">return</span>  operands</div><div class="line">-------------------------------------------------------------------------------------</div><div class="line">   <span class="number">2</span>     <span class="number">0</span>  E &gt;   EXT_STMT</div><div class="line">         <span class="number">1</span>        <span class="keyword">ASSIGN</span>                                                   <span class="comment">!0, 10</span></div><div class="line">   <span class="number">3</span>     <span class="number">2</span>      &gt; <span class="keyword">RETURN</span>                                                   <span class="number">1</span></div><div class="line"></div><div class="line">branch: #  <span class="number">0</span>; line:     <span class="number">2</span>-    <span class="number">3</span>; sop:     <span class="number">0</span>; eop:     <span class="number">2</span>; out1:  -<span class="number">2</span></div><div class="line">path #<span class="number">1</span>: <span class="number">0</span>,</div></pre></td></tr></table></figure></p>
+<h2 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h2><p>vld 扩展主要有以下几个参数：</p>
+<ul>
+<li>vld.active=1 启用 vld 扩展</li>
+<li>vld.verbosity=3 显示更详细信息</li>
+<li>vld.execute=0 只显示 opcode 而不执行 php 脚本</li>
+</ul>
+<p>还有一些其他参数，请参考 <a href="http://www.php-internals.com/book/?p=C-php-vld" target="_blank" rel="external">深入理解 php 内核#VLD 扩展使用指南</a></p>
+<h2 id="备注"><a href="#备注" class="headerlink" title="备注"></a>备注</h2><p>如果经常需要查看 opcode , 而每次在命令中传递参数避免麻烦的话，可以将以上 vld 的参数配置在 php.ini 文件中，<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[vld]</div><div class="line">extensions=vld<span class="selector-class">.so</span></div><div class="line">vld.active=<span class="number">1</span></div><div class="line">vld<span class="selector-class">.vld</span><span class="selector-class">.verbosity</span>=<span class="number">3</span></div><div class="line">vld.execute=<span class="number">0</span></div></pre></td></tr></table></figure></p>
+<p>从而避免手动使用 <code>php -d</code> 参数来传递 vld 配置。<br><figure class="highlight ada"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">php <span class="comment">--help</span></div><div class="line">...</div><div class="line"> -d foo[=bar]     Define INI <span class="keyword">entry</span> foo <span class="keyword">with</span> value <span class="symbol">'bar</span>'</div><div class="line">...</div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;php 虽然是一门动态语言，但是它也有一个编译的过程，这个过程经过词法分析、语法分析,最终生成 Zend 引擎可以执行的 opcode 指令，类似于 java 的字节码。&lt;/p&gt;
+&lt;p&gt;要查看一段代码对应的 opcode ，可以使用 &lt;a href=&quot;http://pecl.php.net/package/vld/&quot;&gt;vld 扩展&lt;/a&gt; 来查看。&lt;/p&gt;
+&lt;h2 id=&quot;安装&quot;&gt;&lt;a href=&quot;#安装&quot; class=&quot;headerlink&quot; title=&quot;安装&quot;&gt;&lt;/a&gt;安装&lt;/h2&gt;&lt;p&gt;安装 vld 和安装 php 其他的扩展没有任何区别，下载源码、编译、安装等…&lt;br&gt;&lt;figure class=&quot;highlight lsl&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;tar zxf vld&lt;span class=&quot;number&quot;&gt;-0.14&lt;/span&gt;&lt;span class=&quot;number&quot;&gt;.0&lt;/span&gt;.tar.gz&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;cd vld&lt;span class=&quot;number&quot;&gt;-0.14&lt;/span&gt;&lt;span class=&quot;number&quot;&gt;.0&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;phpize&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;./configure&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;make&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;make install&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;记得要修改 php.ini 启用 vld 扩展:&lt;br&gt;&lt;figure class=&quot;highlight ini&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;section&quot;&gt;[vld]&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;attr&quot;&gt;extensions&lt;/span&gt;=vld.so&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="php" scheme="http://yoursite.com/categories/php/"/>
+    
+    
+      <category term="opcode" scheme="http://yoursite.com/tags/opcode/"/>
+    
+      <category term="php" scheme="http://yoursite.com/tags/php/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>阅读 php 源码，ctags 配合 vim 实现代码跳转</title>
+    <link href="http://yoursite.com/ctags/"/>
+    <id>http://yoursite.com/ctags/</id>
+    <published>2017-08-01T08:40:05.000Z</published>
+    <updated>2017-08-19T14:04:23.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>在阅读 php 源码的时候，为了方便跳转到相应的函数定义的位置，需要使用 ctags 来生成 tags 文件，再配合 vim 来实现跳转。</p>
+<h2 id="安装-ctags"><a href="#安装-ctags" class="headerlink" title="安装 ctags"></a>安装 ctags</h2><p>macOS 上使用 ctags 非常简单，一般都预装了 ctags 。</p>
+<p>如果没有安装，可以使用 <code>brew install ctags</code> 来安装。</p>
+<h2 id="tags-文件"><a href="#tags-文件" class="headerlink" title="tags 文件"></a>tags 文件</h2><p>在 php 源码根目录，执行 <code>ctags -R</code>, 就会在当前目录下生成一个名为 <code>tags</code> 的 文件。 </p>
+<figure class="highlight livescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">~/codes/php-src(master*) » tail -n <span class="number">20</span> tags                                                                                                                                       </div><div class="line">zval_marked_grey	Zend<span class="regexp">/zend_gc.h	/</span>^	uint32_t zval_marked_grey;$/;<span class="string">"	m	struct:_zend_gc_globals</span></div><div class="line">zval_object_property_dump	ext/standard/var.c	/^static void zval_object_property_dump(zval *zv, zend_ulong index, zend_string *key, int level) \/* &#123;&#123;&#123; *\/$/;"	f	file:</div><div class="line">zval_opt_copy_ctor	Zend<span class="regexp">/zend_variables.h	/</span>^<span class="comment">#define zval_opt_copy_ctor(/;"	d</span></div><div class="line">zval_possible_root	Zend<span class="regexp">/zend_gc.h	/</span>^	uint32_t zval_possible_root;$/;<span class="string">"	m	struct:_zend_gc_globals</span></div><div class="line">zval_ptr_dtor	Zend/zend_execute.c	/^<span class="subst">#define</span> zval_ptr_dtor(/;"	d	file:</div><div class="line">zval_ptr_dtor	Zend<span class="regexp">/zend_execute.c	/</span>^<span class="comment">#undef zval_ptr_dtor$/;"	d	file:</span></div><div class="line">zval_ptr_dtor	Zend<span class="regexp">/zend_variables.h	/</span>^<span class="comment">#define zval_ptr_dtor(/;"	d</span></div><div class="line">zval_ptr_dtor_nogc	Zend<span class="regexp">/zend_variables.h	/</span>^<span class="comment">#define zval_ptr_dtor_nogc(/;"	d</span></div><div class="line">zval_ptr_dtor_wrapper	Zend<span class="regexp">/zend_variables.h	/</span>^<span class="comment">#define zval_ptr_dtor_wrapper /;"	d</span></div></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>tags 文件的格式非常简单，以tab 分割各项，基本有以下几项内容:</p>
+<p>第一列：tag name ,例如 <code>zval_ptr_dtor</code></p>
+<p>第二列：tag 所在的文件，例如 <code>Zend/zend_variables.h</code></p>
+<p>第三列：执行的命令，一般是指在 vi 中执行的正则搜索命令，例如 <code>/^#define zval_ptr_dtor(/;&quot;</code> </p>
+<p>第四列：tag 的类型，例如：d , 类型在不同的语言中有不同的含义。在 c 中， d 代表着 macro definitions (宏定义)</p>
+<p>具体的各语言的 tag 的类型定义可以使用 <code>ctags --list-kinds</code> 来查看:</p>
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">~<span class="regexp">/codes/php</span>-src(master*) » ctags --list-kinds</div><div class="line">C</div><div class="line">    c  classes</div><div class="line">    d  <span class="function"><span class="keyword">macro</span> <span class="title">definitions</span></span></div><div class="line">    e  enumerators (values inside an enumeration)</div><div class="line">    f  function definitions</div><div class="line">    g  enumeration names</div><div class="line">    l  local variables [off]</div><div class="line">    m  <span class="class"><span class="keyword">class</span>, <span class="title">struct</span>, <span class="title">and</span> <span class="title">union</span> <span class="title">members</span></span></div><div class="line">    n  namespaces</div><div class="line">    p  function prototypes [off]</div><div class="line">    s  structure names</div><div class="line">    t  typedefs</div><div class="line">    u  <span class="class"><span class="keyword">union</span> <span class="title">names</span></span></div><div class="line">    v  variable definitions</div><div class="line">    x  external and forward variable declarations [off]</div><div class="line">Java</div><div class="line">    c  classes</div><div class="line">    e  <span class="class"><span class="keyword">enum</span> <span class="title">constants</span></span></div><div class="line">    f  fields</div><div class="line">    g  <span class="class"><span class="keyword">enum</span> <span class="title">types</span></span></div><div class="line">    i  interfaces</div><div class="line">    l  local variables [off]</div><div class="line">    m  methods</div><div class="line">    p  packages</div></pre></td></tr></table></figure>
+<p>查看 ctags 支持哪些语言可以使用 <code>ctags --list-languages</code> 来查看:</p>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">~/codes/php-src(master*) » ctags --list-languages</div><div class="line">....</div><div class="line">C</div><div class="line">C++</div><div class="line">Flex</div><div class="line">Fortran</div><div class="line">HTML</div><div class="line">Java</div><div class="line">JavaScript</div><div class="line">Lisp</div><div class="line">Lua</div><div class="line">Make</div><div class="line">MatLab</div><div class="line">OCaml</div><div class="line">Pascal</div><div class="line">Perl</div><div class="line">PHP</div><div class="line">Python</div><div class="line">...</div></pre></td></tr></table></figure>
+<p>大概有 41 种，不过 并没有看到 对 go 的支持，应该是因为 go 语言还是比较年轻的原因。</p>
+<h2 id="使用-tags"><a href="#使用-tags" class="headerlink" title="使用 tags"></a>使用 tags</h2><p>一般情况下，在 tags 文件所在目录使用 vi (vim) 打开源码文件，在文件中使用快捷键 <code>ctrl+]</code> 即可实现跳转，<code>ctrl+t</code> 即可回到跳转之前的位置。</p>
+<p>如果无法跳转，提示 <code>E433: No tags file</code> ，则需要手动指定 tags 文件,通过 vim 命令或者直接修改 vim 的配置文件 vimrc 均可：</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">#在~/.vimrc中添加:</div><div class="line"><span class="keyword">set</span> <span class="keyword">tags</span>+=~/codes/php-src/<span class="keyword">tags</span></div><div class="line"></div><div class="line">#或者在<span class="keyword">vim</span>中运行命令:</div><div class="line">:<span class="keyword">set</span> <span class="keyword">tags</span>+=~/codes/php-src/<span class="keyword">tags</span></div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在阅读 php 源码的时候，为了方便跳转到相应的函数定义的位置，需要使用 ctags 来生成 tags 文件，再配合 vim 来实现跳转。&lt;/p&gt;
+&lt;h2 id=&quot;安装-ctags&quot;&gt;&lt;a href=&quot;#安装-ctags&quot; class=&quot;headerlink&quot; title=&quot;安装 ctags&quot;&gt;&lt;/a&gt;安装 ctags&lt;/h2&gt;&lt;p&gt;macOS 上使用 ctags 非常简单，一般都预装了 ctags 。&lt;/p&gt;
+&lt;p&gt;如果没有安装，可以使用 &lt;code&gt;brew install ctags&lt;/code&gt; 来安装。&lt;/p&gt;
+&lt;h2 id=&quot;tags-文件&quot;&gt;&lt;a href=&quot;#tags-文件&quot; class=&quot;headerlink&quot; title=&quot;tags 文件&quot;&gt;&lt;/a&gt;tags 文件&lt;/h2&gt;&lt;p&gt;在 php 源码根目录，执行 &lt;code&gt;ctags -R&lt;/code&gt;, 就会在当前目录下生成一个名为 &lt;code&gt;tags&lt;/code&gt; 的 文件。 &lt;/p&gt;
+&lt;figure class=&quot;highlight livescript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;~/codes/php-src(master*) » tail -n &lt;span class=&quot;number&quot;&gt;20&lt;/span&gt; tags                                                                                                                                       &lt;/div&gt;&lt;div class=&quot;line&quot;&gt;zval_marked_grey	Zend&lt;span class=&quot;regexp&quot;&gt;/zend_gc.h	/&lt;/span&gt;^	uint32_t zval_marked_grey;$/;&lt;span class=&quot;string&quot;&gt;&quot;	m	struct:_zend_gc_globals&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;zval_object_property_dump	ext/standard/var.c	/^static void zval_object_property_dump(zval *zv, zend_ulong index, zend_string *key, int level) \/* &amp;#123;&amp;#123;&amp;#123; *\/$/;&quot;&lt;/span&gt;	f	file:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;zval_opt_copy_ctor	Zend&lt;span class=&quot;regexp&quot;&gt;/zend_variables.h	/&lt;/span&gt;^&lt;span class=&quot;comment&quot;&gt;#define zval_opt_copy_ctor(/;&quot;	d&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;zval_possible_root	Zend&lt;span class=&quot;regexp&quot;&gt;/zend_gc.h	/&lt;/span&gt;^	uint32_t zval_possible_root;$/;&lt;span class=&quot;string&quot;&gt;&quot;	m	struct:_zend_gc_globals&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;zval_ptr_dtor	Zend/zend_execute.c	/^&lt;span class=&quot;subst&quot;&gt;#define&lt;/span&gt; zval_ptr_dtor(/;&quot;&lt;/span&gt;	d	file:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;zval_ptr_dtor	Zend&lt;span class=&quot;regexp&quot;&gt;/zend_execute.c	/&lt;/span&gt;^&lt;span class=&quot;comment&quot;&gt;#undef zval_ptr_dtor$/;&quot;	d	file:&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;zval_ptr_dtor	Zend&lt;span class=&quot;regexp&quot;&gt;/zend_variables.h	/&lt;/span&gt;^&lt;span class=&quot;comment&quot;&gt;#define zval_ptr_dtor(/;&quot;	d&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;zval_ptr_dtor_nogc	Zend&lt;span class=&quot;regexp&quot;&gt;/zend_variables.h	/&lt;/span&gt;^&lt;span class=&quot;comment&quot;&gt;#define zval_ptr_dtor_nogc(/;&quot;	d&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;zval_ptr_dtor_wrapper	Zend&lt;span class=&quot;regexp&quot;&gt;/zend_variables.h	/&lt;/span&gt;^&lt;span class=&quot;comment&quot;&gt;#define zval_ptr_dtor_wrapper /;&quot;	d&lt;/span&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+    
+    </summary>
+    
+      <category term="php" scheme="http://yoursite.com/categories/php/"/>
+    
+    
+      <category term="ctags" scheme="http://yoursite.com/tags/ctags/"/>
+    
+  </entry>
+  
+  <entry>
     <title>golang 匿名 struct 的使用方式</title>
     <link href="http://yoursite.com/go-anonymous-struct/"/>
     <id>http://yoursite.com/go-anonymous-struct/</id>
     <published>2017-07-08T15:20:01.000Z</published>
-    <updated>2017-07-08T15:31:31.000Z</updated>
+    <updated>2017-07-10T15:15:49.000Z</updated>
     
-    <content type="html"><![CDATA[<p>编程中有时候需要一个临时的 struct 来封装数据，而这个 struct 的结构在其它地方又不不会被二次复用,可以使用匿名 struct 来实现。</p>
+    <content type="html"><![CDATA[<p>编程中有时候需要一个临时的 struct 来封装数据，而这个 struct 的结构在其它地方又不会被二次复用,可以使用匿名 struct 来实现。</p>
 <p>主要有两种方式,如下:<br>第一种方式，通过 var 初始化</p>
 <figure class="highlight nsis"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var <span class="literal">user</span> struct&#123;<span class="keyword">Name</span> string<span class="comment">;age int&#125;</span></div><div class="line"><span class="literal">user</span>.<span class="keyword">Name</span> = <span class="string">"name"</span></div><div class="line"><span class="literal">user</span>.age = <span class="number">18</span></div></pre></td></tr></table></figure>
 <p>第二种方式，直接初始化</p>
@@ -32,9 +222,9 @@
     
     <summary type="html">
     
-      &lt;p&gt;编程中有时候需要一个临时的 struct 来封装数据，而这个 struct 的结构在其它地方又不不会被二次复用,可以使用匿名 struct 来实现。&lt;/p&gt;
+      &lt;p&gt;编程中有时候需要一个临时的 struct 来封装数据，而这个 struct 的结构在其它地方又不会被二次复用,可以使用匿名 struct 来实现。&lt;/p&gt;
 &lt;p&gt;主要有两种方式,如下:&lt;br&gt;第一种方式，通过 var 初始化&lt;/p&gt;
-&lt;figure class=&quot;high
+&lt;figure class=&quot;highl
     
     </summary>
     
@@ -401,7 +591,7 @@
     <link href="http://yoursite.com/umount-device-when-its-buzy/"/>
     <id>http://yoursite.com/umount-device-when-its-buzy/</id>
     <published>2017-05-12T03:04:07.000Z</published>
-    <updated>2017-05-16T13:45:38.000Z</updated>
+    <updated>2017-08-19T14:04:23.000Z</updated>
     
     <content type="html"><![CDATA[<p>Linux下因为磁盘出问题而导致了<code>Input/output error</code>,所以准备先把有问题的磁盘卸载掉再重新挂上试试。</p>
 <p>执行<code>umount</code>:<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">[root@hostname ~]<span class="comment"># umount -n /dev/sdc1</span></div><div class="line">umount: /home/data: device <span class="keyword">is</span> busy.</div><div class="line">        (In <span class="keyword">some</span> cases useful info <span class="keyword">about</span> processes <span class="keyword">that</span> use</div><div class="line">         <span class="keyword">the</span> device <span class="keyword">is</span> found <span class="keyword">by</span> lsof(<span class="number">8</span>) <span class="keyword">or</span> fuser(<span class="number">1</span>))</div></pre></td></tr></table></figure></p>
@@ -418,10 +608,16 @@
     
     </summary>
     
-      <category term="notes" scheme="http://yoursite.com/categories/notes/"/>
+      <category term="Linux" scheme="http://yoursite.com/categories/Linux/"/>
     
     
       <category term="Linux" scheme="http://yoursite.com/tags/Linux/"/>
+    
+      <category term="umount" scheme="http://yoursite.com/tags/umount/"/>
+    
+      <category term="fuser" scheme="http://yoursite.com/tags/fuser/"/>
+    
+      <category term="losf" scheme="http://yoursite.com/tags/losf/"/>
     
   </entry>
   
@@ -566,7 +762,7 @@
     <link href="http://yoursite.com/shell-change-path/"/>
     <id>http://yoursite.com/shell-change-path/</id>
     <published>2017-04-28T04:04:50.000Z</published>
-    <updated>2017-04-28T13:11:08.000Z</updated>
+    <updated>2017-08-19T14:04:23.000Z</updated>
     
     <content type="html"><![CDATA[<p>有时候编写go程序的时候需要将当前目录加到系统<code>GOPATH</code>中，不然就得将代码放置在已有的<code>GOPATH</code>之下。所以一般习惯在项目根目录执行创建一个<code>shell</code>脚本来动态的修改<code>GOPTAH</code>。<br>脚本很简单，代码如下:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#/bin/sh</span></div><div class="line">CURRENT=`<span class="built_in">pwd</span>`</div><div class="line"><span class="built_in">export</span> GOPATH=<span class="string">"<span class="variable">$&#123;GOPATH&#125;</span>:<span class="variable">$&#123;CURRENT&#125;</span>"</span></div></pre></td></tr></table></figure></p>
 <p>因为是<code>shell</code>脚本，所以就习惯性的执行了如下命令:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sh env</div><div class="line"><span class="built_in">echo</span> <span class="variable">$GOPATH</span></div></pre></td></tr></table></figure></p>
@@ -581,7 +777,7 @@
     
     </summary>
     
-      <category term="notes" scheme="http://yoursite.com/categories/notes/"/>
+      <category term="Linux" scheme="http://yoursite.com/categories/Linux/"/>
     
     
       <category term="Linux" scheme="http://yoursite.com/tags/Linux/"/>
@@ -666,239 +862,6 @@
       <category term="mac" scheme="http://yoursite.com/tags/mac/"/>
     
       <category term="ssh" scheme="http://yoursite.com/tags/ssh/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Linux zgrep使用笔记</title>
-    <link href="http://yoursite.com/Linux-zgrep/"/>
-    <id>http://yoursite.com/Linux-zgrep/</id>
-    <published>2017-03-17T09:20:05.000Z</published>
-    <updated>2017-03-18T15:01:02.000Z</updated>
-    
-    <content type="html"><![CDATA[<p><code>grep</code> 可以用来搜索文件内容,而基于<code>grep</code>的 <code>zgrep</code>这可以用来在压缩包中搜索内容而不需要事先解压文件.</p>
-<figure class="highlight stata"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">[root@yourdream ~]# <span class="keyword">cat</span> <span class="keyword">test</span>.go</div><div class="line">package main</div><div class="line">import (</div><div class="line">   <span class="string">"fmt"</span></div><div class="line">)</div><div class="line">func main()&#123;</div><div class="line">  fmt.Println(<span class="string">"Hello Golang!"</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line">[root@yourdream ~]# tar zcf <span class="keyword">test</span>.tar.gz <span class="keyword">test</span>.go</div><div class="line"></div><div class="line">[root@yourdream ~]# <span class="keyword">file</span> <span class="keyword">test</span>.tar.gz</div><div class="line"><span class="keyword">test</span>.tar.gz: gzip compressed data, from Unix, last modified: Fri Mar 17 17:23:09 2017</div><div class="line"></div><div class="line">[root@yourdream ~]# zgrep <span class="string">"fmt"</span> <span class="keyword">test</span>.tar.gz</div><div class="line">Binary <span class="keyword">file</span> (standard <span class="keyword">input</span>) matches</div><div class="line"></div><div class="line">[root@yourdream ~]# zgrep -a <span class="string">"fmt"</span> <span class="keyword">test</span>.tar.gz</div><div class="line">   <span class="string">"fmt"</span></div><div class="line">  fmt.Println(<span class="string">"Hello Golang!"</span>);</div><div class="line"></div><div class="line">[root@yourdream ~]# tar -tvf <span class="keyword">test</span>.tar.gz</div><div class="line">-rw-r--r-- root/root        81 2017-03-17 17:18 <span class="keyword">test</span>.go</div><div class="line"></div><div class="line">[root@yourdream ~]# tar -rvf <span class="keyword">test</span>.tar.gz <span class="keyword">test</span>/</div><div class="line"><span class="keyword">test</span>/</div><div class="line"><span class="keyword">test</span>/a.php</div><div class="line"></div><div class="line">[root@yourdream ~]# tar -tvf <span class="keyword">test</span>.tar.gz</div><div class="line">-rw-r--r-- root/root        81 2017-03-17 17:18 <span class="keyword">test</span>.go</div><div class="line">drwxr-xr-x root/root         0 2017-03-17 17:50 <span class="keyword">test</span>/</div><div class="line">-rw-r--r-- root/root      1127 2017-03-17 17:50 <span class="keyword">test</span>/a.php</div><div class="line"></div><div class="line">[root@yourdream ~]# zgrep -aHn <span class="string">"Hello"</span> <span class="keyword">test</span>.tar.gz</div><div class="line"><span class="keyword">test</span>.tar.gz:6:  fmt.Println(<span class="string">"Hello Golang!"</span>);</div><div class="line"><span class="keyword">test</span>.tar.gz:16:echo 'Hello php';</div></pre></td></tr></table></figure>
-<ul>
-<li>注意需要加上 <code>-a</code> 参数,让其二进制文件当做文本处理</li>
-<li><code>tar -u -r</code> 先压缩包中添加文件</li>
-<li><code>tar -H</code> 显示文件名</li>
-<li><code>tar -n</code> 显示行号</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;code&gt;grep&lt;/code&gt; 可以用来搜索文件内容,而基于&lt;code&gt;grep&lt;/code&gt;的 &lt;code&gt;zgrep&lt;/code&gt;这可以用来在压缩包中搜索内容而不需要事先解压文件.&lt;/p&gt;
-&lt;figure class=&quot;highlight stata&quot;&gt;&lt;table
-    
-    </summary>
-    
-      <category term="notes" scheme="http://yoursite.com/categories/notes/"/>
-    
-    
-      <category term="Linux" scheme="http://yoursite.com/tags/Linux/"/>
-    
-      <category term="zgrep" scheme="http://yoursite.com/tags/zgrep/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>iptables使用笔记</title>
-    <link href="http://yoursite.com/Linux-iptables/"/>
-    <id>http://yoursite.com/Linux-iptables/</id>
-    <published>2017-03-17T07:07:10.000Z</published>
-    <updated>2017-03-18T15:01:02.000Z</updated>
-    
-    <content type="html"><![CDATA[<h4 id="Linux-下防火墙-iptables-命令使用笔记"><a href="#Linux-下防火墙-iptables-命令使用笔记" class="headerlink" title="Linux 下防火墙 iptables 命令使用笔记"></a>Linux 下防火墙 <code>iptables</code> 命令使用笔记</h4><ul>
-<li><p>查看目前iptables设置 <code>iptables -vnL --line-numbers</code></p>
-<ul>
-<li><code>-v</code> verbose 详细信息</li>
-<li><code>-n</code> 显示数字端口等</li>
-<li><code>-L</code> list ,默认会显示<code>filter</code>表的规则</li>
-<li><code>--line-numbers</code> 显示序号,删除、插入时有用</li>
-</ul>
-</li>
-<li><p>删除规则<code>iptables -t table -D INPUT ruleNumber</code></p>
-<ul>
-<li><code>-t</code> table name,默认filter表,filter|Nat|Mangle|Raw</li>
-<li><code>-D</code> delete</li>
-<li><code>INPUT</code> chain name,INPUT|OUTPUT|FORWARD|PREROUTING|POSTROUTING</li>
-<li><code>ruleNumber</code> rule number,可以使用<code>--line-numbers</code>参数查看</li>
-</ul>
-</li>
-<li><p>查看状态<code>/etc/init.d/iptables status</code></p>
-</li>
-<li>保存修改<code>/etc/init.d/iptables save</code>,规则保存在<code>/etc/sysconfg/iptables</code>文件中</li>
-<li>开启|重启|关闭<code>/etc/init.d/iptables start|restart|stop</code></li>
-</ul>
-<a id="more"></a>
-<h4 id="examples"><a href="#examples" class="headerlink" title="examples"></a>examples</h4><p><code>iptables -I INPUT -s 1.1.1.1 -p tcp -dport 6666 -m comment --comment &quot;some comment&quot; -j ACCEPT</code></p>
-<ul>
-<li>向<code>INPUT</code>链中<code>I</code>(插入)一条规则,没有指定ruleNumber则插入到最前面</li>
-<li><code>-s</code> source,来源ip或者hostname</li>
-<li><code>-p</code> protocol 协议 tcp,udp,icmp(ping包),all 等 <code>/etc/protocols</code>中protocol的均可以</li>
-<li><code>-dport</code> 目标端口 destination port,注意<code>--dport</code>和<code>-dport</code></li>
-<li><code>-m</code> match extension,启用扩展, <code>comment</code>是注释扩展</li>
-<li><code>-j</code> jump</li>
-<li><code>ACCEPT</code> ACCEPT|DROP|REJECT|LOG</li>
-</ul>
-<p>详细可参考 <a href="http://www.cnblogs.com/metoy/p/4320813.html" target="_blank" rel="external">iptables详解</a>,文章很详细!</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h4 id=&quot;Linux-下防火墙-iptables-命令使用笔记&quot;&gt;&lt;a href=&quot;#Linux-下防火墙-iptables-命令使用笔记&quot; class=&quot;headerlink&quot; title=&quot;Linux 下防火墙 iptables 命令使用笔记&quot;&gt;&lt;/a&gt;Linux 下防火墙 &lt;code&gt;iptables&lt;/code&gt; 命令使用笔记&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;查看目前iptables设置 &lt;code&gt;iptables -vnL --line-numbers&lt;/code&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;-v&lt;/code&gt; verbose 详细信息&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;-n&lt;/code&gt; 显示数字端口等&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;-L&lt;/code&gt; list ,默认会显示&lt;code&gt;filter&lt;/code&gt;表的规则&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;--line-numbers&lt;/code&gt; 显示序号,删除、插入时有用&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;删除规则&lt;code&gt;iptables -t table -D INPUT ruleNumber&lt;/code&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;-t&lt;/code&gt; table name,默认filter表,filter|Nat|Mangle|Raw&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;-D&lt;/code&gt; delete&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;INPUT&lt;/code&gt; chain name,INPUT|OUTPUT|FORWARD|PREROUTING|POSTROUTING&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;ruleNumber&lt;/code&gt; rule number,可以使用&lt;code&gt;--line-numbers&lt;/code&gt;参数查看&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;查看状态&lt;code&gt;/etc/init.d/iptables status&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;保存修改&lt;code&gt;/etc/init.d/iptables save&lt;/code&gt;,规则保存在&lt;code&gt;/etc/sysconfg/iptables&lt;/code&gt;文件中&lt;/li&gt;
-&lt;li&gt;开启|重启|关闭&lt;code&gt;/etc/init.d/iptables start|restart|stop&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-    
-    </summary>
-    
-      <category term="notes" scheme="http://yoursite.com/categories/notes/"/>
-    
-    
-      <category term="Linux" scheme="http://yoursite.com/tags/Linux/"/>
-    
-      <category term="iptables" scheme="http://yoursite.com/tags/iptables/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Go Get安装一些第三方库-网络问题</title>
-    <link href="http://yoursite.com/go-get-golang-x-packages/"/>
-    <id>http://yoursite.com/go-get-golang-x-packages/</id>
-    <published>2017-03-08T10:56:51.000Z</published>
-    <updated>2017-03-18T15:01:02.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>go在go get 一些 package时候的会由于<code>众所周知</code>的原因而无法下载。比如在安装 <code>bee</code>的时候有可能会遇到无法下载 <code>golang.org/x/sys/unix</code> 的问题。<br><figure class="highlight xl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">unrecognized <span class="keyword">import</span> <span class="built_in">path</span> <span class="string">"golang.org/x/sys/unix"</span></div></pre></td></tr></table></figure></p>
-<p>解决方案：手动从<code>github</code>下载相应的<code>package</code></p>
-<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git <span class="keyword">clone</span> <span class="title">--depth</span>=<span class="number">1</span> https://github.com/golang/xxx.git</div><div class="line">git <span class="keyword">clone</span> <span class="title">--depth</span>=<span class="number">1</span> https://github.com/golang/xxx.git</div></pre></td></tr></table></figure>
-<p>注：xxx 为对应的需要的库</p>
-<p>下载完成后，<code>软链</code>或者<code>复制</code> 到 <code>$GOPATH/src/golang.org/x/</code> 下即可。<br><figure class="highlight avrasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">golang<span class="meta">.org</span>/</div><div class="line">└── <span class="built_in">x</span></div><div class="line">    ├── net</div><div class="line">    ├── sys</div><div class="line">    └── tools</div><div class="line"></div><div class="line"><span class="number">4</span> directories</div></pre></td></tr></table></figure></p>
-<p>更为简便的方法：<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">mkdir -p <span class="variable">$GOPATH</span><span class="regexp">/src/g</span>olang.org<span class="regexp">/x/</span></div><div class="line">cd !$</div><div class="line">git clone https:<span class="regexp">//gi</span>thub.com<span class="regexp">/golang/</span>net.git</div><div class="line">git clone https:<span class="regexp">//gi</span>thub.com<span class="regexp">/golang/</span>sys.git</div><div class="line">git clone https:<span class="regexp">//gi</span>thub.com<span class="regexp">/golang/</span>tools.git</div></pre></td></tr></table></figure></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;go在go get 一些 package时候的会由于&lt;code&gt;众所周知&lt;/code&gt;的原因而无法下载。比如在安装 &lt;code&gt;bee&lt;/code&gt;的时候有可能会遇到无法下载 &lt;code&gt;golang.org/x/sys/unix&lt;/code&gt; 的问题。&lt;br&gt;&lt;figur
-    
-    </summary>
-    
-      <category term="go" scheme="http://yoursite.com/categories/go/"/>
-    
-    
-      <category term="go" scheme="http://yoursite.com/tags/go/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Atom 调整左侧目录字体大小</title>
-    <link href="http://yoursite.com/atom-set-font-size/"/>
-    <id>http://yoursite.com/atom-set-font-size/</id>
-    <published>2017-03-07T14:39:49.000Z</published>
-    <updated>2017-03-18T15:01:02.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>刚刚安装好 atom的时候， 左侧的 tree 目录字体特别小，可以通过一下方式来设置</p>
-<ul>
-<li><p>打开<code>Atom</code>-<code>Stylesheet</code></p>
-</li>
-<li><p>找到 <code>.tree-view</code></p>
-<figure class="highlight maxima"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">// <span class="built_in">style</span> the <span class="built_in">background</span> <span class="built_in">color</span> of the tree <span class="built_in">view</span></div><div class="line">.tree-<span class="built_in">view</span> &#123;</div><div class="line">  // <span class="built_in">background</span>-<span class="built_in">color</span>: whitesmoke;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>给 <code>.tree-view</code> 添加 <code>font-size</code> 即可：</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.tree-view</span> &#123;</div><div class="line">    <span class="attribute">font-size</span>:<span class="number">16px</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>当然，添加其他属性也是可以的，可以自己定制样式，颜色，字体，字号等，<code>CSS</code>语法</p>
-</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;刚刚安装好 atom的时候， 左侧的 tree 目录字体特别小，可以通过一下方式来设置&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;打开&lt;code&gt;Atom&lt;/code&gt;-&lt;code&gt;Stylesheet&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;找到 &lt;code&gt;.tree-v
-    
-    </summary>
-    
-      <category term="tools" scheme="http://yoursite.com/categories/tools/"/>
-    
-    
-      <category term="atom" scheme="http://yoursite.com/tags/atom/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Atom设置代理</title>
-    <link href="http://yoursite.com/atom_set_proxy/"/>
-    <id>http://yoursite.com/atom_set_proxy/</id>
-    <published>2017-03-07T14:10:01.000Z</published>
-    <updated>2017-03-18T15:01:02.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>由于<code>众所周知</code>的原因，Atom有时候安装插件的时候很慢甚至无法安装。可以通过设置代理来解决。<br>前提是已经有一个可以使用的http代理。<a href="/transfer_socks5_to_http_proxy">参考之前的文章：将socks5转为http代理</a></p>
-<ul>
-<li><p>atom自带了一个工具 <code>apm</code>(atom package management) 这个工具可以用来设置一些系统配置</p>
-</li>
-<li><p>可以用<code>apm config list</code> 查看现有的系统配置信息</p>
-</li>
-</ul>
-<p>下面开始设置 http代理：<br><a id="more"></a></p>
-<ul>
-<li>执行一下命令</li>
-</ul>
-<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">apm config <span class="built_in">set</span> <span class="keyword">http</span>-proxy <span class="keyword">http</span>://host:port</div><div class="line">apm config <span class="built_in">set</span> <span class="keyword">https</span>-proxy <span class="keyword">http</span>://host:port</div><div class="line">apm config <span class="built_in">set</span> strict-ssl <span class="literal">false</span></div></pre></td></tr></table></figure>
-<ul>
-<li>注意两点：<ul>
-<li>https 配置的也是 http 而不是 https!</li>
-<li>set strict-ssl false 可以避免ssl 证书错误问题</li>
-</ul>
-</li>
-</ul>
-<blockquote>
-<p>其实直接修改 ~/.atom/.apmrc 文件也是可行的</p>
-</blockquote>
-<p>具体说明可以查看 <a href="https://github.com/atom/apm#behind-a-firewall" target="_blank" rel="external">这里</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;由于&lt;code&gt;众所周知&lt;/code&gt;的原因，Atom有时候安装插件的时候很慢甚至无法安装。可以通过设置代理来解决。&lt;br&gt;前提是已经有一个可以使用的http代理。&lt;a href=&quot;/transfer_socks5_to_http_proxy&quot;&gt;参考之前的文章：将socks5转为http代理&lt;/a&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;atom自带了一个工具 &lt;code&gt;apm&lt;/code&gt;(atom package management) 这个工具可以用来设置一些系统配置&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;可以用&lt;code&gt;apm config list&lt;/code&gt; 查看现有的系统配置信息&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;下面开始设置 http代理：&lt;br&gt;
-    
-    </summary>
-    
-      <category term="tools" scheme="http://yoursite.com/categories/tools/"/>
-    
-    
-      <category term="atom" scheme="http://yoursite.com/tags/atom/"/>
-    
-      <category term="proxy" scheme="http://yoursite.com/tags/proxy/"/>
     
   </entry>
   

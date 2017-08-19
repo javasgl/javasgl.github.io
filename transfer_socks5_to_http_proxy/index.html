@@ -83,30 +83,30 @@
 
 
 <meta name="description" content="shadowsocks 挺不错的，但是有些时候需要使用http代理来爬墙。这时候可以使用privoxy来将 socks5 代理转换为 http代理。
-步骤如下：
+配置步骤如下：
 
 首先，确保 shadowsocks 已经正常起来的，默认的本地socks5端口号为 1080,可以使用 netstat 和 lsof 命令查看端口情况。
 
-安装privoxy, mac 使用 brew install privoxy 即">
+安装privoxy, mac 使用 brew install privoxy">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Mac上使用Privoxy 将 socks5转换为 http 代理">
 <meta property="og:url" content="http://yoursite.com/transfer_socks5_to_http_proxy/index.html">
 <meta property="og:site_name" content="Mr.song">
 <meta property="og:description" content="shadowsocks 挺不错的，但是有些时候需要使用http代理来爬墙。这时候可以使用privoxy来将 socks5 代理转换为 http代理。
-步骤如下：
+配置步骤如下：
 
 首先，确保 shadowsocks 已经正常起来的，默认的本地socks5端口号为 1080,可以使用 netstat 和 lsof 命令查看端口情况。
 
-安装privoxy, mac 使用 brew install privoxy 即">
-<meta property="og:updated_time" content="2017-03-18T15:01:02.000Z">
+安装privoxy, mac 使用 brew install privoxy">
+<meta property="og:updated_time" content="2017-08-19T14:04:23.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mac上使用Privoxy 将 socks5转换为 http 代理">
 <meta name="twitter:description" content="shadowsocks 挺不错的，但是有些时候需要使用http代理来爬墙。这时候可以使用privoxy来将 socks5 代理转换为 http代理。
-步骤如下：
+配置步骤如下：
 
 首先，确保 shadowsocks 已经正常起来的，默认的本地socks5端口号为 1080,可以使用 netstat 和 lsof 命令查看端口情况。
 
-安装privoxy, mac 使用 brew install privoxy 即">
+安装privoxy, mac 使用 brew install privoxy">
 
 
 
@@ -115,7 +115,7 @@
   var CONFIG = {
     root: '/',
     scheme: 'Mist',
-    sidebar: {"position":"right","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":true},
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":true},
     fancybox: true,
     motion: true,
     duoshuo: {
@@ -165,7 +165,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-right page-post-detail ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -284,7 +284,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="songgl">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/favicon.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -374,7 +374,7 @@
 
       
         <p>shadowsocks 挺不错的，但是有些时候需要使用http代理来爬墙。这时候可以使用privoxy来将 socks5 代理转换为 http代理。</p>
-<p>步骤如下：</p>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>步骤如下：</p>
 <ul>
 <li><p>首先，确保 shadowsocks 已经正常起来的，默认的本地socks5端口号为 1080,可以使用 netstat 和 lsof 命令查看端口情况。</p>
 </li>
@@ -397,6 +397,9 @@
 <ul>
 <li>正常情况下,可以使用http代理了，代理地址<code>http://127.0.0.1:8118</code></li>
 </ul>
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><p>例如，可以给 git 设置 http 或 https 代理,设置方式如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git config --global http.proxy http:<span class="comment">//127.0.0.1:8118</span></div><div class="line">git config --global https.proxy http:<span class="comment">//127.0.0.1:8118</span></div></pre></td></tr></table></figure></p>
+<p>取消代理配置：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git config --global --unset http.proxy</div><div class="line">git config --global --unset https.proxy</div></pre></td></tr></table></figure></p>
+<p>和其他 git 的配置一样，不使用命令行而是直接修改相应的 <code>.gitconfig</code> 文件也是可以的。当然，如果不想修改 git 配置，而只是想临时使用一下，可以使用 -c 参数：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git -c https.proxy=http:<span class="comment">//127.0.0.1:8118 clone --depth=1 https://github.com/xxx/xxx</span></div></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -502,11 +505,20 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
-               src="/images/avatar.gif"
+               src="/images/favicon.png"
                alt="songgl" />
           <p class="site-author-name" itemprop="name">songgl</p>
            
@@ -518,7 +530,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-count">26</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -529,7 +541,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -540,7 +552,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">34</span>
+                <span class="site-state-item-count">44</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -592,6 +604,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#配置"><span class="nav-number">1.</span> <span class="nav-text">配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#示例"><span class="nav-number">2.</span> <span class="nav-text">示例</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

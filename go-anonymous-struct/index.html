@@ -82,28 +82,28 @@
 
 
 
-<meta name="description" content="编程中有时候需要一个临时的 struct 来封装数据，而这个 struct 的结构在其它地方又不不会被二次复用,可以使用匿名 struct 来实现。
+<meta name="description" content="编程中有时候需要一个临时的 struct 来封装数据，而这个 struct 的结构在其它地方又不会被二次复用,可以使用匿名 struct 来实现。
 主要有两种方式,如下:第一种方式，通过 var 初始化
 123var user struct&amp;#123;Name string;age int&amp;#125;user.Name = &quot;name&quot;user.age = 18
 第二种方式，直接初始化
-1jso">
+1json">
 <meta property="og:type" content="article">
 <meta property="og:title" content="golang 匿名 struct 的使用方式">
 <meta property="og:url" content="http://yoursite.com/go-anonymous-struct/index.html">
 <meta property="og:site_name" content="Mr.song">
-<meta property="og:description" content="编程中有时候需要一个临时的 struct 来封装数据，而这个 struct 的结构在其它地方又不不会被二次复用,可以使用匿名 struct 来实现。
+<meta property="og:description" content="编程中有时候需要一个临时的 struct 来封装数据，而这个 struct 的结构在其它地方又不会被二次复用,可以使用匿名 struct 来实现。
 主要有两种方式,如下:第一种方式，通过 var 初始化
 123var user struct&amp;#123;Name string;age int&amp;#125;user.Name = &quot;name&quot;user.age = 18
 第二种方式，直接初始化
-1jso">
-<meta property="og:updated_time" content="2017-07-08T15:31:31.000Z">
+1json">
+<meta property="og:updated_time" content="2017-07-10T15:15:49.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="golang 匿名 struct 的使用方式">
-<meta name="twitter:description" content="编程中有时候需要一个临时的 struct 来封装数据，而这个 struct 的结构在其它地方又不不会被二次复用,可以使用匿名 struct 来实现。
+<meta name="twitter:description" content="编程中有时候需要一个临时的 struct 来封装数据，而这个 struct 的结构在其它地方又不会被二次复用,可以使用匿名 struct 来实现。
 主要有两种方式,如下:第一种方式，通过 var 初始化
 123var user struct&amp;#123;Name string;age int&amp;#125;user.Name = &quot;name&quot;user.age = 18
 第二种方式，直接初始化
-1jso">
+1json">
 
 
 
@@ -112,7 +112,7 @@
   var CONFIG = {
     root: '/',
     scheme: 'Mist',
-    sidebar: {"position":"right","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":true},
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":true},
     fancybox: true,
     motion: true,
     duoshuo: {
@@ -162,7 +162,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-right page-post-detail ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -281,7 +281,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="songgl">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/favicon.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -370,7 +370,7 @@
       
 
       
-        <p>编程中有时候需要一个临时的 struct 来封装数据，而这个 struct 的结构在其它地方又不不会被二次复用,可以使用匿名 struct 来实现。</p>
+        <p>编程中有时候需要一个临时的 struct 来封装数据，而这个 struct 的结构在其它地方又不会被二次复用,可以使用匿名 struct 来实现。</p>
 <p>主要有两种方式,如下:<br>第一种方式，通过 var 初始化</p>
 <figure class="highlight nsis"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var <span class="literal">user</span> struct&#123;<span class="keyword">Name</span> string<span class="comment">;age int&#125;</span></div><div class="line"><span class="literal">user</span>.<span class="keyword">Name</span> = <span class="string">"name"</span></div><div class="line"><span class="literal">user</span>.age = <span class="number">18</span></div></pre></td></tr></table></figure>
 <p>第二种方式，直接初始化</p>
@@ -430,6 +430,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/ctags/" rel="prev" title="阅读 php 源码，ctags 配合 vim 实现代码跳转">
+                阅读 php 源码，ctags 配合 vim 实现代码跳转 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -479,7 +483,7 @@
       <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
-               src="/images/avatar.gif"
+               src="/images/favicon.png"
                alt="songgl" />
           <p class="site-author-name" itemprop="name">songgl</p>
            
@@ -491,7 +495,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-count">26</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -502,7 +506,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -513,7 +517,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">34</span>
+                <span class="site-state-item-count">44</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>

@@ -99,7 +99,7 @@
   var CONFIG = {
     root: '/',
     scheme: 'Mist',
-    sidebar: {"position":"right","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":true},
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":true},
     fancybox: true,
     motion: true,
     duoshuo: {
@@ -149,7 +149,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-right 
+  <div class="container one-collumn sidebar-position-left 
    page-home 
  ">
     <div class="headband"></div>
@@ -265,12 +265,12 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/go-anonymous-struct/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/compress-executables-with-upx/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="songgl">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/favicon.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -287,8 +287,8 @@
             
               
                 
-                <a class="post-title-link" href="/go-anonymous-struct/" itemprop="url">
-                  golang 匿名 struct 的使用方式
+                <a class="post-title-link" href="/compress-executables-with-upx/" itemprop="url">
+                  使用upx压缩可执行文件
                 </a>
               
             
@@ -304,615 +304,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-08T23:20:01+08:00">
-                2017-07-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/go/" itemprop="url" rel="index">
-                    <span itemprop="name">go</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>编程中有时候需要一个临时的 struct 来封装数据，而这个 struct 的结构在其它地方又不不会被二次复用,可以使用匿名 struct 来实现。</p>
-<p>主要有两种方式,如下:<br>第一种方式，通过 var 初始化</p>
-<figure class="highlight nsis"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var <span class="literal">user</span> struct&#123;<span class="keyword">Name</span> string<span class="comment">;age int&#125;</span></div><div class="line"><span class="literal">user</span>.<span class="keyword">Name</span> = <span class="string">"name"</span></div><div class="line"><span class="literal">user</span>.age = <span class="number">18</span></div></pre></td></tr></table></figure>
-<p>第二种方式，直接初始化</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">json.Marshal(<span class="keyword">struct</span>&#123;Name <span class="built_in">string</span>;age <span class="keyword">int</span>&#125;&#123;<span class="string">"name"</span>,<span class="number">18</span>&#125;)</div></pre></td></tr></table></figure>
-<p>或者：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">json.Marshal(<span class="keyword">struct</span>&#123;</div><div class="line">	Name <span class="built_in">string</span></div><div class="line">	age <span class="keyword">int</span></div><div class="line">&#125;&#123;<span class="string">"name"</span>,<span class="number">18</span>&#125;)</div></pre></td></tr></table></figure></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/glide/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="songgl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Mr.song">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/glide/" itemprop="url">
-                  Glide--golang 包管理工具简单教程
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-08T23:06:00+08:00">
-                2017-07-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/go/" itemprop="url" rel="index">
-                    <span itemprop="name">go</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p> Golang挺好用的，但是目前比较受到诟病的是其没有自带包管理工具(golang社区已经发起了一个<a href="https://github.com/golang/dep">dep</a>的项目，不过要正式被golang接受还需要一段时间)。官方没有咋办，那就自己造轮子呗。所以 go的包管理工具就五花八门、层出不穷了。目前有Glide, gopm, godep,gpm，gom等等。。。</p>
-<p>这里介绍一个工具，使用比较简单: glide</p>
-<p>我已经将其的文档翻译成了中文:  <a href="http://glidedocs.readthedocs.io/">glide 中文文档</a>.</p>
-<p>翻译的内容放在github上: <a href="https://github.com/javasgl/GlideDocs">https://github.com/javasgl/GlideDocs</a></p>
-<p>不想看文章的可以直接去看中文文档，文档写的很清晰，文档中关于<code>glide</code>的用法和原理都有说明。<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/glide/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/go-slice-append/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="songgl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Mr.song">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/go-slice-append/" itemprop="url">
-                  golang中slice越界问题
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-21T00:02:26+08:00">
-                2017-06-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/go/" itemprop="url" rel="index">
-                    <span itemprop="name">go</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p><code>go</code>中<code>slice</code>由于其类似于一个长度可动态变化的数组而非常方便使用。<br><code>slice</code>有两个基本属性：<code>cap</code>,<code>len</code>，分别代表容量和已有数据长度。<br>一般声明<code>slice</code>的两种方式如下：<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//定义了一个初始长度为0,容量为2的int 类型的 `slice`</span></div><div class="line">slice:=<span class="built_in">make</span>([]<span class="keyword">int</span>,<span class="number">0</span>,<span class="number">2</span>)</div><div class="line"></div><div class="line"><span class="keyword">var</span> slice=[]<span class="keyword">int</span>&#123;<span class="number">0</span>,<span class="number">1</span>&#125;</div></pre></td></tr></table></figure></p>
-<p>往<code>slice</code>中添加元素使用<code>append</code>方法：<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">slice=<span class="built_in">append</span>(slice,<span class="number">1</span>)</div></pre></td></tr></table></figure></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/go-slice-append/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/debug-golang-with-gdb-on-mac/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="songgl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Mr.song">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/debug-golang-with-gdb-on-mac/" itemprop="url">
-                  Mac上使用gdb单步调试golang程序
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-07T22:29:40+08:00">
-                2017-06-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/go/" itemprop="url" rel="index">
-                    <span itemprop="name">go</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="单步调试"><a href="#单步调试" class="headerlink" title="单步调试"></a>单步调试</h2><p>最近在写<code>golang</code>程序的时候，想要想单步调试一下程序，减少手动<code>print log</code>调试代码的痛苦。</p>
-<p>找了一些golang单步调试的方案，主要有几下几种方案:</p>
-<ul>
-<li>使用 <code>SublimeGDB</code> 插件在<code>Sublime</code> 中调试</li>
-<li>使用 <code>Goland IDE</code> 调试,不过可惜<code>Goland</code>还未发布正式版本</li>
-<li>使用 <code>gdb</code> 工具调试</li>
-</ul>
-<p>每个都尝试了一遍:</p>
-<ul>
-<li><code>SublimeGDB</code> 界面不错，但是调试速度太慢，设置一个断点都需要很长时间，故 pass 此方案。</li>
-<li><code>Goland IDE</code> 只是预览版，有使用时间限制,还是等等吧，等 <code>Jetbrains</code> 出正式版后再去试试.(<code>Jetbrains</code>出品必属精品)</li>
-<li><code>gdb</code>调试，使用下来发现，目前而言，<code>gdb</code>的方式还是用的比较顺手的。</li>
-</ul>
-<p>不过在<code>mac</code>电脑上使用<code>gdb</code>还是遇到了一些问题,不过还好都顺利解决了。<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/debug-golang-with-gdb-on-mac/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/pressure-test-tools/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="songgl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Mr.song">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/pressure-test-tools/" itemprop="url">
-                  压力测试工具ab、webbench、http_load、siege简单使用
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-05T10:05:14+08:00">
-                2017-06-05
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-19T22:39:28+08:00">
+                2017-08-19
               </time>
             
 
@@ -970,12 +363,11 @@
 
       
         
-          <p>本文简单介绍ab、http_load、webbench、siege四种压力测试工具的使用。</p>
-<h1 id="ab"><a href="#ab" class="headerlink" title="ab"></a>ab</h1><p><code>ab</code> 是 <code>apache</code> 服务器自带的一个压力测试工具。安装<code>apache</code> web服务器时就自动安装了。当然，<code>ab</code>也是可以单独安装的，如果你不想安装<code>apache</code>而只是想安装<code>ab</code>，那么可以使用以下方式安装:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[root@yourdream ~]# yum install httpd-tools</div></pre></td></tr></table></figure></p>
-<p>安装完成之后即可使用<code>ab</code>进行测试了。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">[root@yourdream ~]# ab -h</div><div class="line">Usage: ab [options] [http[s]://]hostname[:port]/path</div><div class="line">Options are:</div><div class="line">    -n requests     Number of requests to perform</div><div class="line">    -c concurrency  Number of multiple requests to make</div><div class="line">    ....</div><div class="line">    -h              Display usage information (this message)</div></pre></td></tr></table></figure></p>
+          <p>记得当初刚接触学习 golang 的时候,当时使用还是 go 1.4版本,和其他语言的入门一样，写了一个简单的 hello world 程序。<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> main</div><div class="line"></div><div class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</div><div class="line">	fmt.Println(<span class="string">"Hello World!"</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>程序非常简单，整个源文件大小才 4KB。然后执行 go build 编译成可执行文件，结果让我非常惊讶的是这段简单的代码生成的可执行文件竟然有4M之多。<br>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/pressure-test-tools/#more" rel="contents">
+            <a class="btn" href="/compress-executables-with-upx/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1021,12 +413,12 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/js-pass-this-into-callback-function/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/reading-list/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="songgl">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/favicon.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1043,8 +435,8 @@
             
               
                 
-                <a class="post-title-link" href="/js-pass-this-into-callback-function/" itemprop="url">
-                  js 回调函数访问上下文 this 对象
+                <a class="post-title-link" href="/reading-list/" itemprop="url">
+                  读书清单(备忘)
                 </a>
               
             
@@ -1060,307 +452,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-27T18:10:14+08:00">
-                2017-05-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/notes/" itemprop="url" rel="index">
-                    <span itemprop="name">notes</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>在开发项目之中，使用到js ajax 同服务端进行数据交互。一般图方便直接使用<code>jquery</code>或者<code>axios</code>等已有的库。<br>一般代码如下:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//axios</span></div><div class="line">axios.get(<span class="string">'/url'</span>).then(<span class="function"><span class="keyword">function</span>(<span class="params">res</span>)</span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(res)</div><div class="line">&#125;)</div><div class="line"><span class="comment">//juqery</span></div><div class="line">$.get(<span class="string">'/url'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">res</span>)</span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(res)</div><div class="line">&#125;,<span class="string">'json'</span>)</div></pre></td></tr></table></figure></p>
-<p>那么经常这么使用的肯定会遇到一个场景，就是:在回调函数中如何访问上下文中的<code>this</code>对象?<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/js-pass-this-into-callback-function/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/mysql-bigint-out-of-range/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="songgl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Mr.song">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/mysql-bigint-out-of-range/" itemprop="url">
-                  mysql unsigned/int字段越界
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-22T10:41:39+08:00">
-                2017-05-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/mysql/" itemprop="url" rel="index">
-                    <span itemprop="name">mysql</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>线上的<code>MySQL</code>错误日志中遇到了以下问题<br><figure class="highlight vhdl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Data truncation: BIGINT <span class="built_in">UNSIGNED</span> value <span class="keyword">is</span> <span class="keyword">out</span> <span class="keyword">of</span> <span class="keyword">range</span> <span class="keyword">in</span> `(database.tablename.fieldname)`</div></pre></td></tr></table></figure></p>
-<p><code>MySQL</code>版本为:<br><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="section">mysql&gt; select version();</div><div class="line">+------------+</span></div><div class="line"><span class="section">| version()  |</div><div class="line">+------------+</span></div><div class="line"><span class="section">| 5.6.21-log |</div><div class="line">+------------+</span></div><div class="line">1 row in set (0.00 sec)</div></pre></td></tr></table></figure></p>
-<p>引起这个错误的原因是<code>sql</code>语句中对<code>unsigned</code>字段进行了递减操作的结果为负数导致的,<br><figure class="highlight n1ql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">update</span> <span class="keyword">database</span>.tablename <span class="keyword">set</span> fieldname=fieldname-num</div></pre></td></tr></table></figure></p>
-<p>而<code>MySQL</code>的模式是默认的<code>mode</code>:<br><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="section">mysql&gt; show variables like 'sql_mode';</div><div class="line">+---------------+------------------------+</span></div><div class="line"><span class="section">| Variable_name | Value                  |</div><div class="line">+---------------+------------------------+</span></div><div class="line"><span class="section">| sql_mode      | NO_ENGINE_SUBSTITUTION |</div><div class="line">+---------------+------------------------+</span></div><div class="line">1 row in set (0.00 sec)</div></pre></td></tr></table></figure></p>
-<p>解决方案有3种:<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/mysql-bigint-out-of-range/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/umount-device-when-its-buzy/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="songgl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Mr.song">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/umount-device-when-its-buzy/" itemprop="url">
-                  Linux强制卸载设备
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-12T11:04:07+08:00">
-                2017-05-12
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-19T22:08:27+08:00">
+                2017-08-19
               </time>
             
 
@@ -1419,12 +512,23 @@
       
         
           
-            <p>Linux下因为磁盘出问题而导致了<code>Input/output error</code>,所以准备先把有问题的磁盘卸载掉再重新挂上试试。</p>
-<p>执行<code>umount</code>:<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">[root@hostname ~]<span class="comment"># umount -n /dev/sdc1</span></div><div class="line">umount: /home/data: device <span class="keyword">is</span> busy.</div><div class="line">        (In <span class="keyword">some</span> cases useful info <span class="keyword">about</span> processes <span class="keyword">that</span> use</div><div class="line">         <span class="keyword">the</span> device <span class="keyword">is</span> found <span class="keyword">by</span> lsof(<span class="number">8</span>) <span class="keyword">or</span> fuser(<span class="number">1</span>))</div></pre></td></tr></table></figure></p>
-<p>显示设备正忙，所以执行<code>umount -nf</code>:<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">[root@hostname ~]<span class="comment"># umount -nf /dev/sdc1</span></div><div class="line">umount2: Device <span class="keyword">or</span> resource busy</div><div class="line">umount: /home/data: device <span class="keyword">is</span> busy.</div><div class="line">        (In <span class="keyword">some</span> cases useful info <span class="keyword">about</span> processes <span class="keyword">that</span> use</div><div class="line">         <span class="keyword">the</span> device <span class="keyword">is</span> found <span class="keyword">by</span> lsof(<span class="number">8</span>) <span class="keyword">or</span> fuser(<span class="number">1</span>))</div><div class="line">umount2: Device <span class="keyword">or</span> resource busy</div></pre></td></tr></table></figure></p>
-<p>还是无法卸载。</p>
-<p>根据给出的提示，使用<code>losf</code>或者<code>fuser</code>来找出那些进程正在使用该设备:<br><figure class="highlight gcode"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[root@yourdream ~]<span class="attr"># fuser -cu /dev/sdc1</span></div><div class="line">/dev/sdc<span class="number">1</span>:            <span class="number">2444</span>c<span class="comment">(root)</span>  <span class="number">2458</span>c<span class="comment">(root)</span>  <span class="number">3041</span>c<span class="comment">(mysql)</span></div><div class="line">[root@yourdream ~]<span class="attr"># fuser -cu /dev/sdc1</span></div></pre></td></tr></table></figure></p>
-<p>使用<code>c</code>指定挂载的文件系统，<code>u</code>显示使用者的id。可以看出三个进程正在使用，通过<code>ps</code>可以查到分别为<code>redis</code>和<code>mysql</code>正在使用。<br>因此，卸载之前停掉<code>redis</code>和<code>mysql</code>之后再次执行<code>umount</code>就能正常卸载了。</p>
+            <h2 id="2017读书清单"><a href="#2017读书清单" class="headerlink" title="2017读书清单"></a>2017读书清单</h2><h3 id="进行中-amp-计划中"><a href="#进行中-amp-计划中" class="headerlink" title="进行中&amp;计划中"></a>进行中&amp;计划中</h3><ul>
+<li>《Go并发编程实战》 –郝林</li>
+<li>《App 后台开发运维和架构实践》–曾健生</li>
+<li>《重构–改善既有代码的设计》 – 中文版</li>
+<li>《高性能网站架构实战》 – 刘鑫</li>
+<li>《构建高性能Web站点》 – 郭欣</li>
+<li>《设计模式之禅》 – 秦小波</li>
+<li>《go In Action》（Go语言实战）–中文版</li>
+<li>《the way to go》（go语言程序设计）–中文版</li>
+<li>《build-web-application-with-golang》–github<br>….</li>
+</ul>
+<h3 id="已读"><a href="#已读" class="headerlink" title="已读"></a>已读</h3><ul>
+<li>《Go语言编程》 – 许式伟</li>
+<li>《Go语言最佳实践》– pdf</li>
+<li>《深入理解PHP内核》– php-internal.com</li>
+</ul>
+<p>^_^ 任务艰巨~~~~</p>
 
           
         
@@ -1468,12 +572,12 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/i-love-vim/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/use-bitwise-and-judge-even-odd/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="songgl">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/favicon.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1490,8 +594,8 @@
             
               
                 
-                <a class="post-title-link" href="/i-love-vim/" itemprop="url">
-                  I-love-vim
+                <a class="post-title-link" href="/use-bitwise-and-judge-even-odd/" itemprop="url">
+                  使用 & 代替 % 来判断整数奇偶性
                 </a>
               
             
@@ -1507,8 +611,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-07T22:08:15+08:00">
-                2017-05-07
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-08T10:29:06+08:00">
+                2017-08-08
               </time>
             
 
@@ -1530,8 +634,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/tools/" itemprop="url" rel="index">
-                    <span itemprop="name">tools</span>
+                  <a href="/categories/notes/" itemprop="url" rel="index">
+                    <span itemprop="name">notes</span>
                   </a>
                 </span>
 
@@ -1567,21 +671,12 @@
       
         
           
-            <p>个人是一个<code>vi</code>重度使用者，所以尽可能的会希望所使用的工具中都能支持<code>vim</code>来方便操作。</p>
-<ul>
-<li>chrome浏览器支持 <code>vim</code>操作: Vimium 扩展</li>
-<li>atom 编辑器: vim-mode、vim-mode-plus</li>
-<li>sublime text: 天然支持，配置中<code>ignored_packages</code> 置为空<code>[]</code>即可</li>
-<li>idea 编辑器：<code>vim</code> 插件用来编辑文件内容，还有一个和<code>Vimium</code>相似的插件(名称遗忘,自己未使用)，以和<code>Vimium</code>相同的方式操作<code>idea</code>的各种菜单</li>
-<li>command line: 大部分天然支持<code>vim</code>编辑模式 (非 <code>windows</code> 系统),自行给<code>vim</code>安装了一些插件，打造成了一个命令行的<code>golang</code>的<code>IDE</code><ul>
-<li>目录：<code>scrooloose/nerdtree</code></li>
-<li>目录git状态：<code>Xuyuanp/nerdtree-git-plugin</code></li>
-<li>自动完成：<code>Shougo/neocomplete</code></li>
-<li>go相关格式等工具：<code>fatih/vim-go</code></li>
-</ul>
-</li>
-</ul>
-<p>最后，附上一张命令行<code>IDE</code>效果图:<br><img src="/images/vim.png" alt="vim-ide"></p>
+            <p>一般情况下，判断整数的奇偶性都会使用取模预算， 性能方面没有测试，但是由于机器可以直接操作二进制，应该会比较快，不过这点性能提升一般情况下对整体性能的影响不大，可以忽略不计。<br><figure class="highlight xquery"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> num<span class="meta">%2</span>==<span class="number">0</span> &#123;</div><div class="line">	fmt.Println(<span class="string">"even"</span>)</div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">	fmt.Println(<span class="string">"odd"</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>不过，还有一种方式也是类似，使用 按位与 来判断整数奇偶性：<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> num&amp;<span class="number">1</span>==<span class="number">0</span> &#123;</div><div class="line">	fmt.<span class="keyword">Println</span>(<span class="string">"even"</span>)</div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">	fmt.<span class="keyword">Println</span>(<span class="string">"odd"</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>也能达到相同的效果。</p>
+<p>类似的，使用二进制运算也可以进行乘除法的运算:<br>乘法左移：<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//a = a * 4</span></div><div class="line"><span class="selector-tag">a</span> = <span class="selector-tag">a</span> &lt;&lt; <span class="number">2</span></div><div class="line"></div><div class="line"><span class="comment">//b = b * 8</span></div><div class="line"><span class="selector-tag">b</span> = <span class="selector-tag">b</span> &lt;&lt; <span class="number">3</span></div></pre></td></tr></table></figure></p>
+<p>除法右移：<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//a = a / 4</span></div><div class="line"><span class="selector-tag">a</span> = <span class="selector-tag">a</span> &gt;&gt; <span class="number">2</span></div><div class="line"></div><div class="line"><span class="comment">//b = b / 8</span></div><div class="line"><span class="selector-tag">b</span> = <span class="selector-tag">b</span> &gt;&gt; <span class="number">3</span></div></pre></td></tr></table></figure></p>
+<p>这些都是一些二进制运算的技巧，记下备忘。</p>
 
           
         
@@ -1625,12 +720,12 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/python-dbm/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/php-vld/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="songgl">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/favicon.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1647,8 +742,8 @@
             
               
                 
-                <a class="post-title-link" href="/python-dbm/" itemprop="url">
-                  dbm--python的一个简易K-V数据库
+                <a class="post-title-link" href="/php-vld/" itemprop="url">
+                  阅读 php 源码，使用 vld 扩展查看 opcode
                 </a>
               
             
@@ -1664,8 +759,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-07T21:46:13+08:00">
-                2017-05-07
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-03T10:12:44+08:00">
+                2017-08-03
               </time>
             
 
@@ -1687,8 +782,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
+                  <a href="/categories/php/" itemprop="url" rel="index">
+                    <span itemprop="name">php</span>
                   </a>
                 </span>
 
@@ -1723,14 +818,168 @@
 
       
         
-          
-            <p>在一些小型简单的<code>python</code>程序中,不需要(不想)引入庞大的关系型数据库或者其他大型的非关系型数据库(NoSql)时，<code>dbm</code>模块是一个非常不错的选择。<br>不过在使用的时候需要注意的是，它要求<code>key</code>,<code>value</code>均为字符串类型。<br>可以对其进行一个简单的封装，便于使用。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env python</span></div><div class="line"><span class="comment"># -*- coding: utf-8 -*-</span></div><div class="line"><span class="keyword">import</span> dbm</div><div class="line"><span class="keyword">from</span> models.Config.Config <span class="keyword">import</span> Config</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">DBM</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div><div class="line">        self._db = dbm.open(Config.parse_config(<span class="string">'dbm'</span>, <span class="string">'dbfile'</span>), <span class="string">'c'</span>)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">set</span><span class="params">(self, key, value)</span>:</span></div><div class="line">        self._db[key] = str(value)</div><div class="line">        <span class="keyword">return</span> self</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">del</span><span class="params">(self, key)</span>:</span></div><div class="line">        <span class="keyword">if</span> key <span class="keyword">in</span> self._db.keys():</div><div class="line">            <span class="keyword">del</span> self._db[key]</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get</span><span class="params">(self, key)</span>:</span></div><div class="line">        <span class="keyword">if</span> key <span class="keyword">in</span> self._db.keys():</div><div class="line">            <span class="keyword">return</span> self._db[key]</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            <span class="keyword">return</span> <span class="keyword">None</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__del__</span><span class="params">(self)</span>:</span></div><div class="line">        self._db.close()</div></pre></td></tr></table></figure></p>
-<blockquote>
-<p>Config 是自己封装的一个简易的配置文件解析的类，负责从<code>ini</code>文件中读取指定的配置</p>
-</blockquote>
-<p><code>dbm</code> 的 <code>api</code> 非常简单，<code>set</code>、<code>del</code>、<code>keys</code>，其数据结构和字典非常相似，可以在小型项目中来当做简易的K/V数据库来使用。</p>
+          <p>php 虽然是一门动态语言，但是它也有一个编译的过程，这个过程经过词法分析、语法分析,最终生成 Zend 引擎可以执行的 opcode 指令，类似于 java 的字节码。</p>
+<p>要查看一段代码对应的 opcode ，可以使用 <a href="http://pecl.php.net/package/vld/">vld 扩展</a> 来查看。</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>安装 vld 和安装 php 其他的扩展没有任何区别，下载源码、编译、安装等…<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">tar zxf vld<span class="number">-0.14</span><span class="number">.0</span>.tar.gz</div><div class="line">cd vld<span class="number">-0.14</span><span class="number">.0</span></div><div class="line">phpize</div><div class="line">./configure</div><div class="line">make</div><div class="line">make install</div></pre></td></tr></table></figure></p>
+<p>记得要修改 php.ini 启用 vld 扩展:<br><figure class="highlight ini"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="section">[vld]</span></div><div class="line"><span class="attr">extensions</span>=vld.so</div></pre></td></tr></table></figure></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/php-vld/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/ctags/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="songgl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/favicon.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mr.song">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/ctags/" itemprop="url">
+                  阅读 php 源码，ctags 配合 vim 实现代码跳转
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-01T16:40:05+08:00">
+                2017-08-01
+              </time>
+            
+
+            
+
+            
+          </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/php/" itemprop="url" rel="index">
+                    <span itemprop="name">php</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>在阅读 php 源码的时候，为了方便跳转到相应的函数定义的位置，需要使用 ctags 来生成 tags 文件，再配合 vim 来实现跳转。</p>
+<h2 id="安装-ctags"><a href="#安装-ctags" class="headerlink" title="安装 ctags"></a>安装 ctags</h2><p>macOS 上使用 ctags 非常简单，一般都预装了 ctags 。</p>
+<p>如果没有安装，可以使用 <code>brew install ctags</code> 来安装。</p>
+<h2 id="tags-文件"><a href="#tags-文件" class="headerlink" title="tags 文件"></a>tags 文件</h2><p>在 php 源码根目录，执行 <code>ctags -R</code>, 就会在当前目录下生成一个名为 <code>tags</code> 的 文件。 </p>
+<figure class="highlight livescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">~/codes/php-src(master*) » tail -n <span class="number">20</span> tags                                                                                                                                       </div><div class="line">zval_marked_grey	Zend<span class="regexp">/zend_gc.h	/</span>^	uint32_t zval_marked_grey;$/;<span class="string">"	m	struct:_zend_gc_globals</div><div class="line">zval_object_property_dump	ext/standard/var.c	/^static void zval_object_property_dump(zval *zv, zend_ulong index, zend_string *key, int level) \/* &#123;&#123;&#123; *\/$/;"</span>	f	file:</div><div class="line">zval_opt_copy_ctor	Zend<span class="regexp">/zend_variables.h	/</span>^<span class="comment">#define zval_opt_copy_ctor(/;"	d</span></div><div class="line">zval_possible_root	Zend<span class="regexp">/zend_gc.h	/</span>^	uint32_t zval_possible_root;$/;<span class="string">"	m	struct:_zend_gc_globals</div><div class="line">zval_ptr_dtor	Zend/zend_execute.c	/^<span class="subst">#define</span> zval_ptr_dtor(/;"</span>	d	file:</div><div class="line">zval_ptr_dtor	Zend<span class="regexp">/zend_execute.c	/</span>^<span class="comment">#undef zval_ptr_dtor$/;"	d	file:</span></div><div class="line">zval_ptr_dtor	Zend<span class="regexp">/zend_variables.h	/</span>^<span class="comment">#define zval_ptr_dtor(/;"	d</span></div><div class="line">zval_ptr_dtor_nogc	Zend<span class="regexp">/zend_variables.h	/</span>^<span class="comment">#define zval_ptr_dtor_nogc(/;"	d</span></div><div class="line">zval_ptr_dtor_wrapper	Zend<span class="regexp">/zend_variables.h	/</span>^<span class="comment">#define zval_ptr_dtor_wrapper /;"	d</span></div></pre></td></tr></table></figure>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/ctags/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1767,7 +1016,7 @@
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1800,7 +1049,7 @@
       <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
-               src="/images/avatar.gif"
+               src="/images/favicon.png"
                alt="songgl" />
           <p class="site-author-name" itemprop="name">songgl</p>
            
@@ -1812,7 +1061,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-count">26</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -1823,7 +1072,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -1834,7 +1083,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">34</span>
+                <span class="site-state-item-count">44</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
