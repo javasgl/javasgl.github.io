@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-08-19T15:23:24.000Z</updated>
+  <updated>2017-08-19T16:00:30.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,48 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Chrome 非安全端口限制</title>
+    <link href="http://yoursite.com/chrome-unsafe-port-err/"/>
+    <id>http://yoursite.com/chrome-unsafe-port-err/</id>
+    <published>2017-08-19T15:30:32.000Z</published>
+    <updated>2017-08-19T16:00:30.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>在 beego 群里，有同学问了一个看似比较的简单的问题。问题是这样的: 一个beego web项目，将项目的端口号从默认的 8080 改为 6666 之后通过 Chrome 浏览器无法访问，但是通过其他浏览器却可以访问。</p>
+<p>但是并未在意，认为这可能是chrome浏览器或者系统不小心配置了代理导致的，后来我自己在本机上也实验以下，将应用端口改为 6666 之后，通过 Chrome 浏览器也无法访问。报错信息如下:<br><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">This site can’t be reached</div><div class="line"></div><div class="line">The webpage <span class="keyword">at</span> <span class="keyword">http</span>://localhost:<span class="number">6666</span>/ might be temporarily down <span class="keyword">or</span> <span class="keyword">it</span> may have moved permanently <span class="built_in">to</span> <span class="keyword">a</span> <span class="built_in">new</span> web address.</div><div class="line">ERR_UNSAFE_PORT</div></pre></td></tr></table></figure></p>
+<p>报错信息中提到了 <code>ERR_UNSAFE_PORT</code>。</p>
+<p>解决方案：<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="regexp">/Applications/</span>Google Chrome.app<span class="regexp">/Contents/</span>MacOS<span class="regexp">/Google Chrome --explicitly-allowed-ports=6666,8888</span></div></pre></td></tr></table></figure></p>
+<p>或者换端口，避开Chrome的非安全端口限制。<br>参考资料：</p>
+<ul>
+<li><a href="https://jazzy.id.au/2012/08/23/why_does_chrome_consider_some_ports_unsafe.html" target="_blank" rel="external">https://jazzy.id.au/2012/08/23/why_does_chrome_consider_some_ports_unsafe.html</a></li>
+<li><a href="https://support.google.com/chrome/forum/AAAAP1KN0B0l5d-nXEjLMM?hl=en" target="_blank" rel="external">https://support.google.com/chrome/forum/AAAAP1KN0B0l5d-nXEjLMM?hl=en</a><a id="more"></a>
+Chrome 非安全端口列表如下：<figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div></pre></td><td class="code"><pre><div class="line"><span class="number">1</span>,    <span class="comment">// tcpmux</span></div><div class="line"><span class="number">7</span>,    <span class="comment">// echo</span></div><div class="line"><span class="number">9</span>,    <span class="comment">// discard</span></div><div class="line"><span class="number">11</span>,   <span class="comment">// systat</span></div><div class="line"><span class="number">13</span>,   <span class="comment">// daytime</span></div><div class="line"><span class="number">15</span>,   <span class="comment">// netstat</span></div><div class="line"><span class="number">17</span>,   <span class="comment">// qotd</span></div><div class="line"><span class="number">19</span>,   <span class="comment">// chargen</span></div><div class="line"><span class="number">20</span>,   <span class="comment">// ftp data</span></div><div class="line"><span class="number">21</span>,   <span class="comment">// ftp access</span></div><div class="line"><span class="number">22</span>,   <span class="comment">// ssh</span></div><div class="line"><span class="number">23</span>,   <span class="comment">// telnet</span></div><div class="line"><span class="number">25</span>,   <span class="comment">// smtp</span></div><div class="line"><span class="number">37</span>,   <span class="comment">// time</span></div><div class="line"><span class="number">42</span>,   <span class="comment">// name</span></div><div class="line"><span class="number">43</span>,   <span class="comment">// nicname</span></div><div class="line"><span class="number">53</span>,   <span class="comment">// domain</span></div><div class="line"><span class="number">77</span>,   <span class="comment">// priv-rjs</span></div><div class="line"><span class="number">79</span>,   <span class="comment">// finger</span></div><div class="line"><span class="number">87</span>,   <span class="comment">// ttylink</span></div><div class="line"><span class="number">95</span>,   <span class="comment">// supdup</span></div><div class="line"><span class="number">101</span>,  <span class="comment">// hostriame</span></div><div class="line"><span class="number">102</span>,  <span class="comment">// iso-tsap</span></div><div class="line"><span class="number">103</span>,  <span class="comment">// gppitnp</span></div><div class="line"><span class="number">104</span>,  <span class="comment">// acr-nema</span></div><div class="line"><span class="number">109</span>,  <span class="comment">// pop2</span></div><div class="line"><span class="number">110</span>,  <span class="comment">// pop3</span></div><div class="line"><span class="number">111</span>,  <span class="comment">// sunrpc</span></div><div class="line"><span class="number">113</span>,  <span class="comment">// auth</span></div><div class="line"><span class="number">115</span>,  <span class="comment">// sftp</span></div><div class="line"><span class="number">117</span>,  <span class="comment">// uucp-path</span></div><div class="line"><span class="number">119</span>,  <span class="comment">// nntp</span></div><div class="line"><span class="number">123</span>,  <span class="comment">// NTP</span></div><div class="line"><span class="number">135</span>,  <span class="comment">// loc-srv /epmap</span></div><div class="line"><span class="number">139</span>,  <span class="comment">// netbios</span></div><div class="line"><span class="number">143</span>,  <span class="comment">// imap2</span></div><div class="line"><span class="number">179</span>,  <span class="comment">// BGP</span></div><div class="line"><span class="number">389</span>,  <span class="comment">// ldap</span></div><div class="line"><span class="number">465</span>,  <span class="comment">// smtp+ssl</span></div><div class="line"><span class="number">512</span>,  <span class="comment">// print / exec</span></div><div class="line"><span class="number">513</span>,  <span class="comment">// login</span></div><div class="line"><span class="number">514</span>,  <span class="comment">// shell</span></div><div class="line"><span class="number">515</span>,  <span class="comment">// printer</span></div><div class="line"><span class="number">526</span>,  <span class="comment">// tempo</span></div><div class="line"><span class="number">530</span>,  <span class="comment">// courier</span></div><div class="line"><span class="number">531</span>,  <span class="comment">// chat</span></div><div class="line"><span class="number">532</span>,  <span class="comment">// netnews</span></div><div class="line"><span class="number">540</span>,  <span class="comment">// uucp</span></div><div class="line"><span class="number">556</span>,  <span class="comment">// remotefs</span></div><div class="line"><span class="number">563</span>,  <span class="comment">// nntp+ssl</span></div><div class="line"><span class="number">587</span>,  <span class="comment">// stmp?</span></div><div class="line"><span class="number">601</span>,  <span class="comment">// ??</span></div><div class="line"><span class="number">636</span>,  <span class="comment">// ldap+ssl</span></div><div class="line"><span class="number">993</span>,  <span class="comment">// ldap+ssl</span></div><div class="line"><span class="number">995</span>,  <span class="comment">// pop3+ssl</span></div><div class="line"><span class="number">2049</span>, <span class="comment">// nfs</span></div><div class="line"><span class="number">3659</span>, <span class="comment">// apple-sasl / PasswordServer</span></div><div class="line"><span class="number">4045</span>, <span class="comment">// lockd</span></div><div class="line"><span class="number">6000</span>, <span class="comment">// X11</span></div><div class="line"><span class="number">6665</span>, <span class="comment">// Alternate IRC [Apple addition]</span></div><div class="line"><span class="number">6666</span>, <span class="comment">// Alternate IRC [Apple addition]</span></div><div class="line"><span class="number">6667</span>, <span class="comment">// Standard IRC [Apple addition]</span></div><div class="line"><span class="number">6668</span>, <span class="comment">// Alternate IRC [Apple addition]</span></div><div class="line"><span class="number">6669</span>, <span class="comment">// Alternate IRC [Apple addition]</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在 beego 群里，有同学问了一个看似比较的简单的问题。问题是这样的: 一个beego web项目，将项目的端口号从默认的 8080 改为 6666 之后通过 Chrome 浏览器无法访问，但是通过其他浏览器却可以访问。&lt;/p&gt;
+&lt;p&gt;但是并未在意，认为这可能是chrome浏览器或者系统不小心配置了代理导致的，后来我自己在本机上也实验以下，将应用端口改为 6666 之后，通过 Chrome 浏览器也无法访问。报错信息如下:&lt;br&gt;&lt;figure class=&quot;highlight livecodeserver&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;This site can’t be reached&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;The webpage &lt;span class=&quot;keyword&quot;&gt;at&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;http&lt;/span&gt;://localhost:&lt;span class=&quot;number&quot;&gt;6666&lt;/span&gt;/ might be temporarily down &lt;span class=&quot;keyword&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;it&lt;/span&gt; may have moved permanently &lt;span class=&quot;built_in&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;built_in&quot;&gt;new&lt;/span&gt; web address.&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;ERR_UNSAFE_PORT&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;报错信息中提到了 &lt;code&gt;ERR_UNSAFE_PORT&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;解决方案：&lt;br&gt;&lt;figure class=&quot;highlight awk&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;regexp&quot;&gt;/Applications/&lt;/span&gt;Google Chrome.app&lt;span class=&quot;regexp&quot;&gt;/Contents/&lt;/span&gt;MacOS&lt;span class=&quot;regexp&quot;&gt;/Google Chrome --explicitly-allowed-ports=6666,8888&lt;/span&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;或者换端口，避开Chrome的非安全端口限制。&lt;br&gt;参考资料：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://jazzy.id.au/2012/08/23/why_does_chrome_consider_some_ports_unsafe.html&quot;&gt;https://jazzy.id.au/2012/08/23/why_does_chrome_consider_some_ports_unsafe.html&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://support.google.com/chrome/forum/AAAAP1KN0B0l5d-nXEjLMM?hl=en&quot;&gt;https://support.google.com/chrome/forum/AAAAP1KN0B0l5d-nXEjLMM?hl=en&lt;/a&gt;
+    
+    </summary>
+    
+      <category term="notes" scheme="http://yoursite.com/categories/notes/"/>
+    
+    
+      <category term="chrome" scheme="http://yoursite.com/tags/chrome/"/>
+    
+      <category term="network" scheme="http://yoursite.com/tags/network/"/>
+    
+  </entry>
   
   <entry>
     <title>使用upx压缩可执行文件</title>
@@ -272,9 +314,9 @@
       <category term="go" scheme="http://yoursite.com/categories/go/"/>
     
     
-      <category term="go" scheme="http://yoursite.com/tags/go/"/>
-    
       <category term="glide" scheme="http://yoursite.com/tags/glide/"/>
+    
+      <category term="go" scheme="http://yoursite.com/tags/go/"/>
     
   </entry>
   
@@ -826,42 +868,6 @@
       <category term="Alfred" scheme="http://yoursite.com/tags/Alfred/"/>
     
       <category term="workflow" scheme="http://yoursite.com/tags/workflow/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>解决MacOS Sierra 升级后原有的ssh private key无法通过验证</title>
-    <link href="http://yoursite.com/MacOS-Sierra-ssh-config/"/>
-    <id>http://yoursite.com/MacOS-Sierra-ssh-config/</id>
-    <published>2017-03-19T05:36:32.000Z</published>
-    <updated>2017-03-19T06:14:42.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>周末正好有空,就准备把<code>mac pro</code> 升级到最新的<code>sierra</code>版本，毕竟已经落后于<code>apple</code>官方两个比较大的版本了。</p>
-<p>升级过程很简单，也很顺利。直接通过<code>appstore</code>上在线更新即可，下载完成之后安装向导步骤完成即可。</p>
-<p>直到….我发现公司测试环境<code>502</code>之后，想要登陆到机器上去处理一下的时候，我的<code>ssh key</code>竟然毫无征兆的被deny了！升级之前能登陆服务器，升级之后无法登陆。</p>
-<a id="more"></a>
-<p>问了其他同事，跳板机能正常登陆的，排除了机房出问题的可能性。那就说明这是本地的<code>ssh agent</code>升级后出问题了。</p>
-<p>同时，我也试了下<code>github</code>的<code>key</code>是否也不能使用。结果正如我所料:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">ssh -v github.com</div><div class="line">.....</div><div class="line">.....</div><div class="line">debug1: Skipping ssh-dss key xxxx/xxxx/xxx/ - not in PubkeyAcceptedKeyTypes</div><div class="line">.....</div><div class="line"><span class="function">Permission <span class="title">denied</span> <span class="params">(publickey)</span>.</span></div></pre></td></tr></table></figure></p>
-<p>更加证实了我的想法: <code>这是Mac升级后导致的</code><br>后来 <code>google</code> 发现这个问题很正常，很多人都在升级后遇到了这个问题。同时也暂时采用了临时方案：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Host <span class="string">"github.com"</span></div><div class="line">    User <span class="string">"git"</span></div><div class="line">    IdentityFile <span class="string">"/xxx/xxxx/xxx"</span></div><div class="line">    PubkeyAcceptedKeyTypes=+ssh-dss</div></pre></td></tr></table></figure></p>
-<p>在<code>.ssh/config</code> 中添加了 <code>PubkeyAcceptedKeyTypes=+ssh-dss</code> 配置，让 ssh 接受 <code>dsa</code> 类型的<code>key</code>。</p>
-<p>最终方案应该是采用更加安全的 <code>RSA</code> 算法来生成 <code>key</code>，长度为 <code>2048</code>的 <code>RSA</code>。<code>1024</code>长度的<code>RSA</code>已经有被暴力破解成功的记录了，所以建议采用 <code>2048</code> 长度<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh-keygen -t rsa -b <span class="number">2048</span> -C <span class="string">"new key"</span></div></pre></td></tr></table></figure></p>
-<p>当然，采用 <code>ecdsa</code> 更好，不过考虑到<code>Openssl</code>的兼容问题，在<code>ecdsa</code>未完全通用的情况下还是使用<code>RSA</code>比较好。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;周末正好有空,就准备把&lt;code&gt;mac pro&lt;/code&gt; 升级到最新的&lt;code&gt;sierra&lt;/code&gt;版本，毕竟已经落后于&lt;code&gt;apple&lt;/code&gt;官方两个比较大的版本了。&lt;/p&gt;
-&lt;p&gt;升级过程很简单，也很顺利。直接通过&lt;code&gt;appstore&lt;/code&gt;上在线更新即可，下载完成之后安装向导步骤完成即可。&lt;/p&gt;
-&lt;p&gt;直到….我发现公司测试环境&lt;code&gt;502&lt;/code&gt;之后，想要登陆到机器上去处理一下的时候，我的&lt;code&gt;ssh key&lt;/code&gt;竟然毫无征兆的被deny了！升级之前能登陆服务器，升级之后无法登陆。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="os" scheme="http://yoursite.com/categories/os/"/>
-    
-    
-      <category term="mac" scheme="http://yoursite.com/tags/mac/"/>
-    
-      <category term="ssh" scheme="http://yoursite.com/tags/ssh/"/>
     
   </entry>
   

@@ -265,6 +265,160 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/chrome-unsafe-port-err/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="songgl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/favicon.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mr.song">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/chrome-unsafe-port-err/" itemprop="url">
+                  Chrome 非安全端口限制
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-19T23:30:32+08:00">
+                2017-08-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/notes/" itemprop="url" rel="index">
+                    <span itemprop="name">notes</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>在 beego 群里，有同学问了一个看似比较的简单的问题。问题是这样的: 一个beego web项目，将项目的端口号从默认的 8080 改为 6666 之后通过 Chrome 浏览器无法访问，但是通过其他浏览器却可以访问。</p>
+<p>但是并未在意，认为这可能是chrome浏览器或者系统不小心配置了代理导致的，后来我自己在本机上也实验以下，将应用端口改为 6666 之后，通过 Chrome 浏览器也无法访问。报错信息如下:<br><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">This site can’t be reached</div><div class="line"></div><div class="line">The webpage <span class="keyword">at</span> <span class="keyword">http</span>://localhost:<span class="number">6666</span>/ might be temporarily down <span class="keyword">or</span> <span class="keyword">it</span> may have moved permanently <span class="built_in">to</span> <span class="keyword">a</span> <span class="built_in">new</span> web address.</div><div class="line">ERR_UNSAFE_PORT</div></pre></td></tr></table></figure></p>
+<p>报错信息中提到了 <code>ERR_UNSAFE_PORT</code>。</p>
+<p>解决方案：<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="regexp">/Applications/</span>Google Chrome.app<span class="regexp">/Contents/</span>MacOS<span class="regexp">/Google Chrome --explicitly-allowed-ports=6666,8888</span></div></pre></td></tr></table></figure></p>
+<p>或者换端口，避开Chrome的非安全端口限制。<br>参考资料：</p>
+<ul>
+<li><a href="https://jazzy.id.au/2012/08/23/why_does_chrome_consider_some_ports_unsafe.html">https://jazzy.id.au/2012/08/23/why_does_chrome_consider_some_ports_unsafe.html</a></li>
+<li><a href="https://support.google.com/chrome/forum/AAAAP1KN0B0l5d-nXEjLMM?hl=en">https://support.google.com/chrome/forum/AAAAP1KN0B0l5d-nXEjLMM?hl=en</a>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/chrome-unsafe-port-err/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/compress-executables-with-upx/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -861,157 +1015,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/ctags/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="songgl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/favicon.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Mr.song">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/ctags/" itemprop="url">
-                  阅读 php 源码，ctags 配合 vim 实现代码跳转
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-01T16:40:05+08:00">
-                2017-08-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/php/" itemprop="url" rel="index">
-                    <span itemprop="name">php</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>在阅读 php 源码的时候，为了方便跳转到相应的函数定义的位置，需要使用 ctags 来生成 tags 文件，再配合 vim 来实现跳转。</p>
-<h2 id="安装-ctags"><a href="#安装-ctags" class="headerlink" title="安装 ctags"></a>安装 ctags</h2><p>macOS 上使用 ctags 非常简单，一般都预装了 ctags 。</p>
-<p>如果没有安装，可以使用 <code>brew install ctags</code> 来安装。</p>
-<h2 id="tags-文件"><a href="#tags-文件" class="headerlink" title="tags 文件"></a>tags 文件</h2><p>在 php 源码根目录，执行 <code>ctags -R</code>, 就会在当前目录下生成一个名为 <code>tags</code> 的 文件。 </p>
-<figure class="highlight livescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">~/codes/php-src(master*) » tail -n <span class="number">20</span> tags                                                                                                                                       </div><div class="line">zval_marked_grey	Zend<span class="regexp">/zend_gc.h	/</span>^	uint32_t zval_marked_grey;$/;<span class="string">"	m	struct:_zend_gc_globals</div><div class="line">zval_object_property_dump	ext/standard/var.c	/^static void zval_object_property_dump(zval *zv, zend_ulong index, zend_string *key, int level) \/* &#123;&#123;&#123; *\/$/;"</span>	f	file:</div><div class="line">zval_opt_copy_ctor	Zend<span class="regexp">/zend_variables.h	/</span>^<span class="comment">#define zval_opt_copy_ctor(/;"	d</span></div><div class="line">zval_possible_root	Zend<span class="regexp">/zend_gc.h	/</span>^	uint32_t zval_possible_root;$/;<span class="string">"	m	struct:_zend_gc_globals</div><div class="line">zval_ptr_dtor	Zend/zend_execute.c	/^<span class="subst">#define</span> zval_ptr_dtor(/;"</span>	d	file:</div><div class="line">zval_ptr_dtor	Zend<span class="regexp">/zend_execute.c	/</span>^<span class="comment">#undef zval_ptr_dtor$/;"	d	file:</span></div><div class="line">zval_ptr_dtor	Zend<span class="regexp">/zend_variables.h	/</span>^<span class="comment">#define zval_ptr_dtor(/;"	d</span></div><div class="line">zval_ptr_dtor_nogc	Zend<span class="regexp">/zend_variables.h	/</span>^<span class="comment">#define zval_ptr_dtor_nogc(/;"	d</span></div><div class="line">zval_ptr_dtor_wrapper	Zend<span class="regexp">/zend_variables.h	/</span>^<span class="comment">#define zval_ptr_dtor_wrapper /;"	d</span></div></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/ctags/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1061,7 +1064,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">26</span>
+                <span class="site-state-item-count">27</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -1083,7 +1086,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">44</span>
+                <span class="site-state-item-count">46</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
