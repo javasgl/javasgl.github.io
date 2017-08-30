@@ -238,9 +238,43 @@
       
 
       
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
     </ul>
   
 
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocapitalize="off" autocomplete="off" autocorrect="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
   
 </nav>
 
@@ -265,7 +299,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/pressure-test-tools/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/php-vld/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="songgl">
@@ -287,8 +321,8 @@
             
               
                 
-                <a class="post-title-link" href="/pressure-test-tools/" itemprop="url">
-                  压力测试工具ab、webbench、http_load、siege简单使用
+                <a class="post-title-link" href="/php-vld/" itemprop="url">
+                  阅读 php 源码，使用 vld 扩展查看 opcode
                 </a>
               
             
@@ -304,8 +338,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-05T10:05:14+08:00">
-                2017-06-05
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-03T10:12:44+08:00">
+                2017-08-03
               </time>
             
 
@@ -327,8 +361,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/tools/" itemprop="url" rel="index">
-                    <span itemprop="name">tools</span>
+                  <a href="/categories/php/" itemprop="url" rel="index">
+                    <span itemprop="name">php</span>
                   </a>
                 </span>
 
@@ -340,9 +374,32 @@
 
           
             
+            <!--noindex-->
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/php-vld/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="php-vld/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+              <!--/noindex-->
+            
           
 
           
+          
+             <span id="/php-vld/" class="leancloud_visitors" data-flag-title="阅读 php 源码，使用 vld 扩展查看 opcode">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
           
 
           
@@ -363,12 +420,13 @@
 
       
         
-          <p>本文简单介绍ab、http_load、webbench、siege四种压力测试工具的使用。</p>
-<h1 id="ab"><a href="#ab" class="headerlink" title="ab"></a>ab</h1><p><code>ab</code> 是 <code>apache</code> 服务器自带的一个压力测试工具。安装<code>apache</code> web服务器时就自动安装了。当然，<code>ab</code>也是可以单独安装的，如果你不想安装<code>apache</code>而只是想安装<code>ab</code>，那么可以使用以下方式安装:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[root@yourdream ~]# yum install httpd-tools</div></pre></td></tr></table></figure></p>
-<p>安装完成之后即可使用<code>ab</code>进行测试了。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">[root@yourdream ~]# ab -h</div><div class="line">Usage: ab [options] [http[s]://]hostname[:port]/path</div><div class="line">Options are:</div><div class="line">    -n requests     Number of requests to perform</div><div class="line">    -c concurrency  Number of multiple requests to make</div><div class="line">    ....</div><div class="line">    -h              Display usage information (this message)</div></pre></td></tr></table></figure></p>
+          <p>php 虽然是一门动态语言，但是它也有一个编译的过程，这个过程经过词法分析、语法分析,最终生成 Zend 引擎可以执行的 opcode 指令，类似于 java 的字节码。</p>
+<p>要查看一段代码对应的 opcode ，可以使用 <a href="http://pecl.php.net/package/vld/">vld 扩展</a> 来查看。</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>安装 vld 和安装 php 其他的扩展没有任何区别，下载源码、编译、安装等…<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">tar zxf vld<span class="number">-0.14</span><span class="number">.0</span>.tar.gz</div><div class="line">cd vld<span class="number">-0.14</span><span class="number">.0</span></div><div class="line">phpize</div><div class="line">./configure</div><div class="line">make</div><div class="line">make install</div></pre></td></tr></table></figure></p>
+<p>记得要修改 php.ini 启用 vld 扩展:<br><figure class="highlight ini"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="section">[vld]</span></div><div class="line"><span class="attr">extensions</span>=vld.so</div></pre></td></tr></table></figure></p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/pressure-test-tools/#more" rel="contents">
+            <a class="btn" href="/php-vld/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -414,7 +472,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/js-pass-this-into-callback-function/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/ctags/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="songgl">
@@ -436,8 +494,8 @@
             
               
                 
-                <a class="post-title-link" href="/js-pass-this-into-callback-function/" itemprop="url">
-                  js 回调函数访问上下文 this 对象
+                <a class="post-title-link" href="/ctags/" itemprop="url">
+                  阅读 php 源码，ctags 配合 vim 实现代码跳转
                 </a>
               
             
@@ -453,8 +511,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-27T18:10:14+08:00">
-                2017-05-27
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-01T16:40:05+08:00">
+                2017-08-01
               </time>
             
 
@@ -476,8 +534,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/notes/" itemprop="url" rel="index">
-                    <span itemprop="name">notes</span>
+                  <a href="/categories/php/" itemprop="url" rel="index">
+                    <span itemprop="name">php</span>
                   </a>
                 </span>
 
@@ -489,9 +547,32 @@
 
           
             
+            <!--noindex-->
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/ctags/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="ctags/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+              <!--/noindex-->
+            
           
 
           
+          
+             <span id="/ctags/" class="leancloud_visitors" data-flag-title="阅读 php 源码，ctags 配合 vim 实现代码跳转">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
           
 
           
@@ -512,11 +593,14 @@
 
       
         
-          <p>在开发项目之中，使用到js ajax 同服务端进行数据交互。一般图方便直接使用<code>jquery</code>或者<code>axios</code>等已有的库。<br>一般代码如下:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//axios</span></div><div class="line">axios.get(<span class="string">'/url'</span>).then(<span class="function"><span class="keyword">function</span>(<span class="params">res</span>)</span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(res)</div><div class="line">&#125;)</div><div class="line"><span class="comment">//juqery</span></div><div class="line">$.get(<span class="string">'/url'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">res</span>)</span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(res)</div><div class="line">&#125;,<span class="string">'json'</span>)</div></pre></td></tr></table></figure></p>
-<p>那么经常这么使用的肯定会遇到一个场景，就是:在回调函数中如何访问上下文中的<code>this</code>对象?<br>
+          <p>在阅读 php 源码的时候，为了方便跳转到相应的函数定义的位置，需要使用 ctags 来生成 tags 文件，再配合 vim 来实现跳转。</p>
+<h2 id="安装-ctags"><a href="#安装-ctags" class="headerlink" title="安装 ctags"></a>安装 ctags</h2><p>macOS 上使用 ctags 非常简单，一般都预装了 ctags 。</p>
+<p>如果没有安装，可以使用 <code>brew install ctags</code> 来安装。</p>
+<h2 id="tags-文件"><a href="#tags-文件" class="headerlink" title="tags 文件"></a>tags 文件</h2><p>在 php 源码根目录，执行 <code>ctags -R</code>, 就会在当前目录下生成一个名为 <code>tags</code> 的 文件。 </p>
+<figure class="highlight livescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">~/codes/php-src(master*) » tail -n <span class="number">20</span> tags                                                                                                                                       </div><div class="line">zval_marked_grey	Zend<span class="regexp">/zend_gc.h	/</span>^	uint32_t zval_marked_grey;$/;<span class="string">"	m	struct:_zend_gc_globals</div><div class="line">zval_object_property_dump	ext/standard/var.c	/^static void zval_object_property_dump(zval *zv, zend_ulong index, zend_string *key, int level) \/* &#123;&#123;&#123; *\/$/;"</span>	f	file:</div><div class="line">zval_opt_copy_ctor	Zend<span class="regexp">/zend_variables.h	/</span>^<span class="comment">#define zval_opt_copy_ctor(/;"	d</span></div><div class="line">zval_possible_root	Zend<span class="regexp">/zend_gc.h	/</span>^	uint32_t zval_possible_root;$/;<span class="string">"	m	struct:_zend_gc_globals</div><div class="line">zval_ptr_dtor	Zend/zend_execute.c	/^<span class="subst">#define</span> zval_ptr_dtor(/;"</span>	d	file:</div><div class="line">zval_ptr_dtor	Zend<span class="regexp">/zend_execute.c	/</span>^<span class="comment">#undef zval_ptr_dtor$/;"	d	file:</span></div><div class="line">zval_ptr_dtor	Zend<span class="regexp">/zend_variables.h	/</span>^<span class="comment">#define zval_ptr_dtor(/;"	d</span></div><div class="line">zval_ptr_dtor_nogc	Zend<span class="regexp">/zend_variables.h	/</span>^<span class="comment">#define zval_ptr_dtor_nogc(/;"	d</span></div><div class="line">zval_ptr_dtor_wrapper	Zend<span class="regexp">/zend_variables.h	/</span>^<span class="comment">#define zval_ptr_dtor_wrapper /;"	d</span></div></pre></td></tr></table></figure>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/js-pass-this-into-callback-function/#more" rel="contents">
+            <a class="btn" href="/ctags/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -562,7 +646,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/mysql-bigint-out-of-range/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/go-anonymous-struct/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="songgl">
@@ -584,8 +668,8 @@
             
               
                 
-                <a class="post-title-link" href="/mysql-bigint-out-of-range/" itemprop="url">
-                  mysql unsigned/int字段越界
+                <a class="post-title-link" href="/go-anonymous-struct/" itemprop="url">
+                  golang 匿名 struct 的使用方式
                 </a>
               
             
@@ -601,8 +685,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-22T10:41:39+08:00">
-                2017-05-22
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-08T23:20:01+08:00">
+                2017-07-08
               </time>
             
 
@@ -624,8 +708,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/mysql/" itemprop="url" rel="index">
-                    <span itemprop="name">mysql</span>
+                  <a href="/categories/go/" itemprop="url" rel="index">
+                    <span itemprop="name">go</span>
                   </a>
                 </span>
 
@@ -637,9 +721,32 @@
 
           
             
+            <!--noindex-->
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/go-anonymous-struct/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="go-anonymous-struct/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+              <!--/noindex-->
+            
           
 
           
+          
+             <span id="/go-anonymous-struct/" class="leancloud_visitors" data-flag-title="golang 匿名 struct 的使用方式">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
           
 
           
@@ -660,14 +767,185 @@
 
       
         
-          <p>线上的<code>MySQL</code>错误日志中遇到了以下问题<br><figure class="highlight vhdl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Data truncation: BIGINT <span class="built_in">UNSIGNED</span> value <span class="keyword">is</span> <span class="keyword">out</span> <span class="keyword">of</span> <span class="keyword">range</span> <span class="keyword">in</span> `(database.tablename.fieldname)`</div></pre></td></tr></table></figure></p>
-<p><code>MySQL</code>版本为:<br><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="section">mysql&gt; select version();</div><div class="line">+------------+</span></div><div class="line"><span class="section">| version()  |</div><div class="line">+------------+</span></div><div class="line"><span class="section">| 5.6.21-log |</div><div class="line">+------------+</span></div><div class="line">1 row in set (0.00 sec)</div></pre></td></tr></table></figure></p>
-<p>引起这个错误的原因是<code>sql</code>语句中对<code>unsigned</code>字段进行了递减操作的结果为负数导致的,<br><figure class="highlight n1ql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">update</span> <span class="keyword">database</span>.tablename <span class="keyword">set</span> fieldname=fieldname-num</div></pre></td></tr></table></figure></p>
-<p>而<code>MySQL</code>的模式是默认的<code>mode</code>:<br><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="section">mysql&gt; show variables like 'sql_mode';</div><div class="line">+---------------+------------------------+</span></div><div class="line"><span class="section">| Variable_name | Value                  |</div><div class="line">+---------------+------------------------+</span></div><div class="line"><span class="section">| sql_mode      | NO_ENGINE_SUBSTITUTION |</div><div class="line">+---------------+------------------------+</span></div><div class="line">1 row in set (0.00 sec)</div></pre></td></tr></table></figure></p>
-<p>解决方案有3种:<br>
+          
+            <p>编程中有时候需要一个临时的 struct 来封装数据，而这个 struct 的结构在其它地方又不会被二次复用,可以使用匿名 struct 来实现。</p>
+<p>主要有两种方式,如下:<br>第一种方式，通过 var 初始化</p>
+<figure class="highlight nsis"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var <span class="literal">user</span> struct&#123;<span class="keyword">Name</span> string<span class="comment">;age int&#125;</span></div><div class="line"><span class="literal">user</span>.<span class="keyword">Name</span> = <span class="string">"name"</span></div><div class="line"><span class="literal">user</span>.age = <span class="number">18</span></div></pre></td></tr></table></figure>
+<p>第二种方式，直接初始化</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">json.Marshal(<span class="keyword">struct</span>&#123;Name <span class="built_in">string</span>;age <span class="keyword">int</span>&#125;&#123;<span class="string">"name"</span>,<span class="number">18</span>&#125;)</div></pre></td></tr></table></figure>
+<p>或者：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">json.Marshal(<span class="keyword">struct</span>&#123;</div><div class="line">	Name <span class="built_in">string</span></div><div class="line">	age <span class="keyword">int</span></div><div class="line">&#125;&#123;<span class="string">"name"</span>,<span class="number">18</span>&#125;)</div></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/glide/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="songgl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/favicon.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mr.song">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/glide/" itemprop="url">
+                  Glide--golang 包管理工具简单教程
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-08T23:06:00+08:00">
+                2017-07-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/go/" itemprop="url" rel="index">
+                    <span itemprop="name">go</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            <!--noindex-->
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/glide/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="glide/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+              <!--/noindex-->
+            
+          
+
+          
+          
+             <span id="/glide/" class="leancloud_visitors" data-flag-title="Glide--golang 包管理工具简单教程">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p> Golang挺好用的，但是目前比较受到诟病的是其没有自带包管理工具(golang社区已经发起了一个<a href="https://github.com/golang/dep">dep</a>的项目，不过要正式被golang接受还需要一段时间)。官方没有咋办，那就自己造轮子呗。所以 go的包管理工具就五花八门、层出不穷了。目前有Glide, gopm, godep,gpm，gom等等。。。</p>
+<p>这里介绍一个工具，使用比较简单: glide</p>
+<p>我已经将其的文档翻译成了中文:  <a href="http://glidedocs.readthedocs.io/">glide 中文文档</a>.</p>
+<p>翻译的内容放在github上: <a href="https://github.com/javasgl/GlideDocs">https://github.com/javasgl/GlideDocs</a></p>
+<p>不想看文章的可以直接去看中文文档，文档写的很清晰，文档中关于<code>glide</code>的用法和原理都有说明。<br>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/mysql-bigint-out-of-range/#more" rel="contents">
+            <a class="btn" href="/glide/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -713,7 +991,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/umount-device-when-its-buzy/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/go-slice-append/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="songgl">
@@ -735,8 +1013,8 @@
             
               
                 
-                <a class="post-title-link" href="/umount-device-when-its-buzy/" itemprop="url">
-                  Linux强制卸载设备
+                <a class="post-title-link" href="/go-slice-append/" itemprop="url">
+                  golang中slice越界问题
                 </a>
               
             
@@ -752,8 +1030,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-12T11:04:07+08:00">
-                2017-05-12
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-21T00:02:26+08:00">
+                2017-06-21
               </time>
             
 
@@ -775,8 +1053,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/go/" itemprop="url" rel="index">
+                    <span itemprop="name">go</span>
                   </a>
                 </span>
 
@@ -788,157 +1066,32 @@
 
           
             
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Linux下因为磁盘出问题而导致了<code>Input/output error</code>,所以准备先把有问题的磁盘卸载掉再重新挂上试试。</p>
-<p>执行<code>umount</code>:<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">[root@hostname ~]<span class="comment"># umount -n /dev/sdc1</span></div><div class="line">umount: /home/data: device <span class="keyword">is</span> busy.</div><div class="line">        (In <span class="keyword">some</span> cases useful info <span class="keyword">about</span> processes <span class="keyword">that</span> use</div><div class="line">         <span class="keyword">the</span> device <span class="keyword">is</span> found <span class="keyword">by</span> lsof(<span class="number">8</span>) <span class="keyword">or</span> fuser(<span class="number">1</span>))</div></pre></td></tr></table></figure></p>
-<p>显示设备正忙，所以执行<code>umount -nf</code>:<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">[root@hostname ~]<span class="comment"># umount -nf /dev/sdc1</span></div><div class="line">umount2: Device <span class="keyword">or</span> resource busy</div><div class="line">umount: /home/data: device <span class="keyword">is</span> busy.</div><div class="line">        (In <span class="keyword">some</span> cases useful info <span class="keyword">about</span> processes <span class="keyword">that</span> use</div><div class="line">         <span class="keyword">the</span> device <span class="keyword">is</span> found <span class="keyword">by</span> lsof(<span class="number">8</span>) <span class="keyword">or</span> fuser(<span class="number">1</span>))</div><div class="line">umount2: Device <span class="keyword">or</span> resource busy</div></pre></td></tr></table></figure></p>
-<p>还是无法卸载。</p>
-<p>根据给出的提示，使用<code>losf</code>或者<code>fuser</code>来找出那些进程正在使用该设备:<br><figure class="highlight gcode"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[root@yourdream ~]<span class="attr"># fuser -cu /dev/sdc1</span></div><div class="line">/dev/sdc<span class="number">1</span>:            <span class="number">2444</span>c<span class="comment">(root)</span>  <span class="number">2458</span>c<span class="comment">(root)</span>  <span class="number">3041</span>c<span class="comment">(mysql)</span></div><div class="line">[root@yourdream ~]<span class="attr"># fuser -cu /dev/sdc1</span></div></pre></td></tr></table></figure></p>
-<p>使用<code>c</code>指定挂载的文件系统，<code>u</code>显示使用者的id。可以看出三个进程正在使用，通过<code>ps</code>可以查到分别为<code>redis</code>和<code>mysql</code>正在使用。<br>因此，卸载之前停掉<code>redis</code>和<code>mysql</code>之后再次执行<code>umount</code>就能正常卸载了。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/i-love-vim/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="songgl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/favicon.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Mr.song">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/i-love-vim/" itemprop="url">
-                  I-love-vim
+            <!--noindex-->
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/go-slice-append/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="go-slice-append/" itemprop="commentsCount"></span>
                 </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
               </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-07T22:08:15+08:00">
-                2017-05-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/tools/" itemprop="url" rel="index">
-                    <span itemprop="name">tools</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
+              <!--/noindex-->
             
           
 
           
+          
+             <span id="/go-slice-append/" class="leancloud_visitors" data-flag-title="golang中slice越界问题">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
           
 
           
@@ -959,24 +1112,15 @@
 
       
         
-          
-            <p>个人是一个<code>vi</code>重度使用者，所以尽可能的会希望所使用的工具中都能支持<code>vim</code>来方便操作。</p>
-<ul>
-<li>chrome浏览器支持 <code>vim</code>操作: Vimium 扩展</li>
-<li>atom 编辑器: vim-mode、vim-mode-plus</li>
-<li>sublime text: 天然支持，配置中<code>ignored_packages</code> 置为空<code>[]</code>即可</li>
-<li>idea 编辑器：<code>vim</code> 插件用来编辑文件内容，还有一个和<code>Vimium</code>相似的插件(名称遗忘,自己未使用)，以和<code>Vimium</code>相同的方式操作<code>idea</code>的各种菜单</li>
-<li>command line: 大部分天然支持<code>vim</code>编辑模式 (非 <code>windows</code> 系统),自行给<code>vim</code>安装了一些插件，打造成了一个命令行的<code>golang</code>的<code>IDE</code><ul>
-<li>目录：<code>scrooloose/nerdtree</code></li>
-<li>目录git状态：<code>Xuyuanp/nerdtree-git-plugin</code></li>
-<li>自动完成：<code>Shougo/neocomplete</code></li>
-<li>go相关格式等工具：<code>fatih/vim-go</code></li>
-</ul>
-</li>
-</ul>
-<p>最后，附上一张命令行<code>IDE</code>效果图:<br><img src="/images/vim.png" alt="vim-ide"></p>
-
-          
+          <p><code>go</code>中<code>slice</code>由于其类似于一个长度可动态变化的数组而非常方便使用。<br><code>slice</code>有两个基本属性：<code>cap</code>,<code>len</code>，分别代表容量和已有数据长度。<br>一般声明<code>slice</code>的两种方式如下：<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//定义了一个初始长度为0,容量为2的int 类型的 `slice`</span></div><div class="line">slice:=<span class="built_in">make</span>([]<span class="keyword">int</span>,<span class="number">0</span>,<span class="number">2</span>)</div><div class="line"></div><div class="line"><span class="keyword">var</span> slice=[]<span class="keyword">int</span>&#123;<span class="number">0</span>,<span class="number">1</span>&#125;</div></pre></td></tr></table></figure></p>
+<p>往<code>slice</code>中添加元素使用<code>append</code>方法：<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">slice=<span class="built_in">append</span>(slice,<span class="number">1</span>)</div></pre></td></tr></table></figure></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/go-slice-append/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1013,7 +1157,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1058,7 +1202,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">27</span>
+                <span class="site-state-item-count">33</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -1069,7 +1213,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -1080,7 +1224,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">46</span>
+                <span class="site-state-item-count">53</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -1258,32 +1402,273 @@
 
 	
 
+		<script type="text/javascript">
+		_hcwp = window._hcwp || [];
+
+		_hcwp.push({widget:"Bloggerstream", widget_id: 94663, selector:".hc-comment-count", label: "{\%COUNT%\}" });
+
+		
+
+		(function() {
+		if("HC_LOAD_INIT" in window)return;
+		HC_LOAD_INIT = true;
+		var lang = (navigator.language || navigator.systemLanguage || navigator.userLanguage || "en").substr(0, 2).toLowerCase();
+		var hcc = document.createElement("script"); hcc.type = "text/javascript"; hcc.async = true;
+		hcc.src = ("https:" == document.location.protocol ? "https" : "http")+"://w.hypercomments.com/widget/hc/94663/"+lang+"/widget.js";
+		var s = document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(hcc, s.nextSibling);
+		})();
+		</script>
+
+	
+
+
+
+
+
 
 
 
 
   
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
 
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
 
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
 
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
 
 
   
 
-
-
-
-
-  
-
-
-
-  
   
 
   
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("EzKAd7WHM6JBWdDS27Sd3CMa-gzGzoHsz", "PpiY1yYD2ChLycCHqbPS4Pci");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
 
-  
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
 
   
 
