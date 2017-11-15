@@ -82,19 +82,18 @@
 
 
 
-<meta name="description" content="go中slice由于其类似于一个长度可动态变化的数组而非常方便使用。slice有两个基本属性：cap,len，分别代表容量和已有数据长度。一般声明slice的两种方式如下：1234//定义了一个初始长度为0,容量为2的int 类型的 `slice`slice:=make([]int,0,2)var slice=[]int&amp;#123;0,1&amp;#125;
-往slice中添加元素使用append方法：1">
+<meta name="description" content="go中slice由于其类似于一个长度可动态变化的数组而非常方便使用。slice有两个基本属性：cap,len，分别代表容量和已有数据长度。一般声明slice的两种方式如下：1234//定义了一个初始长度为0,容量为2的int 类型的 `slice`slice:=make([]int,0,2)var slice=[]in">
+<meta name="keywords" content="go,slice">
 <meta property="og:type" content="article">
 <meta property="og:title" content="golang中slice越界问题">
 <meta property="og:url" content="http://yoursite.com/go-slice-append/index.html">
 <meta property="og:site_name" content="Mr.song">
-<meta property="og:description" content="go中slice由于其类似于一个长度可动态变化的数组而非常方便使用。slice有两个基本属性：cap,len，分别代表容量和已有数据长度。一般声明slice的两种方式如下：1234//定义了一个初始长度为0,容量为2的int 类型的 `slice`slice:=make([]int,0,2)var slice=[]int&amp;#123;0,1&amp;#125;
-往slice中添加元素使用append方法：1">
+<meta property="og:description" content="go中slice由于其类似于一个长度可动态变化的数组而非常方便使用。slice有两个基本属性：cap,len，分别代表容量和已有数据长度。一般声明slice的两种方式如下：1234//定义了一个初始长度为0,容量为2的int 类型的 `slice`slice:=make([]int,0,2)var slice=[]int&amp;#123;0,1&amp;#125; 往slice中添加元素使用append方法：1">
+<meta property="og:locale" content="en">
 <meta property="og:updated_time" content="2017-06-20T16:27:59.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="golang中slice越界问题">
-<meta name="twitter:description" content="go中slice由于其类似于一个长度可动态变化的数组而非常方便使用。slice有两个基本属性：cap,len，分别代表容量和已有数据长度。一般声明slice的两种方式如下：1234//定义了一个初始长度为0,容量为2的int 类型的 `slice`slice:=make([]int,0,2)var slice=[]int&amp;#123;0,1&amp;#125;
-往slice中添加元素使用append方法：1">
+<meta name="twitter:description" content="go中slice由于其类似于一个长度可动态变化的数组而非常方便使用。slice有两个基本属性：cap,len，分别代表容量和已有数据长度。一般声明slice的两种方式如下：1234//定义了一个初始长度为0,容量为2的int 类型的 `slice`slice:=make([]int,0,2)var slice=[]int&amp;#123;0,1&amp;#125; 往slice中添加元素使用append方法：1">
 
 
 
@@ -418,14 +417,14 @@
       
 
       
-        <p><code>go</code>中<code>slice</code>由于其类似于一个长度可动态变化的数组而非常方便使用。<br><code>slice</code>有两个基本属性：<code>cap</code>,<code>len</code>，分别代表容量和已有数据长度。<br>一般声明<code>slice</code>的两种方式如下：<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//定义了一个初始长度为0,容量为2的int 类型的 `slice`</span></div><div class="line">slice:=<span class="built_in">make</span>([]<span class="keyword">int</span>,<span class="number">0</span>,<span class="number">2</span>)</div><div class="line"></div><div class="line"><span class="keyword">var</span> slice=[]<span class="keyword">int</span>&#123;<span class="number">0</span>,<span class="number">1</span>&#125;</div></pre></td></tr></table></figure></p>
-<p>往<code>slice</code>中添加元素使用<code>append</code>方法：<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">slice=<span class="built_in">append</span>(slice,<span class="number">1</span>)</div></pre></td></tr></table></figure></p>
+        <p><code>go</code>中<code>slice</code>由于其类似于一个长度可动态变化的数组而非常方便使用。<br><code>slice</code>有两个基本属性：<code>cap</code>,<code>len</code>，分别代表容量和已有数据长度。<br>一般声明<code>slice</code>的两种方式如下：<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//定义了一个初始长度为0,容量为2的int 类型的 `slice`</span></span><br><span class="line">slice:=<span class="built_in">make</span>([]<span class="keyword">int</span>,<span class="number">0</span>,<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> slice=[]<span class="keyword">int</span>&#123;<span class="number">0</span>,<span class="number">1</span>&#125;</span><br></pre></td></tr></table></figure></p>
+<p>往<code>slice</code>中添加元素使用<code>append</code>方法：<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">slice=<span class="built_in">append</span>(slice,<span class="number">1</span>)</span><br></pre></td></tr></table></figure></p>
 <a id="more"></a>
-<p>当然有时也可以使用索引值来直接赋值：<br><figure class="highlight ini"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attr">slice[0]</span>=<span class="number">1</span></div></pre></td></tr></table></figure></p>
+<p>当然有时也可以使用索引值来直接赋值：<br><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">slice[0]</span>=<span class="number">1</span></span><br></pre></td></tr></table></figure></p>
 <p>不过这种方式需要注意的是，索引的值不能大于<code>slice</code>的容量(cap)，否则会报出<code>panic: runtime error: index out of range</code>错误。所以一般情况下应该优先使用<code>append</code>的方法给<code>slice</code>添加元素。</p>
-<p>同样，对<code>slice</code>或者<code>array</code>进行切片(slice)操作的时候，索引也不能超过当前<code>slice</code>的容量或者<code>array</code>的长度<br><figure class="highlight fortran"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var slice = []<span class="built_in">int</span>&#123;<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>&#125;</div><div class="line"><span class="keyword">fmt</span>.Println(slice[:<span class="number">5</span>]) //[<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]</div><div class="line"><span class="keyword">fmt</span>.Println(slice[<span class="number">1</span>:<span class="number">10</span>]) //slice bounds <span class="keyword">out</span> of <span class="built_in">range</span></div></pre></td></tr></table></figure></p>
+<p>同样，对<code>slice</code>或者<code>array</code>进行切片(slice)操作的时候，索引也不能超过当前<code>slice</code>的容量或者<code>array</code>的长度<br><figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var slice = []<span class="built_in">int</span>&#123;<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>&#125;</span><br><span class="line"><span class="keyword">fmt</span>.Println(slice[:<span class="number">5</span>]) //[<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]</span><br><span class="line"><span class="keyword">fmt</span>.Println(slice[<span class="number">1</span>:<span class="number">10</span>]) //slice bounds <span class="keyword">out</span> of <span class="built_in">range</span></span><br></pre></td></tr></table></figure></p>
 <p><code>slice</code>的容量扩容规则： 当容量不够时，容量扩充为之前容量的2倍</p>
-<p>在调用<code>append</code>方法给<code>slice</code>添加元素的时候，可以一次添加多个或者全部：<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> slice = []<span class="keyword">int</span>&#123;<span class="number">0</span>,<span class="number">1</span>&#125;</div><div class="line"><span class="keyword">var</span> slice2 = []<span class="keyword">int</span>&#123;<span class="number">2</span>,<span class="number">3</span>&#125;</div><div class="line"></div><div class="line">fmt.Println(<span class="built_in">append</span>(slice,slice2...)) <span class="comment">//[0,1,2,3]</span></div><div class="line"></div><div class="line">fmt.Println(<span class="built_in">append</span>(slice,<span class="number">4</span>,<span class="number">5</span>)) <span class="comment">//[0,1,4,5]</span></div></pre></td></tr></table></figure></p>
+<p>在调用<code>append</code>方法给<code>slice</code>添加元素的时候，可以一次添加多个或者全部：<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> slice = []<span class="keyword">int</span>&#123;<span class="number">0</span>,<span class="number">1</span>&#125;</span><br><span class="line"><span class="keyword">var</span> slice2 = []<span class="keyword">int</span>&#123;<span class="number">2</span>,<span class="number">3</span>&#125;</span><br><span class="line"></span><br><span class="line">fmt.Println(<span class="built_in">append</span>(slice,slice2...)) <span class="comment">//[0,1,2,3]</span></span><br><span class="line"></span><br><span class="line">fmt.Println(<span class="built_in">append</span>(slice,<span class="number">4</span>,<span class="number">5</span>)) <span class="comment">//[0,1,4,5]</span></span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -547,7 +546,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-count">39</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -558,7 +557,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -569,7 +568,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">53</span>
+                <span class="site-state-item-count">64</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -787,7 +786,7 @@
     // Popup Window;
     var isfetched = false;
     // Search DB path;
-    var search_path = "";
+    var search_path = "search.xml";
     if (search_path.length == 0) {
       search_path = "search.xml";
     }

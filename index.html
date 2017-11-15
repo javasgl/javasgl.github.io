@@ -88,6 +88,7 @@
 <meta property="og:url" content="http://yoursite.com/index.html">
 <meta property="og:site_name" content="Mr.song">
 <meta property="og:description" content="A journey of a thousand miles begins with single step">
+<meta property="og:locale" content="en">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mr.song">
 <meta name="twitter:description" content="A journey of a thousand miles begins with single step">
@@ -299,7 +300,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/variable-parameter/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/git-post-buffer/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="songgl">
@@ -321,8 +322,8 @@
             
               
                 
-                <a class="post-title-link" href="/variable-parameter/" itemprop="url">
-                  可变参数使用
+                <a class="post-title-link" href="/git-post-buffer/" itemprop="url">
+                  git 推送大文件buffer设置
                 </a>
               
             
@@ -338,8 +339,175 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-30T09:11:38+08:00">
-                2017-08-30
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-15T23:09:50+08:00">
+                2017-11-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/tools/" itemprop="url" rel="index">
+                    <span itemprop="name">tools</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            <!--noindex-->
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/git-post-buffer/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="git-post-buffer/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+              <!--/noindex-->
+            
+          
+
+          
+          
+             <span id="/git-post-buffer/" class="leancloud_visitors" data-flag-title="git 推送大文件buffer设置">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>git默认的 http.postBuffer大小为1M。所以偶尔遇到比较大的文件或者项目时，会报出以下错误：<br><figure class="highlight subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">error: </span>RPC failed; result=22, HTTP code = 411</span><br><span class="line">fatal: The remote end hung up unexpectedly</span><br><span class="line">fatal: The remote end hung up unexpectedly</span><br></pre></td></tr></table></figure></p>
+<p>这时可以通过设置 http.postBuffer来解决。下面设置为100M。<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git<span class="built_in"> config </span>--global http.<span class="attribute">postBuffer</span>=102400</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/goroutinue-limit/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="songgl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/favicon.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mr.song">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/goroutinue-limit/" itemprop="url">
+                  Buffered Channel + sync.WaitGroup 实现对 goroutinue 并发数的限制
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-09-18T09:17:34+08:00">
+                2017-09-18
               </time>
             
 
@@ -380,8 +548,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/variable-parameter/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count hc-comment-count" data-xid="variable-parameter/" itemprop="commentsCount"></span>
+                <a href="/goroutinue-limit/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="goroutinue-limit/" itemprop="commentsCount"></span>
                 </a>
               </span>
               <!--/noindex-->
@@ -390,7 +558,7 @@
 
           
           
-             <span id="/variable-parameter/" class="leancloud_visitors" data-flag-title="可变参数使用">
+             <span id="/goroutinue-limit/" class="leancloud_visitors" data-flag-title="Buffered Channel + sync.WaitGroup 实现对 goroutinue 并发数的限制">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -420,10 +588,12 @@
 
       
         
-          <p>很多语言都支持可变参数，下面记录下平时主要使用的几种语言的可变参数用法。主要有 go、php、python、java、js等语言的可变参数的基本使用。</p>
+          <p>写过爬虫的都应该考虑这个问题：不能毫无节制、毫无节操的无限制的并发爬取目标网站的内容，不然很容易被对方识别出来从而被封。</p>
+<p>Go 的 goroutinue 机制使用起来非常简单，所以很多人比如我就喜欢用 Go 来写写爬虫。那么如何限制 goroutinue 并发数呢？</p>
+<p>下面提供一种 Buffered Channel + sync.WaitGroup 实现对 goroutinue 并发数进行控制的思路。这种方式其实在 D&amp;K 所著的《The Go Programing Language》一书中的第八章(goroutinue and channels) 中也有提到。</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/variable-parameter/#more" rel="contents">
+            <a class="btn" href="/goroutinue-limit/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -469,7 +639,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/go-cross-complie/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/http-benckmarking-tool-wrk/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="songgl">
@@ -491,8 +661,8 @@
             
               
                 
-                <a class="post-title-link" href="/go-cross-complie/" itemprop="url">
-                  交叉编译 go 程序
+                <a class="post-title-link" href="/http-benckmarking-tool-wrk/" itemprop="url">
+                  http压力测试工具--wrk
                 </a>
               
             
@@ -508,8 +678,349 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-29T08:54:51+08:00">
-                2017-08-29
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-09-17T10:36:55+08:00">
+                2017-09-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/tools/" itemprop="url" rel="index">
+                    <span itemprop="name">tools</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            <!--noindex-->
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/http-benckmarking-tool-wrk/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="http-benckmarking-tool-wrk/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+              <!--/noindex-->
+            
+          
+
+          
+          
+             <span id="/http-benckmarking-tool-wrk/" class="leancloud_visitors" data-flag-title="http压力测试工具--wrk">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>发现一个新的 http 压力测试工具 wrk ,简单好用。下载地址：<a href="https://github.com/wg/wrk" target="_blank" rel="noopener">https://github.com/wg/wrk</a> 。类似于之前个人经常使用的一些压测工具，详细请移步 <a href="/pressure-test-tools">压力测试工具ab、webbench、http_load、siege简单使用</a>。</p>
+<p>wrk 使用非常简单，参数不多，但是足够自己简单压测一些 http 服务了。下面简单介绍下如何安装和使用。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/http-benckmarking-tool-wrk/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/python-threading/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="songgl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/favicon.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mr.song">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/python-threading/" itemprop="url">
+                  python threading 多线程简单使用
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-09-05T09:13:09+08:00">
+                2017-09-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            <!--noindex-->
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/python-threading/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="python-threading/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+              <!--/noindex-->
+            
+          
+
+          
+          
+             <span id="/python-threading/" class="leancloud_visitors" data-flag-title="python threading 多线程简单使用">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>之前一个项目，使用 Flask 框架写了一个网络图片抓取的程序，当时时间紧急，多张图片下载的时候，就简简单单的使用 <code>for in</code> 循环去获取网络图片内容。后来有空了，看了下 python 的多线程的使用，挺简单的，就用 threading 重新改造了下这个程序，让其支持多线程。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/python-threading/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/go-json-iterator/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="songgl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/favicon.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mr.song">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/go-json-iterator/" itemprop="url">
+                  json-iterator--更快的json解析库
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-31T15:24:51+08:00">
+                2017-08-31
               </time>
             
 
@@ -550,8 +1061,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/go-cross-complie/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count hc-comment-count" data-xid="go-cross-complie/" itemprop="commentsCount"></span>
+                <a href="/go-json-iterator/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="go-json-iterator/" itemprop="commentsCount"></span>
                 </a>
               </span>
               <!--/noindex-->
@@ -560,7 +1071,7 @@
 
           
           
-             <span id="/go-cross-complie/" class="leancloud_visitors" data-flag-title="交叉编译 go 程序">
+             <span id="/go-json-iterator/" class="leancloud_visitors" data-flag-title="json-iterator--更快的json解析库">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -590,527 +1101,12 @@
 
       
         
-          <p>相信大多数人和我一样，都是在 mac 或者 windows 上写 go 代码，但是最终上线运行却是在 Linux 系统之上。这就涉及到一个问题：由于操作系统架构的差异，编译过后的二进制程序能够在多个系统下正常运行么？</p>
-<p>go 不像 java 等运行于 JVM 之上的语言，也不像 php , python 等解释性语言，它需要编译后不依赖于其他环境就能执行，但是编译过程却依赖于系统架构，所以 go 需要交叉编译。</p>
-<p>释义：交叉编译，就是在一个平台上生成另一个平台上的可执行代码。</p>
-<p>go 非常方便的支持交叉编译。<br>
+          <p>golang 中自带了非常方便解析json 的库 <code>encoding/json</code>,一般情况下也是使用这个库来作为 json 的 encode / decode。但是在有些场景下，比如解析大量json格式的日志数据的时候，json的解析性能问题就是一个需要特别关注的问题了。</p>
+<p>滴滴出行平台技术部的开源json解析库 <a href="https://github.com/json-iterator/go" target="_blank" rel="noopener">json-iterator</a>，性能比原生的 encoding/json 快很多。</p>
+<p>下面自己就简单测试了下两者的区别,测试代码很简单，就简单测试了下两者 Unmarshal 和 Marshal 的性能表现：<br>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/go-cross-complie/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/es-search-type/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="songgl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/favicon.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Mr.song">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/es-search-type/" itemprop="url">
-                  Elasticsearch 几种 Search Type
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-24T16:45:45+08:00">
-                2017-08-24
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/elasticsearch/" itemprop="url" rel="index">
-                    <span itemprop="name">elasticsearch</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            <!--noindex-->
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/es-search-type/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count hc-comment-count" data-xid="es-search-type/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-              <!--/noindex-->
-            
-          
-
-          
-          
-             <span id="/es-search-type/" class="leancloud_visitors" data-flag-title="Elasticsearch 几种 Search Type">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>Search Type 有助于理解 Elasticsearch 在多个分片(shard)的情况下，是如何搜索的，是如何决定返回数据数量、如何排序、如何算分的？</p>
-<h2 id="执行过程"><a href="#执行过程" class="headerlink" title="执行过程"></a>执行过程</h2><p>在多个分片情况下，查询 0-20 条记录，elasticsearch 会将请求转发到每个分片上，从每个分片上获取 20 条记录，然后返回给分发节点进行汇总，最后再从汇总的结果中取 0-20 数据返回给客户端。<br>则就是 elasticsearch 分布式搜索的基本的执行过程。</p>
-<h2 id="Search-Type"><a href="#Search-Type" class="headerlink" title="Search Type"></a>Search Type</h2><p>Elasticsearch 中的 search type 主要有 6种：Query then fetch、Dfs Query then fetch、Count、Scan、Query and fetch、Dfs query and fetch。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/es-search-type/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/redis-check-aof/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="songgl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/favicon.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Mr.song">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/redis-check-aof/" itemprop="url">
-                  使用 redis-check-aof 命令修复 aof 文件
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-23T18:27:30+08:00">
-                2017-08-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/redis/" itemprop="url" rel="index">
-                    <span itemprop="name">redis</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            <!--noindex-->
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/redis-check-aof/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count hc-comment-count" data-xid="redis-check-aof/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-              <!--/noindex-->
-            
-          
-
-          
-          
-             <span id="/redis-check-aof/" class="leancloud_visitors" data-flag-title="使用 redis-check-aof 命令修复 aof 文件">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>偶然的一天，发现redis一个实例无法启动，启动的时候，从 aof 文件往内存中加载数据的时候，出现了错误：</p>
-<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Bad <span class="built_in">file</span> <span class="built_in">format</span> reading <span class="keyword">the</span> append only <span class="built_in">file</span>: make <span class="keyword">a</span> backup <span class="keyword">of</span> your AOF <span class="built_in">file</span>, <span class="keyword">then</span> use ./redis-check-aof <span class="comment">--fix filename</span></div></pre></td></tr></table></figure>
-<p>提示，需要使用 redis-check-aof 来修复 aof 文件。</p>
-<p>按照其步骤，先备份再修复：<br><figure class="highlight vbnet"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">[root@hostname <span class="number">6379</span>]<span class="meta"># redis-check-aof --fix appendonly.aof</span></div><div class="line"><span class="number">0</span>x        <span class="number">6</span>a60a5cb: Expected prefix <span class="comment">'</span></div><div class="line">AOF analyzed: size=<span class="number">1784722401</span>, ok_up_to=<span class="number">1784718795</span>, diff=<span class="number">3606</span></div><div class="line">This will shrink the AOF <span class="keyword">from</span> <span class="number">1784722401</span> bytes, <span class="keyword">with</span> <span class="number">3606</span> bytes, <span class="keyword">to</span> <span class="number">1784718795</span> bytes</div><div class="line"><span class="keyword">Continue</span>? [y/N]: y</div><div class="line">Successfully truncated AOF</div></pre></td></tr></table></figure></p>
-<p>修复完成后，重新启动 redis 就能正常启动了。</p>
-<p>同样，redis 如果采用的 rdb 模式持久化数据的话，如果需要修复 rdb 文件，可以使用 redis-check-dump file.rdb 来修复。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/elasticsearch-function-doc/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="songgl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/favicon.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Mr.song">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/elasticsearch-function-doc/" itemprop="url">
-                  Elasticsearch function 中 doc , _fields , _source 使用
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-21T12:07:40+08:00">
-                2017-08-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/elasticsearch/" itemprop="url" rel="index">
-                    <span itemprop="name">elasticsearch</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            <!--noindex-->
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/elasticsearch-function-doc/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count hc-comment-count" data-xid="elasticsearch-function-doc/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-              <!--/noindex-->
-            
-          
-
-          
-          
-             <span id="/elasticsearch-function-doc/" class="leancloud_visitors" data-flag-title="Elasticsearch function 中 doc , _fields , _source 使用">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>面对复杂的查询或者算分逻辑，Elasticsearch 可以使用 Scrpits 脚本功能来实现，实际项目之中也用的非常频繁。<br>在脚本中需要访问文档中的字段，此时有三种方式可以访问，分别是 doc , _fields , _source。这三个字段使用的时候还是有区别的。<br><figure class="highlight ada"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="string">"filtered"</span> : &#123;</div><div class="line">    <span class="string">"query"</span> : &#123;</div><div class="line">        ...</div><div class="line">    &#125;,</div><div class="line">    <span class="string">"filter"</span> : &#123;</div><div class="line">        <span class="string">"script"</span> : &#123;</div><div class="line">            <span class="string">"script"</span> : "<span class="type">doc</span>[<span class="symbol">'num1</span>'].value &gt; param1<span class="string">"</div><div class="line">            "</span>params<span class="string">" : &#123;</div><div class="line">                "</span>param1<span class="string">" : 5</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</span></div></pre></td></tr></table></figure></p>
-<p>下面通过几个示例脚本来分别说明三者之间的区别。<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/elasticsearch-function-doc/#more" rel="contents">
+            <a class="btn" href="/go-json-iterator/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1151,7 +1147,7 @@
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1196,7 +1192,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-count">39</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -1207,7 +1203,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -1218,7 +1214,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">53</span>
+                <span class="site-state-item-count">64</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -1430,7 +1426,7 @@
     // Popup Window;
     var isfetched = false;
     // Search DB path;
-    var search_path = "";
+    var search_path = "search.xml";
     if (search_path.length == 0) {
       search_path = "search.xml";
     }

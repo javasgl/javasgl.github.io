@@ -82,43 +82,18 @@
 
 
 
-<meta name="description" content="单步调试最近在写golang程序的时候，想要想单步调试一下程序，减少手动print log调试代码的痛苦。
-找了一些golang单步调试的方案，主要有几下几种方案:
-
-使用 SublimeGDB 插件在Sublime 中调试
-使用 Goland IDE 调试,不过可惜Goland还未发布正式版本
-使用 gdb 工具调试
-
-每个都尝试了一遍:
-
-SublimeGDB 界面不错，但是调试速度太慢，设置">
+<meta name="description" content="单步调试最近在写golang程序的时候，想要想单步调试一下程序，减少手动print log调试代码的痛苦。 找了一些golang单步调试的方案，主要有几下几种方案:  使用 SublimeGDB 插件在Sublime 中调试 使用 Goland IDE 调试,不过可惜Goland还未发布正式版本 使用 gdb 工具调试">
+<meta name="keywords" content="go,gdb,debug">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Mac上使用gdb单步调试golang程序">
 <meta property="og:url" content="http://yoursite.com/debug-golang-with-gdb-on-mac/index.html">
 <meta property="og:site_name" content="Mr.song">
-<meta property="og:description" content="单步调试最近在写golang程序的时候，想要想单步调试一下程序，减少手动print log调试代码的痛苦。
-找了一些golang单步调试的方案，主要有几下几种方案:
-
-使用 SublimeGDB 插件在Sublime 中调试
-使用 Goland IDE 调试,不过可惜Goland还未发布正式版本
-使用 gdb 工具调试
-
-每个都尝试了一遍:
-
-SublimeGDB 界面不错，但是调试速度太慢，设置">
+<meta property="og:description" content="单步调试最近在写golang程序的时候，想要想单步调试一下程序，减少手动print log调试代码的痛苦。 找了一些golang单步调试的方案，主要有几下几种方案:  使用 SublimeGDB 插件在Sublime 中调试 使用 Goland IDE 调试,不过可惜Goland还未发布正式版本 使用 gdb 工具调试  每个都尝试了一遍:  SublimeGDB 界面不错，但是调试速度太慢，设置">
+<meta property="og:locale" content="en">
 <meta property="og:updated_time" content="2017-06-21T11:53:26.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mac上使用gdb单步调试golang程序">
-<meta name="twitter:description" content="单步调试最近在写golang程序的时候，想要想单步调试一下程序，减少手动print log调试代码的痛苦。
-找了一些golang单步调试的方案，主要有几下几种方案:
-
-使用 SublimeGDB 插件在Sublime 中调试
-使用 Goland IDE 调试,不过可惜Goland还未发布正式版本
-使用 gdb 工具调试
-
-每个都尝试了一遍:
-
-SublimeGDB 界面不错，但是调试速度太慢，设置">
+<meta name="twitter:description" content="单步调试最近在写golang程序的时候，想要想单步调试一下程序，减少手动print log调试代码的痛苦。 找了一些golang单步调试的方案，主要有几下几种方案:  使用 SublimeGDB 插件在Sublime 中调试 使用 Goland IDE 调试,不过可惜Goland还未发布正式版本 使用 gdb 工具调试  每个都尝试了一遍:  SublimeGDB 界面不错，但是调试速度太慢，设置">
 
 
 
@@ -457,12 +432,12 @@ SublimeGDB 界面不错，但是调试速度太慢，设置">
 </ul>
 <p>不过在<code>mac</code>电脑上使用<code>gdb</code>还是遇到了一些问题,不过还好都顺利解决了。<br><a id="more"></a></p>
 <p>遇到的主要问题有权限问题和 mac系统版本问题</p>
-<h2 id="权限问题"><a href="#权限问题" class="headerlink" title="权限问题"></a>权限问题</h2><p>mac 系统为了安全起见，不允许普通用户直接运行gdb,运行时会出现以下问题：<br><figure class="highlight smali"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Unable to find Mach task port for process-id 4263: (os/kern) failure (0x5).</div><div class="line"> (please<span class="built_in"> check </span>gdb is codesigned - see taskgated(8))</div></pre></td></tr></table></figure></p>
-<p>这个问题，网络上已有解决方案，比如对gdb进行签名啥的，嫌麻烦，没有尝试。详细步骤见<a href="https://sourceware.org/gdb/wiki/BuildingOnDarwin" target="_blank" rel="external">这里</a><br>这里直接使用 <code>sudo gdb ..</code>来运行。可以自行设置命令alias。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">alias</span> gdb=<span class="string">'sudo gdb'</span></div></pre></td></tr></table></figure>
+<h2 id="权限问题"><a href="#权限问题" class="headerlink" title="权限问题"></a>权限问题</h2><p>mac 系统为了安全起见，不允许普通用户直接运行gdb,运行时会出现以下问题：<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Unable <span class="keyword">to</span> <span class="builtin-name">find</span> Mach task<span class="built_in"> port </span><span class="keyword">for</span> process-id 4263: (os/kern) failure (0x5).</span><br><span class="line"> (please check gdb is codesigned - see taskgated(8))</span><br></pre></td></tr></table></figure></p>
+<p>这个问题，网络上已有解决方案，比如对gdb进行签名啥的，嫌麻烦，没有尝试。详细步骤见<a href="https://sourceware.org/gdb/wiki/BuildingOnDarwin" target="_blank" rel="noopener">这里</a><br>这里直接使用 <code>sudo gdb ..</code>来运行。可以自行设置命令alias。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">alias</span> gdb=<span class="string">'sudo gdb'</span></span><br></pre></td></tr></table></figure>
 <p>不过这样就得每次输入系统密码了。不过可以使用 <code>expect</code> 来让命令行自动输入密码(这是后话)。</p>
-<h2 id="版本问题"><a href="#版本问题" class="headerlink" title="版本问题"></a>版本问题</h2><p>开始调试的时候遇到了一下问题：<br><figure class="highlight qml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">During startup program terminated <span class="keyword">with</span> <span class="keyword">signal</span><span class="string"> ?</span>, Unknown <span class="keyword">signal</span><span class="string">.</span></div></pre></td></tr></table></figure></p>
-<p>查询了一下，Mac Sierra 这个版本的系统不支持 gdb 调试。解决方案五花八门。<br>主要进行了一下操作：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">brew upgrade gdb </div><div class="line">touch ~/.gdbinit</div><div class="line">cat '<span class="keyword">set</span> <span class="keyword">startup</span>-<span class="keyword">with</span>-shell <span class="keyword">off</span><span class="string">' &gt; ~/.gdbinit</span></div></pre></td></tr></table></figure></p>
+<h2 id="版本问题"><a href="#版本问题" class="headerlink" title="版本问题"></a>版本问题</h2><p>开始调试的时候遇到了一下问题：<br><figure class="highlight qml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">During startup program terminated <span class="keyword">with</span> <span class="keyword">signal</span><span class="string"> ?</span>, Unknown <span class="keyword">signal</span><span class="string">.</span></span><br></pre></td></tr></table></figure></p>
+<p>查询了一下，Mac Sierra 这个版本的系统不支持 gdb 调试。解决方案五花八门。<br>主要进行了一下操作：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">brew upgrade gdb </span><br><span class="line">touch ~/.gdbinit</span><br><span class="line">cat '<span class="keyword">set</span> <span class="keyword">startup</span>-<span class="keyword">with</span>-shell <span class="keyword">off</span><span class="string">' &gt; ~/.gdbinit</span></span><br></pre></td></tr></table></figure></p>
 <p>这些操作主要是:</p>
 <ul>
 <li>将 gdb 从 7.1.2升级到最新的 8.0</li>
@@ -688,7 +663,7 @@ SublimeGDB 界面不错，但是调试速度太慢，设置">
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-count">39</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -699,7 +674,7 @@ SublimeGDB 界面不错，但是调试速度太慢，设置">
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -710,7 +685,7 @@ SublimeGDB 界面不错，但是调试速度太慢，设置">
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">53</span>
+                <span class="site-state-item-count">64</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -944,7 +919,7 @@ SublimeGDB 界面不错，但是调试速度太慢，设置">
     // Popup Window;
     var isfetched = false;
     // Search DB path;
-    var search_path = "";
+    var search_path = "search.xml";
     if (search_path.length == 0) {
       search_path = "search.xml";
     }

@@ -82,22 +82,18 @@
 
 
 
-<meta name="description" content="偶然的一天，发现redis一个实例无法启动，启动的时候，从 aof 文件往内存中加载数据的时候，出现了错误：
-1Bad file format reading the append only file: make a backup of your AOF file, then use ./redis-check-aof --fix filename
-提示，需要使用 redis-check-aof">
+<meta name="description" content="偶然的一天，发现redis一个实例无法启动，启动的时候，从 aof 文件往内存中加载数据的时候，出现了错误： 1Bad file format reading the append only file: make a backup of your AOF file, then use ./redis-check-aof">
+<meta name="keywords" content="redis,aof">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用 redis-check-aof 命令修复 aof 文件">
 <meta property="og:url" content="http://yoursite.com/redis-check-aof/index.html">
 <meta property="og:site_name" content="Mr.song">
-<meta property="og:description" content="偶然的一天，发现redis一个实例无法启动，启动的时候，从 aof 文件往内存中加载数据的时候，出现了错误：
-1Bad file format reading the append only file: make a backup of your AOF file, then use ./redis-check-aof --fix filename
-提示，需要使用 redis-check-aof">
+<meta property="og:description" content="偶然的一天，发现redis一个实例无法启动，启动的时候，从 aof 文件往内存中加载数据的时候，出现了错误： 1Bad file format reading the append only file: make a backup of your AOF file, then use ./redis-check-aof --fix filename 提示，需要使用 redis-check-aof">
+<meta property="og:locale" content="en">
 <meta property="og:updated_time" content="2017-08-30T15:32:10.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用 redis-check-aof 命令修复 aof 文件">
-<meta name="twitter:description" content="偶然的一天，发现redis一个实例无法启动，启动的时候，从 aof 文件往内存中加载数据的时候，出现了错误：
-1Bad file format reading the append only file: make a backup of your AOF file, then use ./redis-check-aof --fix filename
-提示，需要使用 redis-check-aof">
+<meta name="twitter:description" content="偶然的一天，发现redis一个实例无法启动，启动的时候，从 aof 文件往内存中加载数据的时候，出现了错误： 1Bad file format reading the append only file: make a backup of your AOF file, then use ./redis-check-aof --fix filename 提示，需要使用 redis-check-aof">
 
 
 
@@ -422,9 +418,9 @@
 
       
         <p>偶然的一天，发现redis一个实例无法启动，启动的时候，从 aof 文件往内存中加载数据的时候，出现了错误：</p>
-<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Bad <span class="built_in">file</span> <span class="built_in">format</span> reading <span class="keyword">the</span> append only <span class="built_in">file</span>: make <span class="keyword">a</span> backup <span class="keyword">of</span> your AOF <span class="built_in">file</span>, <span class="keyword">then</span> use ./redis-check-aof <span class="comment">--fix filename</span></div></pre></td></tr></table></figure>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Bad <span class="built_in">file</span> <span class="built_in">format</span> reading <span class="keyword">the</span> append only <span class="built_in">file</span>: make <span class="keyword">a</span> backup <span class="keyword">of</span> your AOF <span class="built_in">file</span>, <span class="keyword">then</span> use ./redis-check-aof <span class="comment">--fix filename</span></span><br></pre></td></tr></table></figure>
 <p>提示，需要使用 redis-check-aof 来修复 aof 文件。</p>
-<p>按照其步骤，先备份再修复：<br><figure class="highlight vbnet"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">[root@hostname <span class="number">6379</span>]<span class="meta"># redis-check-aof --fix appendonly.aof</span></div><div class="line"><span class="number">0</span>x        <span class="number">6</span>a60a5cb: Expected prefix <span class="comment">'</span></div><div class="line">AOF analyzed: size=<span class="number">1784722401</span>, ok_up_to=<span class="number">1784718795</span>, diff=<span class="number">3606</span></div><div class="line">This will shrink the AOF <span class="keyword">from</span> <span class="number">1784722401</span> bytes, <span class="keyword">with</span> <span class="number">3606</span> bytes, <span class="keyword">to</span> <span class="number">1784718795</span> bytes</div><div class="line"><span class="keyword">Continue</span>? [y/N]: y</div><div class="line">Successfully truncated AOF</div></pre></td></tr></table></figure></p>
+<p>按照其步骤，先备份再修复：<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@hostname 6379]# redis-check-aof --fix appendonly.aof</span><br><span class="line">0x        6a60a5cb: Expected<span class="built_in"> prefix </span>'</span><br><span class="line">AOF analyzed: <span class="attribute">size</span>=1784722401, <span class="attribute">ok_up_to</span>=1784718795, <span class="attribute">diff</span>=3606</span><br><span class="line">This will shrink the AOF <span class="keyword">from</span> 1784722401 bytes, with 3606 bytes, <span class="keyword">to</span> 1784718795 bytes</span><br><span class="line">Continue? [y/N]: y</span><br><span class="line">Successfully truncated AOF</span><br></pre></td></tr></table></figure></p>
 <p>修复完成后，重新启动 redis 就能正常启动了。</p>
 <p>同样，redis 如果采用的 rdb 模式持久化数据的话，如果需要修复 rdb 文件，可以使用 redis-check-dump file.rdb 来修复。</p>
 
@@ -548,7 +544,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-count">39</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -559,7 +555,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -570,7 +566,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">53</span>
+                <span class="site-state-item-count">64</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -788,7 +784,7 @@
     // Popup Window;
     var isfetched = false;
     // Search DB path;
-    var search_path = "";
+    var search_path = "search.xml";
     if (search_path.length == 0) {
       search_path = "search.xml";
     }

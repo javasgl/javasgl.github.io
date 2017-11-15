@@ -82,37 +82,18 @@
 
 
 
-<meta name="description" content="由于众所周知的原因，Atom有时候安装插件的时候很慢甚至无法安装。可以通过设置代理来解决。前提是已经有一个可以使用的http代理。参考之前的文章：将socks5转为http代理
-
-atom自带了一个工具 apm(atom package management) 这个工具可以用来设置一些系统配置
-
-可以用apm config list 查看现有的系统配置信息
-
-
-下面开始设置 http代理：">
+<meta name="description" content="由于众所周知的原因，Atom有时候安装插件的时候很慢甚至无法安装。可以通过设置代理来解决。前提是已经有一个可以使用的http代理。参考之前的文章：将socks5转为http代理  atom自带了一个工具 apm(atom package management) 这个工具可以用来设置一些系统配置  可以用apm conf">
+<meta name="keywords" content="atom,proxy">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Atom设置代理">
 <meta property="og:url" content="http://yoursite.com/atom_set_proxy/index.html">
 <meta property="og:site_name" content="Mr.song">
-<meta property="og:description" content="由于众所周知的原因，Atom有时候安装插件的时候很慢甚至无法安装。可以通过设置代理来解决。前提是已经有一个可以使用的http代理。参考之前的文章：将socks5转为http代理
-
-atom自带了一个工具 apm(atom package management) 这个工具可以用来设置一些系统配置
-
-可以用apm config list 查看现有的系统配置信息
-
-
-下面开始设置 http代理：">
+<meta property="og:description" content="由于众所周知的原因，Atom有时候安装插件的时候很慢甚至无法安装。可以通过设置代理来解决。前提是已经有一个可以使用的http代理。参考之前的文章：将socks5转为http代理  atom自带了一个工具 apm(atom package management) 这个工具可以用来设置一些系统配置  可以用apm config list 查看现有的系统配置信息   下面开始设置 http代理：">
+<meta property="og:locale" content="en">
 <meta property="og:updated_time" content="2017-03-18T15:01:02.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Atom设置代理">
-<meta name="twitter:description" content="由于众所周知的原因，Atom有时候安装插件的时候很慢甚至无法安装。可以通过设置代理来解决。前提是已经有一个可以使用的http代理。参考之前的文章：将socks5转为http代理
-
-atom自带了一个工具 apm(atom package management) 这个工具可以用来设置一些系统配置
-
-可以用apm config list 查看现有的系统配置信息
-
-
-下面开始设置 http代理：">
+<meta name="twitter:description" content="由于众所周知的原因，Atom有时候安装插件的时候很慢甚至无法安装。可以通过设置代理来解决。前提是已经有一个可以使用的http代理。参考之前的文章：将socks5转为http代理  atom自带了一个工具 apm(atom package management) 这个工具可以用来设置一些系统配置  可以用apm config list 查看现有的系统配置信息   下面开始设置 http代理：">
 
 
 
@@ -447,7 +428,7 @@ atom自带了一个工具 apm(atom package management) 这个工具可以用来�
 <ul>
 <li>执行一下命令</li>
 </ul>
-<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">apm config <span class="built_in">set</span> <span class="keyword">http</span>-proxy <span class="keyword">http</span>://host:port</div><div class="line">apm config <span class="built_in">set</span> <span class="keyword">https</span>-proxy <span class="keyword">http</span>://host:port</div><div class="line">apm config <span class="built_in">set</span> strict-ssl <span class="literal">false</span></div></pre></td></tr></table></figure>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">apm config <span class="built_in">set</span> <span class="keyword">http</span>-proxy <span class="keyword">http</span>://host:port</span><br><span class="line">apm config <span class="built_in">set</span> <span class="keyword">https</span>-proxy <span class="keyword">http</span>://host:port</span><br><span class="line">apm config <span class="built_in">set</span> strict-ssl <span class="literal">false</span></span><br></pre></td></tr></table></figure>
 <ul>
 <li>注意两点：<ul>
 <li>https 配置的也是 http 而不是 https!</li>
@@ -458,7 +439,7 @@ atom自带了一个工具 apm(atom package management) 这个工具可以用来�
 <blockquote>
 <p>其实直接修改 ~/.atom/.apmrc 文件也是可行的</p>
 </blockquote>
-<p>具体说明可以查看 <a href="https://github.com/atom/apm#behind-a-firewall" target="_blank" rel="external">这里</a></p>
+<p>具体说明可以查看 <a href="https://github.com/atom/apm#behind-a-firewall" target="_blank" rel="noopener">这里</a></p>
 
       
     </div>
@@ -580,7 +561,7 @@ atom自带了一个工具 apm(atom package management) 这个工具可以用来�
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-count">39</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -591,7 +572,7 @@ atom自带了一个工具 apm(atom package management) 这个工具可以用来�
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -602,7 +583,7 @@ atom自带了一个工具 apm(atom package management) 这个工具可以用来�
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">53</span>
+                <span class="site-state-item-count">64</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -820,7 +801,7 @@ atom自带了一个工具 apm(atom package management) 这个工具可以用来�
     // Popup Window;
     var isfetched = false;
     // Search DB path;
-    var search_path = "";
+    var search_path = "search.xml";
     if (search_path.length == 0) {
       search_path = "search.xml";
     }

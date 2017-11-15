@@ -82,28 +82,18 @@
 
 
 
-<meta name="description" content="编程中有时候需要一个临时的 struct 来封装数据，而这个 struct 的结构在其它地方又不会被二次复用,可以使用匿名 struct 来实现。
-主要有两种方式,如下:第一种方式，通过 var 初始化
-123var user struct&amp;#123;Name string;age int&amp;#125;user.Name = &quot;name&quot;user.age = 18
-第二种方式，直接初始化
-1json">
+<meta name="description" content="编程中有时候需要一个临时的 struct 来封装数据，而这个 struct 的结构在其它地方又不会被二次复用,可以使用匿名 struct 来实现。 主要有两种方式,如下:第一种方式，通过 var 初始化 123var user struct&amp;#123;Name string;age int&amp;#125;u">
+<meta name="keywords" content="go,anonymous">
 <meta property="og:type" content="article">
 <meta property="og:title" content="golang 匿名 struct 的使用方式">
 <meta property="og:url" content="http://yoursite.com/go-anonymous-struct/index.html">
 <meta property="og:site_name" content="Mr.song">
-<meta property="og:description" content="编程中有时候需要一个临时的 struct 来封装数据，而这个 struct 的结构在其它地方又不会被二次复用,可以使用匿名 struct 来实现。
-主要有两种方式,如下:第一种方式，通过 var 初始化
-123var user struct&amp;#123;Name string;age int&amp;#125;user.Name = &quot;name&quot;user.age = 18
-第二种方式，直接初始化
-1json">
+<meta property="og:description" content="编程中有时候需要一个临时的 struct 来封装数据，而这个 struct 的结构在其它地方又不会被二次复用,可以使用匿名 struct 来实现。 主要有两种方式,如下:第一种方式，通过 var 初始化 123var user struct&amp;#123;Name string;age int&amp;#125;user.Name = &quot;name&quot;user.age = 18 第二种方式，直接初始化 1json">
+<meta property="og:locale" content="en">
 <meta property="og:updated_time" content="2017-07-10T15:15:49.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="golang 匿名 struct 的使用方式">
-<meta name="twitter:description" content="编程中有时候需要一个临时的 struct 来封装数据，而这个 struct 的结构在其它地方又不会被二次复用,可以使用匿名 struct 来实现。
-主要有两种方式,如下:第一种方式，通过 var 初始化
-123var user struct&amp;#123;Name string;age int&amp;#125;user.Name = &quot;name&quot;user.age = 18
-第二种方式，直接初始化
-1json">
+<meta name="twitter:description" content="编程中有时候需要一个临时的 struct 来封装数据，而这个 struct 的结构在其它地方又不会被二次复用,可以使用匿名 struct 来实现。 主要有两种方式,如下:第一种方式，通过 var 初始化 123var user struct&amp;#123;Name string;age int&amp;#125;user.Name = &quot;name&quot;user.age = 18 第二种方式，直接初始化 1json">
 
 
 
@@ -429,10 +419,10 @@
       
         <p>编程中有时候需要一个临时的 struct 来封装数据，而这个 struct 的结构在其它地方又不会被二次复用,可以使用匿名 struct 来实现。</p>
 <p>主要有两种方式,如下:<br>第一种方式，通过 var 初始化</p>
-<figure class="highlight nsis"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var <span class="literal">user</span> struct&#123;<span class="keyword">Name</span> string<span class="comment">;age int&#125;</span></div><div class="line"><span class="literal">user</span>.<span class="keyword">Name</span> = <span class="string">"name"</span></div><div class="line"><span class="literal">user</span>.age = <span class="number">18</span></div></pre></td></tr></table></figure>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var<span class="built_in"> user </span>struct&#123;Name string;age int&#125;</span><br><span class="line">user.Name = <span class="string">"name"</span></span><br><span class="line">user.age = 18</span><br></pre></td></tr></table></figure>
 <p>第二种方式，直接初始化</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">json.Marshal(<span class="keyword">struct</span>&#123;Name <span class="built_in">string</span>;age <span class="keyword">int</span>&#125;&#123;<span class="string">"name"</span>,<span class="number">18</span>&#125;)</div></pre></td></tr></table></figure>
-<p>或者：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">json.Marshal(<span class="keyword">struct</span>&#123;</div><div class="line">	Name <span class="built_in">string</span></div><div class="line">	age <span class="keyword">int</span></div><div class="line">&#125;&#123;<span class="string">"name"</span>,<span class="number">18</span>&#125;)</div></pre></td></tr></table></figure></p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">json.Marshal(<span class="keyword">struct</span>&#123;Name <span class="keyword">string</span>;age <span class="keyword">int</span>&#125;&#123;<span class="string">"name"</span>,<span class="number">18</span>&#125;)</span><br></pre></td></tr></table></figure>
+<p>或者：<br><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">json.Marshal(<span class="keyword">struct</span>&#123;</span><br><span class="line">	Name <span class="keyword">string</span></span><br><span class="line">	age <span class="keyword">int</span></span><br><span class="line">&#125;&#123;<span class="string">"name"</span>,<span class="number">18</span>&#125;)</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -554,7 +544,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-count">39</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -565,7 +555,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -576,7 +566,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">53</span>
+                <span class="site-state-item-count">64</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -794,7 +784,7 @@
     // Popup Window;
     var isfetched = false;
     // Search DB path;
-    var search_path = "";
+    var search_path = "search.xml";
     if (search_path.length == 0) {
       search_path = "search.xml";
     }

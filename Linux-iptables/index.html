@@ -82,49 +82,18 @@
 
 
 
-<meta name="description" content="Linux 下防火墙 iptables 命令使用笔记
-查看目前iptables设置 iptables -vnL --line-numbers
-
--v verbose 详细信息
--n 显示数字端口等
--L list ,默认会显示filter表的规则
---line-numbers 显示序号,删除、插入时有用
-
-
-删除规则iptables -t table -D INPUT ruleNumber
-
--t">
+<meta name="description" content="Linux 下防火墙 iptables 命令使用笔记 查看目前iptables设置 iptables -vnL --line-numbers  -v verbose 详细信息 -n 显示数字端口等 -L list ,默认会显示filter表的规则 --line-numbers 显示序号,删除、插入时有用   删除规则i">
+<meta name="keywords" content="Linux,iptables">
 <meta property="og:type" content="article">
 <meta property="og:title" content="iptables使用笔记">
 <meta property="og:url" content="http://yoursite.com/Linux-iptables/index.html">
 <meta property="og:site_name" content="Mr.song">
-<meta property="og:description" content="Linux 下防火墙 iptables 命令使用笔记
-查看目前iptables设置 iptables -vnL --line-numbers
-
--v verbose 详细信息
--n 显示数字端口等
--L list ,默认会显示filter表的规则
---line-numbers 显示序号,删除、插入时有用
-
-
-删除规则iptables -t table -D INPUT ruleNumber
-
--t">
+<meta property="og:description" content="Linux 下防火墙 iptables 命令使用笔记 查看目前iptables设置 iptables -vnL --line-numbers  -v verbose 详细信息 -n 显示数字端口等 -L list ,默认会显示filter表的规则 --line-numbers 显示序号,删除、插入时有用   删除规则iptables -t table -D INPUT ruleNumber  -t">
+<meta property="og:locale" content="en">
 <meta property="og:updated_time" content="2017-08-19T14:04:23.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iptables使用笔记">
-<meta name="twitter:description" content="Linux 下防火墙 iptables 命令使用笔记
-查看目前iptables设置 iptables -vnL --line-numbers
-
--v verbose 详细信息
--n 显示数字端口等
--L list ,默认会显示filter表的规则
---line-numbers 显示序号,删除、插入时有用
-
-
-删除规则iptables -t table -D INPUT ruleNumber
-
--t">
+<meta name="twitter:description" content="Linux 下防火墙 iptables 命令使用笔记 查看目前iptables设置 iptables -vnL --line-numbers  -v verbose 详细信息 -n 显示数字端口等 -L list ,默认会显示filter表的规则 --line-numbers 显示序号,删除、插入时有用   删除规则iptables -t table -D INPUT ruleNumber  -t">
 
 
 
@@ -481,7 +450,7 @@
 <li><code>-j</code> jump</li>
 <li><code>ACCEPT</code> ACCEPT|DROP|REJECT|LOG</li>
 </ul>
-<p>详细可参考 <a href="http://www.cnblogs.com/metoy/p/4320813.html" target="_blank" rel="external">iptables详解</a>,文章很详细!</p>
+<p>详细可参考 <a href="http://www.cnblogs.com/metoy/p/4320813.html" target="_blank" rel="noopener">iptables详解</a>,文章很详细!</p>
 
       
     </div>
@@ -612,7 +581,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-count">39</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -623,7 +592,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -634,7 +603,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">53</span>
+                <span class="site-state-item-count">64</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -868,7 +837,7 @@
     // Popup Window;
     var isfetched = false;
     // Search DB path;
-    var search_path = "";
+    var search_path = "search.xml";
     if (search_path.length == 0) {
       search_path = "search.xml";
     }

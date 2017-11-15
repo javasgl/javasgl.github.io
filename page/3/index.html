@@ -88,6 +88,7 @@
 <meta property="og:url" content="http://yoursite.com/page/3/index.html">
 <meta property="og:site_name" content="Mr.song">
 <meta property="og:description" content="A journey of a thousand miles begins with single step">
+<meta property="og:locale" content="en">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mr.song">
 <meta name="twitter:description" content="A journey of a thousand miles begins with single step">
@@ -299,7 +300,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/php-vld/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/elasticsearch-function-doc/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="songgl">
@@ -321,8 +322,8 @@
             
               
                 
-                <a class="post-title-link" href="/php-vld/" itemprop="url">
-                  阅读 php 源码，使用 vld 扩展查看 opcode
+                <a class="post-title-link" href="/elasticsearch-function-doc/" itemprop="url">
+                  Elasticsearch function 中 doc , _fields , _source 使用
                 </a>
               
             
@@ -338,8 +339,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-03T10:12:44+08:00">
-                2017-08-03
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-21T12:07:40+08:00">
+                2017-08-21
               </time>
             
 
@@ -361,8 +362,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/php/" itemprop="url" rel="index">
-                    <span itemprop="name">php</span>
+                  <a href="/categories/elasticsearch/" itemprop="url" rel="index">
+                    <span itemprop="name">elasticsearch</span>
                   </a>
                 </span>
 
@@ -380,8 +381,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/php-vld/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count hc-comment-count" data-xid="php-vld/" itemprop="commentsCount"></span>
+                <a href="/elasticsearch-function-doc/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="elasticsearch-function-doc/" itemprop="commentsCount"></span>
                 </a>
               </span>
               <!--/noindex-->
@@ -390,7 +391,7 @@
 
           
           
-             <span id="/php-vld/" class="leancloud_visitors" data-flag-title="阅读 php 源码，使用 vld 扩展查看 opcode">
+             <span id="/elasticsearch-function-doc/" class="leancloud_visitors" data-flag-title="Elasticsearch function 中 doc , _fields , _source 使用">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -420,13 +421,11 @@
 
       
         
-          <p>php 虽然是一门动态语言，但是它也有一个编译的过程，这个过程经过词法分析、语法分析,最终生成 Zend 引擎可以执行的 opcode 指令，类似于 java 的字节码。</p>
-<p>要查看一段代码对应的 opcode ，可以使用 <a href="http://pecl.php.net/package/vld/">vld 扩展</a> 来查看。</p>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>安装 vld 和安装 php 其他的扩展没有任何区别，下载源码、编译、安装等…<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">tar zxf vld<span class="number">-0.14</span><span class="number">.0</span>.tar.gz</div><div class="line">cd vld<span class="number">-0.14</span><span class="number">.0</span></div><div class="line">phpize</div><div class="line">./configure</div><div class="line">make</div><div class="line">make install</div></pre></td></tr></table></figure></p>
-<p>记得要修改 php.ini 启用 vld 扩展:<br><figure class="highlight ini"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="section">[vld]</span></div><div class="line"><span class="attr">extensions</span>=vld.so</div></pre></td></tr></table></figure></p>
+          <p>面对复杂的查询或者算分逻辑，Elasticsearch 可以使用 Scrpits 脚本功能来实现，实际项目之中也用的非常频繁。<br>在脚本中需要访问文档中的字段，此时有三种方式可以访问，分别是 doc , _fields , _source。这三个字段使用的时候还是有区别的。<br><figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"filtered"</span> : &#123;</span><br><span class="line">    <span class="string">"query"</span> : &#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">"filter"</span> : &#123;</span><br><span class="line">        <span class="string">"script"</span> : &#123;</span><br><span class="line">            <span class="string">"script"</span> : "<span class="type">doc</span>[<span class="symbol">'num1</span>'].value &gt; param1<span class="string">"</span></span><br><span class="line"><span class="string">            "</span>params<span class="string">" : &#123;</span></span><br><span class="line"><span class="string">                "</span>param1<span class="string">" : 5</span></span><br><span class="line"><span class="string">            &#125;</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure></p>
+<p>下面通过几个示例脚本来分别说明三者之间的区别。<br>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/php-vld/#more" rel="contents">
+            <a class="btn" href="/elasticsearch-function-doc/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -472,7 +471,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/ctags/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/linux-sort/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="songgl">
@@ -494,8 +493,8 @@
             
               
                 
-                <a class="post-title-link" href="/ctags/" itemprop="url">
-                  阅读 php 源码，ctags 配合 vim 实现代码跳转
+                <a class="post-title-link" href="/linux-sort/" itemprop="url">
+                  Linux sort 命令使用
                 </a>
               
             
@@ -511,8 +510,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-01T16:40:05+08:00">
-                2017-08-01
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-21T11:18:53+08:00">
+                2017-08-21
               </time>
             
 
@@ -534,8 +533,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/php/" itemprop="url" rel="index">
-                    <span itemprop="name">php</span>
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
                   </a>
                 </span>
 
@@ -553,8 +552,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/ctags/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count hc-comment-count" data-xid="ctags/" itemprop="commentsCount"></span>
+                <a href="/linux-sort/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="linux-sort/" itemprop="commentsCount"></span>
                 </a>
               </span>
               <!--/noindex-->
@@ -563,7 +562,7 @@
 
           
           
-             <span id="/ctags/" class="leancloud_visitors" data-flag-title="阅读 php 源码，ctags 配合 vim 实现代码跳转">
+             <span id="/linux-sort/" class="leancloud_visitors" data-flag-title="Linux sort 命令使用">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -593,14 +592,193 @@
 
       
         
-          <p>在阅读 php 源码的时候，为了方便跳转到相应的函数定义的位置，需要使用 ctags 来生成 tags 文件，再配合 vim 来实现跳转。</p>
-<h2 id="安装-ctags"><a href="#安装-ctags" class="headerlink" title="安装 ctags"></a>安装 ctags</h2><p>macOS 上使用 ctags 非常简单，一般都预装了 ctags 。</p>
-<p>如果没有安装，可以使用 <code>brew install ctags</code> 来安装。</p>
-<h2 id="tags-文件"><a href="#tags-文件" class="headerlink" title="tags 文件"></a>tags 文件</h2><p>在 php 源码根目录，执行 <code>ctags -R</code>, 就会在当前目录下生成一个名为 <code>tags</code> 的 文件。 </p>
-<figure class="highlight livescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">~/codes/php-src(master*) » tail -n <span class="number">20</span> tags                                                                                                                                       </div><div class="line">zval_marked_grey	Zend<span class="regexp">/zend_gc.h	/</span>^	uint32_t zval_marked_grey;$/;<span class="string">"	m	struct:_zend_gc_globals</div><div class="line">zval_object_property_dump	ext/standard/var.c	/^static void zval_object_property_dump(zval *zv, zend_ulong index, zend_string *key, int level) \/* &#123;&#123;&#123; *\/$/;"</span>	f	file:</div><div class="line">zval_opt_copy_ctor	Zend<span class="regexp">/zend_variables.h	/</span>^<span class="comment">#define zval_opt_copy_ctor(/;"	d</span></div><div class="line">zval_possible_root	Zend<span class="regexp">/zend_gc.h	/</span>^	uint32_t zval_possible_root;$/;<span class="string">"	m	struct:_zend_gc_globals</div><div class="line">zval_ptr_dtor	Zend/zend_execute.c	/^<span class="subst">#define</span> zval_ptr_dtor(/;"</span>	d	file:</div><div class="line">zval_ptr_dtor	Zend<span class="regexp">/zend_execute.c	/</span>^<span class="comment">#undef zval_ptr_dtor$/;"	d	file:</span></div><div class="line">zval_ptr_dtor	Zend<span class="regexp">/zend_variables.h	/</span>^<span class="comment">#define zval_ptr_dtor(/;"	d</span></div><div class="line">zval_ptr_dtor_nogc	Zend<span class="regexp">/zend_variables.h	/</span>^<span class="comment">#define zval_ptr_dtor_nogc(/;"	d</span></div><div class="line">zval_ptr_dtor_wrapper	Zend<span class="regexp">/zend_variables.h	/</span>^<span class="comment">#define zval_ptr_dtor_wrapper /;"	d</span></div></pre></td></tr></table></figure>
+          
+            <p>Linux 可使用 sort 命令来对文件内容或者其他命令的输出内容进行排序。常见的场景是按大小排列日志文件、按文件名排序等。</p>
+<p>sort 命令常用的参数有：</p>
+<ul>
+<li>r sort默认排序为升序，如果需要降序，则执行 -r即可。reverse</li>
+<li>n sort排序默认是当做字符来排序的，所以会遇到 10&lt;2 的情况,使用 n 让其当做 number 来排序</li>
+<li>u 去重,排重</li>
+<li>t 指定分割符号，有时候需要将内容分割，按照其中部分内容排序</li>
+<li>k 指定排序列，一般配合 t 使用，注意，列从 1 开始</li>
+<li>o 将输出结果重定向写入文件，写入原文件时不能使用 &gt; 。</li>
+</ul>
+<p>example:<br><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">[root@linux]$ls search2*|<span class="built_in">sort</span> -rn -k <span class="number">4</span> -t <span class="string">'.'</span></span><br><span class="line">search2.<span class="built_in">stdout</span>.<span class="built_in">log</span><span class="number">.20</span></span><br><span class="line">search2.<span class="built_in">stdout</span>.<span class="built_in">log</span><span class="number">.19</span></span><br><span class="line">search2.<span class="built_in">stdout</span>.<span class="built_in">log</span><span class="number">.18</span></span><br><span class="line">search2.<span class="built_in">stdout</span>.<span class="built_in">log</span><span class="number">.17</span></span><br><span class="line">search2.<span class="built_in">stdout</span>.<span class="built_in">log</span><span class="number">.16</span></span><br><span class="line">search2.<span class="built_in">stdout</span>.<span class="built_in">log</span><span class="number">.15</span></span><br><span class="line">search2.<span class="built_in">stdout</span>.<span class="built_in">log</span><span class="number">.14</span></span><br><span class="line">search2.<span class="built_in">stdout</span>.<span class="built_in">log</span><span class="number">.13</span></span><br><span class="line">search2.<span class="built_in">stdout</span>.<span class="built_in">log</span><span class="number">.12</span></span><br><span class="line">search2.<span class="built_in">stdout</span>.<span class="built_in">log</span><span class="number">.11</span></span><br><span class="line">search2.<span class="built_in">stdout</span>.<span class="built_in">log</span><span class="number">.10</span></span><br><span class="line">search2.<span class="built_in">stdout</span>.<span class="built_in">log</span><span class="number">.9</span></span><br><span class="line">search2.<span class="built_in">stdout</span>.<span class="built_in">log</span><span class="number">.8</span></span><br><span class="line">search2.<span class="built_in">stdout</span>.<span class="built_in">log</span><span class="number">.7</span></span><br><span class="line">search2.<span class="built_in">stdout</span>.<span class="built_in">log</span><span class="number">.6</span></span><br><span class="line">search2.<span class="built_in">stdout</span>.<span class="built_in">log</span><span class="number">.5</span></span><br><span class="line">search2.<span class="built_in">stdout</span>.<span class="built_in">log</span><span class="number">.4</span></span><br><span class="line">search2.<span class="built_in">stdout</span>.<span class="built_in">log</span><span class="number">.3</span></span><br><span class="line">search2.<span class="built_in">stdout</span>.<span class="built_in">log</span><span class="number">.2</span></span><br><span class="line">search2.<span class="built_in">stdout</span>.<span class="built_in">log</span><span class="number">.1</span></span><br><span class="line">search2.<span class="built_in">stdout</span>.<span class="built_in">log</span></span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/chrome-unsafe-port-err/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="songgl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/favicon.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mr.song">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/chrome-unsafe-port-err/" itemprop="url">
+                  Chrome 非安全端口限制
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-19T23:30:32+08:00">
+                2017-08-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/notes/" itemprop="url" rel="index">
+                    <span itemprop="name">notes</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            <!--noindex-->
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/chrome-unsafe-port-err/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="chrome-unsafe-port-err/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+              <!--/noindex-->
+            
+          
+
+          
+          
+             <span id="/chrome-unsafe-port-err/" class="leancloud_visitors" data-flag-title="Chrome 非安全端口限制">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>在 beego 群里，有同学问了一个看似比较的简单的问题。问题是这样的: 一个beego web项目，将项目的端口号从默认的 8080 改为 6666 之后通过 Chrome 浏览器无法访问，但是通过其他浏览器却可以访问。</p>
+<p>但是并未在意，认为这可能是chrome浏览器或者系统不小心配置了代理导致的，后来我自己在本机上也实验以下，将应用端口改为 6666 之后，通过 Chrome 浏览器也无法访问。报错信息如下:<br><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">This site can’t be reached</span><br><span class="line"></span><br><span class="line">The webpage <span class="keyword">at</span> <span class="keyword">http</span>://localhost:<span class="number">6666</span>/ might be temporarily down <span class="keyword">or</span> <span class="keyword">it</span> may have moved permanently <span class="built_in">to</span> <span class="keyword">a</span> <span class="built_in">new</span> web address.</span><br><span class="line">ERR_UNSAFE_PORT</span><br></pre></td></tr></table></figure></p>
+<p>报错信息中提到了 <code>ERR_UNSAFE_PORT</code>。</p>
+<p>解决方案：<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">/Applications/</span>Google Chrome.app<span class="regexp">/Contents/</span>MacOS<span class="regexp">/Google Chrome --explicitly-allowed-ports=6666,8888</span></span><br></pre></td></tr></table></figure></p>
+<p>或者换端口，避开Chrome的非安全端口限制。<br>参考资料：</p>
+<ul>
+<li><a href="https://jazzy.id.au/2012/08/23/why_does_chrome_consider_some_ports_unsafe.html" target="_blank" rel="noopener">https://jazzy.id.au/2012/08/23/why_does_chrome_consider_some_ports_unsafe.html</a></li>
+<li><a href="https://support.google.com/chrome/forum/AAAAP1KN0B0l5d-nXEjLMM?hl=en" target="_blank" rel="noopener">https://support.google.com/chrome/forum/AAAAP1KN0B0l5d-nXEjLMM?hl=en</a>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/ctags/#more" rel="contents">
+            <a class="btn" href="/chrome-unsafe-port-err/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -646,7 +824,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/go-anonymous-struct/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/compress-executables-with-upx/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="songgl">
@@ -668,8 +846,8 @@
             
               
                 
-                <a class="post-title-link" href="/go-anonymous-struct/" itemprop="url">
-                  golang 匿名 struct 的使用方式
+                <a class="post-title-link" href="/compress-executables-with-upx/" itemprop="url">
+                  使用upx压缩可执行文件
                 </a>
               
             
@@ -685,8 +863,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-08T23:20:01+08:00">
-                2017-07-08
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-19T22:39:28+08:00">
+                2017-08-19
               </time>
             
 
@@ -708,8 +886,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/go/" itemprop="url" rel="index">
-                    <span itemprop="name">go</span>
+                  <a href="/categories/tools/" itemprop="url" rel="index">
+                    <span itemprop="name">tools</span>
                   </a>
                 </span>
 
@@ -727,8 +905,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/go-anonymous-struct/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count hc-comment-count" data-xid="go-anonymous-struct/" itemprop="commentsCount"></span>
+                <a href="/compress-executables-with-upx/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="compress-executables-with-upx/" itemprop="commentsCount"></span>
                 </a>
               </span>
               <!--/noindex-->
@@ -737,7 +915,7 @@
 
           
           
-             <span id="/go-anonymous-struct/" class="leancloud_visitors" data-flag-title="golang 匿名 struct 的使用方式">
+             <span id="/compress-executables-with-upx/" class="leancloud_visitors" data-flag-title="使用upx压缩可执行文件">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -767,185 +945,11 @@
 
       
         
-          
-            <p>编程中有时候需要一个临时的 struct 来封装数据，而这个 struct 的结构在其它地方又不会被二次复用,可以使用匿名 struct 来实现。</p>
-<p>主要有两种方式,如下:<br>第一种方式，通过 var 初始化</p>
-<figure class="highlight nsis"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var <span class="literal">user</span> struct&#123;<span class="keyword">Name</span> string<span class="comment">;age int&#125;</span></div><div class="line"><span class="literal">user</span>.<span class="keyword">Name</span> = <span class="string">"name"</span></div><div class="line"><span class="literal">user</span>.age = <span class="number">18</span></div></pre></td></tr></table></figure>
-<p>第二种方式，直接初始化</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">json.Marshal(<span class="keyword">struct</span>&#123;Name <span class="built_in">string</span>;age <span class="keyword">int</span>&#125;&#123;<span class="string">"name"</span>,<span class="number">18</span>&#125;)</div></pre></td></tr></table></figure>
-<p>或者：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">json.Marshal(<span class="keyword">struct</span>&#123;</div><div class="line">	Name <span class="built_in">string</span></div><div class="line">	age <span class="keyword">int</span></div><div class="line">&#125;&#123;<span class="string">"name"</span>,<span class="number">18</span>&#125;)</div></pre></td></tr></table></figure></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/glide/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="songgl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/favicon.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Mr.song">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/glide/" itemprop="url">
-                  Glide--golang 包管理工具简单教程
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-08T23:06:00+08:00">
-                2017-07-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/go/" itemprop="url" rel="index">
-                    <span itemprop="name">go</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            <!--noindex-->
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/glide/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count hc-comment-count" data-xid="glide/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-              <!--/noindex-->
-            
-          
-
-          
-          
-             <span id="/glide/" class="leancloud_visitors" data-flag-title="Glide--golang 包管理工具简单教程">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p> Golang挺好用的，但是目前比较受到诟病的是其没有自带包管理工具(golang社区已经发起了一个<a href="https://github.com/golang/dep">dep</a>的项目，不过要正式被golang接受还需要一段时间)。官方没有咋办，那就自己造轮子呗。所以 go的包管理工具就五花八门、层出不穷了。目前有Glide, gopm, godep,gpm，gom等等。。。</p>
-<p>这里介绍一个工具，使用比较简单: glide</p>
-<p>我已经将其的文档翻译成了中文:  <a href="http://glidedocs.readthedocs.io/">glide 中文文档</a>.</p>
-<p>翻译的内容放在github上: <a href="https://github.com/javasgl/GlideDocs">https://github.com/javasgl/GlideDocs</a></p>
-<p>不想看文章的可以直接去看中文文档，文档写的很清晰，文档中关于<code>glide</code>的用法和原理都有说明。<br>
+          <p>记得当初刚接触学习 golang 的时候,当时使用还是 go 1.4版本,和其他语言的入门一样，写了一个简单的 hello world 程序。<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	fmt.Println(<span class="string">"Hello World!"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>程序非常简单，整个源文件大小才 4KB。然后执行 go build 编译成可执行文件，结果让我非常惊讶的是这段简单的代码生成的可执行文件竟然有4M之多。<br>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/glide/#more" rel="contents">
+            <a class="btn" href="/compress-executables-with-upx/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -991,7 +995,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/go-slice-append/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/reading-list/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="songgl">
@@ -1013,8 +1017,8 @@
             
               
                 
-                <a class="post-title-link" href="/go-slice-append/" itemprop="url">
-                  golang中slice越界问题
+                <a class="post-title-link" href="/reading-list/" itemprop="url">
+                  读书清单(备忘)
                 </a>
               
             
@@ -1030,8 +1034,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-21T00:02:26+08:00">
-                2017-06-21
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-19T22:08:27+08:00">
+                2017-08-19
               </time>
             
 
@@ -1053,8 +1057,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/go/" itemprop="url" rel="index">
-                    <span itemprop="name">go</span>
+                  <a href="/categories/notes/" itemprop="url" rel="index">
+                    <span itemprop="name">notes</span>
                   </a>
                 </span>
 
@@ -1072,8 +1076,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/go-slice-append/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count hc-comment-count" data-xid="go-slice-append/" itemprop="commentsCount"></span>
+                <a href="/reading-list/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="reading-list/" itemprop="commentsCount"></span>
                 </a>
               </span>
               <!--/noindex-->
@@ -1082,7 +1086,7 @@
 
           
           
-             <span id="/go-slice-append/" class="leancloud_visitors" data-flag-title="golang中slice越界问题">
+             <span id="/reading-list/" class="leancloud_visitors" data-flag-title="读书清单(备忘)">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1112,15 +1116,26 @@
 
       
         
-          <p><code>go</code>中<code>slice</code>由于其类似于一个长度可动态变化的数组而非常方便使用。<br><code>slice</code>有两个基本属性：<code>cap</code>,<code>len</code>，分别代表容量和已有数据长度。<br>一般声明<code>slice</code>的两种方式如下：<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//定义了一个初始长度为0,容量为2的int 类型的 `slice`</span></div><div class="line">slice:=<span class="built_in">make</span>([]<span class="keyword">int</span>,<span class="number">0</span>,<span class="number">2</span>)</div><div class="line"></div><div class="line"><span class="keyword">var</span> slice=[]<span class="keyword">int</span>&#123;<span class="number">0</span>,<span class="number">1</span>&#125;</div></pre></td></tr></table></figure></p>
-<p>往<code>slice</code>中添加元素使用<code>append</code>方法：<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">slice=<span class="built_in">append</span>(slice,<span class="number">1</span>)</div></pre></td></tr></table></figure></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/go-slice-append/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+          
+            <h2 id="2017读书清单"><a href="#2017读书清单" class="headerlink" title="2017读书清单"></a>2017读书清单</h2><h3 id="进行中-amp-计划中"><a href="#进行中-amp-计划中" class="headerlink" title="进行中&amp;计划中"></a>进行中&amp;计划中</h3><ul>
+<li>《Go并发编程实战》 –郝林</li>
+<li>《App 后台开发运维和架构实践》–曾健生</li>
+<li>《重构–改善既有代码的设计》 – 中文版</li>
+<li>《高性能网站架构实战》 – 刘鑫</li>
+<li>《构建高性能Web站点》 – 郭欣</li>
+<li>《设计模式之禅》 – 秦小波</li>
+<li>《go In Action》（Go语言实战）–中文版</li>
+<li>《the way to go》（go语言程序设计）–中文版<br>….</li>
+</ul>
+<h3 id="已读"><a href="#已读" class="headerlink" title="已读"></a>已读</h3><ul>
+<li>《build-web-application-with-golang》–github</li>
+<li>《Go语言编程》 – 许式伟</li>
+<li>《Go语言最佳实践》– pdf</li>
+<li>《深入理解PHP内核》– php-internal.com</li>
+</ul>
+<p>^_^ 任务艰巨~~~~</p>
+
+          
         
       
     </div>
@@ -1157,7 +1172,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1202,7 +1217,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-count">39</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -1213,7 +1228,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -1224,7 +1239,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">53</span>
+                <span class="site-state-item-count">64</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -1436,7 +1451,7 @@
     // Popup Window;
     var isfetched = false;
     // Search DB path;
-    var search_path = "";
+    var search_path = "search.xml";
     if (search_path.length == 0) {
       search_path = "search.xml";
     }

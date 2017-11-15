@@ -82,19 +82,18 @@
 
 
 
-<meta name="description" content="记得当初刚接触学习 golang 的时候,当时使用还是 go 1.4版本,和其他语言的入门一样，写了一个简单的 hello world 程序。1234567package mainimport &quot;fmt&quot;func main() &amp;#123;	fmt.Println(&quot;Hello World!&quot;)&amp;#125;
-程序非常简单，整个源文件大小才 4KB。然后执行 go build 编译成可执行文件，结果">
+<meta name="description" content="记得当初刚接触学习 golang 的时候,当时使用还是 go 1.4版本,和其他语言的入门一样，写了一个简单的 hello world 程序。1234567package mainimport &quot;fmt&quot;func main() &amp;#123;	fmt.Println(&quot;Hello W">
+<meta name="keywords" content="upx,compress,golang">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用upx压缩可执行文件">
 <meta property="og:url" content="http://yoursite.com/compress-executables-with-upx/index.html">
 <meta property="og:site_name" content="Mr.song">
-<meta property="og:description" content="记得当初刚接触学习 golang 的时候,当时使用还是 go 1.4版本,和其他语言的入门一样，写了一个简单的 hello world 程序。1234567package mainimport &quot;fmt&quot;func main() &amp;#123;	fmt.Println(&quot;Hello World!&quot;)&amp;#125;
-程序非常简单，整个源文件大小才 4KB。然后执行 go build 编译成可执行文件，结果">
+<meta property="og:description" content="记得当初刚接触学习 golang 的时候,当时使用还是 go 1.4版本,和其他语言的入门一样，写了一个简单的 hello world 程序。1234567package mainimport &quot;fmt&quot;func main() &amp;#123;	fmt.Println(&quot;Hello World!&quot;)&amp;#125; 程序非常简单，整个源文件大小才 4KB。然后执行 go build 编译成可执行文件，结果">
+<meta property="og:locale" content="en">
 <meta property="og:updated_time" content="2017-08-19T15:23:24.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用upx压缩可执行文件">
-<meta name="twitter:description" content="记得当初刚接触学习 golang 的时候,当时使用还是 go 1.4版本,和其他语言的入门一样，写了一个简单的 hello world 程序。1234567package mainimport &quot;fmt&quot;func main() &amp;#123;	fmt.Println(&quot;Hello World!&quot;)&amp;#125;
-程序非常简单，整个源文件大小才 4KB。然后执行 go build 编译成可执行文件，结果">
+<meta name="twitter:description" content="记得当初刚接触学习 golang 的时候,当时使用还是 go 1.4版本,和其他语言的入门一样，写了一个简单的 hello world 程序。1234567package mainimport &quot;fmt&quot;func main() &amp;#123;	fmt.Println(&quot;Hello World!&quot;)&amp;#125; 程序非常简单，整个源文件大小才 4KB。然后执行 go build 编译成可执行文件，结果">
 
 
 
@@ -418,14 +417,14 @@
       
 
       
-        <p>记得当初刚接触学习 golang 的时候,当时使用还是 go 1.4版本,和其他语言的入门一样，写了一个简单的 hello world 程序。<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> main</div><div class="line"></div><div class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</div><div class="line">	fmt.Println(<span class="string">"Hello World!"</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>程序非常简单，整个源文件大小才 4KB。然后执行 go build 编译成可执行文件，结果让我非常惊讶的是这段简单的代码生成的可执行文件竟然有4M之多。<br><a id="more"></a><br>当然，只有升级到了1.8版本之后，情况稍微好了一些，但是生成的可执行程序依然有1.6M之多。<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">du</span> <span class="selector-tag">-sh</span> <span class="selector-tag">hello</span>*</div><div class="line">1<span class="selector-class">.6M</span>	<span class="selector-tag">hello</span></div><div class="line">4<span class="selector-class">.0K</span>	<span class="selector-tag">hello</span><span class="selector-class">.go</span></div></pre></td></tr></table></figure></p>
+        <p>记得当初刚接触学习 golang 的时候,当时使用还是 go 1.4版本,和其他语言的入门一样，写了一个简单的 hello world 程序。<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	fmt.Println(<span class="string">"Hello World!"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>程序非常简单，整个源文件大小才 4KB。然后执行 go build 编译成可执行文件，结果让我非常惊讶的是这段简单的代码生成的可执行文件竟然有4M之多。<br><a id="more"></a><br>当然，只有升级到了1.8版本之后，情况稍微好了一些，但是生成的可执行程序依然有1.6M之多。<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">du</span> <span class="selector-tag">-sh</span> <span class="selector-tag">hello</span>*</span><br><span class="line">1<span class="selector-class">.6M</span>	<span class="selector-tag">hello</span></span><br><span class="line">4<span class="selector-class">.0K</span>	<span class="selector-tag">hello</span><span class="selector-class">.go</span></span><br></pre></td></tr></table></figure></p>
 <p>虽然现在服务器的硬盘不再是限制，价格也比较低廉，但是网络带宽依然是瓶颈，当可执行文件需要通过网络进行分发的时候，文件的大小的影响就比较明显了。</p>
 <p>这个问题可以通过 upx(the Ultimate Packer for eXecutables) 来解决。</p>
-<p>地址：<a href="https://github.com/upx/upx" target="_blank" rel="external">https://github.com/upx/upx</a></p>
-<p>压缩效果非常明显，以下 helllo_1 和 hello_2 分别是默认压缩和使用 –brute 参数压缩之后的二进制文件：<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">upx -o hello_1 hello</div><div class="line"></div><div class="line">upx --brute hello_2 hello</div><div class="line"></div><div class="line">du -sh hello*</div><div class="line"></div><div class="line"><span class="number">1.6</span>M	hello</div><div class="line"><span class="number">4.0</span>K	hello.go</div><div class="line"><span class="number">576</span>K	hello_1</div><div class="line"><span class="number">456</span>K	hello_2</div></pre></td></tr></table></figure></p>
+<p>地址：<a href="https://github.com/upx/upx" target="_blank" rel="noopener">https://github.com/upx/upx</a></p>
+<p>压缩效果非常明显，以下 helllo_1 和 hello_2 分别是默认压缩和使用 –brute 参数压缩之后的二进制文件：<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">upx -o hello_1 hello</span><br><span class="line"></span><br><span class="line">upx --brute hello_2 hello</span><br><span class="line"></span><br><span class="line">du -sh hello*</span><br><span class="line"></span><br><span class="line"><span class="number">1.6</span>M	hello</span><br><span class="line"><span class="number">4.0</span>K	hello.go</span><br><span class="line"><span class="number">576</span>K	hello_1</span><br><span class="line"><span class="number">456</span>K	hello_2</span><br></pre></td></tr></table></figure></p>
 <p>可见，压缩比相当可观，大概压缩了 70% 的大小。</p>
-<p>下面是一个正式项目的压缩效果：<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"> <span class="number">14</span>M	gomessage_v2</div><div class="line"><span class="number">4.2</span>M	gomessage_v2<span class="selector-class">.compressed</span>			<span class="comment">//upx -o gomessage_v2.compressed gomessage_v2</span></div><div class="line"><span class="number">4.1</span>M	gomessage_v2<span class="selector-class">.compressed</span><span class="selector-class">.best</span>		<span class="comment">//upx --best -o gomessage_v2.compressed.best gomessage_v2</span></div><div class="line"><span class="number">3.1</span>M	gomessage_v2<span class="selector-class">.compressed</span><span class="selector-class">.brute</span>		<span class="comment">//upx --brute -o gomessage_v2.compressed.brute gomessage_v2</span></div></pre></td></tr></table></figure></p>
+<p>下面是一个正式项目的压缩效果：<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> <span class="number">14</span>M	gomessage_v2</span><br><span class="line"><span class="number">4.2</span>M	gomessage_v2<span class="selector-class">.compressed</span>			<span class="comment">//upx -o gomessage_v2.compressed gomessage_v2</span></span><br><span class="line"><span class="number">4.1</span>M	gomessage_v2<span class="selector-class">.compressed</span><span class="selector-class">.best</span>		<span class="comment">//upx --best -o gomessage_v2.compressed.best gomessage_v2</span></span><br><span class="line"><span class="number">3.1</span>M	gomessage_v2<span class="selector-class">.compressed</span><span class="selector-class">.brute</span>		<span class="comment">//upx --brute -o gomessage_v2.compressed.brute gomessage_v2</span></span><br></pre></td></tr></table></figure></p>
 <p>可见压缩之后可执行文件还是小了很多，从 14M 降低到了 3~4M 左右。<br>不同的参数代表着压缩程度，压缩的越多，压缩过程所需的时间也相对比较长。</p>
 
       
@@ -550,7 +549,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-count">39</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -561,7 +560,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -572,7 +571,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">53</span>
+                <span class="site-state-item-count">64</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -790,7 +789,7 @@
     // Popup Window;
     var isfetched = false;
     // Search DB path;
-    var search_path = "";
+    var search_path = "search.xml";
     if (search_path.length == 0) {
       search_path = "search.xml";
     }

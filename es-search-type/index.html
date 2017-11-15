@@ -82,19 +82,18 @@
 
 
 
-<meta name="description" content="Search Type 有助于理解 Elasticsearch 在多个分片(shard)的情况下，是如何搜索的，是如何决定返回数据数量、如何排序、如何算分的？
-执行过程在多个分片情况下，查询 0-20 条记录，elasticsearch 会将请求转发到每个分片上，从每个分片上获取 20 条记录，然后返回给分发节点进行汇总，最后再从汇总的结果中取 0-20 数据返回给客户端。则就是 elastics">
+<meta name="description" content="Search Type 有助于理解 Elasticsearch 在多个分片(shard)的情况下，是如何搜索的，是如何决定返回数据数量、如何排序、如何算分的？ 执行过程在多个分片情况下，查询 0-20 条记录，elasticsearch 会将请求转发到每个分片上，从每个分片上获取 20 条记录，然后返回给分发节点进行汇">
+<meta name="keywords" content="elasticsearch">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Elasticsearch 几种 Search Type">
 <meta property="og:url" content="http://yoursite.com/es-search-type/index.html">
 <meta property="og:site_name" content="Mr.song">
-<meta property="og:description" content="Search Type 有助于理解 Elasticsearch 在多个分片(shard)的情况下，是如何搜索的，是如何决定返回数据数量、如何排序、如何算分的？
-执行过程在多个分片情况下，查询 0-20 条记录，elasticsearch 会将请求转发到每个分片上，从每个分片上获取 20 条记录，然后返回给分发节点进行汇总，最后再从汇总的结果中取 0-20 数据返回给客户端。则就是 elastics">
+<meta property="og:description" content="Search Type 有助于理解 Elasticsearch 在多个分片(shard)的情况下，是如何搜索的，是如何决定返回数据数量、如何排序、如何算分的？ 执行过程在多个分片情况下，查询 0-20 条记录，elasticsearch 会将请求转发到每个分片上，从每个分片上获取 20 条记录，然后返回给分发节点进行汇总，最后再从汇总的结果中取 0-20 数据返回给客户端。则就是 elastics">
+<meta property="og:locale" content="en">
 <meta property="og:updated_time" content="2017-08-30T15:32:10.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Elasticsearch 几种 Search Type">
-<meta name="twitter:description" content="Search Type 有助于理解 Elasticsearch 在多个分片(shard)的情况下，是如何搜索的，是如何决定返回数据数量、如何排序、如何算分的？
-执行过程在多个分片情况下，查询 0-20 条记录，elasticsearch 会将请求转发到每个分片上，从每个分片上获取 20 条记录，然后返回给分发节点进行汇总，最后再从汇总的结果中取 0-20 数据返回给客户端。则就是 elastics">
+<meta name="twitter:description" content="Search Type 有助于理解 Elasticsearch 在多个分片(shard)的情况下，是如何搜索的，是如何决定返回数据数量、如何排序、如何算分的？ 执行过程在多个分片情况下，查询 0-20 条记录，elasticsearch 会将请求转发到每个分片上，从每个分片上获取 20 条记录，然后返回给分发节点进行汇总，最后再从汇总的结果中取 0-20 数据返回给客户端。则就是 elastics">
 
 
 
@@ -571,7 +570,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-count">39</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -582,7 +581,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -593,7 +592,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">53</span>
+                <span class="site-state-item-count">64</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -827,7 +826,7 @@
     // Popup Window;
     var isfetched = false;
     // Search DB path;
-    var search_path = "";
+    var search_path = "search.xml";
     if (search_path.length == 0) {
       search_path = "search.xml";
     }

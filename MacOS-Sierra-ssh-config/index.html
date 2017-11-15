@@ -82,22 +82,18 @@
 
 
 
-<meta name="description" content="周末正好有空,就准备把mac pro 升级到最新的sierra版本，毕竟已经落后于apple官方两个比较大的版本了。
-升级过程很简单，也很顺利。直接通过appstore上在线更新即可，下载完成之后安装向导步骤完成即可。
-直到….我发现公司测试环境502之后，想要登陆到机器上去处理一下的时候，我的ssh key竟然毫无征兆的被deny了！升级之前能登陆服务器，升级之后无法登陆。">
+<meta name="description" content="周末正好有空,就准备把mac pro 升级到最新的sierra版本，毕竟已经落后于apple官方两个比较大的版本了。 升级过程很简单，也很顺利。直接通过appstore上在线更新即可，下载完成之后安装向导步骤完成即可。 直到….我发现公司测试环境502之后，想要登陆到机器上去处理一下的时候，我的ssh key竟然毫无征">
+<meta name="keywords" content="mac,ssh">
 <meta property="og:type" content="article">
 <meta property="og:title" content="解决MacOS Sierra 升级后原有的ssh private key无法通过验证">
 <meta property="og:url" content="http://yoursite.com/MacOS-Sierra-ssh-config/index.html">
 <meta property="og:site_name" content="Mr.song">
-<meta property="og:description" content="周末正好有空,就准备把mac pro 升级到最新的sierra版本，毕竟已经落后于apple官方两个比较大的版本了。
-升级过程很简单，也很顺利。直接通过appstore上在线更新即可，下载完成之后安装向导步骤完成即可。
-直到….我发现公司测试环境502之后，想要登陆到机器上去处理一下的时候，我的ssh key竟然毫无征兆的被deny了！升级之前能登陆服务器，升级之后无法登陆。">
+<meta property="og:description" content="周末正好有空,就准备把mac pro 升级到最新的sierra版本，毕竟已经落后于apple官方两个比较大的版本了。 升级过程很简单，也很顺利。直接通过appstore上在线更新即可，下载完成之后安装向导步骤完成即可。 直到….我发现公司测试环境502之后，想要登陆到机器上去处理一下的时候，我的ssh key竟然毫无征兆的被deny了！升级之前能登陆服务器，升级之后无法登陆。">
+<meta property="og:locale" content="en">
 <meta property="og:updated_time" content="2017-03-19T06:14:42.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="解决MacOS Sierra 升级后原有的ssh private key无法通过验证">
-<meta name="twitter:description" content="周末正好有空,就准备把mac pro 升级到最新的sierra版本，毕竟已经落后于apple官方两个比较大的版本了。
-升级过程很简单，也很顺利。直接通过appstore上在线更新即可，下载完成之后安装向导步骤完成即可。
-直到….我发现公司测试环境502之后，想要登陆到机器上去处理一下的时候，我的ssh key竟然毫无征兆的被deny了！升级之前能登陆服务器，升级之后无法登陆。">
+<meta name="twitter:description" content="周末正好有空,就准备把mac pro 升级到最新的sierra版本，毕竟已经落后于apple官方两个比较大的版本了。 升级过程很简单，也很顺利。直接通过appstore上在线更新即可，下载完成之后安装向导步骤完成即可。 直到….我发现公司测试环境502之后，想要登陆到机器上去处理一下的时候，我的ssh key竟然毫无征兆的被deny了！升级之前能登陆服务器，升级之后无法登陆。">
 
 
 
@@ -426,10 +422,10 @@
 <p>直到….我发现公司测试环境<code>502</code>之后，想要登陆到机器上去处理一下的时候，我的<code>ssh key</code>竟然毫无征兆的被deny了！升级之前能登陆服务器，升级之后无法登陆。</p>
 <a id="more"></a>
 <p>问了其他同事，跳板机能正常登陆的，排除了机房出问题的可能性。那就说明这是本地的<code>ssh agent</code>升级后出问题了。</p>
-<p>同时，我也试了下<code>github</code>的<code>key</code>是否也不能使用。结果正如我所料:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">ssh -v github.com</div><div class="line">.....</div><div class="line">.....</div><div class="line">debug1: Skipping ssh-dss key xxxx/xxxx/xxx/ - not in PubkeyAcceptedKeyTypes</div><div class="line">.....</div><div class="line"><span class="function">Permission <span class="title">denied</span> <span class="params">(publickey)</span>.</span></div></pre></td></tr></table></figure></p>
-<p>更加证实了我的想法: <code>这是Mac升级后导致的</code><br>后来 <code>google</code> 发现这个问题很正常，很多人都在升级后遇到了这个问题。同时也暂时采用了临时方案：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Host <span class="string">"github.com"</span></div><div class="line">    User <span class="string">"git"</span></div><div class="line">    IdentityFile <span class="string">"/xxx/xxxx/xxx"</span></div><div class="line">    PubkeyAcceptedKeyTypes=+ssh-dss</div></pre></td></tr></table></figure></p>
+<p>同时，我也试了下<code>github</code>的<code>key</code>是否也不能使用。结果正如我所料:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ssh -v github.com</span><br><span class="line">.....</span><br><span class="line">.....</span><br><span class="line">debug1: Skipping ssh-dss key xxxx/xxxx/xxx/ - not in PubkeyAcceptedKeyTypes</span><br><span class="line">.....</span><br><span class="line"><span class="function">Permission <span class="title">denied</span> <span class="params">(publickey)</span>.</span></span><br></pre></td></tr></table></figure></p>
+<p>更加证实了我的想法: <code>这是Mac升级后导致的</code><br>后来 <code>google</code> 发现这个问题很正常，很多人都在升级后遇到了这个问题。同时也暂时采用了临时方案：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Host <span class="string">"github.com"</span></span><br><span class="line">    User <span class="string">"git"</span></span><br><span class="line">    IdentityFile <span class="string">"/xxx/xxxx/xxx"</span></span><br><span class="line">    PubkeyAcceptedKeyTypes=+ssh-dss</span><br></pre></td></tr></table></figure></p>
 <p>在<code>.ssh/config</code> 中添加了 <code>PubkeyAcceptedKeyTypes=+ssh-dss</code> 配置，让 ssh 接受 <code>dsa</code> 类型的<code>key</code>。</p>
-<p>最终方案应该是采用更加安全的 <code>RSA</code> 算法来生成 <code>key</code>，长度为 <code>2048</code>的 <code>RSA</code>。<code>1024</code>长度的<code>RSA</code>已经有被暴力破解成功的记录了，所以建议采用 <code>2048</code> 长度<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh-keygen -t rsa -b <span class="number">2048</span> -C <span class="string">"new key"</span></div></pre></td></tr></table></figure></p>
+<p>最终方案应该是采用更加安全的 <code>RSA</code> 算法来生成 <code>key</code>，长度为 <code>2048</code>的 <code>RSA</code>。<code>1024</code>长度的<code>RSA</code>已经有被暴力破解成功的记录了，所以建议采用 <code>2048</code> 长度<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -b <span class="number">2048</span> -C <span class="string">"new key"</span></span><br></pre></td></tr></table></figure></p>
 <p>当然，采用 <code>ecdsa</code> 更好，不过考虑到<code>Openssl</code>的兼容问题，在<code>ecdsa</code>未完全通用的情况下还是使用<code>RSA</code>比较好。</p>
 
       
@@ -552,7 +548,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-count">39</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -563,7 +559,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -574,7 +570,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">53</span>
+                <span class="site-state-item-count">64</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -792,7 +788,7 @@
     // Popup Window;
     var isfetched = false;
     // Search DB path;
-    var search_path = "";
+    var search_path = "search.xml";
     if (search_path.length == 0) {
       search_path = "search.xml";
     }

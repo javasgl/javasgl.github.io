@@ -82,22 +82,18 @@
 
 
 
-<meta name="description" content="php 虽然是一门动态语言，但是它也有一个编译的过程，这个过程经过词法分析、语法分析,最终生成 Zend 引擎可以执行的 opcode 指令，类似于 java 的字节码。
-要查看一段代码对应的 opcode ，可以使用 vld 扩展 来查看。
-安装安装 vld 和安装 php 其他的扩展没有任何区别，下载源码、编译、安装等…123456tar zxf vld-0.14.0.tar.gzcd vld">
+<meta name="description" content="php 虽然是一门动态语言，但是它也有一个编译的过程，这个过程经过词法分析、语法分析,最终生成 Zend 引擎可以执行的 opcode 指令，类似于 java 的字节码。 要查看一段代码对应的 opcode ，可以使用 vld 扩展 来查看。 安装安装 vld 和安装 php 其他的扩展没有任何区别，下载源码、编译、安">
+<meta name="keywords" content="opcode,php">
 <meta property="og:type" content="article">
 <meta property="og:title" content="阅读 php 源码，使用 vld 扩展查看 opcode">
 <meta property="og:url" content="http://yoursite.com/php-vld/index.html">
 <meta property="og:site_name" content="Mr.song">
-<meta property="og:description" content="php 虽然是一门动态语言，但是它也有一个编译的过程，这个过程经过词法分析、语法分析,最终生成 Zend 引擎可以执行的 opcode 指令，类似于 java 的字节码。
-要查看一段代码对应的 opcode ，可以使用 vld 扩展 来查看。
-安装安装 vld 和安装 php 其他的扩展没有任何区别，下载源码、编译、安装等…123456tar zxf vld-0.14.0.tar.gzcd vld">
+<meta property="og:description" content="php 虽然是一门动态语言，但是它也有一个编译的过程，这个过程经过词法分析、语法分析,最终生成 Zend 引擎可以执行的 opcode 指令，类似于 java 的字节码。 要查看一段代码对应的 opcode ，可以使用 vld 扩展 来查看。 安装安装 vld 和安装 php 其他的扩展没有任何区别，下载源码、编译、安装等…123456tar zxf vld-0.14.0.tar.gzcd vld">
+<meta property="og:locale" content="en">
 <meta property="og:updated_time" content="2017-08-19T14:04:23.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="阅读 php 源码，使用 vld 扩展查看 opcode">
-<meta name="twitter:description" content="php 虽然是一门动态语言，但是它也有一个编译的过程，这个过程经过词法分析、语法分析,最终生成 Zend 引擎可以执行的 opcode 指令，类似于 java 的字节码。
-要查看一段代码对应的 opcode ，可以使用 vld 扩展 来查看。
-安装安装 vld 和安装 php 其他的扩展没有任何区别，下载源码、编译、安装等…123456tar zxf vld-0.14.0.tar.gzcd vld">
+<meta name="twitter:description" content="php 虽然是一门动态语言，但是它也有一个编译的过程，这个过程经过词法分析、语法分析,最终生成 Zend 引擎可以执行的 opcode 指令，类似于 java 的字节码。 要查看一段代码对应的 opcode ，可以使用 vld 扩展 来查看。 安装安装 vld 和安装 php 其他的扩展没有任何区别，下载源码、编译、安装等…123456tar zxf vld-0.14.0.tar.gzcd vld">
 
 
 
@@ -422,20 +418,20 @@
 
       
         <p>php 虽然是一门动态语言，但是它也有一个编译的过程，这个过程经过词法分析、语法分析,最终生成 Zend 引擎可以执行的 opcode 指令，类似于 java 的字节码。</p>
-<p>要查看一段代码对应的 opcode ，可以使用 <a href="http://pecl.php.net/package/vld/" target="_blank" rel="external">vld 扩展</a> 来查看。</p>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>安装 vld 和安装 php 其他的扩展没有任何区别，下载源码、编译、安装等…<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">tar zxf vld<span class="number">-0.14</span><span class="number">.0</span>.tar.gz</div><div class="line">cd vld<span class="number">-0.14</span><span class="number">.0</span></div><div class="line">phpize</div><div class="line">./configure</div><div class="line">make</div><div class="line">make install</div></pre></td></tr></table></figure></p>
-<p>记得要修改 php.ini 启用 vld 扩展:<br><figure class="highlight ini"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="section">[vld]</span></div><div class="line"><span class="attr">extensions</span>=vld.so</div></pre></td></tr></table></figure></p>
+<p>要查看一段代码对应的 opcode ，可以使用 <a href="http://pecl.php.net/package/vld/" target="_blank" rel="noopener">vld 扩展</a> 来查看。</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>安装 vld 和安装 php 其他的扩展没有任何区别，下载源码、编译、安装等…<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">tar zxf vld<span class="number">-0.14</span><span class="number">.0</span>.tar.gz</span><br><span class="line">cd vld<span class="number">-0.14</span><span class="number">.0</span></span><br><span class="line">phpize</span><br><span class="line">./configure</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure></p>
+<p>记得要修改 php.ini 启用 vld 扩展:<br><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[vld]</span></span><br><span class="line"><span class="attr">extensions</span>=vld.so</span><br></pre></td></tr></table></figure></p>
 <a id="more"></a>
-<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>使用 vld 查看 opcode 也非常简单，主要传递参数<code>-dvld.active=1</code>来激活 vld 扩展即可：<br><figure class="highlight fortran"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">[root@host ~]# php -dvld.active=<span class="number">1</span> source.php</div><div class="line">Finding <span class="built_in">entry</span> points</div><div class="line">Branch analysis from <span class="keyword">position</span>: <span class="number">0</span></div><div class="line">Jump found. (Code = <span class="number">62</span>) <span class="keyword">Position</span> <span class="number">1</span> = -<span class="number">2</span></div><div class="line">filename:       /root/source.php</div><div class="line"><span class="function"><span class="keyword">function</span></span> <span class="keyword">name</span>:  (null)</div><div class="line"><span class="keyword">number</span> of ops:  <span class="number">3</span></div><div class="line">compiled vars:  <span class="comment">!0 = $a</span></div><div class="line">line     #* E I O op                           fetch          ext  <span class="keyword">return</span>  operands</div><div class="line">-------------------------------------------------------------------------------------</div><div class="line">   <span class="number">2</span>     <span class="number">0</span>  E &gt;   EXT_STMT</div><div class="line">         <span class="number">1</span>        <span class="keyword">ASSIGN</span>                                                   <span class="comment">!0, 10</span></div><div class="line">   <span class="number">3</span>     <span class="number">2</span>      &gt; <span class="keyword">RETURN</span>                                                   <span class="number">1</span></div><div class="line"></div><div class="line">branch: #  <span class="number">0</span>; line:     <span class="number">2</span>-    <span class="number">3</span>; sop:     <span class="number">0</span>; eop:     <span class="number">2</span>; out1:  -<span class="number">2</span></div><div class="line">path #<span class="number">1</span>: <span class="number">0</span>,</div></pre></td></tr></table></figure></p>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>使用 vld 查看 opcode 也非常简单，主要传递参数<code>-dvld.active=1</code>来激活 vld 扩展即可：<br><figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[root@host ~]# php -dvld.active=<span class="number">1</span> source.php</span><br><span class="line">Finding <span class="built_in">entry</span> points</span><br><span class="line">Branch analysis from <span class="keyword">position</span>: <span class="number">0</span></span><br><span class="line">Jump found. (Code = <span class="number">62</span>) <span class="keyword">Position</span> <span class="number">1</span> = -<span class="number">2</span></span><br><span class="line">filename:       /root/source.php</span><br><span class="line"><span class="function"><span class="keyword">function</span></span> <span class="keyword">name</span>:  (null)</span><br><span class="line"><span class="keyword">number</span> of ops:  <span class="number">3</span></span><br><span class="line">compiled vars:  <span class="comment">!0 = $a</span></span><br><span class="line">line     #* E I O op                           fetch          ext  <span class="keyword">return</span>  operands</span><br><span class="line">-------------------------------------------------------------------------------------</span><br><span class="line">   <span class="number">2</span>     <span class="number">0</span>  E &gt;   EXT_STMT</span><br><span class="line">         <span class="number">1</span>        <span class="keyword">ASSIGN</span>                                                   <span class="comment">!0, 10</span></span><br><span class="line">   <span class="number">3</span>     <span class="number">2</span>      &gt; <span class="keyword">RETURN</span>                                                   <span class="number">1</span></span><br><span class="line"></span><br><span class="line">branch: #  <span class="number">0</span>; line:     <span class="number">2</span>-    <span class="number">3</span>; sop:     <span class="number">0</span>; eop:     <span class="number">2</span>; out1:  -<span class="number">2</span></span><br><span class="line">path #<span class="number">1</span>: <span class="number">0</span>,</span><br></pre></td></tr></table></figure></p>
 <h2 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h2><p>vld 扩展主要有以下几个参数：</p>
 <ul>
 <li>vld.active=1 启用 vld 扩展</li>
 <li>vld.verbosity=3 显示更详细信息</li>
 <li>vld.execute=0 只显示 opcode 而不执行 php 脚本</li>
 </ul>
-<p>还有一些其他参数，请参考 <a href="http://www.php-internals.com/book/?p=C-php-vld" target="_blank" rel="external">深入理解 php 内核#VLD 扩展使用指南</a></p>
-<h2 id="备注"><a href="#备注" class="headerlink" title="备注"></a>备注</h2><p>如果经常需要查看 opcode , 而每次在命令中传递参数避免麻烦的话，可以将以上 vld 的参数配置在 php.ini 文件中，<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[vld]</div><div class="line">extensions=vld<span class="selector-class">.so</span></div><div class="line">vld.active=<span class="number">1</span></div><div class="line">vld<span class="selector-class">.vld</span><span class="selector-class">.verbosity</span>=<span class="number">3</span></div><div class="line">vld.execute=<span class="number">0</span></div></pre></td></tr></table></figure></p>
-<p>从而避免手动使用 <code>php -d</code> 参数来传递 vld 配置。<br><figure class="highlight ada"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">php <span class="comment">--help</span></div><div class="line">...</div><div class="line"> -d foo[=bar]     Define INI <span class="keyword">entry</span> foo <span class="keyword">with</span> value <span class="symbol">'bar</span>'</div><div class="line">...</div></pre></td></tr></table></figure></p>
+<p>还有一些其他参数，请参考 <a href="http://www.php-internals.com/book/?p=C-php-vld" target="_blank" rel="noopener">深入理解 php 内核#VLD 扩展使用指南</a></p>
+<h2 id="备注"><a href="#备注" class="headerlink" title="备注"></a>备注</h2><p>如果经常需要查看 opcode , 而每次在命令中传递参数避免麻烦的话，可以将以上 vld 的参数配置在 php.ini 文件中，<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[vld]</span><br><span class="line"><span class="attribute">extensions</span>=vld.so</span><br><span class="line">vld.<span class="attribute">active</span>=1</span><br><span class="line">vld.vld.<span class="attribute">verbosity</span>=3</span><br><span class="line">vld.<span class="attribute">execute</span>=0</span><br></pre></td></tr></table></figure></p>
+<p>从而避免手动使用 <code>php -d</code> 参数来传递 vld 配置。<br><figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">php <span class="comment">--help</span></span><br><span class="line">...</span><br><span class="line"> -d foo[=bar]     Define INI <span class="keyword">entry</span> foo <span class="keyword">with</span> value <span class="symbol">'bar</span>'</span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -566,7 +562,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-count">39</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -577,7 +573,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -588,7 +584,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">53</span>
+                <span class="site-state-item-count">64</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -822,7 +818,7 @@
     // Popup Window;
     var isfetched = false;
     // Search DB path;
-    var search_path = "";
+    var search_path = "search.xml";
     if (search_path.length == 0) {
       search_path = "search.xml";
     }

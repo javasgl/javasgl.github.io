@@ -64,7 +64,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="proxy,socks5,http,privoxy,shadowsocks," />
+  <meta name="keywords" content="proxy,http,socks5,privoxy,shadowsocks," />
 
 
 
@@ -82,31 +82,18 @@
 
 
 
-<meta name="description" content="shadowsocks 挺不错的，但是有些时候需要使用http代理来爬墙。这时候可以使用privoxy来将 socks5 代理转换为 http代理。
-配置步骤如下：
-
-首先，确保 shadowsocks 已经正常起来的，默认的本地socks5端口号为 1080,可以使用 netstat 和 lsof 命令查看端口情况。
-
-安装privoxy, mac 使用 brew install privoxy">
+<meta name="description" content="shadowsocks 挺不错的，但是有些时候需要使用http代理来爬墙。这时候可以使用privoxy来将 socks5 代理转换为 http代理。 配置步骤如下：  首先，确保 shadowsocks 已经正常起来的，默认的本地socks5端口号为 1080,可以使用 netstat 和 lsof 命令查看端口情况。">
+<meta name="keywords" content="proxy,http,socks5,privoxy,shadowsocks">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Mac上使用Privoxy 将 socks5转换为 http 代理">
 <meta property="og:url" content="http://yoursite.com/transfer_socks5_to_http_proxy/index.html">
 <meta property="og:site_name" content="Mr.song">
-<meta property="og:description" content="shadowsocks 挺不错的，但是有些时候需要使用http代理来爬墙。这时候可以使用privoxy来将 socks5 代理转换为 http代理。
-配置步骤如下：
-
-首先，确保 shadowsocks 已经正常起来的，默认的本地socks5端口号为 1080,可以使用 netstat 和 lsof 命令查看端口情况。
-
-安装privoxy, mac 使用 brew install privoxy">
+<meta property="og:description" content="shadowsocks 挺不错的，但是有些时候需要使用http代理来爬墙。这时候可以使用privoxy来将 socks5 代理转换为 http代理。 配置步骤如下：  首先，确保 shadowsocks 已经正常起来的，默认的本地socks5端口号为 1080,可以使用 netstat 和 lsof 命令查看端口情况。  安装privoxy, mac 使用 brew install privoxy">
+<meta property="og:locale" content="en">
 <meta property="og:updated_time" content="2017-08-19T14:04:23.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mac上使用Privoxy 将 socks5转换为 http 代理">
-<meta name="twitter:description" content="shadowsocks 挺不错的，但是有些时候需要使用http代理来爬墙。这时候可以使用privoxy来将 socks5 代理转换为 http代理。
-配置步骤如下：
-
-首先，确保 shadowsocks 已经正常起来的，默认的本地socks5端口号为 1080,可以使用 netstat 和 lsof 命令查看端口情况。
-
-安装privoxy, mac 使用 brew install privoxy">
+<meta name="twitter:description" content="shadowsocks 挺不错的，但是有些时候需要使用http代理来爬墙。这时候可以使用privoxy来将 socks5 代理转换为 http代理。 配置步骤如下：  首先，确保 shadowsocks 已经正常起来的，默认的本地socks5端口号为 1080,可以使用 netstat 和 lsof 命令查看端口情况。  安装privoxy, mac 使用 brew install privoxy">
 
 
 
@@ -439,24 +426,24 @@
 </li>
 <li><p>安装完成后，修改privoxy配置文件</p>
 <a id="more"></a>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim <span class="regexp">/usr/</span>local<span class="regexp">/etc/</span>privoxy<span class="regexp">/config</span></div></pre></td></tr></table></figure>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim <span class="regexp">/usr/</span>local<span class="regexp">/etc/</span>privoxy<span class="regexp">/config</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>修改内容如下：</p>
-<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">forward-socks5t   /               <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">1080</span> .</div><div class="line">listen-address  <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">8118</span></div></pre></td></tr></table></figure>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">forward-socks5t   /               <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">1080</span> .</span><br><span class="line">listen-address  <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span>:<span class="number">8118</span></span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <p><code>listen-address</code> 默认是监听本地8118端口，如果端口没有被占用，可以不用修改</p>
 <ul>
-<li>启动privoxy<figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="regexp">/usr/</span>local<span class="regexp">/sbin/</span>privoxy <span class="regexp">/usr/</span>local<span class="regexp">/etc/</span>privoxy<span class="regexp">/config</span></div></pre></td></tr></table></figure>
+<li>启动privoxy<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">/usr/</span>local<span class="regexp">/sbin/</span>privoxy <span class="regexp">/usr/</span>local<span class="regexp">/etc/</span>privoxy<span class="regexp">/config</span></span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <p>可以使用 <code>ps aux|grep privoxy</code>和 <code>lsof -i:8118</code>来检查是否成功启动</p>
 <ul>
 <li>正常情况下,可以使用http代理了，代理地址<code>http://127.0.0.1:8118</code></li>
 </ul>
-<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><p>例如，可以给 git 设置 http 或 https 代理,设置方式如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git config --global http.proxy http:<span class="comment">//127.0.0.1:8118</span></div><div class="line">git config --global https.proxy http:<span class="comment">//127.0.0.1:8118</span></div></pre></td></tr></table></figure></p>
-<p>取消代理配置：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git config --global --unset http.proxy</div><div class="line">git config --global --unset https.proxy</div></pre></td></tr></table></figure></p>
-<p>和其他 git 的配置一样，不使用命令行而是直接修改相应的 <code>.gitconfig</code> 文件也是可以的。当然，如果不想修改 git 配置，而只是想临时使用一下，可以使用 -c 参数：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git -c https.proxy=http:<span class="comment">//127.0.0.1:8118 clone --depth=1 https://github.com/xxx/xxx</span></div></pre></td></tr></table></figure></p>
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><p>例如，可以给 git 设置 http 或 https 代理,设置方式如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global http.proxy http:<span class="comment">//127.0.0.1:8118</span></span><br><span class="line">git config --global https.proxy http:<span class="comment">//127.0.0.1:8118</span></span><br></pre></td></tr></table></figure></p>
+<p>取消代理配置：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global --unset http.proxy</span><br><span class="line">git config --global --unset https.proxy</span><br></pre></td></tr></table></figure></p>
+<p>和其他 git 的配置一样，不使用命令行而是直接修改相应的 <code>.gitconfig</code> 文件也是可以的。当然，如果不想修改 git 配置，而只是想临时使用一下，可以使用 -c 参数：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git -c https.proxy=http:<span class="comment">//127.0.0.1:8118 clone --depth=1 https://github.com/xxx/xxx</span></span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -488,9 +475,9 @@
           
             <a href="/tags/proxy/" rel="tag"># proxy</a>
           
-            <a href="/tags/socks5/" rel="tag"># socks5</a>
-          
             <a href="/tags/http/" rel="tag"># http</a>
+          
+            <a href="/tags/socks5/" rel="tag"># socks5</a>
           
             <a href="/tags/privoxy/" rel="tag"># privoxy</a>
           
@@ -589,7 +576,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-count">39</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -600,7 +587,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -611,7 +598,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">53</span>
+                <span class="site-state-item-count">64</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -845,7 +832,7 @@
     // Popup Window;
     var isfetched = false;
     // Search DB path;
-    var search_path = "";
+    var search_path = "search.xml";
     if (search_path.length == 0) {
       search_path = "search.xml";
     }

@@ -82,34 +82,18 @@
 
 
 
-<meta name="description" content="Linux 可使用 sort 命令来对文件内容或者其他命令的输出内容进行排序。常见的场景是按大小排列日志文件、按文件名排序等。
-sort 命令常用的参数有：
-
-r sort默认排序为升序，如果需要降序，则执行 -r即可。reverse
-n sort排序默认是当做字符来排序的，所以会遇到 10&amp;lt;2 的情况,使用 n 让其当做 number 来排序
-u 去重,排重
-t 指定分割符号，有时候需要将">
+<meta name="description" content="Linux 可使用 sort 命令来对文件内容或者其他命令的输出内容进行排序。常见的场景是按大小排列日志文件、按文件名排序等。 sort 命令常用的参数有：  r sort默认排序为升序，如果需要降序，则执行 -r即可。reverse n sort排序默认是当做字符来排序的，所以会遇到 10&amp;lt;2 的情况,">
+<meta name="keywords" content="Linux,sort">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux sort 命令使用">
 <meta property="og:url" content="http://yoursite.com/linux-sort/index.html">
 <meta property="og:site_name" content="Mr.song">
-<meta property="og:description" content="Linux 可使用 sort 命令来对文件内容或者其他命令的输出内容进行排序。常见的场景是按大小排列日志文件、按文件名排序等。
-sort 命令常用的参数有：
-
-r sort默认排序为升序，如果需要降序，则执行 -r即可。reverse
-n sort排序默认是当做字符来排序的，所以会遇到 10&amp;lt;2 的情况,使用 n 让其当做 number 来排序
-u 去重,排重
-t 指定分割符号，有时候需要将">
+<meta property="og:description" content="Linux 可使用 sort 命令来对文件内容或者其他命令的输出内容进行排序。常见的场景是按大小排列日志文件、按文件名排序等。 sort 命令常用的参数有：  r sort默认排序为升序，如果需要降序，则执行 -r即可。reverse n sort排序默认是当做字符来排序的，所以会遇到 10&amp;lt;2 的情况,使用 n 让其当做 number 来排序 u 去重,排重 t 指定分割符号，有时候需要将">
+<meta property="og:locale" content="en">
 <meta property="og:updated_time" content="2017-08-30T15:32:10.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux sort 命令使用">
-<meta name="twitter:description" content="Linux 可使用 sort 命令来对文件内容或者其他命令的输出内容进行排序。常见的场景是按大小排列日志文件、按文件名排序等。
-sort 命令常用的参数有：
-
-r sort默认排序为升序，如果需要降序，则执行 -r即可。reverse
-n sort排序默认是当做字符来排序的，所以会遇到 10&amp;lt;2 的情况,使用 n 让其当做 number 来排序
-u 去重,排重
-t 指定分割符号，有时候需要将">
+<meta name="twitter:description" content="Linux 可使用 sort 命令来对文件内容或者其他命令的输出内容进行排序。常见的场景是按大小排列日志文件、按文件名排序等。 sort 命令常用的参数有：  r sort默认排序为升序，如果需要降序，则执行 -r即可。reverse n sort排序默认是当做字符来排序的，所以会遇到 10&amp;lt;2 的情况,使用 n 让其当做 number 来排序 u 去重,排重 t 指定分割符号，有时候需要将">
 
 
 
@@ -443,7 +427,7 @@ t 指定分割符号，有时候需要将">
 <li>k 指定排序列，一般配合 t 使用，注意，列从 1 开始</li>
 <li>o 将输出结果重定向写入文件，写入原文件时不能使用 &gt; 。</li>
 </ul>
-<p>example:<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">[root@linux]$ls search2*|sort -rn -k <span class="number">4</span> -t <span class="string">'.'</span></div><div class="line">search2.<span class="built_in">stdout</span>.<span class="built_in">log</span><span class="number">.20</span></div><div class="line">search2.<span class="built_in">stdout</span>.<span class="built_in">log</span><span class="number">.19</span></div><div class="line">search2.<span class="built_in">stdout</span>.<span class="built_in">log</span><span class="number">.18</span></div><div class="line">search2.<span class="built_in">stdout</span>.<span class="built_in">log</span><span class="number">.17</span></div><div class="line">search2.<span class="built_in">stdout</span>.<span class="built_in">log</span><span class="number">.16</span></div><div class="line">search2.<span class="built_in">stdout</span>.<span class="built_in">log</span><span class="number">.15</span></div><div class="line">search2.<span class="built_in">stdout</span>.<span class="built_in">log</span><span class="number">.14</span></div><div class="line">search2.<span class="built_in">stdout</span>.<span class="built_in">log</span><span class="number">.13</span></div><div class="line">search2.<span class="built_in">stdout</span>.<span class="built_in">log</span><span class="number">.12</span></div><div class="line">search2.<span class="built_in">stdout</span>.<span class="built_in">log</span><span class="number">.11</span></div><div class="line">search2.<span class="built_in">stdout</span>.<span class="built_in">log</span><span class="number">.10</span></div><div class="line">search2.<span class="built_in">stdout</span>.<span class="built_in">log</span><span class="number">.9</span></div><div class="line">search2.<span class="built_in">stdout</span>.<span class="built_in">log</span><span class="number">.8</span></div><div class="line">search2.<span class="built_in">stdout</span>.<span class="built_in">log</span><span class="number">.7</span></div><div class="line">search2.<span class="built_in">stdout</span>.<span class="built_in">log</span><span class="number">.6</span></div><div class="line">search2.<span class="built_in">stdout</span>.<span class="built_in">log</span><span class="number">.5</span></div><div class="line">search2.<span class="built_in">stdout</span>.<span class="built_in">log</span><span class="number">.4</span></div><div class="line">search2.<span class="built_in">stdout</span>.<span class="built_in">log</span><span class="number">.3</span></div><div class="line">search2.<span class="built_in">stdout</span>.<span class="built_in">log</span><span class="number">.2</span></div><div class="line">search2.<span class="built_in">stdout</span>.<span class="built_in">log</span><span class="number">.1</span></div><div class="line">search2.<span class="built_in">stdout</span>.<span class="built_in">log</span></div></pre></td></tr></table></figure></p>
+<p>example:<br><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">[root@linux]$ls search2*|<span class="built_in">sort</span> -rn -k <span class="number">4</span> -t <span class="string">'.'</span></span><br><span class="line">search2.<span class="built_in">stdout</span>.<span class="built_in">log</span><span class="number">.20</span></span><br><span class="line">search2.<span class="built_in">stdout</span>.<span class="built_in">log</span><span class="number">.19</span></span><br><span class="line">search2.<span class="built_in">stdout</span>.<span class="built_in">log</span><span class="number">.18</span></span><br><span class="line">search2.<span class="built_in">stdout</span>.<span class="built_in">log</span><span class="number">.17</span></span><br><span class="line">search2.<span class="built_in">stdout</span>.<span class="built_in">log</span><span class="number">.16</span></span><br><span class="line">search2.<span class="built_in">stdout</span>.<span class="built_in">log</span><span class="number">.15</span></span><br><span class="line">search2.<span class="built_in">stdout</span>.<span class="built_in">log</span><span class="number">.14</span></span><br><span class="line">search2.<span class="built_in">stdout</span>.<span class="built_in">log</span><span class="number">.13</span></span><br><span class="line">search2.<span class="built_in">stdout</span>.<span class="built_in">log</span><span class="number">.12</span></span><br><span class="line">search2.<span class="built_in">stdout</span>.<span class="built_in">log</span><span class="number">.11</span></span><br><span class="line">search2.<span class="built_in">stdout</span>.<span class="built_in">log</span><span class="number">.10</span></span><br><span class="line">search2.<span class="built_in">stdout</span>.<span class="built_in">log</span><span class="number">.9</span></span><br><span class="line">search2.<span class="built_in">stdout</span>.<span class="built_in">log</span><span class="number">.8</span></span><br><span class="line">search2.<span class="built_in">stdout</span>.<span class="built_in">log</span><span class="number">.7</span></span><br><span class="line">search2.<span class="built_in">stdout</span>.<span class="built_in">log</span><span class="number">.6</span></span><br><span class="line">search2.<span class="built_in">stdout</span>.<span class="built_in">log</span><span class="number">.5</span></span><br><span class="line">search2.<span class="built_in">stdout</span>.<span class="built_in">log</span><span class="number">.4</span></span><br><span class="line">search2.<span class="built_in">stdout</span>.<span class="built_in">log</span><span class="number">.3</span></span><br><span class="line">search2.<span class="built_in">stdout</span>.<span class="built_in">log</span><span class="number">.2</span></span><br><span class="line">search2.<span class="built_in">stdout</span>.<span class="built_in">log</span><span class="number">.1</span></span><br><span class="line">search2.<span class="built_in">stdout</span>.<span class="built_in">log</span></span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -565,7 +549,7 @@ t 指定分割符号，有时候需要将">
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-count">39</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -576,7 +560,7 @@ t 指定分割符号，有时候需要将">
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -587,7 +571,7 @@ t 指定分割符号，有时候需要将">
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">53</span>
+                <span class="site-state-item-count">64</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -805,7 +789,7 @@ t 指定分割符号，有时候需要将">
     // Popup Window;
     var isfetched = false;
     // Search DB path;
-    var search_path = "";
+    var search_path = "search.xml";
     if (search_path.length == 0) {
       search_path = "search.xml";
     }
