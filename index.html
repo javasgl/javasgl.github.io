@@ -423,7 +423,7 @@
         
           
             <p>git默认的 http.postBuffer大小为1M。所以偶尔遇到比较大的文件或者项目时，会报出以下错误：<br><figure class="highlight subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">error: </span>RPC failed; result=22, HTTP code = 411</span><br><span class="line">fatal: The remote end hung up unexpectedly</span><br><span class="line">fatal: The remote end hung up unexpectedly</span><br></pre></td></tr></table></figure></p>
-<p>这时可以通过设置 http.postBuffer来解决。下面设置为100M。<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git<span class="built_in"> config </span>--global http.<span class="attribute">postBuffer</span>=102400</span><br></pre></td></tr></table></figure></p>
+<p>这时可以通过设置 http.postBuffer来解决。下面设置为100M。<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git<span class="built_in"> config </span>--global http.<span class="attribute">postBuffer</span>=104857600</span><br></pre></td></tr></table></figure></p>
 
           
         
