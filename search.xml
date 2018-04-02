@@ -1,6 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[python的浅复制和深复制]]></title>
+    <url>%2Fpython-reference-value-md%2F</url>
+    <content type="text"><![CDATA[最近使用python过程中遇到了一个看似诡异的问题,由于惯性思维，这个问题花了一点时间一步步调试才找到。先来看看下面的代码的结果：12345a = [1,2,3]b = ab.append(4)print(b)print(a) 如果这段代码放在其他语言,Java 或者 PHP 中，结果大多是这样的：12[1,2,3,4][1,2,3] 但是在 python 中，实际执行的结果却是这样的：12[1,2,3,4][1,2,3,4] 修改 b 的值，却影响了 a 的值。这个就是 python 和其他语言有一点不一样的地方了，简单可以理解为：python 没有赋值，只有引用。如果以其他语言的方式来理解，那就是 a,b 都是指向同一块内存数据的地址，所以修改其中任何一个，都会引起彼此的变化，因为底层数据都是同一份。 现在，如果需要这段代码表现的和其他语言一致，该怎么写呢？ 浅复制(shallow copy)对于list 列表，python 有 copy 方法：12345a = [1,2,3]b = a.copy()b.append(4)print(b)print(a) 代码执行结果就基本能达到预期了：12[1,2,3,4][1,2,3] 深复制(deep coopy)但是需要注意的是，这个 copy 方法是浅复制(shallow copy),那么它对于嵌套对象就无能为力了。如果需要复制嵌套对象，可以使用 import copy ,然后使用 copy.deepcoopy()来实现对嵌套对象的复制12345678import copya = [1,2,3,[4,5]]# b = a.copy()b = copy.deepcopy(a)b.append(7)b[3][1]=6print(b)print(a) 代码执行结果是这样的：12[1, 2, 3, [4, 6],7][1, 2, 3, [4, 5]] 可以看到 a 并没有因为 b 对嵌套内容的修改而改变。这里需要注意的一点是，如果修改的不是嵌套的内容，那么普通的copy也还是可以的，此例中，append(7) 时，使用 copy 或者 copy.deepcopy 的效果是一样的，a的值都不会受到影响。 deepcopy的本质是递归复制。 对于 list 数据结构而言，可以用 list(x) 来代替 copy, 不过它依然是浅复制,这点需要注意。]]></content>
+      <categories>
+        <category>python</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+        <tag>shallowcopy</tag>
+        <tag>deepcopy</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[python monkey patch解决gevent block forever问题]]></title>
+    <url>%2Fpython-monkey-patch%2F</url>
+    <content type="text"><![CDATA[在 python 中使用 multiprocess 进行多线程或者多进程处理的时候，遇到了 gevent 问题：1gevent.hub.LoopExit:('This operation would block forever....') 这个问题可以通过打上 monkey patch(猴子补丁)来规避。 在导入 multiprocess 库的文件头部加入以下代码：123from gevent import monkeymonkey.patch_all() 注意，这两行代码需要放置在文件导入库的最前面. 我遇到的场景下， 导致 LoopExit 的原因是 multiprocess 的job中远程网络请求超时导致的，如果相应的job任务中没有远程请求的话，即使不用 pathch，代码也是能够正常运行的。由于避免加上超时处理的复杂逻辑，就简单的使用monkey patch来解决这个问题。]]></content>
+      <categories>
+        <category>python</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+        <tag>monkey</tag>
+        <tag>patch</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[python asyncio 简单使用]]></title>
+    <url>%2Fuse-asyncio-in-python%2F</url>
+    <content type="text"><![CDATA[在python 3.4及以上的版本中，可以通过 asyncio 来实现协程(coroutine)。在 python 3.5以后可以使用 async/await 来简化代码，如果python版本是3.4的话，需要通过 @asyncio.coroutine注解 和 yield from 来实现。 一下代码是3.5+以后的写法，和3.4版本的写法主要区别在于: 用 async 代替了 @asyncio.coroutine 用 await 代替了 yield from 1234567891011121314import asyncioasync def task(n): print("do task:",n) await asyncio.sleep(1)tasks = [ task(_) for _ in range(10)]loop = asyncio.get_event_loop()res, _ = loop.run_until_complete(asyncio.wait(tasks))loop.close()for _ in res: print(_.result()) 参考： 廖雪峰的Python3.x教程-异步io]]></content>
+      <categories>
+        <category>python</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+        <tag>coroutine</tag>
+        <tag>asyncio</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[python 多进程、多线程简单使用]]></title>
+    <url>%2Fuse-theading-in-python%2F</url>
+    <content type="text"><![CDATA[python 中可以使用 multiprocessing (多进程) 和 multiprocessing.dummy(多线程) 来实现并发操作。两者在使用方式上一样，只不过实现并发的方式不同。 以下简单使用案例以 multiprocessing.dummy 多线程为例：1234567891011121314151617from multiprocessing.dummy import Pooldef compute(param): return param*100params = [ _ for _ in range(10) ]pool = Pool()results = pool.map(compute, params)pool.close()pool.join()print(results) 注意：多进程(multiprocessing) 无法在 celery 等后台进程中使用，因为 celery 等后台进程不再允许生成子进程,这时候就只能使用多线程或者协程了。 1daemonic processes are not allowed to have children]]></content>
+      <categories>
+        <category>python</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+        <tag>thread</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[go build 常见编译优化]]></title>
+    <url>%2Fgo-build-args%2F</url>
+    <content type="text"><![CDATA[一般情况下，go build 可以直接编译程序，无需额外的参数设定。但在编译生产环境下使用的可执行程序时候，go build 的一些参数还是很有用的。 减小编译后可执行程序的大小1go build -ldflags '-w -s' 说明： -w 禁止生成debug信息,注意使用该选项后，无法使用 gdb 进行调试 -s 禁用符号表可以使用 go tool link --help 查看 ldflags 各参数含义 禁止gc优化和内联1go build -gcflags '-N -l' 说明: -N 禁止编译优化 -l 禁止内联,禁止内联也可以一定程度上减小可执行程序大小可以使用 go tool compile --help 查看 gcflags 各参数含义]]></content>
+      <categories>
+        <category>go</category>
+      </categories>
+      <tags>
+        <tag>go</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[golang同时监听TCP、HTTP端口提供服务]]></title>
+    <url>%2Fgolang-listen-tcp-and-http-port%2F</url>
+    <content type="text"><![CDATA[之前一个golang写的服务，是使用 TCP 方式进行通信的，但是并没很好的处理粘包问题(其实是根本就没有处理粘包问题)。项目需要添加新功能后迅速上线,所以准备先采用http来通信，避免粘包问题。 项目入口 main.go 中，之前是监听 TCP 连接，代码大致如下：12345678910111213141516171819func main()&#123; server,err:= net.Listen("tcp","host:port") if err!=nil&#123; return &#125; defer server.Close() for&#123; conn,err:= server.Accept() if err!=nil&#123; continue &#125; go handleConn(conn) &#125;&#125;func handleConn(conn net.Conn)&#123; //do somethings&#125; 现在需要在此基础之上监听 http 连接,由于 http.ListenAndServe() 方法是阻塞的，所以需要新开goroutine进行监听，代码示意如下：123456789101112131415161718192021222324func main()&#123; http.HandleFunc("/hi", Router) //因为会阻塞，所以需要新开goroutine进行监听 go http.ListenAndServe("host:http_port", nil) server,err:= net.Listen("tcp","host:tcp_port") if err!=nil&#123; return &#125; defer server.Close() for&#123; conn,err:= server.Accept() if err!=nil&#123; continue &#125; go handleConn(conn) &#125;&#125;func handleConn(conn net.Conn)&#123; //do somethings&#125;]]></content>
+      <categories>
+        <category>go</category>
+      </categories>
+      <tags>
+        <tag>go</tag>
+        <tag>http</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[使用 Elasticsearch alias 功能切换 index]]></title>
+    <url>%2Fuse-alias-migrate-index%2F</url>
+    <content type="text"><![CDATA[有时候，需要将已有的索引做些调整重建为另外一个索引，但是为了不影响线上的访问，需要无缝切换到新的索引上。 基本上有两种方案，一是改代码，使线上代码访问新的索引，二是使用 alias 别名功能。 第一种方案有弊端，在代码进行发布到具体机器之前的并不能保证所有的访问都是访问的新的索引。 这里选择通过 alias 来切换索引，因为 alias 中的多条命令是原子性。 1.创建索引 test 和 test_v2123PUT testPUT test_v2GET test* 结果如下:12345678910111213141516171819202122232425262728293031323334&#123; "test": &#123; "aliases": &#123;&#125;, "mappings": &#123;&#125;, "settings": &#123; "index": &#123; "creation_date": "1514183636616", "number_of_shards": "5", "number_of_replicas": "1", "uuid": "oOgEhLzqS_usf7floIhNig", "version": &#123; "created": "5030099" &#125;, "provided_name": "test" &#125; &#125; &#125;, "test_v2": &#123; "aliases": &#123;&#125;, "mappings": &#123;&#125;, "settings": &#123; "index": &#123; "creation_date": "1514183638407", "number_of_shards": "5", "number_of_replicas": "1", "uuid": "o6x6VtmQSFaOpOB-OpIwBg", "version": &#123; "created": "5030099" &#125;, "provided_name": "test_v2" &#125; &#125; &#125;&#125; 2.现在需要将对 test 的访问无缝切换到 test_v2,使用 alias 功能即可做到，对线上服务、对用户无感12345678910111213141516POST _aliases&#123; "actions": [ &#123; "add": &#123; "index": "test_v2", "alias": "test" &#125; &#125;, &#123; "remove_index": &#123; "index": "test" &#125; &#125; ]&#125; actions 中的多条命令是原子性的，所以可以做到无缝切换，不必担心切换过程中会存在访问不到 test 时候。 3.命令解释actions 中第一条命令：add 命令，给索引 test_v2 添加了一个别名 test。actions 中第二条命令：remove_index， 删除原来的 test 索引。执行之后，原来的 test索引会被删除，而对于访问方而言,访问的索引依然是 test,不过访问的是一个别名，底层实际访问的索引已经是 test_v2了 12345678910111213141516171819202122GET test*&#123; "test_v2": &#123; "aliases": &#123; "test": &#123;&#125; &#125;, "mappings": &#123;&#125;, "settings": &#123; "index": &#123; "creation_date": "1514183638407", "number_of_shards": "5", "number_of_replicas": "1", "uuid": "o6x6VtmQSFaOpOB-OpIwBg", "version": &#123; "created": "5030099" &#125;, "provided_name": "test_v2" &#125; &#125; &#125;&#125; 从结果中可见，test索引已经不存在了，但是通过 GET test 还是能访问到,而现在 test_v2 多了一个 alias test。]]></content>
+      <categories>
+        <category>elasticsearch</category>
+      </categories>
+      <tags>
+        <tag>elasticsearch</tag>
+        <tag>es</tag>
+        <tag>alias</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[python celery 强制使用root用户执行]]></title>
+    <url>%2Fpython-celery-force-root%2F</url>
+    <content type="text"><![CDATA[当 celery 使用 root 用户执行时，会报出如下警告:1RuntimeWarning: You're running the worker with superuser privileges: this is absolutely not recommended! 低版本的 celery 情况不清楚，但是 celery 4.1.0 版本中，这个警告是无法去除的。因为源码中是这样写的: 123456789101112131415161718192021222324def check_privileges(accept_content): uid = os.getuid() if hasattr(os, 'getuid') else 65535 gid = os.getgid() if hasattr(os, 'getgid') else 65535 euid = os.geteuid() if hasattr(os, 'geteuid') else 65535 egid = os.getegid() if hasattr(os, 'getegid') else 65535 if hasattr(os, 'fchown'): if not all(hasattr(os, attr) for attr in ['getuid', 'getgid', 'geteuid', 'getegid']): raise SecurityError('suspicious platform, contact support') if not uid or not gid or not euid or not egid: if ('pickle' in accept_content or 'application/x-python-serialize' in accept_content): if not C_FORCE_ROOT: try: print(ROOT_DISALLOWED.format( uid=uid, euid=euid, gid=gid, egid=egid, ), file=sys.stderr) finally: os._exit(1) warnings.warn(RuntimeWarning(ROOT_DISCOURAGED.format( uid=uid, euid=euid, gid=gid, egid=egid, ))) 很明显，这个 RuntimeWarning 是无法通过 C_FORCE_ROOT 设置来屏蔽的。当然了，这个只是一个警告，celery的运行并不受影响。 如果遇到某些版本的 celery 因为 root 用户而无法启动、无法执行的情况，可以通过改变 C_FORCE_ROOT=True 来规避这个问题。 主要有四种方式: 1.手动设置环境变量1export C_FORCE_ROOT="true" 2.使用 supervisor 管理 celery 时，可以用 environment 来设置环境变量.1environment=PYTHONPATH="xxx",C_FORCE_ROOT="true" 3.代码中硬编码指定.123from celery import platformsplatforms.C_FORCE_ROOT=True 4.写入 bashrc 或者其他系统启动脚本之中12file:.bashrcexport C_FORCE_ROOT="true"]]></content>
+      <categories>
+        <category>python</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+        <tag>celery</tag>
+        <tag>supervisor</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Virtualenv 使用]]></title>
     <url>%2Fuse-python-with-virtualenv%2F</url>
     <content type="text"><![CDATA[一般情况下，大多数系统上安装的 python 版本为 2.x 的。但是有时候我们需要同时使用 python3.x 和 python2.x,这里推荐使用 virtualenv 来管理两个甚至是多个不同版本的 python。 安装 python3mac系统安装python3,很简单， brew install python3, 升级也很简单,brew upgrade python3。注意可能需要 sudo。 安装 virtualenv可以用过 pip来安装,pip install virtualenv 创建一个python环境例如创建一个 python3 的环境，virtualenv --python=python3 /usr/local/python3 激活执行source /usr/local/python3/bin/activate即可]]></content>
@@ -78,7 +178,7 @@
   <entry>
     <title><![CDATA[codis dashboard 无法启动处理流程]]></title>
     <url>%2Fcodis-dashboard%2F</url>
-    <content type="text"><![CDATA[使用 codis 过程中，当 codis dashboard 异常挂掉之后，重启 codis-dashboard的时候，无法启动，日志报错信息为：122017/08/31 14:43:46 dashboard.go:234: [PANIC] create zk node failed[error]: dashboard already exists: &#123;"addr": "192.168.0.1:28087", "pid": 15716&#125; 提示无法创建 zookeeper node,因为已经存在 dashboard node 了。 处理方案：连上 zookeeper, 删除相应的节点后重新启动 codis-dashboard。12/usr/local/zookeeper/bin/zkCli.sh -server 192.168.0.1:2181delete /zk/path/dashboard codis-dashboard 重新起来之后，发现还是无法连接 codis。123456782017/08/31 14:44:53 dashboard.go:160: [INFO] dashboard listening on addr: :280872017/08/31 14:44:53 dashboard.go:143: [INFO] dashboard node created: /zk/codis/path/dashboard, &#123;"addr": "192.168.0.1:28087", "pid": 10261&#125;2017/08/31 14:44:53 dashboard.go:144: [WARN] ********** Attention **********2017/08/31 14:44:53 dashboard.go:145: [WARN] You should use `kill &#123;pid&#125;` rather than `kill -9 &#123;pid&#125;` to stop me,2017/08/31 14:44:53 dashboard.go:146: [WARN] or the node resisted on zk will not be cleaned when I'm quiting and you must remove it manually2017/08/31 14:44:53 dashboard.go:147: [WARN] *******************************2017/08/31 14:45:09 proxy.go:191: [INFO] mark_offline, check proxy status:proxy_1&lt;nil&gt; zk: node does not exist2017/08/31 14:45:09 proxy.go:193: [INFO] shutdown proxy successful 这时候需要访问 http://192.192.168.0.1:2181/admin ，找到最后的 proxy status。将相应的 proxy Mark Online 即可。启动日志中也提到了，对于 kill -9 pid 停止 codis 的情况，需要手动删除 zookeeper 相应的节点。 zookeeper 常用命令，使用 help 查看:12345678910111213141516171819202122ZooKeeper -server host:port cmd args stat path [watch] set path data [version] ls path [watch] delquota [-n|-b] path ls2 path [watch] setAcl path acl setquota -n|-b val path history redo cmdno printwatches on|off delete path [version] sync path listquota path rmr path get path [watch] create [-s] [-e] path data acl addauth scheme auth quit getAcl path close connect host:port]]></content>
+    <content type="text"><![CDATA[使用 codis 过程中，当 codis dashboard 异常挂掉之后，重启 codis-dashboard的时候，无法启动，日志报错信息为：122017/08/31 14:43:46 dashboard.go:234: [PANIC] create zk node failed[error]: dashboard already exists: &#123;"addr": "192.168.0.1:28087", "pid": 15716&#125; 提示无法创建 zookeeper node,因为已经存在 dashboard node 了。 处理方案：连上 zookeeper, 删除相应的节点后重新启动 codis-dashboard。12/usr/local/zookeeper/bin/zkCli.sh -server 192.168.0.1:2181delete /zk/path/dashboard codis-dashboard 重新起来之后，发现还是无法连接 codis。123456782017/08/31 14:44:53 dashboard.go:160: [INFO] dashboard listening on addr: :280872017/08/31 14:44:53 dashboard.go:143: [INFO] dashboard node created: /zk/codis/path/dashboard, &#123;"addr": "192.168.0.1:28087", "pid": 10261&#125;2017/08/31 14:44:53 dashboard.go:144: [WARN] ********** Attention **********2017/08/31 14:44:53 dashboard.go:145: [WARN] You should use `kill &#123;pid&#125;` rather than `kill -9 &#123;pid&#125;` to stop me,2017/08/31 14:44:53 dashboard.go:146: [WARN] or the node resisted on zk will not be cleaned when I'm quiting and you must remove it manually2017/08/31 14:44:53 dashboard.go:147: [WARN] *******************************2017/08/31 14:45:09 proxy.go:191: [INFO] mark_offline, check proxy status:proxy_1&lt;nil&gt; zk: node does not exist2017/08/31 14:45:09 proxy.go:193: [INFO] shutdown proxy successful 这时候需要访问 http://192.192.168.0.1:28087/admin ，找到最后的 proxy status。将相应的 proxy Mark Online 即可。启动日志中也提到了，对于 kill -9 pid 停止 codis 的情况，需要手动删除 zookeeper 相应的节点。 zookeeper 常用命令，使用 help 查看:12345678910111213141516171819202122ZooKeeper -server host:port cmd args stat path [watch] set path data [version] ls path [watch] delquota [-n|-b] path ls2 path [watch] setAcl path acl setquota -n|-b val path history redo cmdno printwatches on|off delete path [version] sync path listquota path rmr path get path [watch] create [-s] [-e] path data acl addauth scheme auth quit getAcl path close connect host:port]]></content>
       <categories>
         <category>linux</category>
       </categories>
@@ -182,13 +282,13 @@
       <tags>
         <tag>upx</tag>
         <tag>compress</tag>
-        <tag>golang</tag>
+        <tag>go</tag>
       </tags>
   </entry>
   <entry>
     <title><![CDATA[读书清单(备忘)]]></title>
     <url>%2Freading-list%2F</url>
-    <content type="text"><![CDATA[2017读书清单进行中&amp;计划中 《Go并发编程实战》 –郝林 《App 后台开发运维和架构实践》–曾健生 《重构–改善既有代码的设计》 – 中文版 《高性能网站架构实战》 – 刘鑫 《构建高性能Web站点》 – 郭欣 《设计模式之禅》 – 秦小波 《go In Action》（Go语言实战）–中文版 《the way to go》（go语言程序设计）–中文版…. 已读 《build-web-application-with-golang》–github 《Go语言编程》 – 许式伟 《Go语言最佳实践》– pdf 《深入理解PHP内核》– php-internal.com ^_^ 任务艰巨~~~~]]></content>
+    <content type="text"><![CDATA[2017读书清单进行中&amp;计划中 《Go并发编程实战》 –郝林 《App 后台开发运维和架构实践》–曾健生 《重构–改善既有代码的设计》 – 中文版 《高性能网站架构实战》 – 刘鑫 《构建高性能Web站点》 – 郭欣 《设计模式之禅》 – 秦小波 《go In Action》（Go语言实战）–中文版 《the way to go》（go语言程序设计）–中文版…. 已读 《Go By Example》– github 《build-web-application-with-golang》–github 《Go语言编程》 – 许式伟 《Go语言最佳实践》– pdf 《深入理解PHP内核》– php-internal.com ^_^ 任务艰巨~~~~]]></content>
       <categories>
         <category>notes</category>
       </categories>

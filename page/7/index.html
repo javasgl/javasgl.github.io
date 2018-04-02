@@ -300,7 +300,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/regex-match-chinese/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/debug-golang-with-gdb-on-mac/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="songgl">
@@ -322,8 +322,8 @@
             
               
                 
-                <a class="post-title-link" href="/regex-match-chinese/" itemprop="url">
-                  中文正则匹配
+                <a class="post-title-link" href="/debug-golang-with-gdb-on-mac/" itemprop="url">
+                  Mac上使用gdb单步调试golang程序
                 </a>
               
             
@@ -339,8 +339,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-07T20:36:05+08:00">
-                2017-05-07
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-07T22:29:40+08:00">
+                2017-06-07
               </time>
             
 
@@ -362,8 +362,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/notes/" itemprop="url" rel="index">
-                    <span itemprop="name">notes</span>
+                  <a href="/categories/go/" itemprop="url" rel="index">
+                    <span itemprop="name">go</span>
                   </a>
                 </span>
 
@@ -381,8 +381,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/regex-match-chinese/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count hc-comment-count" data-xid="regex-match-chinese/" itemprop="commentsCount"></span>
+                <a href="/debug-golang-with-gdb-on-mac/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="debug-golang-with-gdb-on-mac/" itemprop="commentsCount"></span>
                 </a>
               </span>
               <!--/noindex-->
@@ -391,7 +391,7 @@
 
           
           
-             <span id="/regex-match-chinese/" class="leancloud_visitors" data-flag-title="中文正则匹配">
+             <span id="/debug-golang-with-gdb-on-mac/" class="leancloud_visitors" data-flag-title="Mac上使用gdb单步调试golang程序">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -421,14 +421,27 @@
 
       
         
-          
-            <p>在某些场景下，需要使用正则对文本中的中文进行匹配。之前就在一个<code>python</code>的项目中需要对中文进行相应的匹配。<br>实际需求: 要求匹配非中文内容。<br>中文的<code>unicode</code>编码范围为 <code>u4e00</code> 到 <code>u9fa5</code>。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line">group = re.search(<span class="string">ur'([^\u4e00-\u9fa5])'</span>,<span class="string">'1中文en汉字'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> group:</span><br><span class="line">	<span class="keyword">print</span> grou.groups()</span><br></pre></td></tr></table></figure></p>
-<p>Tips:</p>
-<blockquote>
-<p>1.正则非匹配: ^<br>2.正则范围匹配: [a-b]<br>3.正则捕获: ()<br>4.python2 中 u 表示 <code>unicode</code>的字符串, python3 已经全部使用<code>unicode</code>来表示字符串<br>5.python 中 r 表示 <code>row string</code>,使用原始字符串，不进行转义</p>
-</blockquote>
-
-          
+          <h2 id="单步调试"><a href="#单步调试" class="headerlink" title="单步调试"></a>单步调试</h2><p>最近在写<code>golang</code>程序的时候，想要想单步调试一下程序，减少手动<code>print log</code>调试代码的痛苦。</p>
+<p>找了一些golang单步调试的方案，主要有几下几种方案:</p>
+<ul>
+<li>使用 <code>SublimeGDB</code> 插件在<code>Sublime</code> 中调试</li>
+<li>使用 <code>Goland IDE</code> 调试,不过可惜<code>Goland</code>还未发布正式版本</li>
+<li>使用 <code>gdb</code> 工具调试</li>
+</ul>
+<p>每个都尝试了一遍:</p>
+<ul>
+<li><code>SublimeGDB</code> 界面不错，但是调试速度太慢，设置一个断点都需要很长时间，故 pass 此方案。</li>
+<li><code>Goland IDE</code> 只是预览版，有使用时间限制,还是等等吧，等 <code>Jetbrains</code> 出正式版后再去试试.(<code>Jetbrains</code>出品必属精品)</li>
+<li><code>gdb</code>调试，使用下来发现，目前而言，<code>gdb</code>的方式还是用的比较顺手的。</li>
+</ul>
+<p>不过在<code>mac</code>电脑上使用<code>gdb</code>还是遇到了一些问题,不过还好都顺利解决了。<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/debug-golang-with-gdb-on-mac/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -470,7 +483,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/shell-change-path/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/pressure-test-tools/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="songgl">
@@ -492,8 +505,8 @@
             
               
                 
-                <a class="post-title-link" href="/shell-change-path/" itemprop="url">
-                  shell脚本修改环境变量
+                <a class="post-title-link" href="/pressure-test-tools/" itemprop="url">
+                  压力测试工具ab、webbench、http_load、siege简单使用
                 </a>
               
             
@@ -509,178 +522,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-28T12:04:50+08:00">
-                2017-04-28
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            <!--noindex-->
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/shell-change-path/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count hc-comment-count" data-xid="shell-change-path/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-              <!--/noindex-->
-            
-          
-
-          
-          
-             <span id="/shell-change-path/" class="leancloud_visitors" data-flag-title="shell脚本修改环境变量">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>有时候编写go程序的时候需要将当前目录加到系统<code>GOPATH</code>中，不然就得将代码放置在已有的<code>GOPATH</code>之下。所以一般习惯在项目根目录执行创建一个<code>shell</code>脚本来动态的修改<code>GOPTAH</code>。<br>脚本很简单，代码如下:<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#/bin/sh</span></span><br><span class="line"><span class="attribute">CURRENT</span>=`pwd`</span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">GOPATH</span>=<span class="string">"<span class="variable">$&#123;GOPATH&#125;</span>:<span class="variable">$&#123;CURRENT&#125;</span>"</span></span><br></pre></td></tr></table></figure></p>
-<p>因为是<code>shell</code>脚本，所以就习惯性的执行了如下命令:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sh env</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$GOPATH</span></span><br></pre></td></tr></table></figure></p>
-<p>期望<code>GOPATH</code>中已经追加上了当前目录，然而事与愿违，并没有什么效果，<code>GOPATH</code>仍然是之前的内容。</p>
-<p>原因:<br>使用 <code>sh</code> 命令来执行shell脚本的时候,脚本真正是在<code>sh</code>创建的子<code>shell</code>中执行,所以当<code>sh</code>进程完成的时候并没有修改系统变量,所以通过执行 <code>sh env</code> 来修改系统变量是无效的。子<code>shell</code>和父<code>shell</code>彼此无法使用对方的变量，子<code>shell</code>对环境变量的修改也不会影响父<code>shell</code>。<br>需要使用 <code>source env</code>来执行，<code>source</code>命令执行脚本的时候，是在<code>source</code>当前<code>shell</code>中执行的,并不会创建子<code>shell</code>。</p>
-<p>参考: <a href="http://bbs.chinaunix.net/thread-2211666-1-1.html" target="_blank" rel="noopener">用source 执行脚本和用sh 执行脚本有什么区别</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/alfred-workflow/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="songgl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/favicon.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Mr.song">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/alfred-workflow/" itemprop="url">
-                  Alfred 编写 workflow
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-26T22:41:37+08:00">
-                2017-03-26
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-05T10:05:14+08:00">
+                2017-06-05
               </time>
             
 
@@ -721,8 +564,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/alfred-workflow/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count hc-comment-count" data-xid="alfred-workflow/" itemprop="commentsCount"></span>
+                <a href="/pressure-test-tools/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="pressure-test-tools/" itemprop="commentsCount"></span>
                 </a>
               </span>
               <!--/noindex-->
@@ -731,7 +574,7 @@
 
           
           
-             <span id="/alfred-workflow/" class="leancloud_visitors" data-flag-title="Alfred 编写 workflow">
+             <span id="/pressure-test-tools/" class="leancloud_visitors" data-flag-title="压力测试工具ab、webbench、http_load、siege简单使用">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -761,10 +604,12 @@
 
       
         
-          <p><code>Alfred</code> 的一个亮点功能就是<code>workflow</code>。通过<code>workflow</code>用户可以很容易的扩展<code>alfred</code>的功能,<br>而开源的优秀的<code>workflow</code>也有很多，不过如果找不到自己满意的<code>workflow</code>，可以自己动手编写<code>workflow</code>。自己动手，丰衣足食！<br>之所以重复造轮子的原因的是因为这个<a href="https://github.com/mwaterfall/alfred-datetime-format-converter" target="_blank" rel="noopener">datetie-format-converter</a> 转换的时间是按照UTC-GMT时间来算的，所以对于中国来说，属于东八区，所以就写了一个<code>php</code>版本的自己使用。<br>这里只是简单记录下自己开发的一个<code>Unix</code>时间戳转换的<code>workflow</code>的过程，详细教程请自行<code>google</code>或者参考 <a href="http://myg0u.com/python/2015/05/23/tutorial-alfred-workflow.html" target="_blank" rel="noopener">这篇教程</a>.<br>
+          <p>本文简单介绍ab、http_load、webbench、siege四种压力测试工具的使用。</p>
+<h1 id="ab"><a href="#ab" class="headerlink" title="ab"></a>ab</h1><p><code>ab</code> 是 <code>apache</code> 服务器自带的一个压力测试工具。安装<code>apache</code> web服务器时就自动安装了。当然，<code>ab</code>也是可以单独安装的，如果你不想安装<code>apache</code>而只是想安装<code>ab</code>，那么可以使用以下方式安装:<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@yourdream ~]# yum install httpd-tools</span><br></pre></td></tr></table></figure></p>
+<p>安装完成之后即可使用<code>ab</code>进行测试了。<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@yourdream ~]# ab -h</span><br><span class="line">Usage: ab [options] [http[s]://]hostname[:port]/path</span><br><span class="line">Options are:</span><br><span class="line">    -n requests     Number of requests to perform</span><br><span class="line">    -c concurrency  Number of multiple requests to make</span><br><span class="line">    ....</span><br><span class="line">    -h              Display usage information (this message)</span><br></pre></td></tr></table></figure></p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/alfred-workflow/#more" rel="contents">
+            <a class="btn" href="/pressure-test-tools/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -810,7 +655,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/MacOS-Sierra-ssh-config/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/js-pass-this-into-callback-function/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="songgl">
@@ -832,8 +677,8 @@
             
               
                 
-                <a class="post-title-link" href="/MacOS-Sierra-ssh-config/" itemprop="url">
-                  解决MacOS Sierra 升级后原有的ssh private key无法通过验证
+                <a class="post-title-link" href="/js-pass-this-into-callback-function/" itemprop="url">
+                  js 回调函数访问上下文 this 对象
                 </a>
               
             
@@ -849,8 +694,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-19T13:36:32+08:00">
-                2017-03-19
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-27T18:10:14+08:00">
+                2017-05-27
               </time>
             
 
@@ -872,8 +717,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/os/" itemprop="url" rel="index">
-                    <span itemprop="name">os</span>
+                  <a href="/categories/notes/" itemprop="url" rel="index">
+                    <span itemprop="name">notes</span>
                   </a>
                 </span>
 
@@ -891,8 +736,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/MacOS-Sierra-ssh-config/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count hc-comment-count" data-xid="MacOS-Sierra-ssh-config/" itemprop="commentsCount"></span>
+                <a href="/js-pass-this-into-callback-function/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="js-pass-this-into-callback-function/" itemprop="commentsCount"></span>
                 </a>
               </span>
               <!--/noindex-->
@@ -901,7 +746,7 @@
 
           
           
-             <span id="/MacOS-Sierra-ssh-config/" class="leancloud_visitors" data-flag-title="解决MacOS Sierra 升级后原有的ssh private key无法通过验证">
+             <span id="/js-pass-this-into-callback-function/" class="leancloud_visitors" data-flag-title="js 回调函数访问上下文 this 对象">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -931,12 +776,11 @@
 
       
         
-          <p>周末正好有空,就准备把<code>mac pro</code> 升级到最新的<code>sierra</code>版本，毕竟已经落后于<code>apple</code>官方两个比较大的版本了。</p>
-<p>升级过程很简单，也很顺利。直接通过<code>appstore</code>上在线更新即可，下载完成之后安装向导步骤完成即可。</p>
-<p>直到….我发现公司测试环境<code>502</code>之后，想要登陆到机器上去处理一下的时候，我的<code>ssh key</code>竟然毫无征兆的被deny了！升级之前能登陆服务器，升级之后无法登陆。</p>
+          <p>在开发项目之中，使用到js ajax 同服务端进行数据交互。一般图方便直接使用<code>jquery</code>或者<code>axios</code>等已有的库。<br>一般代码如下:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//axios</span></span><br><span class="line">axios.get(<span class="string">'/url'</span>).then(<span class="function"><span class="keyword">function</span>(<span class="params">res</span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(res)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">//juqery</span></span><br><span class="line">$.get(<span class="string">'/url'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">res</span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(res)</span><br><span class="line">&#125;,<span class="string">'json'</span>)</span><br></pre></td></tr></table></figure></p>
+<p>那么经常这么使用的肯定会遇到一个场景，就是:在回调函数中如何访问上下文中的<code>this</code>对象?<br>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/MacOS-Sierra-ssh-config/#more" rel="contents">
+            <a class="btn" href="/js-pass-this-into-callback-function/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -982,7 +826,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/Linux-zgrep/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/mysql-bigint-out-of-range/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="songgl">
@@ -1004,8 +848,8 @@
             
               
                 
-                <a class="post-title-link" href="/Linux-zgrep/" itemprop="url">
-                  Linux zgrep使用笔记
+                <a class="post-title-link" href="/mysql-bigint-out-of-range/" itemprop="url">
+                  mysql unsigned/int字段越界
                 </a>
               
             
@@ -1021,8 +865,182 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-17T17:20:05+08:00">
-                2017-03-17
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-22T10:41:39+08:00">
+                2017-05-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/mysql/" itemprop="url" rel="index">
+                    <span itemprop="name">mysql</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            <!--noindex-->
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/mysql-bigint-out-of-range/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="mysql-bigint-out-of-range/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+              <!--/noindex-->
+            
+          
+
+          
+          
+             <span id="/mysql-bigint-out-of-range/" class="leancloud_visitors" data-flag-title="mysql unsigned/int字段越界">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>线上的<code>MySQL</code>错误日志中遇到了以下问题<br><figure class="highlight vhdl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Data truncation: BIGINT <span class="built_in">UNSIGNED</span> value <span class="keyword">is</span> <span class="keyword">out</span> <span class="keyword">of</span> <span class="keyword">range</span> <span class="keyword">in</span> `(database.tablename.fieldname)`</span><br></pre></td></tr></table></figure></p>
+<p><code>MySQL</code>版本为:<br><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select version();</span><br><span class="line"><span class="code">+------------+</span></span><br><span class="line">| version()  |</span><br><span class="line"><span class="code">+------------+</span></span><br><span class="line">| 5.6.21-log |</span><br><span class="line"><span class="code">+------------+</span></span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure></p>
+<p>引起这个错误的原因是<code>sql</code>语句中对<code>unsigned</code>字段进行了递减操作的结果为负数导致的,<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">update database.tablename <span class="builtin-name">set</span> <span class="attribute">fieldname</span>=fieldname-num</span><br></pre></td></tr></table></figure></p>
+<p>而<code>MySQL</code>的模式是默认的<code>mode</code>:<br><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; show variables like <span class="emphasis">'sql_mode'</span>;</span><br><span class="line"><span class="code">+---------------+</span>------------------------+</span><br><span class="line">| Variable<span class="emphasis">_name | Value                  |</span></span><br><span class="line"><span class="emphasis">+---------------+------------------------+</span></span><br><span class="line"><span class="emphasis">| sql_</span>mode      | NO<span class="emphasis">_ENGINE_</span>SUBSTITUTION |</span><br><span class="line"><span class="code">+---------------+</span>------------------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure></p>
+<p>解决方案有3种:<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/mysql-bigint-out-of-range/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/umount-device-when-its-buzy/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="songgl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/favicon.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mr.song">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/umount-device-when-its-buzy/" itemprop="url">
+                  Linux强制卸载设备
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-12T11:04:07+08:00">
+                2017-05-12
               </time>
             
 
@@ -1063,8 +1081,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/Linux-zgrep/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count hc-comment-count" data-xid="Linux-zgrep/" itemprop="commentsCount"></span>
+                <a href="/umount-device-when-its-buzy/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="umount-device-when-its-buzy/" itemprop="commentsCount"></span>
                 </a>
               </span>
               <!--/noindex-->
@@ -1073,7 +1091,7 @@
 
           
           
-             <span id="/Linux-zgrep/" class="leancloud_visitors" data-flag-title="Linux zgrep使用笔记">
+             <span id="/umount-device-when-its-buzy/" class="leancloud_visitors" data-flag-title="Linux强制卸载设备">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1104,14 +1122,12 @@
       
         
           
-            <p><code>grep</code> 可以用来搜索文件内容,而基于<code>grep</code>的 <code>zgrep</code>这可以用来在压缩包中搜索内容而不需要事先解压文件.</p>
-<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">[root@yourdream ~]# <span class="keyword">cat</span> <span class="keyword">test</span>.go</span><br><span class="line">package main</span><br><span class="line">import (</span><br><span class="line">   <span class="string">"fmt"</span></span><br><span class="line">)</span><br><span class="line">func main()&#123;</span><br><span class="line">  fmt.Println(<span class="string">"Hello Golang!"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">[root@yourdream ~]# tar zcf <span class="keyword">test</span>.tar.gz <span class="keyword">test</span>.go</span><br><span class="line"></span><br><span class="line">[root@yourdream ~]# <span class="keyword">file</span> <span class="keyword">test</span>.tar.gz</span><br><span class="line"><span class="keyword">test</span>.tar.gz: gzip compressed data, from Unix, last modified: Fri Mar 17 17:23:09 2017</span><br><span class="line"></span><br><span class="line">[root@yourdream ~]# zgrep <span class="string">"fmt"</span> <span class="keyword">test</span>.tar.gz</span><br><span class="line">Binary <span class="keyword">file</span> (standard <span class="keyword">input</span>) matches</span><br><span class="line"></span><br><span class="line">[root@yourdream ~]# zgrep -a <span class="string">"fmt"</span> <span class="keyword">test</span>.tar.gz</span><br><span class="line">   <span class="string">"fmt"</span></span><br><span class="line">  fmt.Println(<span class="string">"Hello Golang!"</span>);</span><br><span class="line"></span><br><span class="line">[root@yourdream ~]# tar -tvf <span class="keyword">test</span>.tar.gz</span><br><span class="line">-rw-r--r-- root/root        81 2017-03-17 17:18 <span class="keyword">test</span>.go</span><br><span class="line"></span><br><span class="line">[root@yourdream ~]# tar -rvf <span class="keyword">test</span>.tar.gz <span class="keyword">test</span>/</span><br><span class="line"><span class="keyword">test</span>/</span><br><span class="line"><span class="keyword">test</span>/a.php</span><br><span class="line"></span><br><span class="line">[root@yourdream ~]# tar -tvf <span class="keyword">test</span>.tar.gz</span><br><span class="line">-rw-r--r-- root/root        81 2017-03-17 17:18 <span class="keyword">test</span>.go</span><br><span class="line">drwxr-xr-x root/root         0 2017-03-17 17:50 <span class="keyword">test</span>/</span><br><span class="line">-rw-r--r-- root/root      1127 2017-03-17 17:50 <span class="keyword">test</span>/a.php</span><br><span class="line"></span><br><span class="line">[root@yourdream ~]# zgrep -aHn <span class="string">"Hello"</span> <span class="keyword">test</span>.tar.gz</span><br><span class="line"><span class="keyword">test</span>.tar.gz:6:  fmt.Println(<span class="string">"Hello Golang!"</span>);</span><br><span class="line"><span class="keyword">test</span>.tar.gz:16:echo 'Hello php';</span><br></pre></td></tr></table></figure>
-<ul>
-<li>注意需要加上 <code>-a</code> 参数,让其二进制文件当做文本处理</li>
-<li><code>tar -u -r</code> 先压缩包中添加文件</li>
-<li><code>tar -H</code> 显示文件名</li>
-<li><code>tar -n</code> 显示行号</li>
-</ul>
+            <p>Linux下因为磁盘出问题而导致了<code>Input/output error</code>,所以准备先把有问题的磁盘卸载掉再重新挂上试试。</p>
+<p>执行<code>umount</code>:<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@hostname ~]<span class="comment"># umount -n /dev/sdc1</span></span><br><span class="line">umount: /home/data: device <span class="keyword">is</span> busy.</span><br><span class="line">        (In <span class="keyword">some</span> cases useful info <span class="keyword">about</span> processes <span class="keyword">that</span> use</span><br><span class="line">         <span class="keyword">the</span> device <span class="keyword">is</span> found <span class="keyword">by</span> lsof(<span class="number">8</span>) <span class="keyword">or</span> fuser(<span class="number">1</span>))</span><br></pre></td></tr></table></figure></p>
+<p>显示设备正忙，所以执行<code>umount -nf</code>:<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@hostname ~]# umount -nf /dev/sdc1</span><br><span class="line">umount2: Device <span class="keyword">or</span><span class="built_in"> resource </span>busy</span><br><span class="line">umount: /home/data: device is busy.</span><br><span class="line">        (<span class="keyword">In</span> some cases useful <span class="builtin-name">info</span> about processes that use</span><br><span class="line">         the device is found by lsof(8) <span class="keyword">or</span> fuser(1))</span><br><span class="line">umount2: Device <span class="keyword">or</span><span class="built_in"> resource </span>busy</span><br></pre></td></tr></table></figure></p>
+<p>还是无法卸载。</p>
+<p>根据给出的提示，使用<code>losf</code>或者<code>fuser</code>来找出那些进程正在使用该设备:<br><figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@yourdream ~]<span class="attr"># fuser -cu /dev/sdc1</span></span><br><span class="line">/dev/sdc<span class="number">1</span>:            <span class="number">2444</span>c<span class="comment">(root)</span>  <span class="number">2458</span>c<span class="comment">(root)</span>  <span class="number">3041</span>c<span class="comment">(mysql)</span></span><br><span class="line">[root@yourdream ~]<span class="attr"># fuser -cu /dev/sdc1</span></span><br></pre></td></tr></table></figure></p>
+<p>使用<code>c</code>指定挂载的文件系统，<code>u</code>显示使用者的id。可以看出三个进程正在使用，通过<code>ps</code>可以查到分别为<code>redis</code>和<code>mysql</code>正在使用。<br>因此，卸载之前停掉<code>redis</code>和<code>mysql</code>之后再次执行<code>umount</code>就能正常卸载了。</p>
 
           
         
@@ -1150,7 +1166,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1195,7 +1211,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">40</span>
+                <span class="site-state-item-count">48</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -1217,7 +1233,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">65</span>
+                <span class="site-state-item-count">74</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -1286,7 +1302,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

@@ -300,7 +300,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/go-json-iterator/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/golang-listen-tcp-and-http-port/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="songgl">
@@ -322,8 +322,8 @@
             
               
                 
-                <a class="post-title-link" href="/go-json-iterator/" itemprop="url">
-                  json-iterator--更快的json解析库
+                <a class="post-title-link" href="/golang-listen-tcp-and-http-port/" itemprop="url">
+                  golang同时监听TCP、HTTP端口提供服务
                 </a>
               
             
@@ -339,8 +339,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-31T15:24:51+08:00">
-                2017-08-31
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-24T11:45:30+08:00">
+                2018-02-24
               </time>
             
 
@@ -381,8 +381,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/go-json-iterator/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count hc-comment-count" data-xid="go-json-iterator/" itemprop="commentsCount"></span>
+                <a href="/golang-listen-tcp-and-http-port/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="golang-listen-tcp-and-http-port/" itemprop="commentsCount"></span>
                 </a>
               </span>
               <!--/noindex-->
@@ -391,7 +391,7 @@
 
           
           
-             <span id="/go-json-iterator/" class="leancloud_visitors" data-flag-title="json-iterator--更快的json解析库">
+             <span id="/golang-listen-tcp-and-http-port/" class="leancloud_visitors" data-flag-title="golang同时监听TCP、HTTP端口提供服务">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -421,16 +421,12 @@
 
       
         
-          <p>golang 中自带了非常方便解析json 的库 <code>encoding/json</code>,一般情况下也是使用这个库来作为 json 的 encode / decode。但是在有些场景下，比如解析大量json格式的日志数据的时候，json的解析性能问题就是一个需要特别关注的问题了。</p>
-<p>滴滴出行平台技术部的开源json解析库 <a href="https://github.com/json-iterator/go" target="_blank" rel="noopener">json-iterator</a>，性能比原生的 encoding/json 快很多。</p>
-<p>下面自己就简单测试了下两者的区别,测试代码很简单，就简单测试了下两者 Unmarshal 和 Marshal 的性能表现：<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/go-json-iterator/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+          
+            <p>之前一个golang写的服务，是使用 TCP 方式进行通信的，但是并没很好的处理粘包问题(其实是根本就没有处理粘包问题)。项目需要添加新功能后迅速上线,所以准备先采用http来通信，避免粘包问题。</p>
+<p>项目入口 main.go 中，之前是监听 TCP 连接，代码大致如下：<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	server,err:= net.Listen(<span class="string">"tcp"</span>,<span class="string">"host:port"</span>)</span><br><span class="line">	<span class="keyword">if</span> err!=<span class="literal">nil</span>&#123;</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">defer</span> server.Close()</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span>&#123;</span><br><span class="line">		conn,err:= server.Accept() </span><br><span class="line">		<span class="keyword">if</span> err!=<span class="literal">nil</span>&#123;</span><br><span class="line">			<span class="keyword">continue</span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">go</span> handleConn(conn)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">handleConn</span><span class="params">(conn net.Conn)</span></span>&#123;</span><br><span class="line">	<span class="comment">//do somethings</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>现在需要在此基础之上监听 http 连接,由于 http.ListenAndServe() 方法是阻塞的，所以需要新开goroutine进行监听，代码示意如下：<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">	http.HandleFunc(<span class="string">"/hi"</span>, Router)</span><br><span class="line">	<span class="comment">//因为会阻塞，所以需要新开goroutine进行监听</span></span><br><span class="line">	<span class="keyword">go</span> http.ListenAndServe(<span class="string">"host:http_port"</span>, <span class="literal">nil</span>)</span><br><span class="line"></span><br><span class="line">	server,err:= net.Listen(<span class="string">"tcp"</span>,<span class="string">"host:tcp_port"</span>)</span><br><span class="line">	<span class="keyword">if</span> err!=<span class="literal">nil</span>&#123;</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">defer</span> server.Close()</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span>&#123;</span><br><span class="line">		conn,err:= server.Accept() </span><br><span class="line">		<span class="keyword">if</span> err!=<span class="literal">nil</span>&#123;</span><br><span class="line">			<span class="keyword">continue</span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">go</span> handleConn(conn)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">handleConn</span><span class="params">(conn net.Conn)</span></span>&#123;</span><br><span class="line">	<span class="comment">//do somethings</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+          
         
       
     </div>
@@ -472,7 +468,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/codis-dashboard/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/use-alias-migrate-index/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="songgl">
@@ -494,8 +490,8 @@
             
               
                 
-                <a class="post-title-link" href="/codis-dashboard/" itemprop="url">
-                  codis dashboard 无法启动处理流程
+                <a class="post-title-link" href="/use-alias-migrate-index/" itemprop="url">
+                  使用 Elasticsearch alias 功能切换 index
                 </a>
               
             
@@ -511,524 +507,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-31T15:03:20+08:00">
-                2017-08-31
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/linux/" itemprop="url" rel="index">
-                    <span itemprop="name">linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            <!--noindex-->
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/codis-dashboard/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count hc-comment-count" data-xid="codis-dashboard/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-              <!--/noindex-->
-            
-          
-
-          
-          
-             <span id="/codis-dashboard/" class="leancloud_visitors" data-flag-title="codis dashboard 无法启动处理流程">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>使用 codis 过程中，当 codis dashboard 异常挂掉之后，重启 codis-dashboard的时候，无法启动，日志报错信息为：<br><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2017</span>/<span class="number">08</span>/<span class="number">31</span> <span class="number">14</span>:<span class="number">43</span>:<span class="number">46</span> dashboard.go:<span class="number">234</span>: [PANIC] create zk <span class="keyword">node</span> <span class="title">failed</span></span><br><span class="line">[error]: dashboard already exists: &#123;<span class="string">"addr"</span>: <span class="string">"192.168.0.1:28087"</span>, <span class="string">"pid"</span>: <span class="number">15716</span>&#125;</span><br></pre></td></tr></table></figure></p>
-<p>提示无法创建 zookeeper node,因为已经存在 dashboard node 了。</p>
-<p>处理方案：连上 zookeeper, 删除相应的节点后重新启动 codis-dashboard。<br><figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta-keyword">/usr/</span>local<span class="meta-keyword">/zookeeper/</span>bin/zkCli.sh -server <span class="number">192.168</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">2181</span></span><br><span class="line">delete <span class="meta-keyword">/zk/</span>path/dashboard</span><br></pre></td></tr></table></figure></p>
-<p>codis-dashboard 重新起来之后，发现还是无法连接 codis。<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/codis-dashboard/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/variable-parameter/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="songgl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/favicon.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Mr.song">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/variable-parameter/" itemprop="url">
-                  可变参数使用
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-30T09:11:38+08:00">
-                2017-08-30
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/go/" itemprop="url" rel="index">
-                    <span itemprop="name">go</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            <!--noindex-->
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/variable-parameter/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count hc-comment-count" data-xid="variable-parameter/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-              <!--/noindex-->
-            
-          
-
-          
-          
-             <span id="/variable-parameter/" class="leancloud_visitors" data-flag-title="可变参数使用">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>很多语言都支持可变参数，下面记录下平时主要使用的几种语言的可变参数用法。主要有 go、php、python、java、js等语言的可变参数的基本使用。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/variable-parameter/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/go-cross-complie/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="songgl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/favicon.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Mr.song">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/go-cross-complie/" itemprop="url">
-                  交叉编译 go 程序
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-29T08:54:51+08:00">
-                2017-08-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/go/" itemprop="url" rel="index">
-                    <span itemprop="name">go</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            <!--noindex-->
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/go-cross-complie/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count hc-comment-count" data-xid="go-cross-complie/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-              <!--/noindex-->
-            
-          
-
-          
-          
-             <span id="/go-cross-complie/" class="leancloud_visitors" data-flag-title="交叉编译 go 程序">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>相信大多数人和我一样，都是在 mac 或者 windows 上写 go 代码，但是最终上线运行却是在 Linux 系统之上。这就涉及到一个问题：由于操作系统架构的差异，编译过后的二进制程序能够在多个系统下正常运行么？</p>
-<p>go 不像 java 等运行于 JVM 之上的语言，也不像 php , python 等解释性语言，它需要编译后不依赖于其他环境就能执行，但是编译过程却依赖于系统架构，所以 go 需要交叉编译。</p>
-<p>释义：交叉编译，就是在一个平台上生成另一个平台上的可执行代码。</p>
-<p>go 非常方便的支持交叉编译。<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/go-cross-complie/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/es-search-type/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="songgl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/favicon.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Mr.song">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/es-search-type/" itemprop="url">
-                  Elasticsearch 几种 Search Type
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-24T16:45:45+08:00">
-                2017-08-24
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-20T17:20:11+08:00">
+                2017-12-20
               </time>
             
 
@@ -1069,8 +549,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/es-search-type/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count hc-comment-count" data-xid="es-search-type/" itemprop="commentsCount"></span>
+                <a href="/use-alias-migrate-index/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="use-alias-migrate-index/" itemprop="commentsCount"></span>
                 </a>
               </span>
               <!--/noindex-->
@@ -1079,7 +559,7 @@
 
           
           
-             <span id="/es-search-type/" class="leancloud_visitors" data-flag-title="Elasticsearch 几种 Search Type">
+             <span id="/use-alias-migrate-index/" class="leancloud_visitors" data-flag-title="使用 Elasticsearch alias 功能切换 index">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1109,12 +589,13 @@
 
       
         
-          <p>Search Type 有助于理解 Elasticsearch 在多个分片(shard)的情况下，是如何搜索的，是如何决定返回数据数量、如何排序、如何算分的？</p>
-<h2 id="执行过程"><a href="#执行过程" class="headerlink" title="执行过程"></a>执行过程</h2><p>在多个分片情况下，查询 0-20 条记录，elasticsearch 会将请求转发到每个分片上，从每个分片上获取 20 条记录，然后返回给分发节点进行汇总，最后再从汇总的结果中取 0-20 数据返回给客户端。<br>则就是 elasticsearch 分布式搜索的基本的执行过程。</p>
-<h2 id="Search-Type"><a href="#Search-Type" class="headerlink" title="Search Type"></a>Search Type</h2><p>Elasticsearch 中的 search type 主要有 6种：Query then fetch、Dfs Query then fetch、Count、Scan、Query and fetch、Dfs query and fetch。</p>
+          <p>有时候，需要将已有的索引做些调整重建为另外一个索引，但是为了不影响线上的访问，需要无缝切换到新的索引上。</p>
+<p>基本上有两种方案，一是改代码，使线上代码访问新的索引，二是使用 alias 别名功能。</p>
+<p>第一种方案有弊端，在代码进行发布到具体机器之前的并不能保证所有的访问都是访问的新的索引。</p>
+<p>这里选择通过 alias 来切换索引，因为 alias 中的多条命令是原子性。</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/es-search-type/#more" rel="contents">
+            <a class="btn" href="/use-alias-migrate-index/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1151,11 +632,519 @@
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/python-celery-force-root/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="songgl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/favicon.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mr.song">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/python-celery-force-root/" itemprop="url">
+                  python celery 强制使用root用户执行
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-19T15:20:22+08:00">
+                2017-12-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            <!--noindex-->
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/python-celery-force-root/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="python-celery-force-root/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+              <!--/noindex-->
+            
+          
+
+          
+          
+             <span id="/python-celery-force-root/" class="leancloud_visitors" data-flag-title="python celery 强制使用root用户执行">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>当 celery 使用  root 用户执行时，会报出如下警告:<br><figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">RuntimeWarning: You<span class="symbol">'re</span> running the worker <span class="keyword">with</span> superuser privileges: this <span class="keyword">is</span> absolutely <span class="keyword">not</span> recommended!</span><br></pre></td></tr></table></figure></p>
+<p>低版本的 celery 情况不清楚，但是 celery 4.1.0 版本中，这个警告是无法去除的。因为源码中是这样写的:</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/python-celery-force-root/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/use-python-with-virtualenv/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="songgl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/favicon.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mr.song">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/use-python-with-virtualenv/" itemprop="url">
+                  Virtualenv 使用
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-30T21:25:33+08:00">
+                2017-11-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            <!--noindex-->
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/use-python-with-virtualenv/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="use-python-with-virtualenv/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+              <!--/noindex-->
+            
+          
+
+          
+          
+             <span id="/use-python-with-virtualenv/" class="leancloud_visitors" data-flag-title="Virtualenv 使用">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>一般情况下，大多数系统上安装的 python 版本为 2.x 的。但是有时候我们需要同时使用 python3.x 和 python2.x,这里推荐使用 virtualenv 来管理两个甚至是多个不同版本的 python。</p>
+<h2 id="安装-python3"><a href="#安装-python3" class="headerlink" title="安装 python3"></a>安装 python3</h2><p>mac系统安装python3,很简单， <code>brew install python3</code>, 升级也很简单,<code>brew upgrade python3</code>。注意可能需要 sudo。</p>
+<h2 id="安装-virtualenv"><a href="#安装-virtualenv" class="headerlink" title="安装 virtualenv"></a>安装 virtualenv</h2><p>可以用过 pip来安装,<code>pip install virtualenv</code></p>
+<h2 id="创建一个python环境"><a href="#创建一个python环境" class="headerlink" title="创建一个python环境"></a>创建一个python环境</h2><p>例如创建一个 python3 的环境，<code>virtualenv --python=python3 /usr/local/python3</code></p>
+<h2 id="激活"><a href="#激活" class="headerlink" title="激活"></a>激活</h2><p>执行<code>source /usr/local/python3/bin/activate</code>即可</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/git-post-buffer/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="songgl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/favicon.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mr.song">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/git-post-buffer/" itemprop="url">
+                  git 推送大文件buffer设置
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-15T23:09:50+08:00">
+                2017-11-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/tools/" itemprop="url" rel="index">
+                    <span itemprop="name">tools</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            <!--noindex-->
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/git-post-buffer/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="git-post-buffer/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+              <!--/noindex-->
+            
+          
+
+          
+          
+             <span id="/git-post-buffer/" class="leancloud_visitors" data-flag-title="git 推送大文件buffer设置">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>git默认的 http.postBuffer大小为1M。所以偶尔遇到比较大的文件或者项目时，会报出以下错误：<br><figure class="highlight subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">error: </span>RPC failed; result=22, HTTP code = 411</span><br><span class="line">fatal: The remote end hung up unexpectedly</span><br><span class="line">fatal: The remote end hung up unexpectedly</span><br></pre></td></tr></table></figure></p>
+<p>这时可以通过设置 http.postBuffer来解决。下面设置为100M。<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git<span class="built_in"> config </span>--global http.<span class="attribute">postBuffer</span>=104857600</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1200,7 +1189,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">40</span>
+                <span class="site-state-item-count">48</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -1222,7 +1211,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">65</span>
+                <span class="site-state-item-count">74</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -1291,7 +1280,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

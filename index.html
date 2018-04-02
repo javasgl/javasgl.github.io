@@ -300,7 +300,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/use-python-with-virtualenv/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/python-reference-value-md/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="songgl">
@@ -322,8 +322,8 @@
             
               
                 
-                <a class="post-title-link" href="/use-python-with-virtualenv/" itemprop="url">
-                  Virtualenv 使用
+                <a class="post-title-link" href="/python-reference-value-md/" itemprop="url">
+                  python的浅复制和深复制
                 </a>
               
             
@@ -339,8 +339,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-30T21:25:33+08:00">
-                2017-11-30
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-30T18:54:49+08:00">
+                2018-03-30
               </time>
             
 
@@ -381,8 +381,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/use-python-with-virtualenv/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count hc-comment-count" data-xid="use-python-with-virtualenv/" itemprop="commentsCount"></span>
+                <a href="/python-reference-value-md/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="python-reference-value-md/" itemprop="commentsCount"></span>
                 </a>
               </span>
               <!--/noindex-->
@@ -391,7 +391,7 @@
 
           
           
-             <span id="/use-python-with-virtualenv/" class="leancloud_visitors" data-flag-title="Virtualenv 使用">
+             <span id="/python-reference-value-md/" class="leancloud_visitors" data-flag-title="python的浅复制和深复制">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -421,14 +421,18 @@
 
       
         
-          
-            <p>一般情况下，大多数系统上安装的 python 版本为 2.x 的。但是有时候我们需要同时使用 python3.x 和 python2.x,这里推荐使用 virtualenv 来管理两个甚至是多个不同版本的 python。</p>
-<h2 id="安装-python3"><a href="#安装-python3" class="headerlink" title="安装 python3"></a>安装 python3</h2><p>mac系统安装python3,很简单， <code>brew install python3</code>, 升级也很简单,<code>brew upgrade python3</code>。注意可能需要 sudo。</p>
-<h2 id="安装-virtualenv"><a href="#安装-virtualenv" class="headerlink" title="安装 virtualenv"></a>安装 virtualenv</h2><p>可以用过 pip来安装,<code>pip install virtualenv</code></p>
-<h2 id="创建一个python环境"><a href="#创建一个python环境" class="headerlink" title="创建一个python环境"></a>创建一个python环境</h2><p>例如创建一个 python3 的环境，<code>virtualenv --python=python3 /usr/local/python3</code></p>
-<h2 id="激活"><a href="#激活" class="headerlink" title="激活"></a>激活</h2><p>执行<code>source /usr/local/python3/bin/activate</code>即可</p>
-
-          
+          <p>最近使用python过程中遇到了一个看似诡异的问题,由于惯性思维，这个问题花了一点时间一步步调试才找到。<br>先来看看下面的代码的结果：<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">a</span> = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line"><span class="selector-tag">b</span> = a</span><br><span class="line"><span class="selector-tag">b</span>.append(<span class="number">4</span>)</span><br><span class="line"><span class="function"><span class="title">print</span><span class="params">(b)</span></span></span><br><span class="line"><span class="function"><span class="title">print</span><span class="params">(a)</span></span></span><br></pre></td></tr></table></figure></p>
+<p>如果这段代码放在其他语言,Java 或者 PHP 中，结果大多是这样的：<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]</span><br><span class="line">[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br></pre></td></tr></table></figure></p>
+<p>但是在 python 中，实际执行的结果却是这样的：<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]</span><br><span class="line">[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]</span><br></pre></td></tr></table></figure></p>
+<p>修改 b 的值，却影响了 a 的值。这个就是 python 和其他语言有一点不一样的地方了，简单可以理解为：python 没有赋值，只有引用。<br>如果以其他语言的方式来理解，那就是 a,b 都是指向同一块内存数据的地址，所以修改其中任何一个，都会引起彼此的变化，因为底层数据都是同一份。</p>
+<p>现在，如果需要这段代码表现的和其他语言一致，该怎么写呢？</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/python-reference-value-md/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -470,7 +474,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/git-post-buffer/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/python-monkey-patch/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="songgl">
@@ -492,8 +496,8 @@
             
               
                 
-                <a class="post-title-link" href="/git-post-buffer/" itemprop="url">
-                  git 推送大文件buffer设置
+                <a class="post-title-link" href="/python-monkey-patch/" itemprop="url">
+                  python monkey patch解决gevent block forever问题
                 </a>
               
             
@@ -509,8 +513,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-15T23:09:50+08:00">
-                2017-11-15
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-12T11:31:53+08:00">
+                2018-03-12
               </time>
             
 
@@ -532,8 +536,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/tools/" itemprop="url" rel="index">
-                    <span itemprop="name">tools</span>
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
                   </a>
                 </span>
 
@@ -551,8 +555,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/git-post-buffer/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count hc-comment-count" data-xid="git-post-buffer/" itemprop="commentsCount"></span>
+                <a href="/python-monkey-patch/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="python-monkey-patch/" itemprop="commentsCount"></span>
                 </a>
               </span>
               <!--/noindex-->
@@ -561,7 +565,7 @@
 
           
           
-             <span id="/git-post-buffer/" class="leancloud_visitors" data-flag-title="git 推送大文件buffer设置">
+             <span id="/python-monkey-patch/" class="leancloud_visitors" data-flag-title="python monkey patch解决gevent block forever问题">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -592,8 +596,11 @@
       
         
           
-            <p>git默认的 http.postBuffer大小为1M。所以偶尔遇到比较大的文件或者项目时，会报出以下错误：<br><figure class="highlight subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">error: </span>RPC failed; result=22, HTTP code = 411</span><br><span class="line">fatal: The remote end hung up unexpectedly</span><br><span class="line">fatal: The remote end hung up unexpectedly</span><br></pre></td></tr></table></figure></p>
-<p>这时可以通过设置 http.postBuffer来解决。下面设置为100M。<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git<span class="built_in"> config </span>--global http.<span class="attribute">postBuffer</span>=104857600</span><br></pre></td></tr></table></figure></p>
+            <p>在 python 中使用 multiprocess 进行多线程或者多进程处理的时候，遇到了 gevent 问题：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gevent.hub.LoopExit:(<span class="string">'This operation would block forever....'</span>)</span><br></pre></td></tr></table></figure></p>
+<p>这个问题可以通过打上 monkey patch(猴子补丁)来规避。</p>
+<p>在导入 multiprocess 库的文件头部加入以下代码：<br><figure class="highlight capnproto"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> gevent <span class="keyword">import</span> monkey</span><br><span class="line"></span><br><span class="line">monkey.patch_all()</span><br></pre></td></tr></table></figure></p>
+<p>注意，这两行代码需要放置在文件导入库的最前面.</p>
+<p>我遇到的场景下， 导致 LoopExit 的原因是 multiprocess 的job中远程网络请求超时导致的，如果相应的job任务中没有远程请求的话，即使不用 pathch，代码也是能够正常运行的。由于避免加上超时处理的复杂逻辑，就简单的使用monkey patch来解决这个问题。</p>
 
           
         
@@ -637,7 +644,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/goroutinue-limit/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/use-asyncio-in-python/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="songgl">
@@ -659,8 +666,8 @@
             
               
                 
-                <a class="post-title-link" href="/goroutinue-limit/" itemprop="url">
-                  Buffered Channel + sync.WaitGroup 实现对 goroutinue 并发数的限制
+                <a class="post-title-link" href="/use-asyncio-in-python/" itemprop="url">
+                  python asyncio 简单使用
                 </a>
               
             
@@ -676,8 +683,349 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-09-18T09:17:34+08:00">
-                2017-09-18
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-07T15:22:37+08:00">
+                2018-03-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            <!--noindex-->
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/use-asyncio-in-python/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="use-asyncio-in-python/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+              <!--/noindex-->
+            
+          
+
+          
+          
+             <span id="/use-asyncio-in-python/" class="leancloud_visitors" data-flag-title="python asyncio 简单使用">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>在python 3.4及以上的版本中，可以通过 asyncio 来实现协程(coroutine)。在 python 3.5以后可以使用 async/await 来简化代码，如果python版本是3.4的话，需要通过 <code>@asyncio.coroutine</code>注解 和 <code>yield from</code> 来实现。</p>
+<p>一下代码是3.5+以后的写法，和3.4版本的写法主要区别在于:</p>
+<ol>
+<li>用 async 代替了 @asyncio.coroutine </li>
+<li>用 await 代替了 yield from</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> asyncio</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">task</span><span class="params">(n)</span>:</span></span><br><span class="line">	print(<span class="string">"do task:"</span>,n)</span><br><span class="line">	<span class="keyword">await</span> asyncio.sleep(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">tasks = [ task(_) <span class="keyword">for</span> _ <span class="keyword">in</span> range(<span class="number">10</span>)]</span><br><span class="line"></span><br><span class="line">loop = asyncio.get_event_loop()</span><br><span class="line">res, _ = loop.run_until_complete(asyncio.wait(tasks))</span><br><span class="line">loop.close()</span><br><span class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> res:</span><br><span class="line">	print(_.result())</span><br></pre></td></tr></table></figure>
+<p>参考：<br>    廖雪峰的Python3.x教程-<a href="https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/001432090954004980bd351f2cd4cc18c9e6c06d855c498000" target="_blank" rel="noopener">异步io</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/use-theading-in-python/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="songgl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/favicon.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mr.song">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/use-theading-in-python/" itemprop="url">
+                  python 多进程、多线程简单使用
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-07T14:42:01+08:00">
+                2018-03-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            <!--noindex-->
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/use-theading-in-python/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="use-theading-in-python/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+              <!--/noindex-->
+            
+          
+
+          
+          
+             <span id="/use-theading-in-python/" class="leancloud_visitors" data-flag-title="python 多进程、多线程简单使用">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>python 中可以使用 multiprocessing (多进程) 和 multiprocessing.dummy(多线程) 来实现并发操作。<br>两者在使用方式上一样，只不过实现并发的方式不同。</p>
+<p>以下简单使用案例以 multiprocessing.dummy 多线程为例：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">from</span> multiprocessing.dummy <span class="keyword">import</span> Pool</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">compute</span><span class="params">(param)</span>:</span></span><br><span class="line">	<span class="keyword">return</span> param*<span class="number">100</span></span><br><span class="line"></span><br><span class="line">params = [ _ <span class="keyword">for</span> _ <span class="keyword">in</span> range(<span class="number">10</span>) ]</span><br><span class="line"></span><br><span class="line">pool = Pool()</span><br><span class="line"></span><br><span class="line">results = pool.map(compute, params)</span><br><span class="line"></span><br><span class="line">pool.close()</span><br><span class="line"></span><br><span class="line">pool.join()</span><br><span class="line"></span><br><span class="line">print(results)</span><br></pre></td></tr></table></figure></p>
+<p>注意：多进程(multiprocessing) 无法在 celery 等后台进程中使用，因为 celery 等后台进程不再允许生成子进程,这时候就只能使用多线程或者协程了。</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">daemonic processes are <span class="keyword">not</span> allowed <span class="keyword">to</span> have children</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/go-build-args/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="songgl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/favicon.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mr.song">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/go-build-args/" itemprop="url">
+                  go build 常见编译优化
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-27T16:09:14+08:00">
+                2018-02-27
               </time>
             
 
@@ -718,8 +1066,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/goroutinue-limit/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count hc-comment-count" data-xid="goroutinue-limit/" itemprop="commentsCount"></span>
+                <a href="/go-build-args/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="go-build-args/" itemprop="commentsCount"></span>
                 </a>
               </span>
               <!--/noindex-->
@@ -728,7 +1076,7 @@
 
           
           
-             <span id="/goroutinue-limit/" class="leancloud_visitors" data-flag-title="Buffered Channel + sync.WaitGroup 实现对 goroutinue 并发数的限制">
+             <span id="/go-build-args/" class="leancloud_visitors" data-flag-title="go build 常见编译优化">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -758,357 +1106,14 @@
 
       
         
-          <p>写过爬虫的都应该考虑这个问题：不能毫无节制、毫无节操的无限制的并发爬取目标网站的内容，不然很容易被对方识别出来从而被封。</p>
-<p>Go 的 goroutinue 机制使用起来非常简单，所以很多人比如我就喜欢用 Go 来写写爬虫。那么如何限制 goroutinue 并发数呢？</p>
-<p>下面提供一种 Buffered Channel + sync.WaitGroup 实现对 goroutinue 并发数进行控制的思路。这种方式其实在 D&amp;K 所著的《The Go Programing Language》一书中的第八章(goroutinue and channels) 中也有提到。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/goroutinue-limit/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/http-benckmarking-tool-wrk/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="songgl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/favicon.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Mr.song">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/http-benckmarking-tool-wrk/" itemprop="url">
-                  http压力测试工具--wrk
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-09-17T10:36:55+08:00">
-                2017-09-17
-              </time>
-            
-
-            
-
-            
-          </span>
+          
+            <p>一般情况下，go build 可以直接编译程序，无需额外的参数设定。<br>但在编译生产环境下使用的可执行程序时候，go build 的一些参数还是很有用的。</p>
+<h2 id="减小编译后可执行程序的大小"><a href="#减小编译后可执行程序的大小" class="headerlink" title="减小编译后可执行程序的大小"></a>减小编译后可执行程序的大小</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">go</span> build -ldflags <span class="string">'-w -s'</span></span><br></pre></td></tr></table></figure>
+<p>说明：<br>    -w 禁止生成debug信息,注意使用该选项后，无法使用 gdb 进行调试<br>    -s 禁用符号表<br>可以使用 <code>go tool link --help</code> 查看 ldflags 各参数含义</p>
+<h2 id="禁止gc优化和内联"><a href="#禁止gc优化和内联" class="headerlink" title="禁止gc优化和内联"></a>禁止gc优化和内联</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">go</span> build -gcflags <span class="string">'-N -l'</span></span><br></pre></td></tr></table></figure>
+<p>说明:<br>    -N 禁止编译优化<br>    -l 禁止内联,禁止内联也可以一定程度上减小可执行程序大小<br>可以使用 <code>go tool compile --help</code> 查看 gcflags 各参数含义</p>
 
           
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/tools/" itemprop="url" rel="index">
-                    <span itemprop="name">tools</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            <!--noindex-->
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/http-benckmarking-tool-wrk/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count hc-comment-count" data-xid="http-benckmarking-tool-wrk/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-              <!--/noindex-->
-            
-          
-
-          
-          
-             <span id="/http-benckmarking-tool-wrk/" class="leancloud_visitors" data-flag-title="http压力测试工具--wrk">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>发现一个新的 http 压力测试工具 wrk ,简单好用。下载地址：<a href="https://github.com/wg/wrk" target="_blank" rel="noopener">https://github.com/wg/wrk</a> 。类似于之前个人经常使用的一些压测工具，详细请移步 <a href="/pressure-test-tools">压力测试工具ab、webbench、http_load、siege简单使用</a>。</p>
-<p>wrk 使用非常简单，参数不多，但是足够自己简单压测一些 http 服务了。下面简单介绍下如何安装和使用。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/http-benckmarking-tool-wrk/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/python-threading/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="songgl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/favicon.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Mr.song">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/python-threading/" itemprop="url">
-                  python threading 多线程简单使用
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-09-05T09:13:09+08:00">
-                2017-09-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            <!--noindex-->
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/python-threading/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count hc-comment-count" data-xid="python-threading/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-              <!--/noindex-->
-            
-          
-
-          
-          
-             <span id="/python-threading/" class="leancloud_visitors" data-flag-title="python threading 多线程简单使用">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>之前一个项目，使用 Flask 框架写了一个网络图片抓取的程序，当时时间紧急，多张图片下载的时候，就简简单单的使用 <code>for in</code> 循环去获取网络图片内容。后来有空了，看了下 python 的多线程的使用，挺简单的，就用 threading 重新改造了下这个程序，让其支持多线程。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/python-threading/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
         
       
     </div>
@@ -1145,7 +1150,7 @@
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1190,7 +1195,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">40</span>
+                <span class="site-state-item-count">48</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -1212,7 +1217,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">65</span>
+                <span class="site-state-item-count">74</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -1281,7 +1286,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
