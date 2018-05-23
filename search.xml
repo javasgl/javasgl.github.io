@@ -1,6 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[go覆盖测试率图形化分析]]></title>
+    <url>%2Fgo-cover-ui%2F</url>
+    <content type="text"><![CDATA[go test可以用来做单元测试，-cover参数可以显示测试覆盖率。1go test -v ./... -cover 结果如下：123...PASScoverage: 34.4% of statements 但是有时候需要提高覆盖测试率，就需要知道哪些代码被覆盖到了，而哪些代码没有被覆盖到。这时候可以借助go提供的一个工具来实现。 首先，执行单元测试时，添加 -coverprofile=profileName,生成 profile文件。 1go test -v ./... -coverprofile=aaaa 之后，使用go tool cover -html=profileName -o coverage.html来生成html文件后用浏览器打开。 12go tool cover -html=aaaa -o coverage.htmlopen -a /Applications/Google\ Chrome.app coverage.html 最终看到的效果是：红色表示没有覆盖到的代码，绿色表示覆盖到的代码，这样就能针对性的编写单元测试，提高测试覆盖率了。]]></content>
+      <categories>
+        <category>go</category>
+      </categories>
+      <tags>
+        <tag>go</tag>
+        <tag>UnitTest</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[使用 reindex 来修改 elasticsearch 索引mapping]]></title>
+    <url>%2Felastic-search-reindex%2F</url>
+    <content type="text"><![CDATA[elasticsearch索引一旦建立，就无法动态修改其字段的映射类型，有时候因为人为原因污染了索引的mapping,这个时候就只能通过重建索引来修改索引的mapping设置了。 在一次项目中，有一个字段结构如下：123456&#123; "logistics":&#123; "company":"string", "no":"string" &#125;&#125; 由于当初创建索引的时候，既没有给这个索引中的这个字段指定合适的类型，也没有通过动态模板来为这个字段指定类型，导致 elasticsearch 默认将这种结构的数据设置成了 Object 类型，而我们真正想要设置的类型却是 Nested 类型。 这种情况下，一般有两种解决方案。 第一种方案，给这个索引追加一个新的字段，同时给这个字段指定类型。12345678910111213141516PUT test/_mapping/test&#123; "properties": &#123; "logisticsV2":&#123; "type": "nested", "properties": &#123; "company":&#123; "type":"keyword" &#125;, "no":&#123; "type":"keyword" &#125; &#125; &#125; &#125;&#125; 执行之后，index的mapping中就是这样的了：12345678910111213141516171819202122232425262728293031323334353637383940414243&#123; "test":&#123; "mappings":&#123; "test":&#123; "properties":&#123; "logistics":&#123; "properties":&#123; "company":&#123; "type":"text", "fields":&#123; "keyword":&#123; "type":"keyword", "ignore_above":256 &#125; &#125; &#125;, "no":&#123; "type":"text", "fields":&#123; "keyword":&#123; "type":"keyword", "ignore_above":256 &#125; &#125; &#125; &#125; &#125;, "logisticsV2":&#123; "type":"nested", "properties":&#123; "company":&#123; "type":"keyword" &#125;, "no":&#123; "type":"keyword" &#125; &#125; &#125; &#125; &#125; &#125; &#125;&#125; 其中 logisticsV2的类型是 nested 类型，之后依赖于 nested 类型的相关功能使用 logisticsV2字段来实现即可。这个中方式有一些弊端，比如数据冗余问题、数据一致性问题等 第二个方案，使用 elasticsearch 提供的 reindex api 来迁移数据，创建新的索引。首先创建好目标索引,并设置好mapping:1234567891011121314151617PUT test_newPUT test_new/_mapping/test&#123; "properties": &#123; "logistics":&#123; "type": "nested", "properties": &#123; "company":&#123; "type":"keyword" &#125;, "no":&#123; "type":"keyword" &#125; &#125; &#125; &#125;&#125; 之后，使用 reindex 将原来的索引重建到新的索引上：123456789POST _reindex&#123; "source": &#123; "index": "test" &#125;, "dest": &#123; "index": "test_new" &#125;&#125; 等待 reindex 完成后， test_new 就结构就就是你想要的mapping了。 为了对线上业务做到无感，可以使用 alias 别名功能来实现，具体操作可以参考 使用 Elasticsearch alias 功能切换 indexl. 这里不再赘述.]]></content>
+      <categories>
+        <category>elasticsearch</category>
+      </categories>
+      <tags>
+        <tag>elasticsearch</tag>
+        <tag>reindex</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[python的浅复制和深复制]]></title>
     <url>%2Fpython-reference-value-md%2F</url>
     <content type="text"><![CDATA[最近使用python过程中遇到了一个看似诡异的问题,由于惯性思维，这个问题花了一点时间一步步调试才找到。先来看看下面的代码的结果：12345a = [1,2,3]b = ab.append(4)print(b)print(a) 如果这段代码放在其他语言,Java 或者 PHP 中，结果大多是这样的：12[1,2,3,4][1,2,3] 但是在 python 中，实际执行的结果却是这样的：12[1,2,3,4][1,2,3,4] 修改 b 的值，却影响了 a 的值。这个就是 python 和其他语言有一点不一样的地方了，简单可以理解为：python 没有赋值，只有引用。如果以其他语言的方式来理解，那就是 a,b 都是指向同一块内存数据的地址，所以修改其中任何一个，都会引起彼此的变化，因为底层数据都是同一份。 现在，如果需要这段代码表现的和其他语言一致，该怎么写呢？ 浅复制(shallow copy)对于list 列表，python 有 copy 方法：12345a = [1,2,3]b = a.copy()b.append(4)print(b)print(a) 代码执行结果就基本能达到预期了：12[1,2,3,4][1,2,3] 深复制(deep coopy)但是需要注意的是，这个 copy 方法是浅复制(shallow copy),那么它对于嵌套对象就无能为力了。如果需要复制嵌套对象，可以使用 import copy ,然后使用 copy.deepcoopy()来实现对嵌套对象的复制12345678import copya = [1,2,3,[4,5]]# b = a.copy()b = copy.deepcopy(a)b.append(7)b[3][1]=6print(b)print(a) 代码执行结果是这样的：12[1, 2, 3, [4, 6],7][1, 2, 3, [4, 5]] 可以看到 a 并没有因为 b 对嵌套内容的修改而改变。这里需要注意的一点是，如果修改的不是嵌套的内容，那么普通的copy也还是可以的，此例中，append(7) 时，使用 copy 或者 copy.deepcopy 的效果是一样的，a的值都不会受到影响。 deepcopy的本质是递归复制。 对于 list 数据结构而言，可以用 list(x) 来代替 copy, 不过它依然是浅复制,这点需要注意。]]></content>

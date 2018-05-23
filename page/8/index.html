@@ -70,7 +70,7 @@
 
 
 
-  <link rel="alternate" href="/atom.xml" title="Mr.song" type="application/atom+xml" />
+  <link rel="alternate" href="/atom.xml" title="javasgl" type="application/atom+xml" />
 
 
 
@@ -84,13 +84,13 @@
 
 <meta name="description" content="A journey of a thousand miles begins with single step">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Mr.song">
+<meta property="og:title" content="javasgl">
 <meta property="og:url" content="http://yoursite.com/page/8/index.html">
-<meta property="og:site_name" content="Mr.song">
+<meta property="og:site_name" content="javasgl">
 <meta property="og:description" content="A journey of a thousand miles begins with single step">
 <meta property="og:locale" content="en">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Mr.song">
+<meta name="twitter:title" content="javasgl">
 <meta name="twitter:description" content="A journey of a thousand miles begins with single step">
 
 
@@ -125,7 +125,7 @@
 
 
 
-  <title> Mr.song </title>
+  <title> javasgl </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -163,7 +163,7 @@
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Mr.song</span>
+        <span class="site-title">javasgl</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -300,6 +300,351 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/mysql-bigint-out-of-range/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="songgl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/favicon.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="javasgl">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/mysql-bigint-out-of-range/" itemprop="url">
+                  mysql unsigned/int字段越界
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-22T10:41:39+08:00">
+                2017-05-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/mysql/" itemprop="url" rel="index">
+                    <span itemprop="name">mysql</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            <!--noindex-->
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/mysql-bigint-out-of-range/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="mysql-bigint-out-of-range/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+              <!--/noindex-->
+            
+          
+
+          
+          
+             <span id="/mysql-bigint-out-of-range/" class="leancloud_visitors" data-flag-title="mysql unsigned/int字段越界">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>线上的<code>MySQL</code>错误日志中遇到了以下问题<br><figure class="highlight vhdl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Data truncation: BIGINT <span class="built_in">UNSIGNED</span> value <span class="keyword">is</span> <span class="keyword">out</span> <span class="keyword">of</span> <span class="keyword">range</span> <span class="keyword">in</span> `(database.tablename.fieldname)`</span><br></pre></td></tr></table></figure></p>
+<p><code>MySQL</code>版本为:<br><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select version();</span><br><span class="line"><span class="code">+------------+</span></span><br><span class="line">| version()  |</span><br><span class="line"><span class="code">+------------+</span></span><br><span class="line">| 5.6.21-log |</span><br><span class="line"><span class="code">+------------+</span></span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure></p>
+<p>引起这个错误的原因是<code>sql</code>语句中对<code>unsigned</code>字段进行了递减操作的结果为负数导致的,<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">update database.tablename <span class="builtin-name">set</span> <span class="attribute">fieldname</span>=fieldname-num</span><br></pre></td></tr></table></figure></p>
+<p>而<code>MySQL</code>的模式是默认的<code>mode</code>:<br><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; show variables like <span class="emphasis">'sql_mode'</span>;</span><br><span class="line"><span class="code">+---------------+</span>------------------------+</span><br><span class="line">| Variable<span class="emphasis">_name | Value                  |</span></span><br><span class="line"><span class="emphasis">+---------------+------------------------+</span></span><br><span class="line"><span class="emphasis">| sql_</span>mode      | NO<span class="emphasis">_ENGINE_</span>SUBSTITUTION |</span><br><span class="line"><span class="code">+---------------+</span>------------------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure></p>
+<p>解决方案有3种:<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/mysql-bigint-out-of-range/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/umount-device-when-its-buzy/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="songgl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/favicon.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="javasgl">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/umount-device-when-its-buzy/" itemprop="url">
+                  Linux强制卸载设备
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-12T11:04:07+08:00">
+                2017-05-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            <!--noindex-->
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/umount-device-when-its-buzy/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="umount-device-when-its-buzy/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+              <!--/noindex-->
+            
+          
+
+          
+          
+             <span id="/umount-device-when-its-buzy/" class="leancloud_visitors" data-flag-title="Linux强制卸载设备">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Linux下因为磁盘出问题而导致了<code>Input/output error</code>,所以准备先把有问题的磁盘卸载掉再重新挂上试试。</p>
+<p>执行<code>umount</code>:<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@hostname ~]<span class="comment"># umount -n /dev/sdc1</span></span><br><span class="line">umount: /home/data: device <span class="keyword">is</span> busy.</span><br><span class="line">        (In <span class="keyword">some</span> cases useful info <span class="keyword">about</span> processes <span class="keyword">that</span> use</span><br><span class="line">         <span class="keyword">the</span> device <span class="keyword">is</span> found <span class="keyword">by</span> lsof(<span class="number">8</span>) <span class="keyword">or</span> fuser(<span class="number">1</span>))</span><br></pre></td></tr></table></figure></p>
+<p>显示设备正忙，所以执行<code>umount -nf</code>:<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@hostname ~]# umount -nf /dev/sdc1</span><br><span class="line">umount2: Device <span class="keyword">or</span><span class="built_in"> resource </span>busy</span><br><span class="line">umount: /home/data: device is busy.</span><br><span class="line">        (<span class="keyword">In</span> some cases useful <span class="builtin-name">info</span> about processes that use</span><br><span class="line">         the device is found by lsof(8) <span class="keyword">or</span> fuser(1))</span><br><span class="line">umount2: Device <span class="keyword">or</span><span class="built_in"> resource </span>busy</span><br></pre></td></tr></table></figure></p>
+<p>还是无法卸载。</p>
+<p>根据给出的提示，使用<code>losf</code>或者<code>fuser</code>来找出那些进程正在使用该设备:<br><figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@yourdream ~]<span class="attr"># fuser -cu /dev/sdc1</span></span><br><span class="line">/dev/sdc<span class="number">1</span>:            <span class="number">2444</span>c<span class="comment">(root)</span>  <span class="number">2458</span>c<span class="comment">(root)</span>  <span class="number">3041</span>c<span class="comment">(mysql)</span></span><br><span class="line">[root@yourdream ~]<span class="attr"># fuser -cu /dev/sdc1</span></span><br></pre></td></tr></table></figure></p>
+<p>使用<code>c</code>指定挂载的文件系统，<code>u</code>显示使用者的id。可以看出三个进程正在使用，通过<code>ps</code>可以查到分别为<code>redis</code>和<code>mysql</code>正在使用。<br>因此，卸载之前停掉<code>redis</code>和<code>mysql</code>之后再次执行<code>umount</code>就能正常卸载了。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/i-love-vim/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -309,7 +654,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Mr.song">
+      <meta itemprop="name" content="javasgl">
     </span>
 
     
@@ -489,7 +834,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Mr.song">
+      <meta itemprop="name" content="javasgl">
     </span>
 
     
@@ -659,7 +1004,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Mr.song">
+      <meta itemprop="name" content="javasgl">
     </span>
 
     
@@ -815,346 +1160,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/regex-match-chinese/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="songgl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/favicon.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Mr.song">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/regex-match-chinese/" itemprop="url">
-                  中文正则匹配
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-07T20:36:05+08:00">
-                2017-05-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/notes/" itemprop="url" rel="index">
-                    <span itemprop="name">notes</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            <!--noindex-->
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/regex-match-chinese/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count hc-comment-count" data-xid="regex-match-chinese/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-              <!--/noindex-->
-            
-          
-
-          
-          
-             <span id="/regex-match-chinese/" class="leancloud_visitors" data-flag-title="中文正则匹配">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>在某些场景下，需要使用正则对文本中的中文进行匹配。之前就在一个<code>python</code>的项目中需要对中文进行相应的匹配。<br>实际需求: 要求匹配非中文内容。<br>中文的<code>unicode</code>编码范围为 <code>u4e00</code> 到 <code>u9fa5</code>。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line">group = re.search(<span class="string">ur'([^\u4e00-\u9fa5])'</span>,<span class="string">'1中文en汉字'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> group:</span><br><span class="line">	<span class="keyword">print</span> grou.groups()</span><br></pre></td></tr></table></figure></p>
-<p>Tips:</p>
-<blockquote>
-<p>1.正则非匹配: ^<br>2.正则范围匹配: [a-b]<br>3.正则捕获: ()<br>4.python2 中 u 表示 <code>unicode</code>的字符串, python3 已经全部使用<code>unicode</code>来表示字符串<br>5.python 中 r 表示 <code>row string</code>,使用原始字符串，不进行转义</p>
-</blockquote>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/shell-change-path/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="songgl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/favicon.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Mr.song">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/shell-change-path/" itemprop="url">
-                  shell脚本修改环境变量
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-28T12:04:50+08:00">
-                2017-04-28
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            <!--noindex-->
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/shell-change-path/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count hc-comment-count" data-xid="shell-change-path/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-              <!--/noindex-->
-            
-          
-
-          
-          
-             <span id="/shell-change-path/" class="leancloud_visitors" data-flag-title="shell脚本修改环境变量">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>有时候编写go程序的时候需要将当前目录加到系统<code>GOPATH</code>中，不然就得将代码放置在已有的<code>GOPATH</code>之下。所以一般习惯在项目根目录执行创建一个<code>shell</code>脚本来动态的修改<code>GOPTAH</code>。<br>脚本很简单，代码如下:<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#/bin/sh</span></span><br><span class="line"><span class="attribute">CURRENT</span>=`pwd`</span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">GOPATH</span>=<span class="string">"<span class="variable">$&#123;GOPATH&#125;</span>:<span class="variable">$&#123;CURRENT&#125;</span>"</span></span><br></pre></td></tr></table></figure></p>
-<p>因为是<code>shell</code>脚本，所以就习惯性的执行了如下命令:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sh env</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$GOPATH</span></span><br></pre></td></tr></table></figure></p>
-<p>期望<code>GOPATH</code>中已经追加上了当前目录，然而事与愿违，并没有什么效果，<code>GOPATH</code>仍然是之前的内容。</p>
-<p>原因:<br>使用 <code>sh</code> 命令来执行shell脚本的时候,脚本真正是在<code>sh</code>创建的子<code>shell</code>中执行,所以当<code>sh</code>进程完成的时候并没有修改系统变量,所以通过执行 <code>sh env</code> 来修改系统变量是无效的。子<code>shell</code>和父<code>shell</code>彼此无法使用对方的变量，子<code>shell</code>对环境变量的修改也不会影响父<code>shell</code>。<br>需要使用 <code>source env</code>来执行，<code>source</code>命令执行脚本的时候，是在<code>source</code>当前<code>shell</code>中执行的,并不会创建子<code>shell</code>。</p>
-<p>参考: <a href="http://bbs.chinaunix.net/thread-2211666-1-1.html" target="_blank" rel="noopener">用source 执行脚本和用sh 执行脚本有什么区别</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1204,7 +1209,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">48</span>
+                <span class="site-state-item-count">50</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -1226,7 +1231,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">74</span>
+                <span class="site-state-item-count">76</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>

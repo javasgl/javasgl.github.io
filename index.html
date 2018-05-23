@@ -70,7 +70,7 @@
 
 
 
-  <link rel="alternate" href="/atom.xml" title="Mr.song" type="application/atom+xml" />
+  <link rel="alternate" href="/atom.xml" title="javasgl" type="application/atom+xml" />
 
 
 
@@ -84,13 +84,13 @@
 
 <meta name="description" content="A journey of a thousand miles begins with single step">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Mr.song">
+<meta property="og:title" content="javasgl">
 <meta property="og:url" content="http://yoursite.com/index.html">
-<meta property="og:site_name" content="Mr.song">
+<meta property="og:site_name" content="javasgl">
 <meta property="og:description" content="A journey of a thousand miles begins with single step">
 <meta property="og:locale" content="en">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Mr.song">
+<meta name="twitter:title" content="javasgl">
 <meta name="twitter:description" content="A journey of a thousand miles begins with single step">
 
 
@@ -125,7 +125,7 @@
 
 
 
-  <title> Mr.song </title>
+  <title> javasgl </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -163,7 +163,7 @@
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Mr.song</span>
+        <span class="site-title">javasgl</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -300,6 +300,351 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/go-cover-ui/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="songgl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/favicon.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="javasgl">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/go-cover-ui/" itemprop="url">
+                  go覆盖测试率图形化分析
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-23T11:36:53+08:00">
+                2018-05-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/go/" itemprop="url" rel="index">
+                    <span itemprop="name">go</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            <!--noindex-->
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/go-cover-ui/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="go-cover-ui/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+              <!--/noindex-->
+            
+          
+
+          
+          
+             <span id="/go-cover-ui/" class="leancloud_visitors" data-flag-title="go覆盖测试率图形化分析">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>go test可以用来做单元测试，-cover参数可以显示测试覆盖率。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go <span class="built_in">test</span> -v ./... -cover</span><br></pre></td></tr></table></figure></p>
+<p>结果如下：<br><figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">PASS</span><br><span class="line">coverage: <span class="number">34.4</span>% <span class="keyword">of</span> statements</span><br></pre></td></tr></table></figure></p>
+<p>但是有时候需要提高覆盖测试率，就需要知道哪些代码被覆盖到了，而哪些代码没有被覆盖到。这时候可以借助go提供的一个工具来实现。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/go-cover-ui/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/elastic-search-reindex/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="songgl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/favicon.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="javasgl">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/elastic-search-reindex/" itemprop="url">
+                  使用 reindex 来修改 elasticsearch 索引mapping
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-02T08:32:00+08:00">
+                2018-04-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/elasticsearch/" itemprop="url" rel="index">
+                    <span itemprop="name">elasticsearch</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            <!--noindex-->
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/elastic-search-reindex/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="elastic-search-reindex/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+              <!--/noindex-->
+            
+          
+
+          
+          
+             <span id="/elastic-search-reindex/" class="leancloud_visitors" data-flag-title="使用 reindex 来修改 elasticsearch 索引mapping">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>elasticsearch索引一旦建立，就无法动态修改其字段的映射类型，有时候因为人为原因污染了索引的mapping,这个时候就只能通过重建索引来修改索引的mapping设置了。</p>
+<p>在一次项目中，有一个字段结构如下：<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	<span class="attr">"logistics"</span>:&#123;</span><br><span class="line">		<span class="attr">"company"</span>:<span class="string">"string"</span>,</span><br><span class="line">		<span class="attr">"no"</span>:<span class="string">"string"</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>由于当初创建索引的时候，既没有给这个索引中的这个字段指定合适的类型，也没有通过动态模板来为这个字段指定类型，导致 elasticsearch 默认将这种结构的数据设置成了 Object 类型，而我们真正想要设置的类型却是 Nested 类型。</p>
+<p>这种情况下，一般有两种解决方案。<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/elastic-search-reindex/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/python-reference-value-md/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -309,7 +654,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Mr.song">
+      <meta itemprop="name" content="javasgl">
     </span>
 
     
@@ -483,7 +828,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Mr.song">
+      <meta itemprop="name" content="javasgl">
     </span>
 
     
@@ -653,7 +998,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Mr.song">
+      <meta itemprop="name" content="javasgl">
     </span>
 
     
@@ -808,344 +1153,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/use-theading-in-python/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="songgl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/favicon.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Mr.song">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/use-theading-in-python/" itemprop="url">
-                  python 多进程、多线程简单使用
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-07T14:42:01+08:00">
-                2018-03-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            <!--noindex-->
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/use-theading-in-python/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count hc-comment-count" data-xid="use-theading-in-python/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-              <!--/noindex-->
-            
-          
-
-          
-          
-             <span id="/use-theading-in-python/" class="leancloud_visitors" data-flag-title="python 多进程、多线程简单使用">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>python 中可以使用 multiprocessing (多进程) 和 multiprocessing.dummy(多线程) 来实现并发操作。<br>两者在使用方式上一样，只不过实现并发的方式不同。</p>
-<p>以下简单使用案例以 multiprocessing.dummy 多线程为例：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">from</span> multiprocessing.dummy <span class="keyword">import</span> Pool</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">compute</span><span class="params">(param)</span>:</span></span><br><span class="line">	<span class="keyword">return</span> param*<span class="number">100</span></span><br><span class="line"></span><br><span class="line">params = [ _ <span class="keyword">for</span> _ <span class="keyword">in</span> range(<span class="number">10</span>) ]</span><br><span class="line"></span><br><span class="line">pool = Pool()</span><br><span class="line"></span><br><span class="line">results = pool.map(compute, params)</span><br><span class="line"></span><br><span class="line">pool.close()</span><br><span class="line"></span><br><span class="line">pool.join()</span><br><span class="line"></span><br><span class="line">print(results)</span><br></pre></td></tr></table></figure></p>
-<p>注意：多进程(multiprocessing) 无法在 celery 等后台进程中使用，因为 celery 等后台进程不再允许生成子进程,这时候就只能使用多线程或者协程了。</p>
-<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">daemonic processes are <span class="keyword">not</span> allowed <span class="keyword">to</span> have children</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/go-build-args/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="songgl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/favicon.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Mr.song">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/go-build-args/" itemprop="url">
-                  go build 常见编译优化
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-27T16:09:14+08:00">
-                2018-02-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/go/" itemprop="url" rel="index">
-                    <span itemprop="name">go</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            <!--noindex-->
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/go-build-args/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count hc-comment-count" data-xid="go-build-args/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-              <!--/noindex-->
-            
-          
-
-          
-          
-             <span id="/go-build-args/" class="leancloud_visitors" data-flag-title="go build 常见编译优化">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>一般情况下，go build 可以直接编译程序，无需额外的参数设定。<br>但在编译生产环境下使用的可执行程序时候，go build 的一些参数还是很有用的。</p>
-<h2 id="减小编译后可执行程序的大小"><a href="#减小编译后可执行程序的大小" class="headerlink" title="减小编译后可执行程序的大小"></a>减小编译后可执行程序的大小</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">go</span> build -ldflags <span class="string">'-w -s'</span></span><br></pre></td></tr></table></figure>
-<p>说明：<br>    -w 禁止生成debug信息,注意使用该选项后，无法使用 gdb 进行调试<br>    -s 禁用符号表<br>可以使用 <code>go tool link --help</code> 查看 ldflags 各参数含义</p>
-<h2 id="禁止gc优化和内联"><a href="#禁止gc优化和内联" class="headerlink" title="禁止gc优化和内联"></a>禁止gc优化和内联</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">go</span> build -gcflags <span class="string">'-N -l'</span></span><br></pre></td></tr></table></figure>
-<p>说明:<br>    -N 禁止编译优化<br>    -l 禁止内联,禁止内联也可以一定程度上减小可执行程序大小<br>可以使用 <code>go tool compile --help</code> 查看 gcflags 各参数含义</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1195,7 +1202,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">48</span>
+                <span class="site-state-item-count">50</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -1217,7 +1224,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">74</span>
+                <span class="site-state-item-count">76</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>

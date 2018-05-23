@@ -70,7 +70,7 @@
 
 
 
-  <link rel="alternate" href="/atom.xml" title="Mr.song" type="application/atom+xml" />
+  <link rel="alternate" href="/atom.xml" title="javasgl" type="application/atom+xml" />
 
 
 
@@ -84,13 +84,13 @@
 
 <meta name="description" content="A journey of a thousand miles begins with single step">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Mr.song">
+<meta property="og:title" content="javasgl">
 <meta property="og:url" content="http://yoursite.com/page/7/index.html">
-<meta property="og:site_name" content="Mr.song">
+<meta property="og:site_name" content="javasgl">
 <meta property="og:description" content="A journey of a thousand miles begins with single step">
 <meta property="og:locale" content="en">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Mr.song">
+<meta name="twitter:title" content="javasgl">
 <meta name="twitter:description" content="A journey of a thousand miles begins with single step">
 
 
@@ -125,7 +125,7 @@
 
 
 
-  <title> Mr.song </title>
+  <title> javasgl </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -163,7 +163,7 @@
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Mr.song</span>
+        <span class="site-title">javasgl</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -300,6 +300,351 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/glide/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="songgl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/favicon.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="javasgl">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/glide/" itemprop="url">
+                  Glide--golang 包管理工具简单教程
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-08T23:06:00+08:00">
+                2017-07-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/go/" itemprop="url" rel="index">
+                    <span itemprop="name">go</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            <!--noindex-->
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/glide/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="glide/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+              <!--/noindex-->
+            
+          
+
+          
+          
+             <span id="/glide/" class="leancloud_visitors" data-flag-title="Glide--golang 包管理工具简单教程">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p> Golang挺好用的，但是目前比较受到诟病的是其没有自带包管理工具(golang社区已经发起了一个<a href="https://github.com/golang/dep" target="_blank" rel="noopener">dep</a>的项目，不过要正式被golang接受还需要一段时间)。官方没有咋办，那就自己造轮子呗。所以 go的包管理工具就五花八门、层出不穷了。目前有Glide, gopm, godep,gpm，gom等等。。。</p>
+<p>这里介绍一个工具，使用比较简单: glide</p>
+<p>我已经将其的文档翻译成了中文:  <a href="http://glidedocs.readthedocs.io/" target="_blank" rel="noopener">glide 中文文档</a>.</p>
+<p>翻译的内容放在github上: <a href="https://github.com/javasgl/GlideDocs" target="_blank" rel="noopener">https://github.com/javasgl/GlideDocs</a></p>
+<p>不想看文章的可以直接去看中文文档，文档写的很清晰，文档中关于<code>glide</code>的用法和原理都有说明。<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/glide/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/go-slice-append/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="songgl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/favicon.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="javasgl">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/go-slice-append/" itemprop="url">
+                  golang中slice越界问题
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-21T00:02:26+08:00">
+                2017-06-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/go/" itemprop="url" rel="index">
+                    <span itemprop="name">go</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            <!--noindex-->
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/go-slice-append/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="go-slice-append/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+              <!--/noindex-->
+            
+          
+
+          
+          
+             <span id="/go-slice-append/" class="leancloud_visitors" data-flag-title="golang中slice越界问题">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p><code>go</code>中<code>slice</code>由于其类似于一个长度可动态变化的数组而非常方便使用。<br><code>slice</code>有两个基本属性：<code>cap</code>,<code>len</code>，分别代表容量和已有数据长度。<br>一般声明<code>slice</code>的两种方式如下：<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//定义了一个初始长度为0,容量为2的int 类型的 `slice`</span></span><br><span class="line">slice:=<span class="built_in">make</span>([]<span class="keyword">int</span>,<span class="number">0</span>,<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> slice=[]<span class="keyword">int</span>&#123;<span class="number">0</span>,<span class="number">1</span>&#125;</span><br></pre></td></tr></table></figure></p>
+<p>往<code>slice</code>中添加元素使用<code>append</code>方法：<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">slice=<span class="built_in">append</span>(slice,<span class="number">1</span>)</span><br></pre></td></tr></table></figure></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/go-slice-append/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/debug-golang-with-gdb-on-mac/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -309,7 +654,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Mr.song">
+      <meta itemprop="name" content="javasgl">
     </span>
 
     
@@ -492,7 +837,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Mr.song">
+      <meta itemprop="name" content="javasgl">
     </span>
 
     
@@ -664,7 +1009,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Mr.song">
+      <meta itemprop="name" content="javasgl">
     </span>
 
     
@@ -817,351 +1162,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/mysql-bigint-out-of-range/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="songgl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/favicon.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Mr.song">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/mysql-bigint-out-of-range/" itemprop="url">
-                  mysql unsigned/int字段越界
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-22T10:41:39+08:00">
-                2017-05-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/mysql/" itemprop="url" rel="index">
-                    <span itemprop="name">mysql</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            <!--noindex-->
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/mysql-bigint-out-of-range/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count hc-comment-count" data-xid="mysql-bigint-out-of-range/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-              <!--/noindex-->
-            
-          
-
-          
-          
-             <span id="/mysql-bigint-out-of-range/" class="leancloud_visitors" data-flag-title="mysql unsigned/int字段越界">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>线上的<code>MySQL</code>错误日志中遇到了以下问题<br><figure class="highlight vhdl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Data truncation: BIGINT <span class="built_in">UNSIGNED</span> value <span class="keyword">is</span> <span class="keyword">out</span> <span class="keyword">of</span> <span class="keyword">range</span> <span class="keyword">in</span> `(database.tablename.fieldname)`</span><br></pre></td></tr></table></figure></p>
-<p><code>MySQL</code>版本为:<br><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select version();</span><br><span class="line"><span class="code">+------------+</span></span><br><span class="line">| version()  |</span><br><span class="line"><span class="code">+------------+</span></span><br><span class="line">| 5.6.21-log |</span><br><span class="line"><span class="code">+------------+</span></span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure></p>
-<p>引起这个错误的原因是<code>sql</code>语句中对<code>unsigned</code>字段进行了递减操作的结果为负数导致的,<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">update database.tablename <span class="builtin-name">set</span> <span class="attribute">fieldname</span>=fieldname-num</span><br></pre></td></tr></table></figure></p>
-<p>而<code>MySQL</code>的模式是默认的<code>mode</code>:<br><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; show variables like <span class="emphasis">'sql_mode'</span>;</span><br><span class="line"><span class="code">+---------------+</span>------------------------+</span><br><span class="line">| Variable<span class="emphasis">_name | Value                  |</span></span><br><span class="line"><span class="emphasis">+---------------+------------------------+</span></span><br><span class="line"><span class="emphasis">| sql_</span>mode      | NO<span class="emphasis">_ENGINE_</span>SUBSTITUTION |</span><br><span class="line"><span class="code">+---------------+</span>------------------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure></p>
-<p>解决方案有3种:<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/mysql-bigint-out-of-range/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/umount-device-when-its-buzy/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="songgl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/favicon.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Mr.song">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/umount-device-when-its-buzy/" itemprop="url">
-                  Linux强制卸载设备
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-12T11:04:07+08:00">
-                2017-05-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            <!--noindex-->
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/umount-device-when-its-buzy/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count hc-comment-count" data-xid="umount-device-when-its-buzy/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-              <!--/noindex-->
-            
-          
-
-          
-          
-             <span id="/umount-device-when-its-buzy/" class="leancloud_visitors" data-flag-title="Linux强制卸载设备">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Linux下因为磁盘出问题而导致了<code>Input/output error</code>,所以准备先把有问题的磁盘卸载掉再重新挂上试试。</p>
-<p>执行<code>umount</code>:<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@hostname ~]<span class="comment"># umount -n /dev/sdc1</span></span><br><span class="line">umount: /home/data: device <span class="keyword">is</span> busy.</span><br><span class="line">        (In <span class="keyword">some</span> cases useful info <span class="keyword">about</span> processes <span class="keyword">that</span> use</span><br><span class="line">         <span class="keyword">the</span> device <span class="keyword">is</span> found <span class="keyword">by</span> lsof(<span class="number">8</span>) <span class="keyword">or</span> fuser(<span class="number">1</span>))</span><br></pre></td></tr></table></figure></p>
-<p>显示设备正忙，所以执行<code>umount -nf</code>:<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@hostname ~]# umount -nf /dev/sdc1</span><br><span class="line">umount2: Device <span class="keyword">or</span><span class="built_in"> resource </span>busy</span><br><span class="line">umount: /home/data: device is busy.</span><br><span class="line">        (<span class="keyword">In</span> some cases useful <span class="builtin-name">info</span> about processes that use</span><br><span class="line">         the device is found by lsof(8) <span class="keyword">or</span> fuser(1))</span><br><span class="line">umount2: Device <span class="keyword">or</span><span class="built_in"> resource </span>busy</span><br></pre></td></tr></table></figure></p>
-<p>还是无法卸载。</p>
-<p>根据给出的提示，使用<code>losf</code>或者<code>fuser</code>来找出那些进程正在使用该设备:<br><figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@yourdream ~]<span class="attr"># fuser -cu /dev/sdc1</span></span><br><span class="line">/dev/sdc<span class="number">1</span>:            <span class="number">2444</span>c<span class="comment">(root)</span>  <span class="number">2458</span>c<span class="comment">(root)</span>  <span class="number">3041</span>c<span class="comment">(mysql)</span></span><br><span class="line">[root@yourdream ~]<span class="attr"># fuser -cu /dev/sdc1</span></span><br></pre></td></tr></table></figure></p>
-<p>使用<code>c</code>指定挂载的文件系统，<code>u</code>显示使用者的id。可以看出三个进程正在使用，通过<code>ps</code>可以查到分别为<code>redis</code>和<code>mysql</code>正在使用。<br>因此，卸载之前停掉<code>redis</code>和<code>mysql</code>之后再次执行<code>umount</code>就能正常卸载了。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1211,7 +1211,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">48</span>
+                <span class="site-state-item-count">50</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -1233,7 +1233,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">74</span>
+                <span class="site-state-item-count">76</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>

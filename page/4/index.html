@@ -70,7 +70,7 @@
 
 
 
-  <link rel="alternate" href="/atom.xml" title="Mr.song" type="application/atom+xml" />
+  <link rel="alternate" href="/atom.xml" title="javasgl" type="application/atom+xml" />
 
 
 
@@ -84,13 +84,13 @@
 
 <meta name="description" content="A journey of a thousand miles begins with single step">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Mr.song">
+<meta property="og:title" content="javasgl">
 <meta property="og:url" content="http://yoursite.com/page/4/index.html">
-<meta property="og:site_name" content="Mr.song">
+<meta property="og:site_name" content="javasgl">
 <meta property="og:description" content="A journey of a thousand miles begins with single step">
 <meta property="og:locale" content="en">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Mr.song">
+<meta name="twitter:title" content="javasgl">
 <meta name="twitter:description" content="A journey of a thousand miles begins with single step">
 
 
@@ -125,7 +125,7 @@
 
 
 
-  <title> Mr.song </title>
+  <title> javasgl </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -163,7 +163,7 @@
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Mr.song</span>
+        <span class="site-title">javasgl</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -300,6 +300,351 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/go-json-iterator/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="songgl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/favicon.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="javasgl">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/go-json-iterator/" itemprop="url">
+                  json-iterator--更快的json解析库
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-31T15:24:51+08:00">
+                2017-08-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/go/" itemprop="url" rel="index">
+                    <span itemprop="name">go</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            <!--noindex-->
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/go-json-iterator/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="go-json-iterator/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+              <!--/noindex-->
+            
+          
+
+          
+          
+             <span id="/go-json-iterator/" class="leancloud_visitors" data-flag-title="json-iterator--更快的json解析库">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>golang 中自带了非常方便解析json 的库 <code>encoding/json</code>,一般情况下也是使用这个库来作为 json 的 encode / decode。但是在有些场景下，比如解析大量json格式的日志数据的时候，json的解析性能问题就是一个需要特别关注的问题了。</p>
+<p>滴滴出行平台技术部的开源json解析库 <a href="https://github.com/json-iterator/go" target="_blank" rel="noopener">json-iterator</a>，性能比原生的 encoding/json 快很多。</p>
+<p>下面自己就简单测试了下两者的区别,测试代码很简单，就简单测试了下两者 Unmarshal 和 Marshal 的性能表现：<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/go-json-iterator/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/codis-dashboard/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="songgl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/favicon.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="javasgl">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/codis-dashboard/" itemprop="url">
+                  codis dashboard 无法启动处理流程
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-31T15:03:20+08:00">
+                2017-08-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            <!--noindex-->
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/codis-dashboard/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="codis-dashboard/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+              <!--/noindex-->
+            
+          
+
+          
+          
+             <span id="/codis-dashboard/" class="leancloud_visitors" data-flag-title="codis dashboard 无法启动处理流程">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>使用 codis 过程中，当 codis dashboard 异常挂掉之后，重启 codis-dashboard的时候，无法启动，日志报错信息为：<br><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2017</span>/<span class="number">08</span>/<span class="number">31</span> <span class="number">14</span>:<span class="number">43</span>:<span class="number">46</span> dashboard.go:<span class="number">234</span>: [PANIC] create zk <span class="keyword">node</span> <span class="title">failed</span></span><br><span class="line">[error]: dashboard already exists: &#123;<span class="string">"addr"</span>: <span class="string">"192.168.0.1:28087"</span>, <span class="string">"pid"</span>: <span class="number">15716</span>&#125;</span><br></pre></td></tr></table></figure></p>
+<p>提示无法创建 zookeeper node,因为已经存在 dashboard node 了。</p>
+<p>处理方案：连上 zookeeper, 删除相应的节点后重新启动 codis-dashboard。<br><figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta-keyword">/usr/</span>local<span class="meta-keyword">/zookeeper/</span>bin/zkCli.sh -server <span class="number">192.168</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">2181</span></span><br><span class="line">delete <span class="meta-keyword">/zk/</span>path/dashboard</span><br></pre></td></tr></table></figure></p>
+<p>codis-dashboard 重新起来之后，发现还是无法连接 codis。<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/codis-dashboard/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/variable-parameter/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -309,7 +654,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Mr.song">
+      <meta itemprop="name" content="javasgl">
     </span>
 
     
@@ -479,7 +824,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Mr.song">
+      <meta itemprop="name" content="javasgl">
     </span>
 
     
@@ -652,7 +997,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Mr.song">
+      <meta itemprop="name" content="javasgl">
     </span>
 
     
@@ -806,348 +1151,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/redis-check-aof/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="songgl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/favicon.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Mr.song">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/redis-check-aof/" itemprop="url">
-                  使用 redis-check-aof 命令修复 aof 文件
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-23T18:27:30+08:00">
-                2017-08-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/redis/" itemprop="url" rel="index">
-                    <span itemprop="name">redis</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            <!--noindex-->
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/redis-check-aof/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count hc-comment-count" data-xid="redis-check-aof/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-              <!--/noindex-->
-            
-          
-
-          
-          
-             <span id="/redis-check-aof/" class="leancloud_visitors" data-flag-title="使用 redis-check-aof 命令修复 aof 文件">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>偶然的一天，发现redis一个实例无法启动，启动的时候，从 aof 文件往内存中加载数据的时候，出现了错误：</p>
-<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Bad <span class="built_in">file</span> <span class="built_in">format</span> reading <span class="keyword">the</span> append only <span class="built_in">file</span>: make <span class="keyword">a</span> backup <span class="keyword">of</span> your AOF <span class="built_in">file</span>, <span class="keyword">then</span> use ./redis-check-aof <span class="comment">--fix filename</span></span><br></pre></td></tr></table></figure>
-<p>提示，需要使用 redis-check-aof 来修复 aof 文件。</p>
-<p>按照其步骤，先备份再修复：<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@hostname 6379]# redis-check-aof --fix appendonly.aof</span><br><span class="line">0x        6a60a5cb: Expected<span class="built_in"> prefix </span>'</span><br><span class="line">AOF analyzed: <span class="attribute">size</span>=1784722401, <span class="attribute">ok_up_to</span>=1784718795, <span class="attribute">diff</span>=3606</span><br><span class="line">This will shrink the AOF <span class="keyword">from</span> 1784722401 bytes, with 3606 bytes, <span class="keyword">to</span> 1784718795 bytes</span><br><span class="line">Continue? [y/N]: y</span><br><span class="line">Successfully truncated AOF</span><br></pre></td></tr></table></figure></p>
-<p>修复完成后，重新启动 redis 就能正常启动了。</p>
-<p>同样，redis 如果采用的 rdb 模式持久化数据的话，如果需要修复 rdb 文件，可以使用 redis-check-dump file.rdb 来修复。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/elasticsearch-function-doc/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="songgl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/favicon.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Mr.song">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/elasticsearch-function-doc/" itemprop="url">
-                  Elasticsearch function 中 doc , _fields , _source 使用
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-21T12:07:40+08:00">
-                2017-08-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/elasticsearch/" itemprop="url" rel="index">
-                    <span itemprop="name">elasticsearch</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            <!--noindex-->
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/elasticsearch-function-doc/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count hc-comment-count" data-xid="elasticsearch-function-doc/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-              <!--/noindex-->
-            
-          
-
-          
-          
-             <span id="/elasticsearch-function-doc/" class="leancloud_visitors" data-flag-title="Elasticsearch function 中 doc , _fields , _source 使用">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>面对复杂的查询或者算分逻辑，Elasticsearch 可以使用 Scrpits 脚本功能来实现，实际项目之中也用的非常频繁。<br>在脚本中需要访问文档中的字段，此时有三种方式可以访问，分别是 doc , _fields , _source。这三个字段使用的时候还是有区别的。<br><figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"filtered"</span> : &#123;</span><br><span class="line">    <span class="string">"query"</span> : &#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">"filter"</span> : &#123;</span><br><span class="line">        <span class="string">"script"</span> : &#123;</span><br><span class="line">            <span class="string">"script"</span> : "<span class="type">doc</span>[<span class="symbol">'num1</span>'].value &gt; param1<span class="string">"</span></span><br><span class="line"><span class="string">            "</span>params<span class="string">" : &#123;</span></span><br><span class="line"><span class="string">                "</span>param1<span class="string">" : 5</span></span><br><span class="line"><span class="string">            &#125;</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure></p>
-<p>下面通过几个示例脚本来分别说明三者之间的区别。<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/elasticsearch-function-doc/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1197,7 +1200,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">48</span>
+                <span class="site-state-item-count">50</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -1219,7 +1222,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">74</span>
+                <span class="site-state-item-count">76</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
