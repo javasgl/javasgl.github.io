@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-05-23T04:07:28.696Z</updated>
+  <updated>2018-06-06T07:09:44.511Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,42 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>一个时区引发的`血案`</title>
+    <link href="http://yoursite.com/go-time-zone/"/>
+    <id>http://yoursite.com/go-time-zone/</id>
+    <published>2018-06-06T06:10:10.000Z</published>
+    <updated>2018-06-06T07:09:44.511Z</updated>
+    
+    <content type="html"><![CDATA[<p>项目中的一个单元测试，其中一个判断是比较两个时间是否相同。代码逻辑简化抽象如下：<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">time1:=time.Now()</span><br><span class="line">xorm.engine.NewSession().Update(time1)</span><br><span class="line"><span class="keyword">var</span> time2 *time.Time</span><br><span class="line">xorm.engine.NewSession().Get(&amp;time2)</span><br><span class="line"><span class="keyword">if</span> time2.UTC().Format(<span class="string">"2018-06-06"</span>) != time2.UTC().Format(<span class="string">"2018-06-06"</span>)&#123;</span><br><span class="line"><span class="built_in">panic</span> error</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>介绍一下各组件时区设置：</p><ul><li>mysql 默认配置，<code>SYSTEM</code></li><li>xorm dsn 配置为 <code>parseTime=true&amp;loc=Asia%2FShanghai</code></li></ul><p>以上代码，在本地机器上跑单元测试时无异常，能正常通过。但是，上了CI环境后，单元测试却失败了。<br>通过观察CI的日志和自己打印的日志，发现入库前后，这两个时间相差了8个小时，很明显，这个时间受到时区的影响了。</p><a id="more"></a><p>后来调试发现，本地 mysql time_zone SYSTEM的实际值是 CST (中国标准时间),所以 dsn中指定loc为 <code>Asia/Shanghai</code> 并不会有问题。<br>而CI环境中，mysql的 time_zone SYSTEM的实际值是 UTC.而此时代码中使用dsn却是<code>Asia/Shanghai</code>,这样就会导致 <code>xorm.Get()</code>的时候，将时间按照<code>Asia/Shanghai</code>来解析，所以，解析出来的结果和UTC时间相差了8个小时。</p><p>解决方案：<br>将代码中使用的dsn改为 parseTime=true&amp;loc=Local 。</p><p>最终总结，其实这个问题是可以避免的，起初在设计数据库的时候，时间字段如果没有特殊需求，不应该使用数据库的<code>date</code>,<code>timestamp</code>等类型，而是统一都使用 <code>INT UNSIGNED NOT NULL</code>。这样数字类型的时间戳，即可以避免时区问题，还可以用来直接比较大小和进行算数运算。</p><p>附上mysql查看时区配置的几种方式:<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> @@global.time_zone,@@session.time_zone;</span><br></pre></td></tr></table></figure></p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">variables</span> <span class="keyword">like</span> %<span class="keyword">time_zone</span>%;'</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;项目中的一个单元测试，其中一个判断是比较两个时间是否相同。代码逻辑简化抽象如下：&lt;br&gt;&lt;figure class=&quot;highlight go&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;time1:=time.Now()&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;xorm.engine.NewSession().Update(time1)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; time2 *time.Time&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;xorm.engine.NewSession().Get(&amp;amp;time2)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; time2.UTC().Format(&lt;span class=&quot;string&quot;&gt;&quot;2018-06-06&quot;&lt;/span&gt;) != time2.UTC().Format(&lt;span class=&quot;string&quot;&gt;&quot;2018-06-06&quot;&lt;/span&gt;)&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;	&lt;span class=&quot;built_in&quot;&gt;panic&lt;/span&gt; error&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;介绍一下各组件时区设置：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;mysql 默认配置，&lt;code&gt;SYSTEM&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;xorm dsn 配置为 &lt;code&gt;parseTime=true&amp;amp;loc=Asia%2FShanghai&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;以上代码，在本地机器上跑单元测试时无异常，能正常通过。但是，上了CI环境后，单元测试却失败了。&lt;br&gt;通过观察CI的日志和自己打印的日志，发现入库前后，这两个时间相差了8个小时，很明显，这个时间受到时区的影响了。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="go" scheme="http://yoursite.com/categories/go/"/>
+    
+    
+      <category term="go" scheme="http://yoursite.com/tags/go/"/>
+    
+      <category term="time" scheme="http://yoursite.com/tags/time/"/>
+    
+      <category term="timezone" scheme="http://yoursite.com/tags/timezone/"/>
+    
+      <category term="orm" scheme="http://yoursite.com/tags/orm/"/>
+    
+      <category term="sql" scheme="http://yoursite.com/tags/sql/"/>
+    
+  </entry>
   
   <entry>
     <title>go覆盖测试率图形化分析</title>
@@ -536,30 +572,6 @@
       <category term="go" scheme="http://yoursite.com/tags/go/"/>
     
       <category term="complie" scheme="http://yoursite.com/tags/complie/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Elasticsearch 几种 Search Type</title>
-    <link href="http://yoursite.com/es-search-type/"/>
-    <id>http://yoursite.com/es-search-type/</id>
-    <published>2017-08-24T08:45:45.000Z</published>
-    <updated>2017-08-30T15:32:10.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>Search Type 有助于理解 Elasticsearch 在多个分片(shard)的情况下，是如何搜索的，是如何决定返回数据数量、如何排序、如何算分的？</p><h2 id="执行过程"><a href="#执行过程" class="headerlink" title="执行过程"></a>执行过程</h2><p>在多个分片情况下，查询 0-20 条记录，elasticsearch 会将请求转发到每个分片上，从每个分片上获取 20 条记录，然后返回给分发节点进行汇总，最后再从汇总的结果中取 0-20 数据返回给客户端。<br>则就是 elasticsearch 分布式搜索的基本的执行过程。</p><h2 id="Search-Type"><a href="#Search-Type" class="headerlink" title="Search Type"></a>Search Type</h2><p>Elasticsearch 中的 search type 主要有 6种：Query then fetch、Dfs Query then fetch、Count、Scan、Query and fetch、Dfs query and fetch。</p><a id="more"></a><p>执行请求的过程中，涉及到几个不同的 search type。</p><ul><li><p>Query then fetch<br>  查询主要分为两步:<br>  第一步，查询节点首先将请求转发给所有参与的节点，每个节点依据自身的数据执行查询，并将必要的信息返回给查询节点,查询节点进行合并、重新排序等操作。<br>  第二步，查询节点仅从相关的节点获取数据返回。</p><p>  如果没有在请求中没有指定 search_type 参数这这是默认的方式。</p></li><li><p>Dfs Query then fetch</p><p>  和 Query then fetch 一样，只不过在第一步转发请求的时候，它将计算分布式词频来获得更准确的得分。</p></li><li><p>Count</p><p>  顾名思义，这个并不返回文档数据，只返回文档的数量。</p></li><li><p>Scan</p><p>  适用于大量数据进行深度分页获取数据,禁用排序提升性能。</p></li><li><p>Query and fetch</p><p>  这是 elasticsearch 内部的一种优化，不需要手动指定。当请求只作用在一个节点上面的是否，Query then fetch 的两步就合并为一步执行了。当我们有时候为了避免聚合(Aggregation)不准确而将 numbers_of_shards 设置为1个的时候，所有的请求就只在一个节点上处理。</p></li><li><p>Dfs Query and fetch</p><p>  同 Dfs Query and fetch，也不需要手动执行，请求作用于单个节点时候的一种内部优化机制。</p></li></ul>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Search Type 有助于理解 Elasticsearch 在多个分片(shard)的情况下，是如何搜索的，是如何决定返回数据数量、如何排序、如何算分的？&lt;/p&gt;
-&lt;h2 id=&quot;执行过程&quot;&gt;&lt;a href=&quot;#执行过程&quot; class=&quot;headerlink&quot; title=&quot;执行过程&quot;&gt;&lt;/a&gt;执行过程&lt;/h2&gt;&lt;p&gt;在多个分片情况下，查询 0-20 条记录，elasticsearch 会将请求转发到每个分片上，从每个分片上获取 20 条记录，然后返回给分发节点进行汇总，最后再从汇总的结果中取 0-20 数据返回给客户端。&lt;br&gt;则就是 elasticsearch 分布式搜索的基本的执行过程。&lt;/p&gt;
-&lt;h2 id=&quot;Search-Type&quot;&gt;&lt;a href=&quot;#Search-Type&quot; class=&quot;headerlink&quot; title=&quot;Search Type&quot;&gt;&lt;/a&gt;Search Type&lt;/h2&gt;&lt;p&gt;Elasticsearch 中的 search type 主要有 6种：Query then fetch、Dfs Query then fetch、Count、Scan、Query and fetch、Dfs query and fetch。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="elasticsearch" scheme="http://yoursite.com/categories/elasticsearch/"/>
-    
-    
-      <category term="elasticsearch" scheme="http://yoursite.com/tags/elasticsearch/"/>
     
   </entry>
   

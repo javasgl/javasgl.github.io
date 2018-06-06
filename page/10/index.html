@@ -300,6 +300,179 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/Linux-zgrep/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="songgl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/favicon.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="javasgl">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/Linux-zgrep/" itemprop="url">
+                  Linux zgrep使用笔记
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-17T17:20:05+08:00">
+                2017-03-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            <!--noindex-->
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/Linux-zgrep/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="Linux-zgrep/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+              <!--/noindex-->
+            
+          
+
+          
+          
+             <span id="/Linux-zgrep/" class="leancloud_visitors" data-flag-title="Linux zgrep使用笔记">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><code>grep</code> 可以用来搜索文件内容,而基于<code>grep</code>的 <code>zgrep</code>这可以用来在压缩包中搜索内容而不需要事先解压文件.</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">[root@yourdream ~]# <span class="keyword">cat</span> <span class="keyword">test</span>.go</span><br><span class="line">package main</span><br><span class="line">import (</span><br><span class="line">   <span class="string">"fmt"</span></span><br><span class="line">)</span><br><span class="line">func main()&#123;</span><br><span class="line">  fmt.Println(<span class="string">"Hello Golang!"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">[root@yourdream ~]# tar zcf <span class="keyword">test</span>.tar.gz <span class="keyword">test</span>.go</span><br><span class="line"></span><br><span class="line">[root@yourdream ~]# <span class="keyword">file</span> <span class="keyword">test</span>.tar.gz</span><br><span class="line"><span class="keyword">test</span>.tar.gz: gzip compressed data, from Unix, last modified: Fri Mar 17 17:23:09 2017</span><br><span class="line"></span><br><span class="line">[root@yourdream ~]# zgrep <span class="string">"fmt"</span> <span class="keyword">test</span>.tar.gz</span><br><span class="line">Binary <span class="keyword">file</span> (standard <span class="keyword">input</span>) matches</span><br><span class="line"></span><br><span class="line">[root@yourdream ~]# zgrep -a <span class="string">"fmt"</span> <span class="keyword">test</span>.tar.gz</span><br><span class="line">   <span class="string">"fmt"</span></span><br><span class="line">  fmt.Println(<span class="string">"Hello Golang!"</span>);</span><br><span class="line"></span><br><span class="line">[root@yourdream ~]# tar -tvf <span class="keyword">test</span>.tar.gz</span><br><span class="line">-rw-r--r-- root/root        81 2017-03-17 17:18 <span class="keyword">test</span>.go</span><br><span class="line"></span><br><span class="line">[root@yourdream ~]# tar -rvf <span class="keyword">test</span>.tar.gz <span class="keyword">test</span>/</span><br><span class="line"><span class="keyword">test</span>/</span><br><span class="line"><span class="keyword">test</span>/a.php</span><br><span class="line"></span><br><span class="line">[root@yourdream ~]# tar -tvf <span class="keyword">test</span>.tar.gz</span><br><span class="line">-rw-r--r-- root/root        81 2017-03-17 17:18 <span class="keyword">test</span>.go</span><br><span class="line">drwxr-xr-x root/root         0 2017-03-17 17:50 <span class="keyword">test</span>/</span><br><span class="line">-rw-r--r-- root/root      1127 2017-03-17 17:50 <span class="keyword">test</span>/a.php</span><br><span class="line"></span><br><span class="line">[root@yourdream ~]# zgrep -aHn <span class="string">"Hello"</span> <span class="keyword">test</span>.tar.gz</span><br><span class="line"><span class="keyword">test</span>.tar.gz:6:  fmt.Println(<span class="string">"Hello Golang!"</span>);</span><br><span class="line"><span class="keyword">test</span>.tar.gz:16:echo 'Hello php';</span><br></pre></td></tr></table></figure>
+<ul>
+<li>注意需要加上 <code>-a</code> 参数,让其二进制文件当做文本处理</li>
+<li><code>tar -u -r</code> 先压缩包中添加文件</li>
+<li><code>tar -H</code> 显示文件名</li>
+<li><code>tar -n</code> 显示行号</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/Linux-iptables/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1008,188 +1181,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/transfer_socks5_to_http_proxy/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="songgl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/favicon.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="javasgl">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/transfer_socks5_to_http_proxy/" itemprop="url">
-                  Mac上使用Privoxy 将 socks5转换为 http 代理
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-06T23:07:20+08:00">
-                2017-03-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/tools/" itemprop="url" rel="index">
-                    <span itemprop="name">tools</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            <!--noindex-->
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/transfer_socks5_to_http_proxy/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count hc-comment-count" data-xid="transfer_socks5_to_http_proxy/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-              <!--/noindex-->
-            
-          
-
-          
-          
-             <span id="/transfer_socks5_to_http_proxy/" class="leancloud_visitors" data-flag-title="Mac上使用Privoxy 将 socks5转换为 http 代理">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>shadowsocks 挺不错的，但是有些时候需要使用http代理来爬墙。这时候可以使用privoxy来将 socks5 代理转换为 http代理。</p>
-<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>步骤如下：</p>
-<ul>
-<li><p>首先，确保 shadowsocks 已经正常起来的，默认的本地socks5端口号为 1080,可以使用 netstat 和 lsof 命令查看端口情况。</p>
-</li>
-<li><p>安装privoxy, mac 使用 brew install privoxy 即可</p>
-</li>
-<li><p>安装完成后，修改privoxy配置文件</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/transfer_socks5_to_http_proxy/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/9/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span>
+    <a class="extend prev" rel="prev" href="/page/9/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/11/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1234,7 +1230,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">50</span>
+                <span class="site-state-item-count">51</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -1256,7 +1252,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">76</span>
+                <span class="site-state-item-count">80</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
