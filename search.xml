@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[使用go-svc安全退出程序]]></title>
+    <url>%2Fgo-svc%2F</url>
+    <content type="text"><![CDATA[阅读 NSQ 源码时，看到NSQ使用了 go-svc 来启动nsq的相关程序,使得在程序退出的时候可以做一些释放资源等收尾工作。 使用起来非常简单,定义一个Service,实现其 svc.Service中的接口即可。 简单使用12345678910111213141516171819202122232425262728293031323334353637383940414243package mainimport ( "fmt" "github.com/judwhite/go-svc/svc" "log" "syscall" "time")type program struct &#123;&#125;func main() &#123; prg := &amp;program&#123;&#125; if err := svc.Run(prg, syscall.SIGUSR1, syscall.SIGINT, syscall.SIGTERM); err != nil &#123; log.Fatal(err) &#125;&#125;func (program) Init(env svc.Environment) error &#123; fmt.Println("init.....") return nil&#125;func (program) Start() error &#123; fmt.Println("start.....") fmt.Println(syscall.Getpid()) go func() &#123; ticker := time.NewTicker(2 * time.Second) for t := range ticker.C &#123; fmt.Println("tick at", t) &#125; &#125;() return nil&#125;func (program) Stop() error &#123; fmt.Println("stop.....") return nil&#125; 注意事项1.Start方法中不能只直接阻塞，需要在Start方法中新开goroutine去写需要阻塞的代码。2.svc.Run()方法的第二个参数可以指定需要程序监听的信号，默认情况下不指定的话，默认会监听 SIGINT和 SIGTERM两个。根据具体需要进行指定，比如本例中还监听了SIGUSR1. 实现原理其实go-svc代码实现很简单，使用了标准库中的os/signal的Notify方法。下面的代码截取于judwhite/go-svc/svc/svc-other.go：1234567891011121314151617181920212223242526// Run runs your Service.//// Run will block until one of the signals specified in sig is received.// If sig is empty syscall.SIGINT and syscall.SIGTERM are used by default.func Run(service Service, sig ...os.Signal) error &#123; env := environment&#123;&#125; if err := service.Init(env); err != nil &#123; return err &#125; if err := service.Start(); err != nil &#123; return err &#125; if len(sig) == 0 &#123; sig = []os.Signal&#123;syscall.SIGINT, syscall.SIGTERM&#125; &#125; signalChan := make(chan os.Signal, 1) signalNotify(signalChan, sig...) //signalNotify方法其实就是 signal.Notify 方法 //var signalNotify = signal.Notify &lt;-signalChan return service.Stop()&#125; 标准库里面的 os/signal中的 Notfiy方法签名如下：1func Notify(c chan&lt;- os.Signal, sig ...os.Signal) &#123;&#125;]]></content>
+      <categories>
+        <category>go</category>
+      </categories>
+      <tags>
+        <tag>go</tag>
+        <tag>go-svc</tag>
+        <tag>signal</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[一个时区引发的`血案`]]></title>
     <url>%2Fgo-time-zone%2F</url>
     <content type="text"><![CDATA[项目中的一个单元测试，其中一个判断是比较两个时间是否相同。代码逻辑简化抽象如下：1234567time1:=time.Now()xorm.engine.NewSession().Update(time1)var time2 *time.Timexorm.engine.NewSession().Get(&amp;time2)if time2.UTC().Format("2018-06-06") != time2.UTC().Format("2018-06-06")&#123; panic error&#125; 介绍一下各组件时区设置： mysql 默认配置，SYSTEM xorm dsn 配置为 parseTime=true&amp;loc=Asia%2FShanghai 以上代码，在本地机器上跑单元测试时无异常，能正常通过。但是，上了CI环境后，单元测试却失败了。通过观察CI的日志和自己打印的日志，发现入库前后，这两个时间相差了8个小时，很明显，这个时间受到时区的影响了。 后来调试发现，本地 mysql time_zone SYSTEM的实际值是 CST (中国标准时间),所以 dsn中指定loc为 Asia/Shanghai 并不会有问题。而CI环境中，mysql的 time_zone SYSTEM的实际值是 UTC.而此时代码中使用dsn却是Asia/Shanghai,这样就会导致 xorm.Get()的时候，将时间按照Asia/Shanghai来解析，所以，解析出来的结果和UTC时间相差了8个小时。 解决方案：将代码中使用的dsn改为 parseTime=true&amp;loc=Local 。 最终总结，其实这个问题是可以避免的，起初在设计数据库的时候，时间字段如果没有特殊需求，不应该使用数据库的date,timestamp等类型，而是统一都使用 INT UNSIGNED NOT NULL。这样数字类型的时间戳，即可以避免时区问题，还可以用来直接比较大小和进行算数运算。 附上mysql查看时区配置的几种方式:1select @@global.time_zone,@@session.time_zone; 1show variables like %time_zone%;']]></content>

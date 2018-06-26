@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-06-06T07:09:44.511Z</updated>
+  <updated>2018-06-26T08:17:43.599Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>使用go-svc安全退出程序</title>
+    <link href="http://yoursite.com/go-svc/"/>
+    <id>http://yoursite.com/go-svc/</id>
+    <published>2018-06-26T07:24:02.000Z</published>
+    <updated>2018-06-26T08:17:43.599Z</updated>
+    
+    <content type="html"><![CDATA[<p>阅读 <a href="https://github.com/nsqio/nsq" target="_blank" rel="noopener">NSQ</a> 源码时，看到NSQ使用了 go-svc 来启动nsq的相关程序,使得在程序退出的时候可以做一些释放资源等收尾工作。</p><p>使用起来非常简单,定义一个Service,实现其 svc.Service中的接口即可。</p><a id="more"></a><h3 id="简单使用"><a href="#简单使用" class="headerlink" title="简单使用"></a>简单使用</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line"><span class="string">"fmt"</span></span><br><span class="line"><span class="string">"github.com/judwhite/go-svc/svc"</span></span><br><span class="line"><span class="string">"log"</span></span><br><span class="line"><span class="string">"syscall"</span></span><br><span class="line"><span class="string">"time"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> program <span class="keyword">struct</span> &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">prg := &amp;program&#123;&#125;</span><br><span class="line"><span class="keyword">if</span> err := svc.Run(prg, syscall.SIGUSR1, syscall.SIGINT, syscall.SIGTERM); err != <span class="literal">nil</span> &#123;</span><br><span class="line">log.Fatal(err)</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(program)</span> <span class="title">Init</span><span class="params">(env svc.Environment)</span> <span class="title">error</span></span> &#123;</span><br><span class="line"></span><br><span class="line">fmt.Println(<span class="string">"init....."</span>)</span><br><span class="line"><span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(program)</span> <span class="title">Start</span><span class="params">()</span> <span class="title">error</span></span> &#123;</span><br><span class="line"></span><br><span class="line">fmt.Println(<span class="string">"start....."</span>)</span><br><span class="line">fmt.Println(syscall.Getpid())</span><br><span class="line"><span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">ticker := time.NewTicker(<span class="number">2</span> * time.Second)</span><br><span class="line"><span class="keyword">for</span> t := <span class="keyword">range</span> ticker.C &#123;</span><br><span class="line">fmt.Println(<span class="string">"tick at"</span>, t)</span><br><span class="line">&#125;</span><br><span class="line">&#125;()</span><br><span class="line"><span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(program)</span> <span class="title">Stop</span><span class="params">()</span> <span class="title">error</span></span> &#123;</span><br><span class="line"></span><br><span class="line">fmt.Println(<span class="string">"stop....."</span>)</span><br><span class="line"><span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><p>1.Start方法中不能只直接阻塞，需要在Start方法中新开goroutine去写需要阻塞的代码。<br>2.svc.Run()方法的第二个参数可以指定需要程序监听的信号，默认情况下不指定的话，默认会监听 SIGINT和 SIGTERM两个。根据具体需要进行指定，比如本例中还监听了SIGUSR1.</p><h3 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h3><p>其实go-svc代码实现很简单，使用了标准库中的<code>os/signal</code>的<code>Notify</code>方法。<br>下面的代码截取于<code>judwhite/go-svc/svc/svc-other.go</code>：<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Run runs your Service.</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// Run will block until one of the signals specified in sig is received.</span></span><br><span class="line"><span class="comment">// If sig is empty syscall.SIGINT and syscall.SIGTERM are used by default.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Run</span><span class="params">(service Service, sig ...os.Signal)</span> <span class="title">error</span></span> &#123;</span><br><span class="line">env := environment&#123;&#125;</span><br><span class="line"><span class="keyword">if</span> err := service.Init(env); err != <span class="literal">nil</span> &#123;</span><br><span class="line"><span class="keyword">return</span> err</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> err := service.Start(); err != <span class="literal">nil</span> &#123;</span><br><span class="line"><span class="keyword">return</span> err</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> <span class="built_in">len</span>(sig) == <span class="number">0</span> &#123;</span><br><span class="line">sig = []os.Signal&#123;syscall.SIGINT, syscall.SIGTERM&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">signalChan := <span class="built_in">make</span>(<span class="keyword">chan</span> os.Signal, <span class="number">1</span>)</span><br><span class="line">signalNotify(signalChan, sig...)</span><br><span class="line"><span class="comment">//signalNotify方法其实就是 signal.Notify 方法</span></span><br><span class="line"><span class="comment">//var signalNotify = signal.Notify</span></span><br><span class="line">&lt;-signalChan</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> service.Stop()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>标准库里面的 <code>os/signal</code>中的 <code>Notfiy</code>方法签名如下：<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">func Notify(c chan&lt;- os<span class="selector-class">.Signal</span>, sig ..<span class="selector-class">.os</span><span class="selector-class">.Signal</span>) &#123;&#125;</span><br></pre></td></tr></table></figure></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;阅读 &lt;a href=&quot;https://github.com/nsqio/nsq&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;NSQ&lt;/a&gt; 源码时，看到NSQ使用了 go-svc 来启动nsq的相关程序,使得在程序退出的时候可以做一些释放资源等收尾工作。&lt;/p&gt;
+&lt;p&gt;使用起来非常简单,定义一个Service,实现其 svc.Service中的接口即可。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="go" scheme="http://yoursite.com/categories/go/"/>
+    
+    
+      <category term="go" scheme="http://yoursite.com/tags/go/"/>
+    
+      <category term="go-svc" scheme="http://yoursite.com/tags/go-svc/"/>
+    
+      <category term="signal" scheme="http://yoursite.com/tags/signal/"/>
+    
+  </entry>
   
   <entry>
     <title>一个时区引发的`血案`</title>
@@ -545,33 +572,6 @@
       <category term="python" scheme="http://yoursite.com/tags/python/"/>
     
       <category term="java" scheme="http://yoursite.com/tags/java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>交叉编译 go 程序</title>
-    <link href="http://yoursite.com/go-cross-complie/"/>
-    <id>http://yoursite.com/go-cross-complie/</id>
-    <published>2017-08-29T00:54:51.000Z</published>
-    <updated>2017-08-30T15:32:10.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>相信大多数人和我一样，都是在 mac 或者 windows 上写 go 代码，但是最终上线运行却是在 Linux 系统之上。这就涉及到一个问题：由于操作系统架构的差异，编译过后的二进制程序能够在多个系统下正常运行么？</p><p>go 不像 java 等运行于 JVM 之上的语言，也不像 php , python 等解释性语言，它需要编译后不依赖于其他环境就能执行，但是编译过程却依赖于系统架构，所以 go 需要交叉编译。</p><p>释义：交叉编译，就是在一个平台上生成另一个平台上的可执行代码。</p><p>go 非常方便的支持交叉编译。<br><a id="more"></a></p><p>我们先来看看不同环境下 go env 返回的结果。</p><p>Mac 下：<br><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">GOARCH</span>=<span class="string">"amd64"</span></span><br><span class="line"><span class="attr">GOOS</span>=<span class="string">"darwin"</span></span><br><span class="line"><span class="attr">CGO_ENABLED</span>=<span class="string">"1"</span></span><br></pre></td></tr></table></figure></p><p>Linux 下：<br><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">GOARCH</span>=<span class="string">"amd64"</span></span><br><span class="line"><span class="attr">GOOS</span>=<span class="string">"linux"</span></span><br><span class="line"><span class="attr">CGO_ENABLED</span>=<span class="string">"1"</span></span><br></pre></td></tr></table></figure></p><p>架构均是 x64 架构，区别是 GOOS 。</p><p>比如，我在 mac 上开发，最终需要部署到 linux 上运行，在没有 ci(持续集成)的支持下，一般有两种方式：</p><ul><li>将源代码复制到目标服务器上( scp 或者 git )，然后在目标机器上 go build 编译。</li><li>本地编译，只将最终编译过后的二进制文件复制到目标机器上。</li></ul><p>大多数肯定倾向于第二种方式，那么这时候就需要交叉编译了。</p><p>编译成Linux下可执行文件<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">CGO_ENABLED</span>=0 <span class="attribute">GOOS</span>=linux <span class="attribute">GOARCH</span>=amd64 go build</span><br></pre></td></tr></table></figure></p><p>编译成Windows下可执行文件<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">CGO_ENABLED</span>=0 <span class="attribute">GOOS</span>=windows <span class="attribute">GOARCH</span>=amd64 go build</span><br></pre></td></tr></table></figure></p><p>编译过后，将二进制传送到相应系统即可运行。</p><p>但是，这种交叉编译有一点限制就是：</p><p>不支持CGO的交叉编译，如果程序中使用了 CGO , 则不能通过这种方式来交叉编译。</p><p>如果使用 GUN Make ,则可以将以上参数写到 Makefile 文件中:<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">build-linux:</span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">CGO_ENABLED</span>=0 &amp;&amp; <span class="builtin-name">export</span> <span class="attribute">GOOS</span>=linux &amp;&amp; <span class="builtin-name">export</span> <span class="attribute">GOARCH</span>=amd64 &amp;&amp; go build</span><br><span class="line"></span><br><span class="line">build-wins:</span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">CGO_ENABLED</span>=0 &amp;&amp; <span class="builtin-name">export</span> <span class="attribute">GOOS</span>=windows &amp;&amp; <span class="builtin-name">export</span> <span class="attribute">GOARCH</span>=amd64 &amp;&amp; go build</span><br></pre></td></tr></table></figure></p><p>参考：</p><ul><li><a href="https://solovyov.net/en/2012/cross-compiling-go/" target="_blank" rel="noopener">cross-compilling-go</a></li></ul>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;相信大多数人和我一样，都是在 mac 或者 windows 上写 go 代码，但是最终上线运行却是在 Linux 系统之上。这就涉及到一个问题：由于操作系统架构的差异，编译过后的二进制程序能够在多个系统下正常运行么？&lt;/p&gt;
-&lt;p&gt;go 不像 java 等运行于 JVM 之上的语言，也不像 php , python 等解释性语言，它需要编译后不依赖于其他环境就能执行，但是编译过程却依赖于系统架构，所以 go 需要交叉编译。&lt;/p&gt;
-&lt;p&gt;释义：交叉编译，就是在一个平台上生成另一个平台上的可执行代码。&lt;/p&gt;
-&lt;p&gt;go 非常方便的支持交叉编译。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="go" scheme="http://yoursite.com/categories/go/"/>
-    
-    
-      <category term="go" scheme="http://yoursite.com/tags/go/"/>
-    
-      <category term="complie" scheme="http://yoursite.com/tags/complie/"/>
     
   </entry>
   
