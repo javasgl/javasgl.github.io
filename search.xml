@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[sync.Pool缓存池中对象回收时机]]></title>
+    <url>%2Fgo-sync-pool%2F</url>
+    <content type="text"><![CDATA[为了缓解GC压力，go标准库在sync包中提供了一个Pool，但是这个Pool和我们一般意义上的Pool不太一样，主要有以下几点区别:1.Pool无法设置大小，所以理论上只受限于系统内存大小。2.Pool中的对象不支持自定义过期时间及策略，究其原因，Pool并不是一个Cache.3.Pool的设计初衷是为了缓解GC压力，所以Pool中的对象会在GC开始前全部清除。 下面这段注释来源于pool.go:12345678910111213// A Pool is a set of temporary objects that may be individually saved and// retrieved.//// Any item stored in the Pool may be removed automatically at any time without// notification. If the Pool holds the only reference when this happens, the// item might be deallocated.//// A Pool is safe for use by multiple goroutines simultaneously.//// Pool's purpose is to cache allocated but unused items for later reuse,// relieving pressure on the garbage collector. That is, it makes it easy to// build efficient, thread-safe free lists. However, it is not suitable for all// free lists. 让我们用代码验证一下 sync.Pool中对象的回收时机:1234567891011121314151617181920212223242526package mainimport ( "fmt" "runtime" "sync")func main() &#123; p := &amp;sync.Pool&#123; New: func() interface&#123;&#125; &#123; return 0 &#125;, &#125; a := p.Get().(int) p.Put(1) b := p.Get().(int) fmt.Println(a, b) a = p.Get().(int) p.Put(1) runtime.GC() //手动调用GC b = p.Get().(int) fmt.Println(a, b)&#125; 执行结果分别打印出了: 0 1 0 0 可见，在手动调用GC之后，Pool中的对象被全部清除了，在Get的时候重新调用定义的New方法创建了新的对象]]></content>
+      <categories>
+        <category>go</category>
+      </categories>
+      <tags>
+        <tag>go</tag>
+        <tag>sync.Pool</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[使用go-svc安全退出程序]]></title>
     <url>%2Fgo-svc%2F</url>
     <content type="text"><![CDATA[阅读 NSQ 源码时，看到NSQ使用了 go-svc 来启动nsq的相关程序,使得在程序退出的时候可以做一些释放资源等收尾工作。 使用起来非常简单,定义一个Service,实现其 svc.Service中的接口即可。 简单使用12345678910111213141516171819202122232425262728293031323334353637383940414243package mainimport ( "fmt" "github.com/judwhite/go-svc/svc" "log" "syscall" "time")type program struct &#123;&#125;func main() &#123; prg := &amp;program&#123;&#125; if err := svc.Run(prg, syscall.SIGUSR1, syscall.SIGINT, syscall.SIGTERM); err != nil &#123; log.Fatal(err) &#125;&#125;func (program) Init(env svc.Environment) error &#123; fmt.Println("init.....") return nil&#125;func (program) Start() error &#123; fmt.Println("start.....") fmt.Println(syscall.Getpid()) go func() &#123; ticker := time.NewTicker(2 * time.Second) for t := range ticker.C &#123; fmt.Println("tick at", t) &#125; &#125;() return nil&#125;func (program) Stop() error &#123; fmt.Println("stop.....") return nil&#125; 注意事项1.Start方法中不能只直接阻塞，需要在Start方法中新开goroutine去写需要阻塞的代码。2.svc.Run()方法的第二个参数可以指定需要程序监听的信号，默认情况下不指定的话，默认会监听 SIGINT和 SIGTERM两个。根据具体需要进行指定，比如本例中还监听了SIGUSR1. 实现原理其实go-svc代码实现很简单，使用了标准库中的os/signal的Notify方法。下面的代码截取于judwhite/go-svc/svc/svc-other.go：1234567891011121314151617181920212223242526// Run runs your Service.//// Run will block until one of the signals specified in sig is received.// If sig is empty syscall.SIGINT and syscall.SIGTERM are used by default.func Run(service Service, sig ...os.Signal) error &#123; env := environment&#123;&#125; if err := service.Init(env); err != nil &#123; return err &#125; if err := service.Start(); err != nil &#123; return err &#125; if len(sig) == 0 &#123; sig = []os.Signal&#123;syscall.SIGINT, syscall.SIGTERM&#125; &#125; signalChan := make(chan os.Signal, 1) signalNotify(signalChan, sig...) //signalNotify方法其实就是 signal.Notify 方法 //var signalNotify = signal.Notify &lt;-signalChan return service.Stop()&#125; 标准库里面的 os/signal中的 Notfiy方法签名如下：1func Notify(c chan&lt;- os.Signal, sig ...os.Signal) &#123;&#125;]]></content>
@@ -332,9 +344,9 @@
         <category>tools</category>
       </categories>
       <tags>
+        <tag>go</tag>
         <tag>upx</tag>
         <tag>compress</tag>
-        <tag>go</tag>
       </tags>
   </entry>
   <entry>
