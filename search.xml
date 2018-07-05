@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[用 Go Plugin 构建模块化系统]]></title>
+    <url>%2Fbuild-module-system-use-go-plugin%2F</url>
+    <content type="text"><![CDATA[自从 golang 1.8以后，提供了一个 Plugin 的机制使得 golang能够加载 so 动态链接库文件。这样可以对外发布动态链接库而不需要把源码共享给对方去进行编译,还可以做到按需加载相应的插件来实现动态开启插件相应的功能。 官方文档在此：https://golang.org/pkg/plugin/ 编写一个 Plugin 基本有以下几步: 1.Plguin 需要有自己的 main package2.编译的时候，使用 go build -buildmode=plugin file.go 来编译3.使用 plugin.Open(path string) 来打开.so文件，同一插件只能打开一次，重复打开会报错4.使用 plugin.LookUp(name string) 来获取插件中对外暴露的方法或者类型5.使用类型断言，断言后执行相应的方法 main.go1234567891011121314151617181920package mainimport ( "fmt" "plugin")func main() &#123; p, err := plugin.Open("plugin.so") if err != nil &#123; panic(err) &#125; m, err := p.Lookup("GetProductBasePrice") if err != nil &#123; panic(err) &#125; res := m.(func(int) int)(30) fmt.Println(res)&#125; plugin.go123456789101112package mainimport "fmt"func main() &#123;&#125;func GetProductBasePrice(basePrice int) int &#123; return basePrice + 200&#125; 注意几点问题： 插件中定义的 struct 无法暴露出来，可以让主程序和插件程序import公共的 package 来解决 私有方法、变量不会被暴露出来]]></content>
+      <categories>
+        <category>go</category>
+      </categories>
+      <tags>
+        <tag>go</tag>
+        <tag>plugin</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[sync.Pool缓存池中对象回收时机]]></title>
     <url>%2Fgo-sync-pool%2F</url>
     <content type="text"><![CDATA[为了缓解GC压力，go标准库在sync包中提供了一个Pool，但是这个Pool和我们一般意义上的Pool不太一样，主要有以下几点区别:1.Pool无法设置大小，所以理论上只受限于系统内存大小。2.Pool中的对象不支持自定义过期时间及策略，究其原因，Pool并不是一个Cache.3.Pool的设计初衷是为了缓解GC压力，所以Pool中的对象会在GC开始前全部清除。 下面这段注释来源于pool.go:12345678910111213// A Pool is a set of temporary objects that may be individually saved and// retrieved.//// Any item stored in the Pool may be removed automatically at any time without// notification. If the Pool holds the only reference when this happens, the// item might be deallocated.//// A Pool is safe for use by multiple goroutines simultaneously.//// Pool's purpose is to cache allocated but unused items for later reuse,// relieving pressure on the garbage collector. That is, it makes it easy to// build efficient, thread-safe free lists. However, it is not suitable for all// free lists. 让我们用代码验证一下 sync.Pool中对象的回收时机:1234567891011121314151617181920212223242526package mainimport ( "fmt" "runtime" "sync")func main() &#123; p := &amp;sync.Pool&#123; New: func() interface&#123;&#125; &#123; return 0 &#125;, &#125; a := p.Get().(int) p.Put(1) b := p.Get().(int) fmt.Println(a, b) a = p.Get().(int) p.Put(1) runtime.GC() //手动调用GC b = p.Get().(int) fmt.Println(a, b)&#125; 执行结果分别打印出了: 0 1 0 0 可见，在手动调用GC之后，Pool中的对象被全部清除了，在Get的时候重新调用定义的New方法创建了新的对象]]></content>
@@ -344,9 +356,9 @@
         <category>tools</category>
       </categories>
       <tags>
-        <tag>go</tag>
         <tag>upx</tag>
         <tag>compress</tag>
+        <tag>go</tag>
       </tags>
   </entry>
   <entry>

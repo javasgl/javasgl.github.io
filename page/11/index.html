@@ -300,6 +300,165 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/go-get-golang-x-packages/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="songgl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/favicon.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="javasgl">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/go-get-golang-x-packages/" itemprop="url">
+                  Go Get安装一些第三方库-网络问题
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-08T18:56:51+08:00">
+                2017-03-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/go/" itemprop="url" rel="index">
+                    <span itemprop="name">go</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/go-get-golang-x-packages/" class="leancloud_visitors" data-flag-title="Go Get安装一些第三方库-网络问题">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>go在go get 一些 package时候的会由于<code>众所周知</code>的原因而无法下载。比如在安装 <code>bee</code>的时候有可能会遇到无法下载 <code>golang.org/x/sys/unix</code> 的问题。<br><figure class="highlight xl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unrecognized <span class="keyword">import</span> <span class="built_in">path</span> <span class="string">"golang.org/x/sys/unix"</span></span><br></pre></td></tr></table></figure></p>
+<p>解决方案：手动从<code>github</code>下载相应的<code>package</code></p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git <span class="keyword">clone</span> <span class="title">--depth</span>=<span class="number">1</span> https://github.com/golang/xxx.git</span><br><span class="line">git <span class="keyword">clone</span> <span class="title">--depth</span>=<span class="number">1</span> https://github.com/golang/xxx.git</span><br></pre></td></tr></table></figure>
+<p>注：xxx 为对应的需要的库</p>
+<p>下载完成后，<code>软链</code>或者<code>复制</code> 到 <code>$GOPATH/src/golang.org/x/</code> 下即可。<br><figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">golang<span class="meta">.org</span>/</span><br><span class="line">└── <span class="built_in">x</span></span><br><span class="line">    ├── net</span><br><span class="line">    ├── sys</span><br><span class="line">    └── tools</span><br><span class="line"></span><br><span class="line"><span class="number">4</span> directories</span><br></pre></td></tr></table></figure></p>
+<p>更为简便的方法：<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p <span class="variable">$GOPATH</span><span class="regexp">/src/g</span>olang.org<span class="regexp">/x/</span></span><br><span class="line">cd !$</span><br><span class="line">git clone https:<span class="regexp">//gi</span>thub.com<span class="regexp">/golang/</span>net.git</span><br><span class="line">git clone https:<span class="regexp">//gi</span>thub.com<span class="regexp">/golang/</span>sys.git</span><br><span class="line">git clone https:<span class="regexp">//gi</span>thub.com<span class="regexp">/golang/</span>tools.git</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/atom-set-font-size/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -836,7 +995,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">53</span>
+                <span class="site-state-item-count">54</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -858,7 +1017,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">83</span>
+                <span class="site-state-item-count">84</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
