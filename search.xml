@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[angular ng-repeat 双向数据绑定实现动态增删DOM]]></title>
+    <url>%2Fangular-repeat-bind-object-of-arrays%2F</url>
+    <content type="text"><![CDATA[在实现一个需要动态增删的form表单需求时，MVVM的思维模式下，很容易就想到使用数组的添加和删除来实现DOM元素的动态添加和删除。 代码首先定义一个空数组,push几条初始数据(或者在相关按钮的click事件中去对这个数组进行增删)，然后在页面上使用ng-repeat和ng-model在循环中绑定这个数组的数据。123456item= &#123; name:'default value'&#125;$scope.items= []$scope.items.push(item)$scope.items.push(item) html页面如下：123&lt;div ng-repeat="item in items track by $index"&gt; &lt;input type="text" ng-model="item.name"&gt;&lt;/div&gt; 问题以上代码看似没有问题，但是实际结果却并不预期。页面渲染完成后，修改两个input中的任何一个，数组中的两个元素的数据都保持了一致变动。尝试了一下几种方案之后均无法实现单独绑定:123456789方案1：&lt;div ng-repeat="item in items track by $index"&gt; &lt;input type="text" ng-model="items[$index].name"&gt;&lt;/div&gt;方案2：&lt;div ng-repeat="item in items track by $index"&gt; &lt;input type="text" ng-model="$parent.items[$index].name"&gt;&lt;/div&gt; 后来怀疑是代码中push(item)的问题，每次push的时候，添加的都是同一个item,这样数组中的每一个元素引用的都是内存中的同一个item的地址，所以修改任何元素，都会影响内存中的同一个item对象，从而导致所有的数组元素的值都同步一致修改了。 解决基于以上思路，产生了两种解决方案：方案一，每次push的时候，添加一个空对象到数组中，这样避免每个元素引用同一个内存对象1234$scope.items.push(&#123;&#125;)$scope.items.push(&#123;&#125;)$scope.items.push(&#123;&#125;)...... 方案二，每次push的时候，使用 angular.copy重新复制出一个新对象出来添加到数组中1234567item= &#123; name:'default value'&#125;$scope.items.push(angular.copy(item))$scope.items.push(angular.copy(item))$scope.items.push(angular.copy(item))......]]></content>
+      <categories>
+        <category>javascript</category>
+      </categories>
+      <tags>
+        <tag>angular</tag>
+        <tag>js</tag>
+        <tag>ng-repeat</tag>
+        <tag>mvvm</tag>
+        <tag>ng-model</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[用 Go Plugin 构建模块化系统]]></title>
     <url>%2Fbuild-module-system-use-go-plugin%2F</url>
     <content type="text"><![CDATA[自从 golang 1.8以后，提供了一个 Plugin 的机制使得 golang能够加载 so 动态链接库文件。这样可以对外发布动态链接库而不需要把源码共享给对方去进行编译,还可以做到按需加载相应的插件来实现动态开启插件相应的功能。 官方文档在此：https://golang.org/pkg/plugin/ 编写一个 Plugin 基本有以下几步: 1.Plguin 需要有自己的 main package2.编译的时候，使用 go build -buildmode=plugin file.go 来编译3.使用 plugin.Open(path string) 来打开.so文件，同一插件只能打开一次，重复打开会报错4.使用 plugin.LookUp(name string) 来获取插件中对外暴露的方法或者类型5.使用类型断言，断言后执行相应的方法 main.go1234567891011121314151617181920package mainimport ( "fmt" "plugin")func main() &#123; p, err := plugin.Open("plugin.so") if err != nil &#123; panic(err) &#125; m, err := p.Lookup("GetProductBasePrice") if err != nil &#123; panic(err) &#125; res := m.(func(int) int)(30) fmt.Println(res)&#125; plugin.go123456789101112package mainimport "fmt"func main() &#123;&#125;func GetProductBasePrice(basePrice int) int &#123; return basePrice + 200&#125; 注意几点问题： 插件中定义的 struct 无法暴露出来，可以让主程序和插件程序import公共的 package 来解决 私有方法、变量不会被暴露出来]]></content>
@@ -356,9 +371,9 @@
         <category>tools</category>
       </categories>
       <tags>
+        <tag>go</tag>
         <tag>upx</tag>
         <tag>compress</tag>
-        <tag>go</tag>
       </tags>
   </entry>
   <entry>
@@ -474,7 +489,7 @@
     <url>%2Fjs-pass-this-into-callback-function%2F</url>
     <content type="text"><![CDATA[在开发项目之中，使用到js ajax 同服务端进行数据交互。一般图方便直接使用jquery或者axios等已有的库。一般代码如下:12345678//axiosaxios.get('/url').then(function(res)&#123; console.log(res)&#125;)//juqery$.get('/url',function(res)&#123; console.log(res)&#125;,'json') 那么经常这么使用的肯定会遇到一个场景，就是:在回调函数中如何访问上下文中的this对象?123456function request()&#123; //this axios.get('/url').then(function(res)&#123; //in callbacl ,how to access this &#125;)&#125; 之前的做法是这样的:将this赋值给一个局部变量,然后在回调函数中访问这个变量12345678function request()&#123; //this var that = this; axios.get('/url').then(function(res)&#123; //in callbacl ,how to access this console.log(that) &#125;)&#125; 后来知道了更为优雅的两种方式: 使用 bind函数:123456789101112//axiosfunction request()&#123; axios.get('/url').then(function(res)&#123; console.log(this); &#125;.bind(this));&#125;//jqueryfunction request()&#123; $.get('/url',function(res)&#123; console.log(this); &#125;.bind(this),'json');&#125; 使用ES6的箭头函数:123456789101112//axiosfunction request()&#123; axios.get('/url').then((res)=&gt;&#123; console.log(this); ));&#125;//juqeryfunction request()&#123; $.get('/url',(res)=&gt;&#123; console.log(this); &#125;,'json');&#125; 参考: 深入浅出ES6（七）：箭头函数 Arrow Functions]]></content>
       <categories>
-        <category>notes</category>
+        <category>javascript</category>
       </categories>
       <tags>
         <tag>js</tag>

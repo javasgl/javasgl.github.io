@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-07-05T09:23:03.011Z</updated>
+  <updated>2018-11-14T04:16:53.985Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>angular ng-repeat 双向数据绑定实现动态增删DOM</title>
+    <link href="http://yoursite.com/angular-repeat-bind-object-of-arrays/"/>
+    <id>http://yoursite.com/angular-repeat-bind-object-of-arrays/</id>
+    <published>2018-11-14T03:44:50.000Z</published>
+    <updated>2018-11-14T04:16:53.985Z</updated>
+    
+    <content type="html"><![CDATA[<p>在实现一个需要动态增删的form表单需求时，<code>MVVM</code>的思维模式下，很容易就想到使用数组的添加和删除来实现DOM元素的动态添加和删除。</p><a id="more"></a><h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><p>首先定义一个空数组,<code>push</code>几条初始数据(或者在相关按钮的<code>click</code>事件中去对这个数组进行增删)，然后在页面上使用<code>ng-repeat</code>和<code>ng-model</code>在循环中绑定这个数组的数据。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">item= &#123;</span><br><span class="line">name:<span class="string">'default value'</span></span><br><span class="line">&#125;</span><br><span class="line">$scope.items= []</span><br><span class="line">$scope.items.push(item)</span><br><span class="line">$scope.items.push(item)</span><br></pre></td></tr></table></figure></p><p>html页面如下：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">ng-repeat</span>=<span class="string">"item in items track by $index"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">ng-model</span>=<span class="string">"item.name"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p><h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>以上代码看似没有问题，但是实际结果却并不预期。页面渲染完成后，修改两个<code>input</code>中的任何一个，数组中的两个元素的数据都保持了一致变动。尝试了一下几种方案之后均无法实现单独绑定:<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">方案1：</span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">ng-repeat</span>=<span class="string">"item in items track by $index"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">ng-model</span>=<span class="string">"items[$index].name"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">方案2：</span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">ng-repeat</span>=<span class="string">"item in items track by $index"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">ng-model</span>=<span class="string">"$parent.items[$index].name"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p><p>后来怀疑是代码中<code>push(item)</code>的问题，每次<code>push</code>的时候，添加的都是同一个<code>item</code>,这样数组中的每一个元素引用的都是内存中的同一个<code>item</code>的地址，所以修改任何元素，都会影响内存中的同一个<code>item</code>对象，从而导致所有的数组元素的值都同步一致修改了。</p><h3 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h3><p>基于以上思路，产生了两种解决方案：<br>方案一，每次<code>push</code>的时候，添加一个空对象到数组中，这样避免每个元素引用同一个内存对象<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$scope.items.push(&#123;&#125;)</span><br><span class="line">$scope.items.push(&#123;&#125;)</span><br><span class="line">$scope.items.push(&#123;&#125;)</span><br><span class="line">......</span><br></pre></td></tr></table></figure></p><p>方案二，每次<code>push</code>的时候，使用 <code>angular.copy</code>重新复制出一个新对象出来添加到数组中<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">item= &#123;</span><br><span class="line">name:<span class="string">'default value'</span></span><br><span class="line">&#125;</span><br><span class="line">$scope.items.push(angular.copy(item))</span><br><span class="line">$scope.items.push(angular.copy(item))</span><br><span class="line">$scope.items.push(angular.copy(item))</span><br><span class="line">......</span><br></pre></td></tr></table></figure></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在实现一个需要动态增删的form表单需求时，&lt;code&gt;MVVM&lt;/code&gt;的思维模式下，很容易就想到使用数组的添加和删除来实现DOM元素的动态添加和删除。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="javascript" scheme="http://yoursite.com/categories/javascript/"/>
+    
+    
+      <category term="angular" scheme="http://yoursite.com/tags/angular/"/>
+    
+      <category term="js" scheme="http://yoursite.com/tags/js/"/>
+    
+      <category term="ng-repeat" scheme="http://yoursite.com/tags/ng-repeat/"/>
+    
+      <category term="mvvm" scheme="http://yoursite.com/tags/mvvm/"/>
+    
+      <category term="ng-model" scheme="http://yoursite.com/tags/ng-model/"/>
+    
+  </entry>
   
   <entry>
     <title>用 Go Plugin 构建模块化系统</title>
@@ -534,38 +564,6 @@
       <category term="python" scheme="http://yoursite.com/tags/python/"/>
     
       <category term="thread" scheme="http://yoursite.com/tags/thread/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>json-iterator--更快的json解析库</title>
-    <link href="http://yoursite.com/go-json-iterator/"/>
-    <id>http://yoursite.com/go-json-iterator/</id>
-    <published>2017-08-31T07:24:51.000Z</published>
-    <updated>2017-08-31T13:18:45.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>golang 中自带了非常方便解析json 的库 <code>encoding/json</code>,一般情况下也是使用这个库来作为 json 的 encode / decode。但是在有些场景下，比如解析大量json格式的日志数据的时候，json的解析性能问题就是一个需要特别关注的问题了。</p><p>滴滴出行平台技术部的开源json解析库 <a href="https://github.com/json-iterator/go" target="_blank" rel="noopener">json-iterator</a>，性能比原生的 encoding/json 快很多。</p><p>下面自己就简单测试了下两者的区别,测试代码很简单，就简单测试了下两者 Unmarshal 和 Marshal 的性能表现：<br><a id="more"></a></p><p>测试代码: <a href="https://gist.github.com/javasgl/e405c436963d2fd7c91c03a05ddcb6b9" target="_blank" rel="noopener">json-benckmark_test.go</a></p><script src="https://gist.github.com/javasgl/e405c436963d2fd7c91c03a05ddcb6b9.js"></script><p>执行 go test -test.bench=.后结果:<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Benchmark_array_by_json<span class="number">-4</span>          <span class="number">500000</span>      <span class="number">2748</span> ns/op     <span class="number">456</span> B/op      <span class="number">14</span> allocs/op</span><br><span class="line">Benchmark_array_by_jsoniter<span class="number">-4</span>     <span class="number">2000000</span>       <span class="number">676</span> ns/op     <span class="number">144</span> B/op       <span class="number">3</span> allocs/op</span><br><span class="line">Benchmark_decode_by_json<span class="number">-4</span>         <span class="number">500000</span>      <span class="number">2804</span> ns/op</span><br><span class="line">Benchmark_decode_by_jsoniter<span class="number">-4</span>    <span class="number">2000000</span>       <span class="number">764</span> ns/op</span><br><span class="line">PASS</span><br><span class="line">ok  learnGo/json<span class="number">7.217</span>s</span><br></pre></td></tr></table></figure></p><p>可见，json 和 jsoniter 在 Unmarshal 和 Marshal 方面的差别还是比较大的。</p><p>go 版本的 jsoniter/go 最近已经发布了 1.0 版本，Kubernetes V1.8 准备引入这个库,见 <a href="https://github.com/json-iterator/go/issues/154。" target="_blank" rel="noopener">https://github.com/json-iterator/go/issues/154。</a></p><p>同时, jsoniter 也有 java 可以使用的库 <a href="https://github.com/json-iterator/java" target="_blank" rel="noopener">jsoniter/java</a>, 据官方测试，性能比我之前比较喜欢使用的 alibaba 的 fastjson 都还要好,以后有机会可以尝试下。</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;golang 中自带了非常方便解析json 的库 &lt;code&gt;encoding/json&lt;/code&gt;,一般情况下也是使用这个库来作为 json 的 encode / decode。但是在有些场景下，比如解析大量json格式的日志数据的时候，json的解析性能问题就是一个需要特别关注的问题了。&lt;/p&gt;
-&lt;p&gt;滴滴出行平台技术部的开源json解析库 &lt;a href=&quot;https://github.com/json-iterator/go&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;json-iterator&lt;/a&gt;，性能比原生的 encoding/json 快很多。&lt;/p&gt;
-&lt;p&gt;下面自己就简单测试了下两者的区别,测试代码很简单，就简单测试了下两者 Unmarshal 和 Marshal 的性能表现：&lt;br&gt;
-    
-    </summary>
-    
-      <category term="go" scheme="http://yoursite.com/categories/go/"/>
-    
-    
-      <category term="go" scheme="http://yoursite.com/tags/go/"/>
-    
-      <category term="json" scheme="http://yoursite.com/tags/json/"/>
-    
-      <category term="json-iterator" scheme="http://yoursite.com/tags/json-iterator/"/>
-    
-      <category term="encoding" scheme="http://yoursite.com/tags/encoding/"/>
-    
-      <category term="fastjson" scheme="http://yoursite.com/tags/fastjson/"/>
     
   </entry>
   
