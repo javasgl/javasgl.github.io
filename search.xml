@@ -1,6 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[mysql5.7/mariadb Generated Columns]]></title>
+    <url>%2Fmysql-generated-columns%2F</url>
+    <content type="text"><![CDATA[mysql 5.7 以后带来了一个新的功能，即 “Generated Columns”,字面意思可翻译为 “生成列”，顾名思义，这列的数据不能被直接插入或者更新，而是依据一定的规则自动生成。 Generated Columns 定义方式如下:1234col_name data_type [GENERATED ALWAYS] AS (expr) [VIRTUAL | STORED] [NOT NULL | NULL] [UNIQUE [KEY]] [[PRIMARY] KEY] [COMMENT 'string'] 注： 默认是 VIRTUAL,即 虚拟列，不实际占用存储空间，在读取数据时即时计算而来；STORED 则与之相反，它会生成真实的数据列，和正常的列无异，占用存储空间;两者在限制上各有细微区别，具体可查看文末 mysql/mariadb 链接阅读详情 以下样例,展示了自动生成指定时间字段的月份:c_month 的值通过对c_time进行内置函数month调用自动得到,插入语句中无需指定c_month的值12345678910111213141516171819202122mysql&gt; CREATE TABLE generated_columns_test (c_time datetime,c_month int generated always as(month(c_time)));Query OK, 0 rows affected (0.19 sec)mysql&gt; desc generated_columns_test;+---------+----------+------+-----+---------+-------------------+| Field | Type | Null | Key | Default | Extra |+---------+----------+------+-----+---------+-------------------+| c_time | datetime | YES | | NULL | || c_month | int(11) | YES | | NULL | VIRTUAL GENERATED |+---------+----------+------+-----+---------+-------------------+2 rows in set (0.01 sec)mysql&gt; insert into generated_columns_test(c_time)values (now());Query OK, 1 row affected (0.00 sec)mysql&gt; select * from generated_columns_test;+---------------------+---------+| c_time | c_month |+---------------------+---------+| 2020-02-18 09:33:42 | 2 |+---------------------+---------+1 row in set (0.00 sec) 是不是很熟悉？以前这样的需求，一般需要在程序中处理好月份后和 c_time 一并插入数据库，是 generated columns 则可以做自动生成,将程序逻辑后移到数据库层面了。 可以设想一下，generated columns 可用于哪些场景？ 根据订单创建时间，自动填充默认过期时间？ 根据发货时间，自动填充有效期？ …… 当然，generated columns并非银弹，不是所有的业务逻辑都适合运用它，不应该把本该程序处理的部分业务交给数据库去处理，这将给系统维护带来隐患，这和不推荐使用存储过程和自定义函数一样的道理 总体来说，generated columns 虽然有诸多限制，但总体上使用起来还是很方便的，具体的文档可以查看： mysql generated columns mariadb generated columns]]></content>
+      <categories>
+        <category>mysql</category>
+      </categories>
+      <tags>
+        <tag>sql</tag>
+        <tag>mysql</tag>
+        <tag>mariadb</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[永久修改 mac mac files/proc 限制]]></title>
+    <url>%2Fmac-max-limit%2F</url>
+    <content type="text"><![CDATA[mac 升级后的某一天，本地跑程序时发现提示 open too many files, 竟然提示打开文件数过多。 使用ulimit -n 查看，最大的文件数限制为 256 ，这明显太小了。 使用launchctl limit 查看,结果如下: 12345678910~/codes/backupAnyThing/blog(master*) » launchctl limit cpu unlimited unlimited filesize unlimited unlimited data unlimited unlimited stack 8388608 67104768 core 0 unlimited rss unlimited unlimited memlock unlimited unlimited maxproc 1064 1064 maxfiles 256 256 解决方案大致上有三种： 命令行中执行 ulimit -n xxx, 但是仅对当前 session 生效，新开 session 或者重启后会恢复为系统值 在 .bashrc / .zshrc 等脚本中加上 ulimit -n xxxx, 这样每次新开 session 即可自动设置最大文件描述符显示 加入到 launchd 服务中, 永久修改 这里记录下第三种方案的步骤 创建两个 plist文件，民间名分别为 limit.maxproc.plist, limit.maxfiles.plist, 内容如下: file: limit.maxfiles.plist1234567891011121314151617181920&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"&gt; &lt;plist version="1.0"&gt; &lt;dict&gt; &lt;key&gt;Label&lt;/key&gt; &lt;string&gt;limit.maxfiles&lt;/string&gt; &lt;key&gt;ProgramArguments&lt;/key&gt; &lt;array&gt; &lt;string&gt;launchctl&lt;/string&gt; &lt;string&gt;limit&lt;/string&gt; &lt;string&gt;maxfiles&lt;/string&gt; &lt;string&gt;200000&lt;/string&gt; &lt;string&gt;200000&lt;/string&gt; &lt;/array&gt; &lt;key&gt;RunAtLoad&lt;/key&gt; &lt;true/&gt; &lt;key&gt;ServiceIPC&lt;/key&gt; &lt;false/&gt; &lt;/dict&gt; &lt;/plist&gt; file: limit.maxproc.plist 1234567891011121314151617181920 &lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;!DOCTYPE plist PUBLIC "-//Apple/DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"&gt; &lt;plist version="1.0"&gt; &lt;dict&gt; &lt;key&gt;Label&lt;/key&gt; &lt;string&gt;limit.maxproc&lt;/string&gt; &lt;key&gt;ProgramArguments&lt;/key&gt; &lt;array&gt; &lt;string&gt;launchctl&lt;/string&gt; &lt;string&gt;limit&lt;/string&gt; &lt;string&gt;maxproc&lt;/string&gt; &lt;string&gt;20480&lt;/string&gt; &lt;string&gt;20480&lt;/string&gt; &lt;/array&gt; &lt;key&gt;RunAtLoad&lt;/key&gt; &lt;true /&gt; &lt;key&gt;ServiceIPC&lt;/key&gt; &lt;false /&gt; &lt;/dict&gt; &lt;/plist&gt; 将以上两个文件移动到 /Library/LaunchDaemons 目录下，确保两个文件的权限如下： 12-rw-r--r-- 1 root wheel 592B Sep 29 16:39 limit.maxfiles.plist-rw-r--r-- 1 root wheel 589B Sep 29 16:40 limit.maxproc.plist 重启系统，重启后自动生效。 注: 如果只需要修改 max files, 仅添加 limit.maxfiles.plist 文件即可。]]></content>
+      <categories>
+        <category>os</category>
+      </categories>
+      <tags>
+        <tag>mac</tag>
+        <tag>limit</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[angular ng-repeat 双向数据绑定实现动态增删DOM]]></title>
     <url>%2Fangular-repeat-bind-object-of-arrays%2F</url>
     <content type="text"><![CDATA[在实现一个需要动态增删的form表单需求时，MVVM的思维模式下，很容易就想到使用数组的添加和删除来实现DOM元素的动态添加和删除。 代码首先定义一个空数组,push几条初始数据(或者在相关按钮的click事件中去对这个数组进行增删)，然后在页面上使用ng-repeat和ng-model在循环中绑定这个数组的数据。123456item= &#123; name:'default value'&#125;$scope.items= []$scope.items.push(item)$scope.items.push(item) html页面如下：123&lt;div ng-repeat="item in items track by $index"&gt; &lt;input type="text" ng-model="item.name"&gt;&lt;/div&gt; 问题以上代码看似没有问题，但是实际结果却并不预期。页面渲染完成后，修改两个input中的任何一个，数组中的两个元素的数据都保持了一致变动。尝试了一下几种方案之后均无法实现单独绑定:123456789方案1：&lt;div ng-repeat="item in items track by $index"&gt; &lt;input type="text" ng-model="items[$index].name"&gt;&lt;/div&gt;方案2：&lt;div ng-repeat="item in items track by $index"&gt; &lt;input type="text" ng-model="$parent.items[$index].name"&gt;&lt;/div&gt; 后来怀疑是代码中push(item)的问题，每次push的时候，添加的都是同一个item,这样数组中的每一个元素引用的都是内存中的同一个item的地址，所以修改任何元素，都会影响内存中的同一个item对象，从而导致所有的数组元素的值都同步一致修改了。 解决基于以上思路，产生了两种解决方案：方案一，每次push的时候，添加一个空对象到数组中，这样避免每个元素引用同一个内存对象1234$scope.items.push(&#123;&#125;)$scope.items.push(&#123;&#125;)$scope.items.push(&#123;&#125;)...... 方案二，每次push的时候，使用 angular.copy重新复制出一个新对象出来添加到数组中1234567item= &#123; name:'default value'&#125;$scope.items.push(angular.copy(item))$scope.items.push(angular.copy(item))$scope.items.push(angular.copy(item))......]]></content>

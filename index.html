@@ -300,6 +300,344 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/mysql-generated-columns/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="songgl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/favicon.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="javasgl">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/mysql-generated-columns/" itemprop="url">
+                  mysql5.7/mariadb Generated Columns
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-02-18T08:31:45+08:00">
+                2020-02-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/mysql/" itemprop="url" rel="index">
+                    <span itemprop="name">mysql</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/mysql-generated-columns/" class="leancloud_visitors" data-flag-title="mysql5.7/mariadb Generated Columns">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>mysql 5.7 以后带来了一个新的功能，即 “Generated Columns”,字面意思可翻译为 “生成列”，顾名思义，这列的数据不能被直接插入或者更新，而是依据一定的规则自动生成。</p>
+<p>Generated Columns 定义方式如下:<br><figure class="highlight prolog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">col_name data_type [<span class="symbol">GENERATED</span> <span class="symbol">ALWAYS</span>] <span class="symbol">AS</span> (expr)</span><br><span class="line">  [<span class="symbol">VIRTUAL</span> | <span class="symbol">STORED</span>] [<span class="symbol">NOT</span> <span class="symbol">NULL</span> | <span class="symbol">NULL</span>]</span><br><span class="line">  [<span class="symbol">UNIQUE</span> [<span class="symbol">KEY</span>]] [[<span class="symbol">PRIMARY</span>] <span class="symbol">KEY</span>]</span><br><span class="line">  [<span class="symbol">COMMENT</span> <span class="string">'string'</span>]</span><br></pre></td></tr></table></figure></p>
+<p>注：</p>
+<blockquote>
+<p>默认是 VIRTUAL,即 虚拟列，不实际占用存储空间，在读取数据时即时计算而来；<br>STORED 则与之相反，它会生成真实的数据列，和正常的列无异，占用存储空间;<br>两者在限制上各有细微区别，具体可查看文末 mysql/mariadb 链接阅读详情</p>
+</blockquote>
+<p>以下样例,展示了自动生成指定时间字段的月份:<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/mysql-generated-columns/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/mac-max-limit/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="songgl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/favicon.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="javasgl">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/mac-max-limit/" itemprop="url">
+                  永久修改 mac mac files/proc 限制
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-10-11T14:19:49+08:00">
+                2019-10-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/os/" itemprop="url" rel="index">
+                    <span itemprop="name">os</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/mac-max-limit/" class="leancloud_visitors" data-flag-title="永久修改 mac mac files/proc 限制">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>mac 升级后的某一天，本地跑程序时发现提示 <code>open too many files</code>, 竟然提示打开文件数过多。</p>
+<p>使用<code>ulimit -n</code> 查看，最大的文件数限制为 256 ，这明显太小了。 使用<code>launchctl limit</code> 查看,结果如下:</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">~/codes/backupAnyThing/blog(master*) » launchctl limit</span><br><span class="line">	cpu         unlimited      unlimited</span><br><span class="line">	filesize    unlimited      unlimited</span><br><span class="line">	data        unlimited      unlimited</span><br><span class="line">	stack       <span class="number">8388608</span>        <span class="number">67104768</span></span><br><span class="line">	core        <span class="number">0</span>              unlimited</span><br><span class="line">	rss         unlimited      unlimited</span><br><span class="line">	memlock     unlimited      unlimited</span><br><span class="line">	maxproc     <span class="number">1064</span>           <span class="number">1064</span></span><br><span class="line">	maxfiles    <span class="number">256</span>            <span class="number">256</span></span><br></pre></td></tr></table></figure>
+<p>解决方案大致上有三种：</p>
+<ul>
+<li><p>命令行中执行 <code>ulimit -n xxx</code>, 但是仅对当前 session 生效，新开 session 或者重启后会恢复为系统值 </p>
+</li>
+<li><p>在 .bashrc / .zshrc 等脚本中加上 <code>ulimit -n xxxx</code>, 这样每次新开 session 即可自动设置最大文件描述符显示</p>
+</li>
+<li><p>加入到 launchd 服务中, 永久修改</p>
+</li>
+</ul>
+<p>这里记录下第三种方案的步骤</p>
+<p>创建两个 plist文件，民间名分别为 <code>limit.maxproc.plist</code>, <code>limit.maxfiles.plist</code>, 内容如下:</p>
+<p>file: limit.maxfiles.plist<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="php"><span class="meta">&lt;?</span>xml version=<span class="string">"1.0"</span> encoding=<span class="string">"UTF-8"</span><span class="meta">?&gt;</span></span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">plist</span> <span class="attr">version</span>=<span class="string">"1.0"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dict</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">key</span>&gt;</span>Label<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">string</span>&gt;</span>limit.maxfiles<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">key</span>&gt;</span>ProgramArguments<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">array</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">string</span>&gt;</span>launchctl<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">string</span>&gt;</span>limit<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">string</span>&gt;</span>maxfiles<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">string</span>&gt;</span>200000<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">string</span>&gt;</span>200000<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">array</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">key</span>&gt;</span>RunAtLoad<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">true</span>/&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">key</span>&gt;</span>ServiceIPC<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">false</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dict</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">plist</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>file: limit.maxproc.plist</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">  <span class="php"><span class="meta">&lt;?</span>xml version=<span class="string">"1.0"</span> encoding=<span class="string">"UTF-8"</span><span class="meta">?&gt;</span></span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE plist PUBLIC "-//Apple/DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">plist</span> <span class="attr">version</span>=<span class="string">"1.0"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dict</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">key</span>&gt;</span>Label<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">string</span>&gt;</span>limit.maxproc<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">key</span>&gt;</span>ProgramArguments<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">array</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">string</span>&gt;</span>launchctl<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">string</span>&gt;</span>limit<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">string</span>&gt;</span>maxproc<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">string</span>&gt;</span>20480<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">string</span>&gt;</span>20480<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">array</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">key</span>&gt;</span>RunAtLoad<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">true</span> /&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">key</span>&gt;</span>ServiceIPC<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">false</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dict</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">plist</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>将以上两个文件移动到 <code>/Library/LaunchDaemons</code> 目录下，确保两个文件的权限如下：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">-rw-r--r--</span>  1 <span class="selector-tag">root</span>  <span class="selector-tag">wheel</span>   592<span class="selector-tag">B</span> <span class="selector-tag">Sep</span> 29 16<span class="selector-pseudo">:39</span> <span class="selector-tag">limit</span><span class="selector-class">.maxfiles</span><span class="selector-class">.plist</span></span><br><span class="line"><span class="selector-tag">-rw-r--r--</span>  1 <span class="selector-tag">root</span>  <span class="selector-tag">wheel</span>   589<span class="selector-tag">B</span> <span class="selector-tag">Sep</span> 29 16<span class="selector-pseudo">:40</span> <span class="selector-tag">limit</span><span class="selector-class">.maxproc</span><span class="selector-class">.plist</span></span><br></pre></td></tr></table></figure>
+<p>重启系统，重启后自动生效。</p>
+<p>注: 如果只需要修改 <code>max files</code>, 仅添加 <code>limit.maxfiles.plist</code> 文件即可。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/angular-repeat-bind-object-of-arrays/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -766,334 +1104,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/go-svc/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="songgl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/favicon.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="javasgl">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/go-svc/" itemprop="url">
-                  使用go-svc安全退出程序
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-26T15:24:02+08:00">
-                2018-06-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/go/" itemprop="url" rel="index">
-                    <span itemprop="name">go</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/go-svc/" class="leancloud_visitors" data-flag-title="使用go-svc安全退出程序">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>阅读 <a href="https://github.com/nsqio/nsq" target="_blank" rel="noopener">NSQ</a> 源码时，看到NSQ使用了 go-svc 来启动nsq的相关程序,使得在程序退出的时候可以做一些释放资源等收尾工作。</p>
-<p>使用起来非常简单,定义一个Service,实现其 svc.Service中的接口即可。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/go-svc/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/go-time-zone/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="songgl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/favicon.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="javasgl">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/go-time-zone/" itemprop="url">
-                  一个时区引发的`血案`
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-06T14:10:10+08:00">
-                2018-06-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/go/" itemprop="url" rel="index">
-                    <span itemprop="name">go</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/go-time-zone/" class="leancloud_visitors" data-flag-title="一个时区引发的`血案`">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>项目中的一个单元测试，其中一个判断是比较两个时间是否相同。代码逻辑简化抽象如下：<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">time1:=time.Now()</span><br><span class="line">xorm.engine.NewSession().Update(time1)</span><br><span class="line"><span class="keyword">var</span> time2 *time.Time</span><br><span class="line">xorm.engine.NewSession().Get(&amp;time2)</span><br><span class="line"><span class="keyword">if</span> time2.UTC().Format(<span class="string">"2018-06-06"</span>) != time2.UTC().Format(<span class="string">"2018-06-06"</span>)&#123;</span><br><span class="line">	<span class="built_in">panic</span> error</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>介绍一下各组件时区设置：</p>
-<ul>
-<li>mysql 默认配置，<code>SYSTEM</code></li>
-<li>xorm dsn 配置为 <code>parseTime=true&amp;loc=Asia%2FShanghai</code></li>
-</ul>
-<p>以上代码，在本地机器上跑单元测试时无异常，能正常通过。但是，上了CI环境后，单元测试却失败了。<br>通过观察CI的日志和自己打印的日志，发现入库前后，这两个时间相差了8个小时，很明显，这个时间受到时区的影响了。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/go-time-zone/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1138,7 +1153,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">55</span>
+                <span class="site-state-item-count">57</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -1160,7 +1175,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">88</span>
+                <span class="site-state-item-count">90</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -1229,7 +1244,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2018</span>
+  <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
