@@ -8,9 +8,9 @@
         <category>redis</category>
       </categories>
       <tags>
-        <tag>cache</tag>
         <tag>redis</tag>
         <tag>memcache</tag>
+        <tag>cache</tag>
       </tags>
   </entry>
   <entry>
@@ -21,8 +21,8 @@
         <category>mysql</category>
       </categories>
       <tags>
-        <tag>sql</tag>
         <tag>mysql</tag>
+        <tag>sql</tag>
         <tag>mariadb</tag>
       </tags>
   </entry>

@@ -5,12 +5,12 @@
   <subtitle>step by step</subtitle>
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://yoursite.com/"/>
+  <link href="https://javasgl.github.io/"/>
   <updated>2020-02-19T03:00:32.191Z</updated>
-  <id>http://yoursite.com/</id>
+  <id>https://javasgl.github.io/</id>
   
   <author>
-    <name>songgl</name>
+    <name>javasgl</name>
     
   </author>
   
@@ -18,8 +18,8 @@
   
   <entry>
     <title>缓存常见问题处理</title>
-    <link href="http://yoursite.com/handle-cache-problems/"/>
-    <id>http://yoursite.com/handle-cache-problems/</id>
+    <link href="https://javasgl.github.io/handle-cache-problems/"/>
+    <id>https://javasgl.github.io/handle-cache-problems/</id>
     <published>2020-02-19T01:42:12.000Z</published>
     <updated>2020-02-19T03:00:32.191Z</updated>
     
@@ -41,21 +41,21 @@
     
     </summary>
     
-      <category term="redis" scheme="http://yoursite.com/categories/redis/"/>
+      <category term="redis" scheme="https://javasgl.github.io/categories/redis/"/>
     
     
-      <category term="cache" scheme="http://yoursite.com/tags/cache/"/>
+      <category term="redis" scheme="https://javasgl.github.io/tags/redis/"/>
     
-      <category term="redis" scheme="http://yoursite.com/tags/redis/"/>
+      <category term="memcache" scheme="https://javasgl.github.io/tags/memcache/"/>
     
-      <category term="memcache" scheme="http://yoursite.com/tags/memcache/"/>
+      <category term="cache" scheme="https://javasgl.github.io/tags/cache/"/>
     
   </entry>
   
   <entry>
     <title>mysql5.7/mariadb Generated Columns</title>
-    <link href="http://yoursite.com/mysql-generated-columns/"/>
-    <id>http://yoursite.com/mysql-generated-columns/</id>
+    <link href="https://javasgl.github.io/mysql-generated-columns/"/>
+    <id>https://javasgl.github.io/mysql-generated-columns/</id>
     <published>2020-02-18T00:31:45.000Z</published>
     <updated>2020-02-18T01:57:28.905Z</updated>
     
@@ -73,21 +73,21 @@
     
     </summary>
     
-      <category term="mysql" scheme="http://yoursite.com/categories/mysql/"/>
+      <category term="mysql" scheme="https://javasgl.github.io/categories/mysql/"/>
     
     
-      <category term="sql" scheme="http://yoursite.com/tags/sql/"/>
+      <category term="mysql" scheme="https://javasgl.github.io/tags/mysql/"/>
     
-      <category term="mysql" scheme="http://yoursite.com/tags/mysql/"/>
+      <category term="sql" scheme="https://javasgl.github.io/tags/sql/"/>
     
-      <category term="mariadb" scheme="http://yoursite.com/tags/mariadb/"/>
+      <category term="mariadb" scheme="https://javasgl.github.io/tags/mariadb/"/>
     
   </entry>
   
   <entry>
     <title>永久修改 mac mac files/proc 限制</title>
-    <link href="http://yoursite.com/mac-max-limit/"/>
-    <id>http://yoursite.com/mac-max-limit/</id>
+    <link href="https://javasgl.github.io/mac-max-limit/"/>
+    <id>https://javasgl.github.io/mac-max-limit/</id>
     <published>2019-10-11T06:19:49.000Z</published>
     <updated>2019-10-11T06:39:44.000Z</updated>
     
@@ -103,19 +103,19 @@
     
     </summary>
     
-      <category term="os" scheme="http://yoursite.com/categories/os/"/>
+      <category term="os" scheme="https://javasgl.github.io/categories/os/"/>
     
     
-      <category term="mac" scheme="http://yoursite.com/tags/mac/"/>
+      <category term="mac" scheme="https://javasgl.github.io/tags/mac/"/>
     
-      <category term="limit" scheme="http://yoursite.com/tags/limit/"/>
+      <category term="limit" scheme="https://javasgl.github.io/tags/limit/"/>
     
   </entry>
   
   <entry>
     <title>angular ng-repeat 双向数据绑定实现动态增删DOM</title>
-    <link href="http://yoursite.com/angular-repeat-bind-object-of-arrays/"/>
-    <id>http://yoursite.com/angular-repeat-bind-object-of-arrays/</id>
+    <link href="https://javasgl.github.io/angular-repeat-bind-object-of-arrays/"/>
+    <id>https://javasgl.github.io/angular-repeat-bind-object-of-arrays/</id>
     <published>2018-11-14T03:44:50.000Z</published>
     <updated>2018-11-14T04:16:53.000Z</updated>
     
@@ -127,25 +127,25 @@
     
     </summary>
     
-      <category term="javascript" scheme="http://yoursite.com/categories/javascript/"/>
+      <category term="javascript" scheme="https://javasgl.github.io/categories/javascript/"/>
     
     
-      <category term="angular" scheme="http://yoursite.com/tags/angular/"/>
+      <category term="angular" scheme="https://javasgl.github.io/tags/angular/"/>
     
-      <category term="js" scheme="http://yoursite.com/tags/js/"/>
+      <category term="js" scheme="https://javasgl.github.io/tags/js/"/>
     
-      <category term="ng-repeat" scheme="http://yoursite.com/tags/ng-repeat/"/>
+      <category term="ng-repeat" scheme="https://javasgl.github.io/tags/ng-repeat/"/>
     
-      <category term="mvvm" scheme="http://yoursite.com/tags/mvvm/"/>
+      <category term="mvvm" scheme="https://javasgl.github.io/tags/mvvm/"/>
     
-      <category term="ng-model" scheme="http://yoursite.com/tags/ng-model/"/>
+      <category term="ng-model" scheme="https://javasgl.github.io/tags/ng-model/"/>
     
   </entry>
   
   <entry>
     <title>用 Go Plugin 构建模块化系统</title>
-    <link href="http://yoursite.com/build-module-system-use-go-plugin/"/>
-    <id>http://yoursite.com/build-module-system-use-go-plugin/</id>
+    <link href="https://javasgl.github.io/build-module-system-use-go-plugin/"/>
+    <id>https://javasgl.github.io/build-module-system-use-go-plugin/</id>
     <published>2018-07-05T08:48:13.000Z</published>
     <updated>2018-07-05T09:23:03.000Z</updated>
     
@@ -158,19 +158,19 @@
     
     </summary>
     
-      <category term="go" scheme="http://yoursite.com/categories/go/"/>
+      <category term="go" scheme="https://javasgl.github.io/categories/go/"/>
     
     
-      <category term="go" scheme="http://yoursite.com/tags/go/"/>
+      <category term="go" scheme="https://javasgl.github.io/tags/go/"/>
     
-      <category term="plugin" scheme="http://yoursite.com/tags/plugin/"/>
+      <category term="plugin" scheme="https://javasgl.github.io/tags/plugin/"/>
     
   </entry>
   
   <entry>
     <title>sync.Pool缓存池中对象回收时机</title>
-    <link href="http://yoursite.com/go-sync-pool/"/>
-    <id>http://yoursite.com/go-sync-pool/</id>
+    <link href="https://javasgl.github.io/go-sync-pool/"/>
+    <id>https://javasgl.github.io/go-sync-pool/</id>
     <published>2018-06-27T03:48:04.000Z</published>
     <updated>2018-06-27T04:04:09.000Z</updated>
     
@@ -182,19 +182,19 @@
     
     </summary>
     
-      <category term="go" scheme="http://yoursite.com/categories/go/"/>
+      <category term="go" scheme="https://javasgl.github.io/categories/go/"/>
     
     
-      <category term="go" scheme="http://yoursite.com/tags/go/"/>
+      <category term="go" scheme="https://javasgl.github.io/tags/go/"/>
     
-      <category term="sync.Pool" scheme="http://yoursite.com/tags/sync-Pool/"/>
+      <category term="sync.Pool" scheme="https://javasgl.github.io/tags/sync-Pool/"/>
     
   </entry>
   
   <entry>
     <title>使用go-svc安全退出程序</title>
-    <link href="http://yoursite.com/go-svc/"/>
-    <id>http://yoursite.com/go-svc/</id>
+    <link href="https://javasgl.github.io/go-svc/"/>
+    <id>https://javasgl.github.io/go-svc/</id>
     <published>2018-06-26T07:24:02.000Z</published>
     <updated>2018-06-26T08:17:43.000Z</updated>
     
@@ -207,21 +207,21 @@
     
     </summary>
     
-      <category term="go" scheme="http://yoursite.com/categories/go/"/>
+      <category term="go" scheme="https://javasgl.github.io/categories/go/"/>
     
     
-      <category term="go" scheme="http://yoursite.com/tags/go/"/>
+      <category term="go" scheme="https://javasgl.github.io/tags/go/"/>
     
-      <category term="go-svc" scheme="http://yoursite.com/tags/go-svc/"/>
+      <category term="go-svc" scheme="https://javasgl.github.io/tags/go-svc/"/>
     
-      <category term="signal" scheme="http://yoursite.com/tags/signal/"/>
+      <category term="signal" scheme="https://javasgl.github.io/tags/signal/"/>
     
   </entry>
   
   <entry>
     <title>一个时区引发的`血案`</title>
-    <link href="http://yoursite.com/go-time-zone/"/>
-    <id>http://yoursite.com/go-time-zone/</id>
+    <link href="https://javasgl.github.io/go-time-zone/"/>
+    <id>https://javasgl.github.io/go-time-zone/</id>
     <published>2018-06-06T06:10:10.000Z</published>
     <updated>2018-06-06T07:09:44.000Z</updated>
     
@@ -239,25 +239,25 @@
     
     </summary>
     
-      <category term="go" scheme="http://yoursite.com/categories/go/"/>
+      <category term="go" scheme="https://javasgl.github.io/categories/go/"/>
     
     
-      <category term="go" scheme="http://yoursite.com/tags/go/"/>
+      <category term="go" scheme="https://javasgl.github.io/tags/go/"/>
     
-      <category term="time" scheme="http://yoursite.com/tags/time/"/>
+      <category term="time" scheme="https://javasgl.github.io/tags/time/"/>
     
-      <category term="timezone" scheme="http://yoursite.com/tags/timezone/"/>
+      <category term="timezone" scheme="https://javasgl.github.io/tags/timezone/"/>
     
-      <category term="orm" scheme="http://yoursite.com/tags/orm/"/>
+      <category term="orm" scheme="https://javasgl.github.io/tags/orm/"/>
     
-      <category term="sql" scheme="http://yoursite.com/tags/sql/"/>
+      <category term="sql" scheme="https://javasgl.github.io/tags/sql/"/>
     
   </entry>
   
   <entry>
     <title>go覆盖测试率图形化分析</title>
-    <link href="http://yoursite.com/go-cover-ui/"/>
-    <id>http://yoursite.com/go-cover-ui/</id>
+    <link href="https://javasgl.github.io/go-cover-ui/"/>
+    <id>https://javasgl.github.io/go-cover-ui/</id>
     <published>2018-05-23T03:36:53.000Z</published>
     <updated>2018-05-23T04:07:28.000Z</updated>
     
@@ -271,19 +271,19 @@
     
     </summary>
     
-      <category term="go" scheme="http://yoursite.com/categories/go/"/>
+      <category term="go" scheme="https://javasgl.github.io/categories/go/"/>
     
     
-      <category term="go" scheme="http://yoursite.com/tags/go/"/>
+      <category term="go" scheme="https://javasgl.github.io/tags/go/"/>
     
-      <category term="UnitTest" scheme="http://yoursite.com/tags/UnitTest/"/>
+      <category term="UnitTest" scheme="https://javasgl.github.io/tags/UnitTest/"/>
     
   </entry>
   
   <entry>
     <title>使用 reindex 来修改 elasticsearch 索引mapping</title>
-    <link href="http://yoursite.com/elastic-search-reindex/"/>
-    <id>http://yoursite.com/elastic-search-reindex/</id>
+    <link href="https://javasgl.github.io/elastic-search-reindex/"/>
+    <id>https://javasgl.github.io/elastic-search-reindex/</id>
     <published>2018-04-02T00:32:00.000Z</published>
     <updated>2018-05-23T03:36:23.000Z</updated>
     
@@ -298,19 +298,19 @@
     
     </summary>
     
-      <category term="elasticsearch" scheme="http://yoursite.com/categories/elasticsearch/"/>
+      <category term="elasticsearch" scheme="https://javasgl.github.io/categories/elasticsearch/"/>
     
     
-      <category term="elasticsearch" scheme="http://yoursite.com/tags/elasticsearch/"/>
+      <category term="elasticsearch" scheme="https://javasgl.github.io/tags/elasticsearch/"/>
     
-      <category term="reindex" scheme="http://yoursite.com/tags/reindex/"/>
+      <category term="reindex" scheme="https://javasgl.github.io/tags/reindex/"/>
     
   </entry>
   
   <entry>
     <title>python的浅复制和深复制</title>
-    <link href="http://yoursite.com/python-reference-value-md/"/>
-    <id>http://yoursite.com/python-reference-value-md/</id>
+    <link href="https://javasgl.github.io/python-reference-value-md/"/>
+    <id>https://javasgl.github.io/python-reference-value-md/</id>
     <published>2018-03-30T10:54:49.000Z</published>
     <updated>2018-04-02T00:28:10.000Z</updated>
     
@@ -326,21 +326,21 @@
     
     </summary>
     
-      <category term="python" scheme="http://yoursite.com/categories/python/"/>
+      <category term="python" scheme="https://javasgl.github.io/categories/python/"/>
     
     
-      <category term="python" scheme="http://yoursite.com/tags/python/"/>
+      <category term="python" scheme="https://javasgl.github.io/tags/python/"/>
     
-      <category term="shallowcopy" scheme="http://yoursite.com/tags/shallowcopy/"/>
+      <category term="shallowcopy" scheme="https://javasgl.github.io/tags/shallowcopy/"/>
     
-      <category term="deepcopy" scheme="http://yoursite.com/tags/deepcopy/"/>
+      <category term="deepcopy" scheme="https://javasgl.github.io/tags/deepcopy/"/>
     
   </entry>
   
   <entry>
     <title>python monkey patch解决gevent block forever问题</title>
-    <link href="http://yoursite.com/python-monkey-patch/"/>
-    <id>http://yoursite.com/python-monkey-patch/</id>
+    <link href="https://javasgl.github.io/python-monkey-patch/"/>
+    <id>https://javasgl.github.io/python-monkey-patch/</id>
     <published>2018-03-12T03:31:53.000Z</published>
     <updated>2018-04-01T23:40:00.000Z</updated>
     
@@ -355,21 +355,21 @@
     
     </summary>
     
-      <category term="python" scheme="http://yoursite.com/categories/python/"/>
+      <category term="python" scheme="https://javasgl.github.io/categories/python/"/>
     
     
-      <category term="python" scheme="http://yoursite.com/tags/python/"/>
+      <category term="python" scheme="https://javasgl.github.io/tags/python/"/>
     
-      <category term="monkey" scheme="http://yoursite.com/tags/monkey/"/>
+      <category term="monkey" scheme="https://javasgl.github.io/tags/monkey/"/>
     
-      <category term="patch" scheme="http://yoursite.com/tags/patch/"/>
+      <category term="patch" scheme="https://javasgl.github.io/tags/patch/"/>
     
   </entry>
   
   <entry>
     <title>python asyncio 简单使用</title>
-    <link href="http://yoursite.com/use-asyncio-in-python/"/>
-    <id>http://yoursite.com/use-asyncio-in-python/</id>
+    <link href="https://javasgl.github.io/use-asyncio-in-python/"/>
+    <id>https://javasgl.github.io/use-asyncio-in-python/</id>
     <published>2018-03-07T07:22:37.000Z</published>
     <updated>2018-04-01T23:40:00.000Z</updated>
     
@@ -384,21 +384,21 @@
     
     </summary>
     
-      <category term="python" scheme="http://yoursite.com/categories/python/"/>
+      <category term="python" scheme="https://javasgl.github.io/categories/python/"/>
     
     
-      <category term="python" scheme="http://yoursite.com/tags/python/"/>
+      <category term="python" scheme="https://javasgl.github.io/tags/python/"/>
     
-      <category term="coroutine" scheme="http://yoursite.com/tags/coroutine/"/>
+      <category term="coroutine" scheme="https://javasgl.github.io/tags/coroutine/"/>
     
-      <category term="asyncio" scheme="http://yoursite.com/tags/asyncio/"/>
+      <category term="asyncio" scheme="https://javasgl.github.io/tags/asyncio/"/>
     
   </entry>
   
   <entry>
     <title>python 多进程、多线程简单使用</title>
-    <link href="http://yoursite.com/use-theading-in-python/"/>
-    <id>http://yoursite.com/use-theading-in-python/</id>
+    <link href="https://javasgl.github.io/use-theading-in-python/"/>
+    <id>https://javasgl.github.io/use-theading-in-python/</id>
     <published>2018-03-07T06:42:01.000Z</published>
     <updated>2018-04-01T23:40:00.000Z</updated>
     
@@ -414,19 +414,19 @@
     
     </summary>
     
-      <category term="python" scheme="http://yoursite.com/categories/python/"/>
+      <category term="python" scheme="https://javasgl.github.io/categories/python/"/>
     
     
-      <category term="python" scheme="http://yoursite.com/tags/python/"/>
+      <category term="python" scheme="https://javasgl.github.io/tags/python/"/>
     
-      <category term="thread" scheme="http://yoursite.com/tags/thread/"/>
+      <category term="thread" scheme="https://javasgl.github.io/tags/thread/"/>
     
   </entry>
   
   <entry>
     <title>go build 常见编译优化</title>
-    <link href="http://yoursite.com/go-build-args/"/>
-    <id>http://yoursite.com/go-build-args/</id>
+    <link href="https://javasgl.github.io/go-build-args/"/>
+    <id>https://javasgl.github.io/go-build-args/</id>
     <published>2018-02-27T08:09:14.000Z</published>
     <updated>2018-04-01T23:40:00.000Z</updated>
     
@@ -442,17 +442,17 @@
     
     </summary>
     
-      <category term="go" scheme="http://yoursite.com/categories/go/"/>
+      <category term="go" scheme="https://javasgl.github.io/categories/go/"/>
     
     
-      <category term="go" scheme="http://yoursite.com/tags/go/"/>
+      <category term="go" scheme="https://javasgl.github.io/tags/go/"/>
     
   </entry>
   
   <entry>
     <title>golang同时监听TCP、HTTP端口提供服务</title>
-    <link href="http://yoursite.com/golang-listen-tcp-and-http-port/"/>
-    <id>http://yoursite.com/golang-listen-tcp-and-http-port/</id>
+    <link href="https://javasgl.github.io/golang-listen-tcp-and-http-port/"/>
+    <id>https://javasgl.github.io/golang-listen-tcp-and-http-port/</id>
     <published>2018-02-24T03:45:30.000Z</published>
     <updated>2018-04-01T23:40:00.000Z</updated>
     
@@ -468,19 +468,19 @@
     
     </summary>
     
-      <category term="go" scheme="http://yoursite.com/categories/go/"/>
+      <category term="go" scheme="https://javasgl.github.io/categories/go/"/>
     
     
-      <category term="go" scheme="http://yoursite.com/tags/go/"/>
+      <category term="go" scheme="https://javasgl.github.io/tags/go/"/>
     
-      <category term="http" scheme="http://yoursite.com/tags/http/"/>
+      <category term="http" scheme="https://javasgl.github.io/tags/http/"/>
     
   </entry>
   
   <entry>
     <title>使用 Elasticsearch alias 功能切换 index</title>
-    <link href="http://yoursite.com/use-alias-migrate-index/"/>
-    <id>http://yoursite.com/use-alias-migrate-index/</id>
+    <link href="https://javasgl.github.io/use-alias-migrate-index/"/>
+    <id>https://javasgl.github.io/use-alias-migrate-index/</id>
     <published>2017-12-20T09:20:11.000Z</published>
     <updated>2018-04-01T23:40:00.000Z</updated>
     
@@ -495,21 +495,21 @@
     
     </summary>
     
-      <category term="elasticsearch" scheme="http://yoursite.com/categories/elasticsearch/"/>
+      <category term="elasticsearch" scheme="https://javasgl.github.io/categories/elasticsearch/"/>
     
     
-      <category term="elasticsearch" scheme="http://yoursite.com/tags/elasticsearch/"/>
+      <category term="elasticsearch" scheme="https://javasgl.github.io/tags/elasticsearch/"/>
     
-      <category term="es" scheme="http://yoursite.com/tags/es/"/>
+      <category term="es" scheme="https://javasgl.github.io/tags/es/"/>
     
-      <category term="alias" scheme="http://yoursite.com/tags/alias/"/>
+      <category term="alias" scheme="https://javasgl.github.io/tags/alias/"/>
     
   </entry>
   
   <entry>
     <title>python celery 强制使用root用户执行</title>
-    <link href="http://yoursite.com/python-celery-force-root/"/>
-    <id>http://yoursite.com/python-celery-force-root/</id>
+    <link href="https://javasgl.github.io/python-celery-force-root/"/>
+    <id>https://javasgl.github.io/python-celery-force-root/</id>
     <published>2017-12-19T07:20:22.000Z</published>
     <updated>2018-04-01T23:40:00.000Z</updated>
     
@@ -522,21 +522,21 @@
     
     </summary>
     
-      <category term="python" scheme="http://yoursite.com/categories/python/"/>
+      <category term="python" scheme="https://javasgl.github.io/categories/python/"/>
     
     
-      <category term="python" scheme="http://yoursite.com/tags/python/"/>
+      <category term="python" scheme="https://javasgl.github.io/tags/python/"/>
     
-      <category term="celery" scheme="http://yoursite.com/tags/celery/"/>
+      <category term="celery" scheme="https://javasgl.github.io/tags/celery/"/>
     
-      <category term="supervisor" scheme="http://yoursite.com/tags/supervisor/"/>
+      <category term="supervisor" scheme="https://javasgl.github.io/tags/supervisor/"/>
     
   </entry>
   
   <entry>
     <title>Virtualenv 使用</title>
-    <link href="http://yoursite.com/use-python-with-virtualenv/"/>
-    <id>http://yoursite.com/use-python-with-virtualenv/</id>
+    <link href="https://javasgl.github.io/use-python-with-virtualenv/"/>
+    <id>https://javasgl.github.io/use-python-with-virtualenv/</id>
     <published>2017-11-30T13:25:33.000Z</published>
     <updated>2017-11-30T13:35:51.000Z</updated>
     
@@ -552,19 +552,19 @@
     
     </summary>
     
-      <category term="python" scheme="http://yoursite.com/categories/python/"/>
+      <category term="python" scheme="https://javasgl.github.io/categories/python/"/>
     
     
-      <category term="python" scheme="http://yoursite.com/tags/python/"/>
+      <category term="python" scheme="https://javasgl.github.io/tags/python/"/>
     
-      <category term="virtualenv" scheme="http://yoursite.com/tags/virtualenv/"/>
+      <category term="virtualenv" scheme="https://javasgl.github.io/tags/virtualenv/"/>
     
   </entry>
   
   <entry>
     <title>git 推送大文件buffer设置</title>
-    <link href="http://yoursite.com/git-post-buffer/"/>
-    <id>http://yoursite.com/git-post-buffer/</id>
+    <link href="https://javasgl.github.io/git-post-buffer/"/>
+    <id>https://javasgl.github.io/git-post-buffer/</id>
     <published>2017-11-15T15:09:50.000Z</published>
     <updated>2017-11-15T15:34:01.000Z</updated>
     
@@ -579,10 +579,10 @@
     
     </summary>
     
-      <category term="tools" scheme="http://yoursite.com/categories/tools/"/>
+      <category term="tools" scheme="https://javasgl.github.io/categories/tools/"/>
     
     
-      <category term="git" scheme="http://yoursite.com/tags/git/"/>
+      <category term="git" scheme="https://javasgl.github.io/tags/git/"/>
     
   </entry>
   
