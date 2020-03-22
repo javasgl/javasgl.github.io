@@ -90,7 +90,7 @@
 <meta property="og:site_name" content="javasgl">
 <meta property="og:description" content="初始git 项目中，可以使用以下命令为项目添加submodule 1git submodule add -b branch_name git@github.com:javasgl/xxx.git module_path 执行以上命令后，会在当前项目下生成一个.gitmodules 文件，内容如下 1234[submodule &quot;module_path&quot;]	path = module_path	ur">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-03-22T09:44:40.935Z">
+<meta property="og:updated_time" content="2020-03-22T09:50:26.428Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="修改 git submodule">
 <meta name="twitter:description" content="初始git 项目中，可以使用以下命令为项目添加submodule 1git submodule add -b branch_name git@github.com:javasgl/xxx.git module_path 执行以上命令后，会在当前项目下生成一个.gitmodules 文件，内容如下 1234[submodule &quot;module_path&quot;]	path = module_path	ur">
@@ -415,6 +415,7 @@
 <figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">.git/modules</span></span><br><span class="line">└── module<span class="emphasis">_path</span></span><br></pre></td></tr></table></figure>
 <h2 id="变更"><a href="#变更" class="headerlink" title="变更"></a>变更</h2><p>有时候，对于已经添加了submodule的项目，如果想更换 <code>submodule</code> 的地址，那个这就比较麻烦，目前<code>git</code>并没有直接提供相关命令,需要进行一系列的手工操作</p>
 <p>简单记录如下，备查</p>
+<a id="more"></a>
 <p>比如，想把 <code>submodule</code> 的地址换为 <code>github.com/xxx/xxx.git</code></p>
 <ol>
 <li><p>将 <code>submodule</code> 移除 <code>git</code> 版本控制</p>

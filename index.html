@@ -409,8 +409,7 @@
 
       
         
-          
-            <h2 id="初始"><a href="#初始" class="headerlink" title="初始"></a>初始</h2><p><code>git</code> 项目中，可以使用以下命令为项目添加<code>submodule</code></p>
+          <h2 id="初始"><a href="#初始" class="headerlink" title="初始"></a>初始</h2><p><code>git</code> 项目中，可以使用以下命令为项目添加<code>submodule</code></p>
 <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git submodule add -<span class="selector-tag">b</span> branch_name git@github<span class="selector-class">.com</span>:javasgl/xxx<span class="selector-class">.git</span> module_path</span><br></pre></td></tr></table></figure>
 <p>执行以上命令后，会在当前项目下生成一个<code>.gitmodules</code> 文件，内容如下</p>
 <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[submodule <span class="string">"module_path"</span>]</span><br><span class="line">	path = module_path</span><br><span class="line">	url = git@github<span class="selector-class">.com</span>:javasgl/xxx.git</span><br><span class="line">	branch = branch_name</span><br></pre></td></tr></table></figure>
@@ -420,22 +419,13 @@
 <figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">.git/modules</span></span><br><span class="line">└── module<span class="emphasis">_path</span></span><br></pre></td></tr></table></figure>
 <h2 id="变更"><a href="#变更" class="headerlink" title="变更"></a>变更</h2><p>有时候，对于已经添加了submodule的项目，如果想更换 <code>submodule</code> 的地址，那个这就比较麻烦，目前<code>git</code>并没有直接提供相关命令,需要进行一系列的手工操作</p>
 <p>简单记录如下，备查</p>
-<p>比如，想把 <code>submodule</code> 的地址换为 <code>github.com/xxx/xxx.git</code></p>
-<ol>
-<li><p>将 <code>submodule</code> 移除 <code>git</code> 版本控制</p>
-<figure class="highlight ceylon"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git rm <span class="keyword">module</span><span class="number">_p</span>ath</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>移除 <code>.git/config</code> <code>.gitmodules</code> 中的配置</p>
-</li>
-<li><p>删除 <code>.git/modules/</code>下相关代码</p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm .git<span class="regexp">/modules/m</span>odule_path</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>执行之前的初始化，可以重新<code>add</code>新的<code>submodule</code></p>
-<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">git</span> <span class="keyword">submodule </span><span class="keyword">add </span>github.com/xxx/xxx.git xxx_path</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/git-submodule/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
