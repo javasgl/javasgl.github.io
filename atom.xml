@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://javasgl.github.io/"/>
-  <updated>2020-02-19T03:00:32.191Z</updated>
+  <updated>2020-03-22T09:44:40.935Z</updated>
   <id>https://javasgl.github.io/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>修改 git submodule</title>
+    <link href="https://javasgl.github.io/git-submodule/"/>
+    <id>https://javasgl.github.io/git-submodule/</id>
+    <published>2020-03-22T09:24:51.000Z</published>
+    <updated>2020-03-22T09:44:40.935Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="初始"><a href="#初始" class="headerlink" title="初始"></a>初始</h2><p><code>git</code> 项目中，可以使用以下命令为项目添加<code>submodule</code></p><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git submodule add -<span class="selector-tag">b</span> branch_name git@github<span class="selector-class">.com</span>:javasgl/xxx<span class="selector-class">.git</span> module_path</span><br></pre></td></tr></table></figure><p>执行以上命令后，会在当前项目下生成一个<code>.gitmodules</code> 文件，内容如下</p><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[submodule <span class="string">"module_path"</span>]</span><br><span class="line">path = module_path</span><br><span class="line">url = git@github<span class="selector-class">.com</span>:javasgl/xxx.git</span><br><span class="line">branch = branch_name</span><br></pre></td></tr></table></figure><p>同时也将修改 <code>.git/config</code>文件<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[submodule <span class="string">"module_path"</span>]</span><br><span class="line">url = git@github<span class="selector-class">.com</span>:javasgl/xxx.git</span><br><span class="line">active = true</span><br></pre></td></tr></table></figure></p><p>此时，执行以下命令即可从远程拉取相关代码到<code>submodule</code>中:<br><figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">git</span> <span class="keyword">submodule </span>update --init</span><br><span class="line"></span><br><span class="line">// 可以使用 git <span class="keyword">submodule </span>deinit 重新初始化</span><br></pre></td></tr></table></figure></p><p>执行之后，会在 <code>.git/modules/module_path/</code> 下看到 <code>submodeule</code>相关的代码</p><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">.git/modules</span></span><br><span class="line">└── module<span class="emphasis">_path</span></span><br></pre></td></tr></table></figure><h2 id="变更"><a href="#变更" class="headerlink" title="变更"></a>变更</h2><p>有时候，对于已经添加了submodule的项目，如果想更换 <code>submodule</code> 的地址，那个这就比较麻烦，目前<code>git</code>并没有直接提供相关命令,需要进行一系列的手工操作</p><p>简单记录如下，备查</p><p>比如，想把 <code>submodule</code> 的地址换为 <code>github.com/xxx/xxx.git</code></p><ol><li><p>将 <code>submodule</code> 移除 <code>git</code> 版本控制</p><figure class="highlight ceylon"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git rm <span class="keyword">module</span><span class="number">_p</span>ath</span><br></pre></td></tr></table></figure></li><li><p>移除 <code>.git/config</code> <code>.gitmodules</code> 中的配置</p></li><li><p>删除 <code>.git/modules/</code>下相关代码</p><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm .git<span class="regexp">/modules/m</span>odule_path</span><br></pre></td></tr></table></figure></li><li><p>执行之前的初始化，可以重新<code>add</code>新的<code>submodule</code></p><figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">git</span> <span class="keyword">submodule </span><span class="keyword">add </span>github.com/xxx/xxx.git xxx_path</span><br></pre></td></tr></table></figure></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;初始&quot;&gt;&lt;a href=&quot;#初始&quot; class=&quot;headerlink&quot; title=&quot;初始&quot;&gt;&lt;/a&gt;初始&lt;/h2&gt;&lt;p&gt;&lt;code&gt;git&lt;/code&gt; 项目中，可以使用以下命令为项目添加&lt;code&gt;submodule&lt;/code&gt;&lt;/p&gt;
+&lt;figure c
+      
+    
+    </summary>
+    
+      <category term="git" scheme="https://javasgl.github.io/categories/git/"/>
+    
+    
+      <category term="git" scheme="https://javasgl.github.io/tags/git/"/>
+    
+      <category term="submodule" scheme="https://javasgl.github.io/tags/submodule/"/>
+    
+  </entry>
   
   <entry>
     <title>缓存常见问题处理</title>
@@ -44,11 +72,11 @@
       <category term="redis" scheme="https://javasgl.github.io/categories/redis/"/>
     
     
+      <category term="cache" scheme="https://javasgl.github.io/tags/cache/"/>
+    
       <category term="redis" scheme="https://javasgl.github.io/tags/redis/"/>
     
       <category term="memcache" scheme="https://javasgl.github.io/tags/memcache/"/>
-    
-      <category term="cache" scheme="https://javasgl.github.io/tags/cache/"/>
     
   </entry>
   
@@ -558,31 +586,6 @@
       <category term="python" scheme="https://javasgl.github.io/tags/python/"/>
     
       <category term="virtualenv" scheme="https://javasgl.github.io/tags/virtualenv/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>git 推送大文件buffer设置</title>
-    <link href="https://javasgl.github.io/git-post-buffer/"/>
-    <id>https://javasgl.github.io/git-post-buffer/</id>
-    <published>2017-11-15T15:09:50.000Z</published>
-    <updated>2017-11-15T15:34:01.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>git默认的 http.postBuffer大小为1M。所以偶尔遇到比较大的文件或者项目时，会报出以下错误：<br><figure class="highlight subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">error: </span>RPC failed; result=22, HTTP code = 411</span><br><span class="line">fatal: The remote end hung up unexpectedly</span><br><span class="line">fatal: The remote end hung up unexpectedly</span><br></pre></td></tr></table></figure></p><p>这时可以通过设置 http.postBuffer来解决。下面设置为100M。<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git<span class="built_in"> config </span>--global http.<span class="attribute">postBuffer</span>=104857600</span><br></pre></td></tr></table></figure></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;git默认的 http.postBuffer大小为1M。所以偶尔遇到比较大的文件或者项目时，会报出以下错误：&lt;br&gt;&lt;figure class=&quot;highlight subunit&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span clas
-      
-    
-    </summary>
-    
-      <category term="tools" scheme="https://javasgl.github.io/categories/tools/"/>
-    
-    
-      <category term="git" scheme="https://javasgl.github.io/tags/git/"/>
     
   </entry>
   

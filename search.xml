@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[修改 git submodule]]></title>
+    <url>%2Fgit-submodule%2F</url>
+    <content type="text"><![CDATA[初始git 项目中，可以使用以下命令为项目添加submodule 1git submodule add -b branch_name git@github.com:javasgl/xxx.git module_path 执行以上命令后，会在当前项目下生成一个.gitmodules 文件，内容如下 1234[submodule "module_path"] path = module_path url = git@github.com:javasgl/xxx.git branch = branch_name 同时也将修改 .git/config文件123[submodule "module_path"] url = git@github.com:javasgl/xxx.git active = true 此时，执行以下命令即可从远程拉取相关代码到submodule中:123git submodule update --init// 可以使用 git submodule deinit 重新初始化 执行之后，会在 .git/modules/module_path/ 下看到 submodeule相关的代码 12.git/modules└── module_path 变更有时候，对于已经添加了submodule的项目，如果想更换 submodule 的地址，那个这就比较麻烦，目前git并没有直接提供相关命令,需要进行一系列的手工操作 简单记录如下，备查 比如，想把 submodule 的地址换为 github.com/xxx/xxx.git 将 submodule 移除 git 版本控制 1git rm module_path 移除 .git/config .gitmodules 中的配置 删除 .git/modules/下相关代码 1rm .git/modules/module_path 执行之前的初始化，可以重新add新的submodule 1git submodule add github.com/xxx/xxx.git xxx_path]]></content>
+      <categories>
+        <category>git</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+        <tag>submodule</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[缓存常见问题处理]]></title>
     <url>%2Fhandle-cache-problems%2F</url>
     <content type="text"><![CDATA[缓存使用过过程中常见问题基本是以下几个问题： 缓存穿透问题 缓存并发问题 热点数据问题 数据一致问题 这些问题不是独立的，一般都会存在因果关系或者同时存在 下面列举一下问题原因及基本解决思路 缓存穿透/过期缓存穿透问题是指请求数据在缓存中没有找到，导致请求直接打到数据库的情况 这种场景下，大致有两类原因可以导致这类问题： 1.缓存中没有命中，查询数据库，数据库无此数据，不会去更新缓存，这样导致下次同样的请求都会重复这样的请求，每次都会请求数据库 2.由于缓存过期时间设置不合理，导致瞬时大量缓存过期，大量请求直接打到数据库 原因 1 的解决方案:为数据设置默认值，即使从数据库没有查询到，也设置缓存，之后数据有值了去主动更新缓存 这样虽然可以避免查询一直不存在的数据而导致的缓存穿透问题，但是也容易引起恶意攻击，攻击方式：构造大量无效的条件去查询，这样导致缓存中大量的存在默认缓存，导致缓存占用量急剧增大而引起缓存驱逐,针对这种方式，可以为默认缓存设置一些比较短的过期时间来稍微缓解这一问题,只是缓解，无法完全解决这个攻击 原因 2 的解决方案： 不要设置统一的过期时间，为过期时间添加随机数,让数据过期时间分散开，不要集中在同一时间过期 缓存并发缓存并发问题是指多个请求请求同一个数据，而且都没有从缓存中获取到数据，并从数据库查询后都去更新缓存，导致缓存重复更新问题大多数场景下，这个问题影响并不大，只是会产生一些重复的数据库查询和重复更新缓存但是如果有些缓存不能重复更新，比如一些自动设置的时间、计数器等，那么重复更新会带来问题 这个问题的解决方案： 使用CAS方案，即设置缓存之前先检查是否已经设置了，如果设置过，则不作任何操作如果是使用redis,则可以直接使用其SETNX命令 热点数据绝大多数系统中，频繁访问的数据只是一小部分，而受硬件、成本等因素，把所有的数据都放在缓存中也不太现实 这个问题，可以使用日志分析、访问计数等方式统计热点数据，基于历史访问情况刷新TOP-N数据到缓存中，并且不定时的去更新这个TOP-N列表 数据一致问题这个问题一般比较难弄，只要使用缓存，则必然可能出现缓存不一致的问题,这个问题和使用缓存更新策略有很大的关系，具体问题需要根据不同的缓存更新方式来定制化解决，不能一概而论 这个问题基本思路是使用补偿机制，即使用定时、不定时巡检的方式，刷新缓存数据，保证数据一致性]]></content>
@@ -8,9 +20,9 @@
         <category>redis</category>
       </categories>
       <tags>
+        <tag>cache</tag>
         <tag>redis</tag>
         <tag>memcache</tag>
-        <tag>cache</tag>
       </tags>
   </entry>
   <entry>
@@ -542,8 +554,8 @@
         <category>mysql</category>
       </categories>
       <tags>
-        <tag>database</tag>
         <tag>mysql</tag>
+        <tag>database</tag>
       </tags>
   </entry>
   <entry>
