@@ -300,6 +300,171 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://javasgl.github.io/elasticsearch-cluster/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="javasgl">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/favicon.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="javasgl">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/elasticsearch-cluster/" itemprop="url">
+                  ES7.8.1 集群搭建踩坑记录
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-08-14T22:44:15+08:00">
+                2020-08-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/elasticsearch/" itemprop="url" rel="index">
+                    <span itemprop="name">elasticsearch</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/elasticsearch-cluster/" class="leancloud_visitors" data-flag-title="ES7.8.1 集群搭建踩坑记录">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>时隔两年多时间，再次接触 elasticsearch,准备在测试环境搭建一套 ES 集群用来测试</p>
+<p>之前使用ES还是在其1.4.x~2.0.x左右的时候，现在 ES 版本已经发展到了7.x以上了(中间经历过于kibana同步版本号,所以版本变动比较大)</p>
+<h2 id="单机安装"><a href="#单机安装" class="headerlink" title="单机安装"></a>单机安装</h2><p>大致安装步骤和之前的版本差别不大,依然保持了其开箱即用的特性,只需要很少的配置即可</p>
+<p>单机很简单，修改集群名称，节点名称,数据及日志目录,以及监听绑定的ip,然后直接运行可执行文件即可</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">注：下载的打包文件中，附带一个openjdk可以直接使用，如果使用 supervisor 来管理 es, 可以使用</span><br><span class="line">supervisor 的 environment 功能，来设置 JAVA_HOME 环境变量</span><br><span class="line"></span><br><span class="line">配置如下，ES_HOME 即 elasticsearch 解压后文件夹所在目录</span><br><span class="line"></span><br><span class="line">[es]</span><br><span class="line"><span class="attribute">command</span>=<span class="variable">$ES_HOME</span>/bin/elasticsearch</span><br><span class="line"><span class="attribute">directory</span>=<span class="variable">$ES_HOME</span></span><br><span class="line"><span class="attribute">environment</span>=JAVA_HOME=$ES_HOME/jdk</span><br></pre></td></tr></table></figure>
+<p>单机没什么问题，很顺畅的就启动起来了，通过 curl <a href="http://ip:es_port" target="_blank" rel="noopener">http://ip:es_port</a> 可以得到很熟悉的返回：<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"name"</span> : <span class="string">"node1"</span>,</span><br><span class="line">  <span class="attr">"cluster_name"</span> : <span class="string">"cluster-name"</span>,</span><br><span class="line">  <span class="attr">"cluster_uuid"</span> : <span class="string">"2c2jICSxTHK_jUcJjaBucw"</span>,</span><br><span class="line">  <span class="attr">"version"</span> : &#123;</span><br><span class="line">    <span class="attr">"number"</span> : <span class="string">"7.8.1"</span>,</span><br><span class="line">    <span class="attr">"build_flavor"</span> : <span class="string">"default"</span>,</span><br><span class="line">    <span class="attr">"build_type"</span> : <span class="string">"tar"</span>,</span><br><span class="line">    <span class="attr">"build_hash"</span> : <span class="string">"b5ca9c58fb664ca8bf9e4057fc229b3396bf3a89"</span>,</span><br><span class="line">    <span class="attr">"build_date"</span> : <span class="string">"2020-07-21T16:40:44.668009Z"</span>,</span><br><span class="line">    <span class="attr">"build_snapshot"</span> : <span class="literal">false</span>,</span><br><span class="line">    <span class="attr">"lucene_version"</span> : <span class="string">"8.5.1"</span>,</span><br><span class="line">    <span class="attr">"minimum_wire_compatibility_version"</span> : <span class="string">"6.8.0"</span>,</span><br><span class="line">    <span class="attr">"minimum_index_compatibility_version"</span> : <span class="string">"6.0.0-beta1"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"tagline"</span> : <span class="string">"You Know, for Search"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="组件集群"><a href="#组件集群" class="headerlink" title="组件集群"></a>组件集群</h2><p>既然单机的起来的，那如法炮制，将配置文件复制一份，修改了其 node name, scp到另外一台机器上，准备好 supervisor 配置，准备开始组建两个节点组成的集群</p>
+<p>满以为不会有什么问题，启动之后，发现，第二个节点，怎么也加入不到第一个节点之中<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/elasticsearch-cluster/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="https://javasgl.github.io/git-submodule/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -964,164 +1129,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="https://javasgl.github.io/angular-repeat-bind-object-of-arrays/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="javasgl">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/favicon.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="javasgl">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/angular-repeat-bind-object-of-arrays/" itemprop="url">
-                  angular ng-repeat 双向数据绑定实现动态增删DOM
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-14T11:44:50+08:00">
-                2018-11-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/javascript/" itemprop="url" rel="index">
-                    <span itemprop="name">javascript</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/angular-repeat-bind-object-of-arrays/" class="leancloud_visitors" data-flag-title="angular ng-repeat 双向数据绑定实现动态增删DOM">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors </span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>在实现一个需要动态增删的form表单需求时，<code>MVVM</code>的思维模式下，很容易就想到使用数组的添加和删除来实现DOM元素的动态添加和删除。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/angular-repeat-bind-object-of-arrays/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1171,7 +1178,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">59</span>
+                <span class="site-state-item-count">60</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -1193,7 +1200,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">93</span>
+                <span class="site-state-item-count">94</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>

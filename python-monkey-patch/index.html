@@ -407,7 +407,7 @@
       
         <p>在 python 中使用 multiprocess 进行多线程或者多进程处理的时候，遇到了 gevent 问题：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gevent.hub.LoopExit:(<span class="string">'This operation would block forever....'</span>)</span><br></pre></td></tr></table></figure></p>
 <p>这个问题可以通过打上 monkey patch(猴子补丁)来规避。</p>
-<p>在导入 multiprocess 库的文件头部加入以下代码：<br><figure class="highlight capnproto"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> gevent <span class="keyword">import</span> monkey</span><br><span class="line"></span><br><span class="line">monkey.patch_all()</span><br></pre></td></tr></table></figure></p>
+<p>在导入 multiprocess 库的文件头部加入以下代码：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> gevent <span class="keyword">import</span> monkey</span><br><span class="line"></span><br><span class="line">monkey.patch_all()</span><br></pre></td></tr></table></figure></p>
 <p>注意，这两行代码需要放置在文件导入库的最前面.</p>
 <p>我遇到的场景下， 导致 LoopExit 的原因是 multiprocess 的job中远程网络请求超时导致的，如果相应的job任务中没有远程请求的话，即使不用 pathch，代码也是能够正常运行的。由于避免加上超时处理的复杂逻辑，就简单的使用monkey patch来解决这个问题。</p>
 
@@ -548,7 +548,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">59</span>
+                <span class="site-state-item-count">60</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -570,7 +570,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">93</span>
+                <span class="site-state-item-count">94</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
